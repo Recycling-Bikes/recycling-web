@@ -11,11 +11,11 @@ import {MdEmail} from 'react-icons/md';
 
 const Footer = (props) => {
   return (
-    <MDBFooter className='text-center text-lg-start text-muted footer-customs' fluid>
+    <MDBFooter className='text-center text-lg-start text-muted footer-customs' fluid="true">
 
       <section className='d-flex justify-content-center justify-content-lg-between p-1' >
       
-        <MDBContainer className='text-center text-md-start mt-5' fluid>
+        <MDBContainer className='text-center text-md-start mt-5' fluid="true">
         <MDBRow className='text-center text-md-start mt-5'>
             <MDBCol md="3" lg="2" xl="3" >
 
@@ -29,7 +29,7 @@ const Footer = (props) => {
               </Link>
             </MDBCol>
 
-          <MDBCol fluid>
+          <MDBCol fluid="true">
               <MDBRow className='mt-3'>
                 <MDBCol md="3" lg="2" xl="2" className='me-auto'>
               <h6 className='text-uppercase fw-bold mb-4'>Products</h6>

@@ -1,13 +1,13 @@
 import Contenedor from "./components/Contenedor";
 import Article from "./Home/Article";
-import MainPage from "./Home/main-home";
+import Presentation from "./Home/Presentation";
 
 
 export default function HomePage(props) {
     return (
         <Contenedor>
             
-            <MainPage/>
+            <Presentation/>
         
             <Article data={props.data} />
             

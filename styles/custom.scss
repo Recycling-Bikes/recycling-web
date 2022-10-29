@@ -1,16 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
 
-
 @import "../node_modules/bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
 
 $blue:    #0FA899 !default;
 
+.sticky-top {
+    position: sticky !important;
+}
+
+
 
 body{
     font-family: 'Karla', sans-serif !important;
 }
+
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
@@ -92,4 +97,7 @@ a {
     font-weight: bold;
 
 }
+
+
+
 

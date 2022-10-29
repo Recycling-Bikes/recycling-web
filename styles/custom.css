@@ -10958,4 +10958,9 @@ a {
 .tittle-custom {
   color: #06433D !important;
   font-weight: bold;
+}
+
+.position-nav {
+  position: -webkit-sticky !important;
+  position: sticky !important;
 }/*# sourceMappingURL=custom.css.map */

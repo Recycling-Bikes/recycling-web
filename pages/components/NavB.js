@@ -12,9 +12,8 @@ import {BiSearchAlt} from 'react-icons/bi';
 
 function NavB() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='hover-custom sticky-top'>
-      
-      <Container >
+    <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top" className='hover-custom shadow-sm'>
+      <Container>
 
 
         <Navbar.Brand href="#home">
