@@ -9,6 +9,7 @@ const Contenedor = props => {
     return (
         <>
             <Head>
+                <link rel="shortcut icon" href="/mesa.png" />
                 <title>Recycling</title>
             </Head>
 

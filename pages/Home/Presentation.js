@@ -13,10 +13,11 @@ function Presentation() {
         <Container fluid className=''>
             <Row>
                 <Col>
-                    <Container className='p-4'>
+                    <Container className='p-4 '>
                         <Container className='p-4'>
 
-                            <h1 className='fs-1 tittle-custom'   > Transformamos la compra y venta de bicis usadas en Latinoamérica</h1>
+                            <h1 className='fs-1 tittle-custom'> 
+                            Transformamos la compra y venta de bicis usadas en Latinoamérica</h1>
                             <p>
                                 Explora +12.000 bicicletas en nuestra plataforma
                             </p>
@@ -38,7 +39,7 @@ function Presentation() {
                 <Col>
                     <div
                         className='p-5 text-center bg-image'>
-                        <Card.Img variant="top" src="/Mountain.png" />
+                        <Card.Img variant="top" src="/Mountain.png" className='mw-50' />
 
 
                     </div>

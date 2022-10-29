@@ -53,7 +53,7 @@ function NavB() {
 
             <NavDropdown title="Vender" id="collasible-nav-dropdown">
 
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="/vender">vender h1</NavDropdown.Item>
 
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
 
