@@ -9,8 +9,8 @@
 $blue:    #0FA899 !default;
 
 
-body{
-    font-family: 'Karla' !important;
+*{
+    font-family: 'Karla', sans-serif !important;
 }
 
 // 3. Include remainder of required Bootstrap stylesheets
@@ -63,8 +63,6 @@ body{
 @import "../node_modules/bootstrap/scss/spinners";
 @import "../node_modules/bootstrap/scss/offcanvas";
 @import "../node_modules/bootstrap/scss/placeholders";  
-
-
 
 a {
     text-decoration: none;

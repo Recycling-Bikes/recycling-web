@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { MDBIcon } from 'mdb-react-ui-kit';
 
 
+
+
 function MainPage() {
     return (
 
 
-        <Container fluid >
+        <Container fluid>
             <Row>
                 <Col>
                     <Container className='p-4'>
@@ -18,7 +20,7 @@ function MainPage() {
                         Explora +12.000 bicicletas en nuestra plataforma
                         </p>
                         <Button variant="primary">Comprar bicis</Button>
-                        <Row className='p-2 d-flex hover-custom'>
+                        <Row className='p-2 d-flex'>
                             <Col className=''>
                             <Link href="/" className='link-custom-text' >
                             Vender mi bici <MDBIcon fas icon="fa fa-angle-right fa-xs" />
