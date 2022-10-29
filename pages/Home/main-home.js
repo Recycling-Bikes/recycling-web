@@ -20,7 +20,7 @@ function MainPage() {
                         Explora +12.000 bicicletas en nuestra plataforma
                         </p>
                         <Button variant="primary">Comprar bicis</Button>
-                        <Row className='p-2 d-flex'>
+                        <Row className='p-2 d-flex hover-custom'>
                             <Col className=''>
                             <Link href="/" className='link-custom-text' >
                             Vender mi bici <MdKeyboardArrowRight />

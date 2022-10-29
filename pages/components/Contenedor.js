@@ -7,13 +7,13 @@ import Head from 'next/head'
 const Contenedor = props => {
     return (
         <>
-        <Head>
-            <title>Mi blog</title>
-        </Head>
+            <Head>
+                <title>Recycling</title>
+            </Head>
 
             <NavB />
 
-                {props.children}
+            {props.children}
             <Footer />
 
         </>
