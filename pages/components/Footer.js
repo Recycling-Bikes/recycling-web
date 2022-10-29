@@ -1,7 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon} from 'mdb-react-ui-kit';
+import { MDBFooter, MDBContainer, MDBRow, MDBCol} from 'mdb-react-ui-kit';
 import Link from 'next/link';
 import React from 'react';
+import {BsInstagram} from 'react-icons/bs';
+import {FaFacebook} from 'react-icons/fa';
+import {IoLocationSharp, IoLogoWhatsapp} from 'react-icons/io5'
+import {MdEmail} from 'react-icons/md';
+
+
 
 const Footer = (props) => {
   return (
@@ -75,25 +81,25 @@ const Footer = (props) => {
             <MDBCol md="5" lg="4" xl="3" className='me-auto mb-md-0 mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
               <p>
-                <MDBIcon icon="home" className="me-2" />
+                <IoLocationSharp size={22} className="me-2" />
                 New York, NY 10012, US
               </p>
               <p>
-                <MDBIcon icon="envelope" className="me-3" />
+                <MdEmail size={22} className="me-3" />
                 info@example.com
               </p>
               <p>
-                <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
+                <IoLogoWhatsapp size={24} className="me-3" /> + 01 234 567 88
               </p>
             </MDBCol>
 
             <MDBCol md="2" lg="3" xl="2" className='me-auto'>
               <h6 className='text-uppercase fw-bold mb-4'>Síguenos</h6>
               <a href='' className='me-4 text-reset'>
-                <MDBIcon fab icon="facebook-f" className='ms-1' size='lg' />
+                <FaFacebook size={23}/>
               </a>
               <a href='' className=' text-reset'>
-                <MDBIcon fab icon="instagram" className='ms-1' size='lg' />
+                <BsInstagram size={22}/>
               </a>
             </MDBCol>
           </MDBRow>

@@ -2,11 +2,13 @@ import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
 
 
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
-import { MDBIcon } from 'mdb-react-ui-kit';
+import {BsPersonCircle} from 'react-icons/bs';
+import {FiShoppingCart} from 'react-icons/fi';
+import {BiSearchAlt} from 'react-icons/bi';
 
 function NavB() {
   return (
@@ -71,9 +73,9 @@ function NavB() {
           </Nav>
 
           <Nav>
-            <Nav.Link href="#deets" ><MDBIcon fas icon="search" /></Nav.Link>
-            <Nav.Link href="#deets" ><MDBIcon fas icon="shopping-cart" /></Nav.Link>
-            <Nav.Link href="#deets" className='text-primary'><MDBIcon far icon="user-circle" /> Acceder</Nav.Link>
+            <Nav.Link href="#deets" ><BiSearchAlt size={23} /></Nav.Link>
+            <Nav.Link href="#deets" ><FiShoppingCart size={22}/></Nav.Link>
+            <Nav.Link href="#deets" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>
           </Nav>
 
         </Navbar.Collapse>

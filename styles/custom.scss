@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
-@import "@fortawesome/fontawesome-free/css/all.min.css";
 
 
 @import "../node_modules/bootstrap/scss/functions";
@@ -9,7 +8,7 @@
 $blue:    #0FA899 !default;
 
 
-*{
+body{
     font-family: 'Karla', sans-serif !important;
 }
 

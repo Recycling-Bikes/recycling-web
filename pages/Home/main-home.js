@@ -1,7 +1,7 @@
 
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Link from 'next/link';
-import { MDBIcon } from 'mdb-react-ui-kit';
+import {MdKeyboardArrowRight} from "react-icons/md"
 
 
 
@@ -23,7 +23,7 @@ function MainPage() {
                         <Row className='p-2 d-flex'>
                             <Col className=''>
                             <Link href="/" className='link-custom-text' >
-                            Vender mi bici <MDBIcon fas icon="fa fa-angle-right fa-xs" />
+                            Vender mi bici <MdKeyboardArrowRight />
                             </Link> 
 
                             </Col>
