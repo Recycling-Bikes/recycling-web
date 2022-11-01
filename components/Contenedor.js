@@ -15,11 +15,15 @@ const Contenedor = props => {
 
             <SSRProvider>
 
-            <NavB />
+                <NavB />
 
                 {props.children}
-                
-            <Footer />
+
+
+
+
+
+                <Footer />
             </SSRProvider>
 
         </>

@@ -98,5 +98,15 @@ a {
 }
 
 
+.presentation{
+    background-color: rgba(207, 238, 235, 0.4) ;
+}
+
+
+@media only screen and (max-device-width: 710px){
+    .img-presentacion{
+        display: none;
+}}
+
 
 

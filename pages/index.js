@@ -1,15 +1,18 @@
-import Contenedor from "./components/Contenedor";
+import Contenedor from "components/Contenedor";
 import Article from "./Home/Article";
+import Carts from "./Home/Carts";
 import Presentation from "./Home/Presentation";
 
 
 export default function HomePage(props) {
     return (
         <Contenedor>
-            
-            <Presentation/>
-        
+
+            <Presentation />
+
             <Article data={props.data} />
+
+            <Carts/>
             
         </Contenedor>
 

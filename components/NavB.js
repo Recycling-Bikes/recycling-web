@@ -1,8 +1,6 @@
 import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
 
-
-
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -72,8 +70,8 @@ function NavB() {
           </Nav>
 
           <Nav>
-            <Nav.Link href="#deets" ><BiSearchAlt size={23} /></Nav.Link>
-            <Nav.Link href="#deets" ><FiShoppingCart size={22}/></Nav.Link>
+            <Nav.Link href="#deets" ><BiSearchAlt size={23} /> </Nav.Link>
+            <Nav.Link href="#deets" ><FiShoppingCart size={22}/> </Nav.Link>
             <Nav.Link href="#deets" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>
           </Nav>
 

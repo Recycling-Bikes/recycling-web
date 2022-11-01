@@ -10,11 +10,10 @@ function Presentation() {
     return (
 
 
-        <Container fluid className=''>
-            <Row>
-                <Col>
-                    <Container className='p-4 '>
-                        <Container className='p-4'>
+        <Container fluid className='presentation p-5 mb-5' style={{backgroundColor: "rgba(207, 238, 235, 0.4)"}}>
+            <Row className='pb-5'>
+                <Col className='mx-2 d-flex flex-column justify-content-center align-items-baseline'>
+                    
 
                             <h1 className='fs-1 tittle-custom'> 
                             Transformamos la compra y venta de bicis usadas en Latinoamérica</h1>
@@ -31,15 +30,16 @@ function Presentation() {
                                 </Col>
 
                             </Row>
-                        </Container>
-                    </Container>
+
 
                 </Col>
 
-                <Col>
+                <Col className='img-presentacion m-4'>
                     <div
-                        className='p-5 text-center bg-image'>
-                        <Card.Img variant="top" src="/Mountain.png" className='mw-50' />
+                        className=' text-center bg-image'>
+                        <Card.Img variant="top" src="/Mountain.png" className='' 
+                        
+                        />
 
 
                     </div>
