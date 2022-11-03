@@ -1,4 +1,5 @@
 import Contenedor from "components/Contenedor";
+import { Container } from "react-bootstrap";
 import Article from "./Home/Article";
 import Carts from "./Home/Carts";
 import Presentation from "./Home/Presentation";
@@ -13,6 +14,7 @@ export default function HomePage(props) {
             <Article data={props.data} />
 
             <Carts/>
+
             
         </Contenedor>
 
