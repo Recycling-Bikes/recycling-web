@@ -6,12 +6,14 @@ import { BsInstagram } from 'react-icons/bs';
 import { FaFacebook } from 'react-icons/fa';
 import { IoLocationSharp, IoLogoWhatsapp } from 'react-icons/io5'
 import { MdEmail } from 'react-icons/md';
+import { Container} from 'react-bootstrap';
 
 
 
 const Footer = (props) => {
   return (
-    <MDBFooter className='text-center text-lg-start text-muted footer-customs' fluid="true">
+    <Container>
+    <MDBFooter className='text-center text-lg-start text-muted footer-customs'>
 
       <section className='d-flex justify-content-center justify-content-lg-between p-1' >
 
@@ -112,6 +114,7 @@ const Footer = (props) => {
         2022 © Recycling. Todos los derechos reservados
       </div>
     </MDBFooter>
+    </Container>
   )
 }
 

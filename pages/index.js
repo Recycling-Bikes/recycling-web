@@ -8,9 +8,9 @@ import Presentation from "./Home/Presentation";
 export default function HomePage(props) {
     return (
         <Contenedor>
-
-            <Presentation />
-
+            <Container fluid className="presentation">
+            <Presentation/>
+            </Container>
             <Article data={props.data} />
 
             <Carts/>

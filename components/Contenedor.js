@@ -2,6 +2,7 @@ import NavB from './NavB'
 import Footer from './Footer'
 import Head from 'next/head'
 import { SSRProvider } from "react-bootstrap"
+import { Container } from "react-bootstrap"
 
 
 
@@ -22,8 +23,11 @@ const Contenedor = props => {
 
 
 
-
+                <Container fluid className='footer-customs'>
                 <Footer />
+                </Container>
+
+
             </SSRProvider>
 
         </>

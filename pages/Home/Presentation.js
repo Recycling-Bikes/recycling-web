@@ -10,7 +10,7 @@ function Presentation() {
     return (
 
 
-        <Container className='presentation p-5 mb-5' style={{backgroundColor: "rgba(207, 238, 235, 0.4)"}}>
+        <Container className='p-5 mb-5'>
             <Row className='pb-5'>
                 <Col className='mx-2 d-flex flex-column justify-content-center align-items-baseline'>
                     
