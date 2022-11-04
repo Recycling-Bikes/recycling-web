@@ -18,7 +18,7 @@ export default function Carts() {
 
         <Row className='d-flex justify-content-center py-3' >
 
-          <Card style={{ width: '17rem', height: '10rem' }} className="m-3 py-2 px-3">
+          <Card style={{ width: '17rem', height: '10rem', color:"primary",backgroundColor: "none" }} className="m-3 py-2 px-3">
 
             <Card.Body>
 
