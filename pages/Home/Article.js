@@ -28,62 +28,53 @@ function Article(props) {
                 modules={[Autoplay, Pagination]}
 
                 autoplay={{
-                    delay: 5000
+                    delay: 5000,
+                    disableOnInteraction: false,
                 }}
-                pagination={{
-                    clickable: true,
-                }}
+
 
                 loop={true}
                 breakpoints={{
-                    "@0.00": {
-                        slidesPerView: 1.15,
-                        spaceBetween: 25,
-                    },
-                    "@0.40": {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                      },
+                      360: {
                         slidesPerView: 1.25,
-                        spaceBetween: 25,
-                    },
-                    "@0.50": {
-                        slidesPerView: 1.35,
-                        spaceBetween: 25,
-                    },
-                    "@0.60": {
-                        slidesPerView: 1.45,
-                        spaceBetween: 25,
-                    },
-                    "@0.70": {
-                        slidesPerView: 1.50,
-                        spaceBetween: 25,
-                    },
-                    "@0.80": {
-                        slidesPerView: 1.75,
-                        spaceBetween: 25,
-                    },
-                    "@0.90": {
+                        spaceBetween: 20
+                      },
+                      480: {
+                        slidesPerView: 1.40,
+                        spaceBetween: 30
+                      },
+                    576: {
+                        slidesPerView: 1.60,
+                        spaceBetween: 40
+                      },
+
+                      768: {
                         slidesPerView: 2.50,
-
-                    },
-                    "@1.10": {
+                        spaceBetween: 40
+                      },
+                      
+                      992: {
                         slidesPerView: 3,
-                        spaceBetween: 25,
-                    },
-                    "@1.30": {
-                        slidesPerView: 3.50,
-
-                    },
-                    "@1.40": {
+                        spaceBetween: 40
+                      },
+                      1200: {
+                        slidesPerView: 3.75,
+                        spaceBetween: 40
+                      },
+                      1400: {
                         slidesPerView: 4,
+                        spaceBetween: 40
+                      }
 
-                    },
-                    "@1.50": {
-                        slidesPerView: 4,
-
-                    },
                 }}
 
                 slidesPerView="auto"
             >
+                <Container className='mx-5'>
                 <SwiperSlide >    <Card style={{ width: '18rem' }}>
                     <div className='m-3'>
                         <Badge bg="primary" >Popular</Badge>
@@ -169,6 +160,8 @@ function Article(props) {
 
                     </Card.Body>
                 </Card></SwiperSlide>
+
+                </Container>
 
             </Swiper>
         </Container>
