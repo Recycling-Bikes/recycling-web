@@ -1,7 +1,7 @@
 import Contenedor from "components/Contenedor";
 import { Container } from "react-bootstrap";
 import Article from "./Home/Article";
-import Carts from "./Home/Carts";
+import Promesas from "./Home/Promesas";
 import Presentation from "./Home/Presentation";
 
 
@@ -9,13 +9,13 @@ export default function HomePage(props) {
     return (
         <Contenedor>
             <Container fluid className="presentation">
-            <Presentation/>
+                <Presentation />
             </Container>
             <Article data={props.data} />
 
-            <Carts/>
+            <Promesas />
 
-            
+
         </Contenedor>
 
     )

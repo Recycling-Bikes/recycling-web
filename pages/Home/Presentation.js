@@ -21,15 +21,14 @@ function Presentation() {
                                 Explora +12.000 bicicletas en nuestra plataforma
                             </p>
                             <Button variant="primary">Comprar bicis</Button>
-                            <Row className='p-2 d-flex hover-custom'>
-                                <Col className=''>
-                                    <Link href="/" className='link-custom-text' >
+                                
+                                    <Link href="/" className='link-custom-text pt-2 px-1' >
                                         Vender mi bici <MdKeyboardArrowRight />
                                     </Link>
 
-                                </Col>
+                                
 
-                            </Row>
+                            
 
 
                 </Col>

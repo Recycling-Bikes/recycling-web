@@ -5,14 +5,14 @@ import { BsShieldCheck, BsCreditCard, BsFillPersonCheckFill } from "react-icons/
 import Link from 'next/link'
 import { MdKeyboardArrowRight } from "react-icons/md"
 
-export default function Carts() {
+export default function Promesas() {
   return (
 
     <Container style={{ backgroundColor: "rgba(207, 238, 235, 0.4)" }}
       fluid className='mt-5 pb-5 px-auto d-flex flex-column 
       justify-content-center '>
 
-      <Row className='pt-5 mx-5 d-flex justify-content-center' fluid>
+      <Row className='pt-5 mx-5 d-flex justify-content-center' fluid="true">
 
         <h1 className='d-flex justify-content-center'>¿Por qué comprar con nosotros?</h1>
 
