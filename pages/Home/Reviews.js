@@ -7,7 +7,7 @@ import { Autoplay, Pagination } from 'swiper'
 
 // Import Swiper styles
 import 'swiper/css';
-import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, Image } from 'react-bootstrap';
 import React from 'react';
 import Link from 'next/link';
 
@@ -135,7 +135,7 @@ function Reviews(props) {
                                     Hace un mes
                                 </Card.Text>
                             </div>
-                            <Row><div style={{ width: "auto" }}>  <img src='/person.png ' style={{ width: "50px" }} /></div>
+                            <Row><div style={{ width: "auto" }}>  <Image src='/person.png ' style={{ width: "50px" }} /></div>
                                 <Col>
                                     <div style={{ color: "rgba(255, 193, 7, 1)" }}><BsStarFill /> <BsStarFill /> <BsStarFill /> <BsStarFill /></div>
                                     <Card.Title style={{ fontSize: 16 }}>{'"'}Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas.  Sigan de esta forma y llegarán lejos.{'"'}</Card.Title>

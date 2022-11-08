@@ -72,7 +72,7 @@ function NavB() {
           <Nav>
             <Nav.Link href="#deets" ><BiSearchAlt size={23} /> </Nav.Link>
             <Nav.Link href="#deets" ><FiShoppingCart size={22}/> </Nav.Link>
-            <Nav.Link href="#deets" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>
+            <Nav.Link href="/form/singin" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>
           </Nav>
 
         </Navbar.Collapse>
