@@ -14,7 +14,7 @@ export default function Promesas() {
 
       <Row className='pt-5 mx-5 d-flex justify-content-center' fluid="true">
 
-        <h1 className='d-flex justify-content-center'>¿Por qué comprar con nosotros?</h1>
+        <h1 className='d-flex justify-content-center tittle-custom'>¿Por qué comprar con nosotros?</h1>
 
         <Row className='d-flex justify-content-center py-3' >
 

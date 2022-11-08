@@ -11,7 +11,6 @@ import { Container, Card, Badge } from 'react-bootstrap';
 import React from 'react';
 
 function Article(props) {
-    const swiper = useSwiper();
 
 
     return (
@@ -20,7 +19,7 @@ function Article(props) {
 
 
                 <div className='d-flex mb-4 justify-content-between'>
-                    <h2>Explora bicis destacadas</h2>
+                    <h2 className='tittle-custom'>Explora bicis destacadas</h2>
 
                     <div></div>
                 </div>

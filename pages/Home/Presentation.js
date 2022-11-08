@@ -36,7 +36,7 @@ function Presentation() {
                 <Col className='img-presentacion m-4'>
                     <div
                         className=' text-center bg-image'>
-                        <Card.Img variant="top" src="/Mountain.png" className='' 
+                        <Card.Img variant="top" src="/Mountain.png" className='img-presentacion' 
                         
                         />
 

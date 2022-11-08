@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import Article from "./Home/Article";
 import Promesas from "./Home/Promesas";
 import Presentation from "./Home/Presentation";
+import Reviews from "./Home/Reviews";
 
 
 export default function HomePage(props) {
@@ -12,6 +13,8 @@ export default function HomePage(props) {
                 <Presentation />
             </Container>
             <Article data={props.data} />
+
+            <Reviews/>
 
             <Promesas />
 

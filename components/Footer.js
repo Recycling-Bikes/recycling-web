@@ -94,7 +94,6 @@ const Footer = (props) => {
                     <IoLogoWhatsapp size={24} className="me-3" /> + 01 234 567 88
                   </p>
                 </MDBCol>
-
                 <MDBCol md="3" lg="3" xl="2" className='me-auto pb-5' >
                   <h6 className='text-uppercase fw-bold mb-4'>Síguenos</h6>
                   <a href='' className='me-4 text-reset'>
