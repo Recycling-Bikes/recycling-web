@@ -95,7 +95,7 @@ const Footer = (props) => {
                   </p>
                 </MDBCol>
 
-                <MDBCol md="2" lg="3" xl="2" className='me-auto pb-5' >
+                <MDBCol md="3" lg="3" xl="2" className='me-auto pb-5' >
                   <h6 className='text-uppercase fw-bold mb-4'>Síguenos</h6>
                   <a href='' className='me-4 text-reset'>
                     <FaFacebook size={23} />
