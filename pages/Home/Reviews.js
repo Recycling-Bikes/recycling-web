@@ -17,7 +17,7 @@ function Reviews(props) {
 
 
     return (
-        <Container className='px-2 py-5 mt-5'>
+        <Container className='px-2 py-2 mt-5'>
             <Container >
 
 

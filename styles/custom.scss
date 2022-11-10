@@ -86,9 +86,15 @@ a {
 
 }
 
-.btn{
+.btn-primary, .btn-outline-primary:hover {
     color: white !important;
+    border-Top: rgba(111, 111, 111, 0.06);
 }
+
+.separador{
+    border-top: 1px solid #dee2e6;
+}
+
 
 
 

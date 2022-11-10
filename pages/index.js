@@ -12,7 +12,7 @@ export default function HomePage(props) {
             <Container fluid className="presentation">
                 <Presentation />
             </Container>
-            <Article data={props.data} />
+            <Article Title="Explora bicis destacadas" data={props.data} />
 
             <Reviews/>
 

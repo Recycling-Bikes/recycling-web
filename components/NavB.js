@@ -14,7 +14,7 @@ function NavB() {
       <Container>
 
 
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
             <Image
               src="/recycling.png"
               width="60"
