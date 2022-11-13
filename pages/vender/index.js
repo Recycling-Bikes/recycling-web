@@ -12,10 +12,14 @@ export default function Vender() {
       <Container > 
       <Row className='d-flex justify-content-center'>
         <Row>
-          <Col sm="" className='pb-4' ><Vista/>
+          <Col className='pb-4' ><Vista/>
+
+          <div className=" d-lg-none   "><Descriptons/></div>
+
           <Carractristicas />
-          </Col>
-          <Col  sm="100" md="100" lg="5" xl="5" xxl="4" ><Descriptons/></Col>
+
+          </Col >
+          <Col  sm="100" md="auto" lg="5" xl="5" xxl="4" className="d-none d-lg-block" ><Descriptons/></Col>
           
           </Row>
         

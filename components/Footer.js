@@ -12,7 +12,7 @@ import { Container} from 'react-bootstrap';
 
 const Footer = (props) => {
   return (
-    <Container>
+    <Container style={{}}>
     <MDBFooter className='text-center text-lg-start text-muted footer-customs'>
 
       <section className='d-flex justify-content-center justify-content-lg-between p-1' >

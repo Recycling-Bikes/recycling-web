@@ -9,7 +9,7 @@ import Reviews from "./Home/Reviews";
 export default function HomePage(props) {
     return (
         <Contenedor>
-            <Container fluid className="presentation">
+            <Container fluid className="presentation ">
                 <Presentation />
             </Container>
             <Article Title="Explora bicis destacadas" data={props.data} />

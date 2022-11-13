@@ -33,10 +33,10 @@ function Presentation() {
 
                 </Col>
 
-                <Col className='img-presentacion m-4'>
+                <Col className=' d-none d-lg-block m-4'>
                     <div
                         className=' text-center bg-image'>
-                        <Card.Img variant="top" src="/Mountain.png" className='img-presentacion' 
+                        <Card.Img variant="top" src="/Mountain.png" className='' 
                         
                         />
 

@@ -8,7 +8,7 @@ export default function Formimg() {
   return (
     
         <Container fluid="true">
-        <Image src="/loginimg.png" className='img-fluid img-presentacion' style={{height: "-webkit-fill-available", width: "90vh",}}/>
+        <Image src="/loginimg.png" className=' d-none d-xl-block' style={{height: "100vh",}}/>
 
         <Link href="/">
         <Image
