@@ -1,4 +1,4 @@
-import Contenedor from "components/Contenedor";
+import Contenedor from "components/home/Contenedor";
 import { Container } from "react-bootstrap";
 import Article from "./Home/Article";
 import Promesas from "./Home/Promesas";
@@ -14,7 +14,7 @@ export default function HomePage(props) {
             </Container>
             <Article Title="Explora bicis destacadas" data={props.data} />
 
-            <Reviews/>
+            <Reviews />
 
             <Promesas />
 

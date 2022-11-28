@@ -5,13 +5,17 @@ import { Container, Breadcrumb, Row,Col } from 'react-bootstrap'
 
 
 export default function Vista() {
-    const [primaryVista, setPrimaryVista] = useState("/Mountain.png")
 
-    const listLink = ["/Mountain.png", "/segundavista.png", "/tercera.png"]
+  const listLink = ["/Mountain.png", "/segundavista.png"]
+    
+  const [primaryVista, setPrimaryVista] = useState(listLink[1])
+
+    
 
 
   return (
     <>
+
     <Row className='mt-4'>
         <Breadcrumb>
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -27,13 +31,10 @@ export default function Vista() {
 
 
 
-        {listLink.map(link => {
+        {listLink.map(links => <img src={links} key={links} width={50} height={50} className="m-2" onClick={() => setPrimaryVista(links)}/>
 
-            <img src="link" width={50} height={50} className="m-2" />
-            console.log(link)
-        })}
-
-      hola
+            
+        )}
       </Col>
       <Col>
       <Container>

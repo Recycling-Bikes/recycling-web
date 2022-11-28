@@ -19,7 +19,7 @@ export default function Descriptons() {
             <Accordion className='mt-3 separador' defaultActiveKey="0" flush >
                 <Accordion.Item eventKey="1" className='separador'>
                     <Accordion.Header>Envío y ensamblaje</Accordion.Header>
-                    <Accordion.Body>
+                    <Accordion.Body>ñ
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
                         minim veniam, quis nostrud exercitation ullamco laboris nisi ut

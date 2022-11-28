@@ -130,7 +130,7 @@ function Reviews(props) {
                         <Card.Body style={{ fontSize: 16 }}>
                             <div className='d-flex justify-content-between '>
                                 <p style={{ color: "gray" }} className='d-flex align-items-center '>
-                                    <FcGoogle size={18} className="mr-1" /> Google Reviews</p>
+                                <FcGoogle size={18} className="mr-1"/> Google Reviews</p>
                                 <Card.Text>
                                     Hace un mes
                                 </Card.Text>

@@ -24,7 +24,7 @@ const Contenedor = props => {
 
 
                 <Container fluid className='footer-customs'>
-                <Footer />
+                    <Footer />
                 </Container>
 
 

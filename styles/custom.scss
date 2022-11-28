@@ -96,6 +96,16 @@ a {
 }
 
 
+.accordion-button:not(.collapsed){
+    box-shadow: none!important
+}
+.accordion-button{
+    padding-bottom: 10px;
+}
+.accordion-body{
+    padding-top: 0px!important;
+}
+
 
 
 .tittle-custom{
@@ -106,6 +116,7 @@ a {
 
 .presentation{
     background-color: rgba(207, 238, 235, 0.4) ;
+
 }
 
 
@@ -114,8 +125,45 @@ a {
         display: none;
 }}
 
+.accordion {
+    // scss-docs-start accordion-css-vars
+    
+    --#{$prefix}accordion-bg: #{$accordion-bg};
+
+    --#{$prefix}accordion-border-width: #{$accordion-border-width};
+
+    --#{$prefix}accordion-btn-padding-x: #{$accordion-button-padding-x};
+    --#{$prefix}accordion-btn-padding-y: #{$accordion-button-padding-y};
+    --#{$prefix}accordion-btn-color: #{$accordion-button-color};
+    --#{$prefix}accordion-btn-bg: #{$accordion-button-bg};
+    --#{$prefix}accordion-btn-icon: #{escape-svg($accordion-button-icon)};
+    --#{$prefix}accordion-btn-icon-width: #{$accordion-icon-width};
+    --#{$prefix}accordion-btn-icon-transform: #{$accordion-icon-transform};
+    --#{$prefix}accordion-btn-icon-transition: #{$accordion-icon-transition};
+    --#{$prefix}accordion-btn-active-icon: #{escape-svg($accordion-button-icon)};
+    --#{$prefix}accordion-btn-focus-border-color: #{$accordion-button-focus-border-color};
+    --#{$prefix}accordion-btn-focus-box-shadow: #{gras};
+    --#{$prefix}accordion-body-padding-x: #{$accordion-body-padding-x};
+    --#{$prefix}accordion-body-padding-y: #{$accordion-body-padding-y};
+    --#{$prefix}accordion-active-color: #{black};
+    --#{$prefix}accordion-active-bg: #{$accordion-bg};
+    // scss-docs-end accordion-css-vars
+  }
 
 
-.holA{
-    color:v
-}
+
+  .price {  display: grid;
+    grid-template-columns: 1.3fr 0.2fr 1.4fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "minimo . maximo"
+      "minimo guion maximo"; 
+  }
+  
+  .minimo { grid-area: minimo; }
+  
+  .maximo { grid-area: maximo; }
+  
+  .guion { grid-area: guion; }
