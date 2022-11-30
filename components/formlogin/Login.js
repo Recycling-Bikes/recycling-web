@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { Container, SSRProvider } from 'react-bootstrap'
 import Formnav from './Formnav'
 import Formfooter from './Formfooter'
 import Formimg from './Formimg'
+import Router from 'next/router'
+import { supabase } from 'supabase/client';
 
 export default function Login(props) {
+    useEffect(()=>{
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (!!session){
+                Router.push("/")
+            }
+          })
+    },[])
     return (
         <>
             <Head>

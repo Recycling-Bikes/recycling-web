@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
 
@@ -7,8 +8,24 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import {BsPersonCircle} from 'react-icons/bs';
 import {FiShoppingCart} from 'react-icons/fi';
 import {BiSearchAlt} from 'react-icons/bi';
+import UserContext from 'context/User/UserContext';
+import React, { useState , useContext, useEffect } from 'react';
+import User from './user';
 
-function NavB() {
+
+
+
+ 
+
+export default function NavB({}) {
+
+  const {getUser, user} = useContext(UserContext)
+  useEffect(()=>{
+    getUser()
+  },[getUser])
+
+
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top" className='hover-custom shadow-sm'>
       <Container>
@@ -72,7 +89,9 @@ function NavB() {
           <Nav>
             <Nav.Link href="#deets" ><BiSearchAlt size={23} /> </Nav.Link>
             <Nav.Link href="#deets" ><FiShoppingCart size={22}/> </Nav.Link>
-            <Nav.Link href="/form/singin" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>
+            {user ? <User /> 
+            : <Nav.Link href="/form/singin" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>}
+            
           </Nav>
 
         </Navbar.Collapse>
@@ -81,4 +100,4 @@ function NavB() {
   );
 }
 
-export default NavB;
+

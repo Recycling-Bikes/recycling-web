@@ -17,17 +17,18 @@ function Reviews(props) {
 
 
     return (
-        <Container className='px-2 py-2 mt-5'>
+        <Container className='px-2 my-2 mt-5'>
             <Container >
 
 
-                <div className='d-flex mb-4 justify-content-between'>
-                    <h2 className='tittle-custom'>Conoce lo que miles de ciclistas dicen de nosotros</h2>
+                
+                    <h2 className='tittle-custom mb-4'>Conoce lo que miles de ciclistas dicen de nosotros</h2>
 
-                    <div></div>
-                </div>
+                    
+                
 
                 <Swiper
+                className='py-2'
                     modules={[Autoplay, Pagination]}
 
 
@@ -74,6 +75,7 @@ function Reviews(props) {
                     }}
 
                     slidesPerView="auto"
+
                 >
 
                     <SwiperSlide >    <Card style={{ width: cardswight }}>
@@ -86,7 +88,7 @@ function Reviews(props) {
                                     Hace un mes
                                 </Card.Text>
                             </div>
-                            <Row><div style={{ width: "auto" }}>  <img src='/person.png ' style={{ width: "50px" }} /></div>
+                            <Row><div style={{ width: "auto" }}>  <Image alt='' src='/person.png ' style={{ width: "50px" }} /></div>
                                 <Col>
                                     <div style={{ color: "rgba(255, 193, 7, 1)" }}><BsStarFill /> <BsStarFill /> <BsStarFill /> <BsStarFill /></div>
                                     <Card.Title style={{ fontSize: 16 }}>{'"'}Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas.  Sigan de esta forma y llegarán lejos.{'"'}</Card.Title>
@@ -111,7 +113,7 @@ function Reviews(props) {
                                     Hace un mes
                                 </Card.Text>
                             </div>
-                            <Row><div style={{ width: "auto" }}>  <img src='/person.png ' style={{ width: "50px" }} /></div>
+                            <Row><div style={{ width: "auto" }}>  <Image alt='' src='/person.png ' style={{ width: "50px" }} /></div>
                                 <Col>
                                     <div style={{ color: "rgba(255, 193, 7, 1)" }}><BsStarFill /> <BsStarFill /> <BsStarFill /> <BsStarFill /></div>
                                     <Card.Title style={{ fontSize: 16 }}>{'"'}Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas.  Sigan de esta forma y llegarán lejos.{'"'}</Card.Title>
@@ -135,7 +137,7 @@ function Reviews(props) {
                                     Hace un mes
                                 </Card.Text>
                             </div>
-                            <Row><div style={{ width: "auto" }}>  <Image src='/person.png ' style={{ width: "50px" }} /></div>
+                            <Row><div style={{ width: "auto" }}>  <Image alt='' src='/person.png ' style={{ width: "50px" }} /></div>
                                 <Col>
                                     <div style={{ color: "rgba(255, 193, 7, 1)" }}><BsStarFill /> <BsStarFill /> <BsStarFill /> <BsStarFill /></div>
                                     <Card.Title style={{ fontSize: 16 }}>{'"'}Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas.  Sigan de esta forma y llegarán lejos.{'"'}</Card.Title>
@@ -159,7 +161,7 @@ function Reviews(props) {
                                     Hace un mes
                                 </Card.Text>
                             </div>
-                            <Row><div style={{ width: "auto" }}>  <img src='/person.png ' style={{ width: "50px" }} /></div>
+                            <Row><div style={{ width: "auto" }}>  <Image alt='' src='/person.png ' style={{ width: "50px" }} /></div>
                                 <Col>
                                     <div style={{ color: "rgba(255, 193, 7, 1)" }}><BsStarFill /> <BsStarFill /> <BsStarFill /> <BsStarFill /></div>
                                     <Card.Title style={{ fontSize: 16 }}>{'"'}Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas.  Sigan de esta forma y llegarán lejos.{'"'}</Card.Title>
