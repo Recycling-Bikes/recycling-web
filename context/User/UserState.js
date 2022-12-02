@@ -11,6 +11,7 @@ import { GET_USER } from "../types";
 const UserState = (props) => {
   const initialState = {
     user: undefined,
+    bicis: undefined,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -30,6 +31,18 @@ const UserState = (props) => {
     try {
       await supabase.auth.signOut()
       getUser()
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const getBicis = async () => {
+    try {
+      const {data} = await supabase.auth.getUser()
+      const res = data.user
+
+      dispatch({ type: GET_USER, payload: res });
 
     } catch (error) {
       console.error(error);
@@ -41,8 +54,10 @@ const UserState = (props) => {
     <UserContext.Provider
       value={{
         user: state.user,
+        bicis: state.bicis,
         getUser,
         deleteUser,
+        getBicis
       }}
     >
       {props.children}

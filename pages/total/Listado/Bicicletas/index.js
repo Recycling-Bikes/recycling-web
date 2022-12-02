@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, Button, Row, Col, Form } from 'react-bootstrap'
-import Getbicis from './Getbicis'
-import Getbicismin from './Getbicismin'
+import Getbicis from './list'
+import Getbicismin from './listmin'
 
-export default function Bicicletas() {
+export default function Bicicletas(
+
+) {
     return (
         <div>
             <Card className='my-3 lg' style={{ width: 'auto' }}>
@@ -30,8 +32,8 @@ export default function Bicicletas() {
                     
                 </Form.Group></Col>
             </Row>
-            <Getbicis/>
-            <Getbicismin/>
+            <Getbicis />
+            <Getbicismin />
         </div>
     )
 }

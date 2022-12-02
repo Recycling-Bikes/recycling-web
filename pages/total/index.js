@@ -1,11 +1,13 @@
 import Contenedor from "components/home/Contenedor";
-import Bicicletas from "components/Listado/Bicicletas";
-import Filtro from "components/Listado/Filtro";
+import Bicicletas from "./Listado/Bicicletas";
+import Filtro from "./Listado/Filtro";
 import { Container, Row, Col } from "react-bootstrap";
+import BicisState from "context/Bicis/BicisState"
 
 export default function Todasbicis() {
     return (
         <Contenedor>
+            <BicisState>
             <Container className="my-5">
                 <Row><h2 className="px-4">Bicis a la venta</h2></Row>
                 <Row>
@@ -14,6 +16,7 @@ export default function Todasbicis() {
 
                 </Row>
             </Container>
+            </BicisState>
         </Contenedor>
     )
 }

@@ -1,19 +1,14 @@
-import { GET_USER, DELETE_USER} from "../types";
+import { GET_BICIS, DELETE_USER} from "../types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   const { payload, type } = action;
 
   switch (type) {
-    case GET_USER:
+    case GET_BICIS:
       return {
         ...state,
-        user: payload,
-      };
-    case DELETE_USER:
-      return {
-        ...state,
-        user: undefined,
+        bicis: payload,
       };
 
     default:

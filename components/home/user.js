@@ -13,7 +13,7 @@ export default function User() {
               <NavDropdown.Item href="#action3">
               <Nav.Link href="/perfil" className='text-primary'>Perfil</Nav.Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action4" onClick={()=> deleteUser()}>
+              <NavDropdown.Item href="#" onClick={()=> deleteUser()}>
                 Cerrar sesión
               </NavDropdown.Item>
               <NavDropdown.Divider />

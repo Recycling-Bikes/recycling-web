@@ -10,14 +10,17 @@ import Router from "next/router"
 import UserContext from 'context/User/UserContext';
 
 export default function Singin() {
+
   const {getUser} = useContext(UserContext)
 
+  const [confirmPass, setConfirmPass] = useState(undefined)
 
   const [validated, setValidated] = useState(false);
+  const reset = () =>{setConfirmPass("Contraseña o usuario incorrecto") 
+                formPassword.value = ""}
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
-
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -25,19 +28,18 @@ export default function Singin() {
     else {
       event.preventDefault();
 
-      const {data:{user, session}, error}= await supabase.auth.signInWithPassword(
+      const {data:{user}, error}= await supabase.auth.signInWithPassword(
           {
             email: formEmail.value,
             password: formPassword.value
           }
         ) 
         getUser()
-        user ? Router.push("/") : formPassword.value = ""; 
-      
+        user ? Router.push("/") 
+        : reset()
+        }
 
-      
-      
-    }
+    
     event.preventDefault();
 
     setValidated(true);
@@ -62,7 +64,7 @@ export default function Singin() {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" required />
             <Form.Control.Feedback type="invalid">
-                Debes escribir un contraseña
+              {confirmPass ? confirmPass : "Debes escribir un contraseña"}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
