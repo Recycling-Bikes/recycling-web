@@ -2,11 +2,13 @@
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { MdKeyboardArrowRight } from "react-icons/md"
+import { useRouter } from 'next/router';
 
 
 
 
 function Presentation() {
+    const router = useRouter()
     return (
 
 
@@ -20,7 +22,7 @@ function Presentation() {
                             <p>
                                 Explora +12.000 bicicletas en nuestra plataforma
                             </p>
-                            <Button variant="primary">Comprar bicis</Button>
+                            <Button variant="primary" onClick={()=> router.push("/total")}>Comprar bicis</Button>
                                 
                                     <Link href="/" className='link-custom-text pt-2 px-1' >
                                         Vender mi bici <MdKeyboardArrowRight />

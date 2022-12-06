@@ -8,11 +8,6 @@ import { supabase } from 'supabase/client';
 import Router from 'next/router'
 export default function Register(props) {
 
-    supabase.auth.onAuthStateChange((event, session) => {
-        if (!!session) {
-            Router.push("/")
-        }
-    })
 
     return(
     <>

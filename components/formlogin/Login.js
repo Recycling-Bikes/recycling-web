@@ -8,13 +8,7 @@ import Router from 'next/router'
 import { supabase } from 'supabase/client';
 
 export default function Login(props) {
-    useEffect(()=>{
-        supabase.auth.onAuthStateChange((event, session) => {
-            if (!!session){
-                Router.push("/")
-            }
-          })
-    },[])
+   
     return (
         <>
             <Head>

@@ -5,12 +5,16 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { supabase } from 'supabase/client';
 import Router from "next/router"
+import UserContext from 'context/User/UserContext';
+import React, {useContext} from 'react'
+
 
 
 
 
 
 export default function Register({ }) {
+  const {getUser} = useContext(UserContext)
 
   const [confirmPass, setConfirmPass] = useState(undefined)
 
@@ -23,7 +27,7 @@ export default function Register({ }) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      console.log("hola")
+      
     }
     else {
       event.preventDefault();
@@ -32,14 +36,14 @@ export default function Register({ }) {
         event.target.formConfirmPassword.value = ""
 
         setConfirmPass("las contrseñas deben ser iguales")
-      } else if ((event.target.formPassword.value).length <= 4) {
+      } else if ((event.target.formPassword.value).length < 5) {
 
         event.target.formPassword.value = ""
         event.target.formConfirmPassword.value = ""
-        setConfirmPass("la contrseña debe tener mas de 4 carracteres")
+        setConfirmPass("la contraseña debe tener 5 0 mas carracteres")
+
       } else {
-         
-        const data = await supabase.auth.signUp(
+        const {data, error} = await supabase.auth.signUp(
           {
             email: event.target.formEmail.value,
             password: event.target.formPassword.value,
@@ -51,10 +55,10 @@ export default function Register({ }) {
             }
           }
         )
-        console.log(data.error==null)
-        if(data.error) {
-          Router.push("/")
-          console.log(data.error)
+
+        if(data.user) {
+          getUser()
+          Router.push("./register/send")
         }
       }    
       

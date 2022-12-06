@@ -19,10 +19,8 @@ import User from './user';
 
 export default function NavB({}) {
 
-  const {getUser, user} = useContext(UserContext)
-  useEffect(()=>{
-    getUser()
-  },[getUser])
+  const {user} = useContext(UserContext)
+
 
 
 

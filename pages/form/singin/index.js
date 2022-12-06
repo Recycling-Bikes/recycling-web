@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, {useContext} from 'react'
+
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -8,24 +8,47 @@ import { useState } from 'react';
 import { supabase } from 'supabase/client';
 import Router from "next/router"
 import UserContext from 'context/User/UserContext';
+import React, {useContext} from 'react'
+
 
 export default function Singin() {
 
+  
+
   const {getUser} = useContext(UserContext)
 
-  const [confirmPass, setConfirmPass] = useState(undefined)
+  const [confirmPass, setConfirmPass] = useState(null)
 
   const [validated, setValidated] = useState(false);
-  const reset = () =>{setConfirmPass("Contraseña o usuario incorrecto") 
-                formPassword.value = ""}
+
+  
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
+    
+
     if (form.checkValidity() === false) {
       event.preventDefault();
-      event.stopPropagation();
+
     }
+    
     else {
+      
+      const reset = (error) =>{
+
+        if (error.indexOf("credentials") != -1) {
+          setConfirmPass("Contraseña o usuario incorrectos") 
+          console.log("2dfsasdfasdf")
+        }
+        if(error.indexOf("Email") != -1) {
+          setConfirmPass("No se a confirmado el correo")
+          console.log("confirmPass")
+
+        }
+        formPassword.value = ""
+        console.log(confirmPass)
+      }
+
       event.preventDefault();
 
       const {data:{user}, error}= await supabase.auth.signInWithPassword(
@@ -34,16 +57,17 @@ export default function Singin() {
             password: formPassword.value
           }
         ) 
-        getUser()
-        user ? Router.push("/") 
-        : reset()
-        }
+        
+        user ? /* Router.push("/")  */ (getUser(), console.log(error))
+        : (reset(error.message), console.log(error.message));
+        };
 
-    
-    event.preventDefault();
+        
 
     setValidated(true);
   };
+
+
   return (
 
     <Register>
@@ -64,7 +88,7 @@ export default function Singin() {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" required />
             <Form.Control.Feedback type="invalid">
-              {confirmPass ? confirmPass : "Debes escribir un contraseña"}
+              {confirmPass ? confirmPass : "Debes escribir una contraseña"}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
