@@ -4,15 +4,16 @@ import BicisContext from "./BicisContext";
 import BicisReducer from "./BicisReducer";
 import { supabase } from 'supabase/client';
 
-import { GET_BICIS } from "../types";
+import { GET_BICI, GET_BICIS } from "../types";
 import { useQuery } from '@tanstack/react-query';
+import { FiNavigation } from "react-icons/fi";
 
 const BicisState = (props) => {
   const initialState = {
 
-    bicis: [],
+    bici: [],
   };
-  let valor= 0
+
 
   const [state, dispatch] = useReducer(BicisReducer, initialState);
 
@@ -22,11 +23,26 @@ const BicisState = (props) => {
     let { data: lista_bicis} = await supabase
     .from('lista_bicis')
     .select('*')
-    valor++
-    /* dispatch({ type: GET_BICIS, payload: lista_bicis}) */;
-    console.log(valor);
     return lista_bicis
   };
+
+
+  const getBici = async (id) =>{
+        const { data: lista_bicis, error} = (await supabase
+          .from('lista_bicis')
+          .select('*')
+          .eq('id', id))
+
+          lista_bicis ? (lista_bicis).length > 0 ? dispatch({ type: GET_BICI, payload: lista_bicis }) : null :null
+
+        return lista_bicis
+      }
+      
+    
+
+
+      
+  
 
 
 const createBici = async (
@@ -54,9 +70,10 @@ const createBici = async (
   return (
     <BicisContext.Provider
       value={{
-        bicis: state.bicis,
+        bici: state.bici,
         getBicis,
         createBici,
+        getBici,
       }}
     >
       {props.children}

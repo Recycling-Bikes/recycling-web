@@ -56,9 +56,9 @@ export default function Singin() {
             email: formEmail.value,
             password: formPassword.value
           }
-        ) 
+        )
         
-        user ? /* Router.push("/")  */ (getUser(), console.log(error))
+        user ? (getUser(), Router.push("/"))
         : (reset(error.message), console.log(error.message));
         };
 

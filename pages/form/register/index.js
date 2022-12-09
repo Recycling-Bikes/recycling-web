@@ -15,6 +15,7 @@ import React, {useContext} from 'react'
 
 export default function Register({ }) {
   const {getUser} = useContext(UserContext)
+  
 
   const [confirmPass, setConfirmPass] = useState(undefined)
 
@@ -36,11 +37,11 @@ export default function Register({ }) {
         event.target.formConfirmPassword.value = ""
 
         setConfirmPass("las contrseñas deben ser iguales")
-      } else if ((event.target.formPassword.value).length < 5) {
+      } else if ((event.target.formPassword.value).length < 6) {
 
         event.target.formPassword.value = ""
         event.target.formConfirmPassword.value = ""
-        setConfirmPass("la contraseña debe tener 5 0 mas carracteres")
+        setConfirmPass("la contraseña debe tener 6 0 mas carracteres")
 
       } else {
         const {data, error} = await supabase.auth.signUp(
@@ -56,6 +57,7 @@ export default function Register({ }) {
           }
         )
 
+        
         if(data.user) {
           getUser()
           Router.push("./register/send")

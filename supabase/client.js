@@ -5,4 +5,4 @@ const ANON =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJl
 
 
 
-export const supabase = createClient(supabaseUrl, ANON);
+export const supabase = createClient(supabaseUrl, ANON)
