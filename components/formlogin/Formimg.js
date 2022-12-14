@@ -8,7 +8,7 @@ export default function Formimg() {
   return (
     
         <Container fluid="true">
-        <Image src="/loginimg.png" className=' d-none d-xl-block' style={{height: "100vh",}}/>
+        <Image src="/loginimg.png" className=' d-none d-xl-block' style={{maxHeight: "100vh"}}/>
 
         <Link href="/">
         <Image
@@ -18,7 +18,8 @@ export default function Formimg() {
               style={{position: "absolute",
                 left: "2.72vw",
                 top: "2.12vw",
-                height: "5vh"}}
+                height: "5vh",
+                }}
 
             />
           </Link>

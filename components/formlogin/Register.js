@@ -17,18 +17,17 @@ export default function Register(props) {
         </Head>
 
         <SSRProvider>
-            <div className='d-flex flex-row' style={{ height: "-webkit-fill-available" }}>
+            <div className='d-flex flex-row '>
                 <Formimg />
-                <div style={{
-                    width: "100%",
-                    width: "-moz-available fill-available",
-                    width: "fill-available",
-                    width: "-webkit-fill-available",
+
+                <div className='d-flex flex-column justify-content-between with-available' style={{
+                    height: "100vh"
                 }} >
 
                     <Formnav2 />
 
-                    <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' style={{ height: "90vh" }}>
+
+                    <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' >
                         {props.children}
                     </Container>
 

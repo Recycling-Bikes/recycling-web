@@ -17,16 +17,18 @@ export default function Login(props) {
             </Head>
 
             <SSRProvider>
-            <div className='d-flex flex-row' style={{height: "-webkit-fill-available"}}>
+            <div className='d-flex flex-row'>
                 <Formimg />
-                <div style={{width: "100%",
+                <div className='d-flex flex-column justify-content-between' style={{
                     width: "-moz-available fill-available",
                     width: "fill-available",
-                    width: "-webkit-fill-available",}} >
-
+                    width: "-webkit-fill-available",
+                    height: "100vh"
+                }} >
+                        
                 <Formnav />
 
-                <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' style={{height: "90vh"}}>
+                <Container className='d-flex flex-column  justify-content-center align-content-center align-items-center'>
                 {props.children}
                 </Container>
 

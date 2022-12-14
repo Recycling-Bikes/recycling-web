@@ -4,9 +4,11 @@ import Article from "./Home/Article";
 import Promesas from "./Home/Promesas";
 import Presentation from "./Home/Presentation";
 import Reviews from "./Home/Reviews";
+import { useEffect } from "react";
 
 
 export default function HomePage(props) {
+
     return (
         <Contenedor>
             <Container fluid className="presentation ">

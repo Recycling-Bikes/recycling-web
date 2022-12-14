@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 import UserContext from "./UserContext";
 import UserReducer from "./UserReducer";
@@ -10,7 +10,7 @@ import { GET_USER } from "../types";
 
 const UserState = (props) => {
   const initialState = {
-    user: undefined,
+    user: props.user,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -26,26 +26,40 @@ const UserState = (props) => {
       console.error(error);
     }
   };
+
+
+
+  const updateUser = (userJson) => {
+    const user = userJson ? JSON.stringify(userJson) : null
+
+      dispatch({ type: GET_USER, payload: user });
+
+  };
+
+
   const deleteUser = async () => {
     try {
       await supabase.auth.signOut()
-      getUser()
+      updateUser()
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 
 
-
+  useEffect(()=>{
+    const user = localStorage.getItem("sb-iathmgighltcphggwwyp-auth-token")
+    user ? updateUser(user) :null
+  },[])
 
 
   return (
     <UserContext.Provider
       value={{
         user: state.user,
-        bicis: state.bicis,
         getUser,
         deleteUser,
+        updateUser
       }}
     >
       {props.children}

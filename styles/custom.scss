@@ -119,6 +119,12 @@ a {
 
 }
 
+.with-available{
+    width: stretch;
+    width:-webkit-fill-available;
+    width: -moz-available;
+}
+
 
 @media only screen and (max-device-width: 780px){
     .img-presentacion{

@@ -1,4 +1,4 @@
-import { GET_BICI, DELETE_USER} from "../types";
+import { GET_BICI, CREATE_BICI} from "../types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
@@ -7,8 +7,16 @@ export default (state, action) => {
   switch (type) {
     case GET_BICI:
       return {
+        ...state,
         bici: payload[0],
       };
+      case CREATE_BICI:
+      return {
+        ...state,
+        publicacion: payload,
+      };
+      
+
 
     default:
       return state;

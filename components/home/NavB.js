@@ -11,6 +11,7 @@ import {BiSearchAlt} from 'react-icons/bi';
 import UserContext from 'context/User/UserContext';
 import React, { useState , useContext, useEffect } from 'react';
 import User from './user';
+import Link from 'next/link';
 
 
 
@@ -21,15 +22,12 @@ export default function NavB({}) {
 
   const {user} = useContext(UserContext)
 
-
-
-
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top" className='hover-custom shadow-sm'>
       <Container>
 
 
-        <Navbar.Brand href="/">
+        <Link href="/">
             <Image
               src="/recycling.png"
               width="60"
@@ -37,7 +35,7 @@ export default function NavB({}) {
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />
-        </Navbar.Brand>
+        </Link>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -88,7 +86,7 @@ export default function NavB({}) {
             <Nav.Link href="#deets" ><BiSearchAlt size={23} /> </Nav.Link>
             <Nav.Link href="#deets" ><FiShoppingCart size={22}/> </Nav.Link>
             {user ? <User /> 
-            : <Nav.Link href="/form/singin" className='text-primary'><BsPersonCircle /> Acceder</Nav.Link>}
+            : <Nav.Link href="/form/singin" className=' text-primary'><BsPersonCircle /> Acceder</Nav.Link>}
             
           </Nav>
 

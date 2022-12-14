@@ -4,14 +4,14 @@ import BicisContext from "./BicisContext";
 import BicisReducer from "./BicisReducer";
 import { supabase } from 'supabase/client';
 
-import { GET_BICI, GET_BICIS } from "../types";
-import { useQuery } from '@tanstack/react-query';
-import { FiNavigation } from "react-icons/fi";
+import { GET_BICI, CREATE_BICI } from "../types";
+
 
 const BicisState = (props) => {
   const initialState = {
 
     bici: [],
+    publicacion: null,
   };
 
 
@@ -45,32 +45,25 @@ const BicisState = (props) => {
   
 
 
-const createBici = async (
-    Tittle, Valor,
-    Descripcion, Condicion,
-    Marca, Agno,
-    Modelo, Talla,
-    Material, Transmision,
-    suspension) => {
-    const { data, error } = await supabase
-      .from('lista_bicis')
-      .insert([
-        {
-          Tittle, Valor,
-          Descripcion, Condicion,
-          Marca, Agno,
-          Modelo, Talla,
-          Material, Transmision,
-          suspension
-        },
-      ])
+const createBici = (publicacion) => {
+    
+  dispatch({ type: CREATE_BICI, payload: publicacion })
+
+      
   }
+  const sendBici = (publicacion) => {
+    
+    supabase.from('lista_bicis').insert(publicacion)
+  
+        
+    }
 
 
   return (
     <BicisContext.Provider
       value={{
         bici: state.bici,
+        puiblicacion: state.puiblicacion,
         getBicis,
         createBici,
         getBici,

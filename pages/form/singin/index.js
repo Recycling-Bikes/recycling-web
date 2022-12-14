@@ -4,15 +4,16 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Register from 'components/formlogin/Register';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from 'supabase/client';
-import Router from "next/router"
+import {useRouter} from "next/router"
 import UserContext from 'context/User/UserContext';
 import React, {useContext} from 'react'
 
 
 export default function Singin() {
 
+  const router = useRouter()
   
 
   const {getUser} = useContext(UserContext)
@@ -58,7 +59,7 @@ export default function Singin() {
           }
         )
         
-        user ? (getUser(), Router.push("/"))
+        user ? (getUser(), router.push("/"))
         : (reset(error.message), console.log(error.message));
         };
 
@@ -72,7 +73,7 @@ export default function Singin() {
 
     <Register>
 
-      <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' style={{ height: "90vh" }} >
+      <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' style={{ maxHeight: "90vh", height: "-webkit-fill-available" }} >
 
         <Form noValidate validated={validated} onSubmit={handleSubmit} >
           <h1 className='mb-4'>Accede a Recycling</h1>

@@ -1,11 +1,51 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Contenedor from 'components/home/Contenedor'
 import { Row, Form, Col, Container, Button, ProgressBar } from 'react-bootstrap'
 import Link from 'next/link'
 import { MdOutlinePedalBike } from 'react-icons/md'
 import { BsCardChecklist, BsThreeDots } from 'react-icons/bs'
+import { useRouter } from 'next/router'
+import BicisContext from 'context/Bicis/BicisContext'
 
-export default function uno() {
+export default function Parttres() {
+
+    const router = useRouter()
+
+
+    const { createBici, publicacion } = useContext(BicisContext)
+
+    const HandleSubmit = (event) => {
+        const form = event.currentTarget;
+  
+        
+  
+          event.preventDefault();
+  
+  
+  
+              router.push("./cuatro")
+            
+             
+          
+  
+        event.preventDefault();
+        
+    
+    
+  
+        useEffect(()=>{
+          const publict ={hola: "leo",
+          data: {
+              nombre: "Uno",
+              agencia: "1",
+              cantidad: "1",
+          }}
+  
+          createBici(publict)
+  
+      },[])
+  
+      };
 
 
 
@@ -114,7 +154,7 @@ export default function uno() {
 
                             <div className='d-flex justify-content-end pt-3 align-items-center'>
 
-                                <Link href="#" className='mx-3'>Atras</Link>
+                                <Link href="./two" className='mx-3'>Atras</Link>
 
                                 <Button variant="primary" type="submit">
                                     Valor de tu bici
