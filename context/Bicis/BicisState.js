@@ -4,7 +4,7 @@ import BicisContext from "./BicisContext";
 import BicisReducer from "./BicisReducer";
 import { supabase } from 'supabase/client';
 
-import { GET_BICI, CREATE_BICI } from "../types";
+import { GET_BICI, CREATE_BICI, GET_MARCAS } from "../types";
 
 
 const BicisState = (props) => {
@@ -29,8 +29,8 @@ const BicisState = (props) => {
   const getMarcas = async () => {
     let { data: marcas, error } = await supabase
       .from('marcas')
-      .select('*')
-    dispatch({ type: GET_MARCAS, payload: marcas })
+      .select('*');
+    dispatch({ type: GET_MARCAS, payload: marcas });
   };
 
 

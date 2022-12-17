@@ -41,6 +41,7 @@ export default function PartUno() {
     console.log(publict);
   };
 
+  getMarcas();
   console.log(marcas);
 
   return (
