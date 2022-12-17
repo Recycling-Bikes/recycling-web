@@ -48,7 +48,7 @@ const UserState = (props) => {
 
 
   useEffect(()=>{
-    const user = localStorage.getItem("sb-iathmgighltcphggwwyp-auth-token")
+    const user = localStorage.getItem("sb-mmducfdpxruujxivibfv-auth-token")
     user ? updateUser(user) :null
   },[])
 

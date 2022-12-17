@@ -132,6 +132,7 @@ useEffect(()=>{
                     required
                   >
                     <option>Seleciona una Marca</option>
+                    {}
                     <option value="1">MTM</option>
                     <option value="2">CTD</option>
                     <option value="3">Three</option>
