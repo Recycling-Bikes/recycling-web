@@ -14,6 +14,7 @@ import { MdOutlinePedalBike } from "react-icons/md";
 import { BsCardChecklist, BsThreeDots } from "react-icons/bs";
 import BicisContext from "context/Bicis/BicisContext";
 import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
 
 export default function PartUno() {
 
@@ -25,10 +26,17 @@ export default function PartUno() {
 
   const [validated, setValidated] = useState(false);
 
-  useEffect(()=>{
-    getMarcas();
-    console.log(marcas);
-  },[getMarcas,marcas])
+
+
+  const {isLoading, isErrorn, error, data} =useQuery({
+    queryKey: ["productos"],
+    queryFn: getMarcas
+})
+
+useEffect(()=>{
+
+  console.log(marcas);
+},[marcas])
 
   const HandleSubmit = (event) => {
     const form = event.currentTarget;
