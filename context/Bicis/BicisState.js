@@ -28,7 +28,7 @@ const BicisState = (props) => {
 
   const getMarcas = async () => {
     let { data: marcas, error } = await supabase
-      .from('marcas')
+      .from('brands')
       .select('*');
     dispatch({ type: GET_MARCAS, payload: marcas });
   };
