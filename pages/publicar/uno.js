@@ -19,7 +19,7 @@ export default function PartUno() {
 
   const router = useRouter();
 
-  const { createBici, publicacion } = useContext(BicisContext);
+  const { createBici, publicacion, getMarcas, marcas } = useContext(BicisContext);
 
   const [validated, setValidated] = useState(false);
 
@@ -39,8 +39,9 @@ export default function PartUno() {
     };
 
     console.log(publict);
-
   };
+
+  console.log(marcas);
 
   return (
     <Contenedor>

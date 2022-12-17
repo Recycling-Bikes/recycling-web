@@ -15,8 +15,11 @@ export default (state, action) => {
         ...state,
         publicacion: payload,
       };
-      
-
+      case GET_MARCAS:
+      return {
+        ...state,
+        marcas: payload,
+      };
 
     default:
       return state;

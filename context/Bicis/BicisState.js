@@ -9,7 +9,7 @@ import { GET_BICI, CREATE_BICI } from "../types";
 
 const BicisState = (props) => {
   const initialState = {
-
+    marcas:[],
     bici: [],
     publicacion: null,
   };
@@ -21,9 +21,16 @@ const BicisState = (props) => {
   const getBicis = async () => {
 
     let { data: lista_bicis} = await supabase
-    .from('lista_bicis')
+    .from('bicis')
     .select('*')
     return lista_bicis
+  };
+
+  const getMarcas = async () => {
+    let { data: marcas, error } = await supabase
+      .from('marcas')
+      .select('*')
+    dispatch({ type: GET_MARCAS, payload: marcas })
   };
 
 
@@ -37,25 +44,15 @@ const BicisState = (props) => {
 
         return lista_bicis
       }
-      
-    
-
-
-      
-  
 
 
 const createBici = (publicacion) => {
     
   dispatch({ type: CREATE_BICI, payload: publicacion })
 
-      
   }
   const sendBici = (publicacion) => {
-    
     supabase.from('lista_bicis').insert(publicacion)
-  
-        
     }
 
 
@@ -67,6 +64,8 @@ const createBici = (publicacion) => {
         getBicis,
         createBici,
         getBici,
+        getMarcas,
+        marcas: state.marcas,
       }}
     >
       {props.children}
