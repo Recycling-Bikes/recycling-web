@@ -1,3 +1,4 @@
+import { supabase } from 'supabase/client';
 import React, { useContext, useEffect, useState } from "react";
 import Contenedor from "components/home/Contenedor";
 import {
@@ -34,11 +35,11 @@ export default function PartUno() {
 })
 
 useEffect(()=>{
-
   console.log(marcas);
 },[marcas])
 
-  const HandleSubmit = (event) => {
+  const HandleSubmit = async (event) => {
+
     const form = event.currentTarget;
 
     event.preventDefault();
@@ -48,16 +49,21 @@ useEffect(()=>{
     setValidated(true);
 
     const publict = {
-      Agno: Agno.value,
-      Marca: Marca.value,
-      Modelo: Modelo.value,
+      year: 2022, //Agno.value,
+      model: 1, //Modelo.value,
+      bici_condition: 1,
+      size: 1,
     };
 
     console.log(publict);
+
+    // Test with hard coded data
+    const { data, error } = await supabase
+      .from('bicis')
+      .insert([publict,]);
+    console.log(error);
+    console.log(data);
   };
-
-
-  
 
   return (
     <Contenedor>
