@@ -17,11 +17,18 @@ import { useRouter } from "next/router";
 
 export default function PartUno() {
 
+  
+
   const router = useRouter();
 
   const { createBici, publicacion, getMarcas, marcas } = useContext(BicisContext);
 
   const [validated, setValidated] = useState(false);
+
+  useEffect(()=>{
+    getMarcas();
+    console.log(marcas);
+  },[getMarcas,marcas])
 
   const HandleSubmit = (event) => {
     const form = event.currentTarget;
@@ -42,8 +49,7 @@ export default function PartUno() {
   };
 
 
-  getMarcas();
-  console.log(marcas);
+  
 
   return (
     <Contenedor>
