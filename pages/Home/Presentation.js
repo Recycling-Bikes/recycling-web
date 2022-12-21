@@ -20,7 +20,7 @@ function Presentation() {
                     <p>
                         Explora +12.000 bicicletas en nuestra plataforma
                     </p>
-                    <Button variant="primary" onClick={() => router.push("/total")}>Comprar bicis</Button>
+                    <Button variant="primary" onClick={() => router.push("/parking")}>Comprar bicis</Button>
 
                     <Link href="/intermedio" className='link-custom-text pt-2 px-1' >
                         Vender mi bici <MdKeyboardArrowRight />

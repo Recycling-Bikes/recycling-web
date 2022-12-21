@@ -35,7 +35,7 @@ function Presentation() {
                             <p className='pb-4'>
                             Publica en un mercado de más de 3.000 ciclistas
                             </p>
-                            <Button className='' variant="primary" onClick={()=> router.push("/total")}>Vender tu bici ahora</Button>
+                            <Button className='' variant="primary" onClick={()=>{localStorage.removeItem('items'); router.push("/publicar/uno")}}>Vender tu bici ahora</Button>
                                 
                                     
 

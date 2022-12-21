@@ -11,9 +11,11 @@ export default (state, action) => {
         bici: payload[0],
       };
       case CREATE_BICI:
+
       return {
         ...state,
-        publicacion: payload,
+        publicacion: payload
+        
       };
       case GET_MARCAS:
       return {
