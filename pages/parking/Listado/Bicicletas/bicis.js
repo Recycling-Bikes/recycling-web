@@ -41,7 +41,7 @@ export default function Bicis({width, clase}) {
                 </Card.Text>
                 <Card.Title style={{color: "black"}}>{bici.title}</Card.Title>
                 <Card.Text style={{color: "rgba(108, 117, 125, 1)"}}>
-                    ${bici.price}
+                    ${bici.price.toLocaleString('en')}
                 </Card.Text>
 
 
