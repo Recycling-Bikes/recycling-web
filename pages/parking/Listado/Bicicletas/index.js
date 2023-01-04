@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Button, Row, Col, Form } from 'react-bootstrap'
 import Getbicis from './list'
-import Getbicismin from './listmin'
+
 
 export default function Bicicletas(
 
@@ -33,7 +33,7 @@ export default function Bicicletas(
                 </Form.Group></Col>
             </Row>
             <Getbicis />
-            <Getbicismin />
+
         </div>
     )
 }

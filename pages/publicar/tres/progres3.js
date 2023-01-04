@@ -41,14 +41,14 @@ export default function Progres3() {
                   borderRadius: "50%",
                   backgroundColor: "#CFEEEB",
                   color: "#0FA899",
-                }}
+                }} 
               />
               <div className="px-1">
                 <p className="m-0 p-0" style={{ color: "#0FA899" }}>
                   Paso 3/3
                 </p>
                 <p className="m-0 p-0">
-                  <strong>Condicon de la bici</strong>
+                  <strong>Condición de la bici</strong>
                 </p>
               </div>
             </div>

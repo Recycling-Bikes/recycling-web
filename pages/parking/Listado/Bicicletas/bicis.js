@@ -10,7 +10,7 @@ export default function Bicis({width, clase}) {
 
     
 
-    let{getBicis}=useContext(BicisContext)
+    let {getBicis, CDN}=useContext(BicisContext)
 
     
 
@@ -30,7 +30,7 @@ export default function Bicis({width, clase}) {
     <>
     {data
     ?  data.map((bici) => <Card style={{ width: width }} className={clase} key={bici.id}  >
-        <Link href={`/parking/${bici.id}`}>
+        <Link href={`/parking/${bici.id}`} passHref>
             <div className='m-3'>
                 <Badge bg="primary" style={{color: "white"}} >Popular</Badge>
                 <Card.Img variant="top" src="/imagec.png" />

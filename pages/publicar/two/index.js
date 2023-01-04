@@ -15,6 +15,7 @@ const schema = yup.object().shape({
   transmission: yup.string().required("La marca es requerida"),
 });
 
+
 export default function Partdos() {
   const router = useRouter();
 
@@ -96,7 +97,7 @@ export default function Partdos() {
                           isInvalid={!!errors.size}
                           value={values.size}
                         >
-                          <option value="">Seleciona una size</option>
+                          <option value="">Selecciona una talla</option>
                           {selectList(listTallas, values.size)}
                           
                         </Form.Select>
@@ -125,7 +126,7 @@ export default function Partdos() {
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="transmission">
-                        <Form.Label>Transmision</Form.Label>
+                        <Form.Label>Transmisión</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           onChange={handleChange}
@@ -145,7 +146,7 @@ export default function Partdos() {
 
                       <div className="d-flex justify-content-end pt-3 align-items-center">
                         <Link href="./uno" className="mx-3">
-                          Atras
+                          Atrás
                         </Link>
 
                         <Button variant="primary" type="submit">

@@ -1,15 +1,19 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
+// cspell:disable
 
 import BicisContext from "./BicisContext";
 import BicisReducer from "./BicisReducer";
 import { supabase } from "supabase/client";
 
-import { GET_BICI, CREATE_BICI } from "../types";
+import { GET_BICI, CREATE_BICI, DELETE_BICI } from "../types";
+import { v4 } from "uuid";
+import UserContext from "context/User/UserContext";
 
 const BicisState = (props) => {
   const initialState = {
     /* marcas:[], */
-    bici: [],
+    CDN : "https://mmducfdpxruujxivibfv.supabase.co/storage/v1/object/public/imagesbicis/",
+    bici: {},
     publicacion: {},
   };
 
@@ -43,7 +47,7 @@ const BicisState = (props) => {
     let { data: size, error } = await supabase.from("size").select("*");
     return size;
   };
-  
+
   const getTransmision = async () => {
     let { data: transmissions, error } = await supabase
       .from("transmissions")
@@ -59,39 +63,65 @@ const BicisState = (props) => {
   };
 
   const getBici = async (id) => {
+
+    
+
     const { data: bicis, error } = await supabase
       .from("bicis")
-      .select("*")
+      .select(`id, price, title , filesUrl , models (name), size (name), bici_conditions (name)`)
       .eq("id", id);
 
-    console.log(bicis);
+    /*   */
     bicis
-      ? bicis.length > 0
+      ? bicis.length > 0 
         ? dispatch({ type: GET_BICI, payload: bicis })
         : null
       : null;
 
-    return bicis;
+
+    return state.bici;
   };
 
   const createBici = (publicacion) => {
-    const date = Object.assign(state.publicacion, publicacion);
+    const data = JSON.parse(localStorage.getItem("items"));
+    const datas = Object.assign(state.publicacion, data, publicacion);
 
-    dispatch({ type: CREATE_BICI, payload: date });
+    dispatch({ type: CREATE_BICI, payload: datas });
 
     localStorage.setItem("items", JSON.stringify(state.publicacion));
   };
+
+  const UploadImagesBici = (files, userID) => {
+    const carpeta = v4();
+    let filesUrl = [];
+  
+    const promises = files.map(async (file) => {
+      const { data, error } = await supabase.storage
+        .from("imagesbicis")
+        .upload(userID + "/" + carpeta + "/" + v4(), file);
+  
+      filesUrl.push(data.path);
+      error ? console.log(error) : null;
+      return null;
+    });
+  
+    return Promise.all(promises).then(() => {
+      return filesUrl;
+    });
+  };
+  
+
+  
+
 
   const prueba = async () => {
     let { data: bicis, error } = await supabase.from("bicis").select(`
     id, price, title,
     models (name)`);
     return bicis;
-  }
+  };
 
-
-
-  const saveBici = async({
+  const saveBici = async ({
     bici_condition,
     year,
     model,
@@ -101,26 +131,28 @@ const BicisState = (props) => {
     transmission,
     title,
     description,
-    price
-}) => {
-
-
+    price,
+    filesUrl,
+  }) => {
     const { data, error } = await supabase
-      .from('bicis')
-      .insert([{bici_condition,
-        year,
-        model,
-        size,
-        transmission,
-        title,
-        description,
-        price}]);
+      .from("bicis")
+      .insert([
+        {
+          bici_condition,
+          year,
+          model,
+          size,
+          transmission,
+          title,
+          description,
+          price,
+          filesUrl,
+        },
+      ]);
 
-      console.log(data);
-      console.log(error);
+    console.log(data);
+    console.log(error);
   };
-
-  
 
   const localDataBici = () => {
     const data = JSON.parse(localStorage.getItem("items"));
@@ -136,6 +168,7 @@ const BicisState = (props) => {
   return (
     <BicisContext.Provider
       value={{
+        CDN: state.CDN,
         bici: state.bici,
         getBicis,
         createBici,
@@ -149,8 +182,8 @@ const BicisState = (props) => {
         getTransmision,
         getCondicion,
         saveBici,
-        prueba
-        /* marcas: state.marcas, */
+        prueba,
+        UploadImagesBici,
       }}
     >
       {props.children}

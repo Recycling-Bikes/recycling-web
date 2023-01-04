@@ -29,8 +29,8 @@ const UserState = (props) => {
 
 
 
-  const updateUser = (userJson) => {
-    const user = userJson ? JSON.stringify(userJson) : null
+  const updateUser = (userJson = null) => {
+    const user = userJson ? userJson.user : null
 
       dispatch({ type: GET_USER, payload: user });
 
@@ -48,7 +48,7 @@ const UserState = (props) => {
 
 
   useEffect(()=>{
-    const user = localStorage.getItem("sb-mmducfdpxruujxivibfv-auth-token")
+    const user = JSON.parse(localStorage.getItem("sb-mmducfdpxruujxivibfv-auth-token"))
     user ? updateUser(user) :null
   },[])
 

@@ -80,16 +80,14 @@ export default function Parttres() {
                                         type="radio"
                                         name="bici_condition"
                                         value={datum.id}
-                                        isInvalid={!!errors.bici_condition}
-                                        
+
                                         onChange={handleChange}
-                                      />
+                                      />  
 
-
-                                      <Form.Check.Label>{datum.name}</Form.Check.Label>
+                                      <Form.Check.Label>{datum.name}{}</Form.Check.Label>
                                     </Form.Check>
                                     </Col>
-
+                                    
                                     <Col sm="5" className="">
                                     {datum.description}
 

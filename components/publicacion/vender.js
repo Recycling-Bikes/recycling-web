@@ -1,16 +1,20 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container, Button, Accordion } from 'react-bootstrap'
+import PropTypes from 'prop-types';
+import BicisContext from 'context/Bicis/BicisContext';
 
 export default function Descriptons() {
+
+    const {bici} = useContext(BicisContext)
     return (
         <Container className='py-3 mx-3 d-flex flex-column'>
-            <h2>Specialized Aethos Pro SRAM Force eTap AXS Road Bike - 2021, 56cm</h2>
-            <p>SKU: 1AE9C3B33D1F</p>
+            <h2>{bici.title}</h2>
+            <p>SKU: {bici.id}</p>
 
             <p className='mb-0 '>Altura recomendada del ciclista: <strong>1,77m - 1,85m</strong></p>
-            <Link href="#">Guia de tallas</Link>
-            <h2 className='my-4'>$6,499</h2>
+            <Link href="#">Guía de tallas</Link>
+            <h2 className='my-4'>${bici.price.toLocaleString('en')}</h2>
 
             <Button className='mb-2'>Añadir al carrito</Button>
             <Button className='mb-2' variant="outline-primary">Trade - in</Button>
@@ -44,4 +48,5 @@ export default function Descriptons() {
         </Container>
     )
 }
+
 

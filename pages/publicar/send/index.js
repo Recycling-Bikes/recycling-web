@@ -1,6 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Contenedor from "components/home/Contenedor";
-import { Row, Form, Col, Container, Button, InputGroup } from "react-bootstrap";
+import {
+  Row,
+  Form,
+  Col,
+  Container,
+  Button,
+  InputGroup,
+  FormGroup,
+  FloatingLabel,
+} from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import BicisContext from "context/Bicis/BicisContext";
@@ -8,32 +17,47 @@ import Progres2 from "./progres2";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { useQuery } from "@tanstack/react-query";
+import UserContext from "context/User/UserContext";
 
 const schema = yup.object().shape({
   description: yup.string().required("El año es requerido"),
   title: yup.string().required("El modelo es requerido"),
   price: yup.string().required("La marca es requerida"),
+  files: yup.array().required(),
 });
 
 export default function Partdos() {
   const router = useRouter();
+  const { user } = useContext(UserContext);
 
-  const { createBici, publicacion, localDataBici, saveBici } =
+
+  const { createBici, publicacion, localDataBici, saveBici, UploadImagesBici } =
     useContext(BicisContext);
 
   const datosda = useQuery({
     queryKey: ["localDataBici"],
     queryFn: localDataBici,
   });
+  
 
-  const SaveData = (items) => {
+  const SaveData = async (items) => {
+    const uploadPromise = UploadImagesBici(items.files, user.id);
+  
+    const pathImages = await uploadPromise;
+  
+    items = {
+      ...items,
+      filesUrl: pathImages,
+    };
+  
+    console.log(JSON.stringify(items)); 
+  
     createBici(items);
     saveBici(publicacion);
-
-    localStorage.removeItem('items');
+  
+    localStorage.removeItem("items");
+  
     router.push("/parking");
-    
-    return null;
   };
 
   return (
@@ -50,6 +74,7 @@ export default function Partdos() {
                   ? publicacion.description
                   : "",
                 price: publicacion.price ? publicacion.price : "",
+                files: publicacion.files ? publicacion.files : {},
               }}
             >
               {({
@@ -57,6 +82,7 @@ export default function Partdos() {
                 handleChange,
                 handleBlur,
                 values,
+
                 touched,
                 isValid,
                 errors,
@@ -87,7 +113,6 @@ export default function Partdos() {
                             <Form.Control
                               type="number"
                               placeholder="500"
-                              aria-describedby="inputGroupPrepend"
                               required
                               min="1"
                               pattern="^[0-9]+"
@@ -101,20 +126,54 @@ export default function Partdos() {
                           </InputGroup>
                         </Form.Group>
                       </Row>
+
                       <Form.Group className="mb-3" controlId="formGridAddress1">
-                        <Form.Label>Descripcion</Form.Label>
+                        <Form.Label>Descripción</Form.Label>
+                        <FloatingLabel controlId="description">
+                          <Form.Control
+                            className="p-2"
+                            as="textarea"
+                            name="description"
+                            onChange={handleChange}
+                            value={values.description}
+                            required
+                            style={{ height: "100px" }}
+                          />
+                        </FloatingLabel>
+                      </Form.Group>
+
+                      <FormGroup className="mb-3">
+                        <Form.Label className="d-flex">
+                          Fotos del producto{" "}
+                          <div className="mx-1" style={{ color: "red" }}>
+                            *
+                          </div>
+                        </Form.Label>
+
                         <Form.Control
-                          type="text"
-                          name="description"
-                          onChange={handleChange}
-                          value={values.description}
+                          className=""
+                          type="file"
+                          multiple={true}
+                          name="files"
+                          id="files"
+                          accept="image/*,video/*,"
+                          onChange={(e) => {
+                            const pawa = {
+                              target: {
+                                ...e.target,
+                                value: Object.values(e.target.files),
+                              },
+                            };
+
+                            handleChange(pawa);
+                          }}
                           required
                         />
-                      </Form.Group>
+                      </FormGroup>
 
                       <div className="d-flex justify-content-end pt-3 align-items-center">
                         <Link href="./cuatro" className="mx-3">
-                          Atras
+                          Atrás
                         </Link>
 
                         <Button variant="primary" type="submit">
@@ -126,6 +185,10 @@ export default function Partdos() {
                 );
               }}
             </Formik>
+
+            {/* {imageBicis 
+            ? <Image alt="" width={500} height={32} src={ `  ./{imageBicis}`} />
+            :null} */}
           </Col>
         </Row>
       </Container>

@@ -22,7 +22,7 @@ function Presentation() {
                     </p>
                     <Button variant="primary" onClick={() => router.push("/parking")}>Comprar bicis</Button>
 
-                    <Link href="/intermedio" className='link-custom-text pt-2 px-1' >
+                    <Link href="/intermedio" className='link-custom-text pt-2 px-1' passHref>
                         Vender mi bici <MdKeyboardArrowRight />
                     </Link>
 

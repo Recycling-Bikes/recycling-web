@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { NavDropdown, Nav } from "react-bootstrap";
-import { supabase } from "supabase/client";
 import UserContext from "context/User/UserContext";
 
 export default function User() {
@@ -8,13 +7,12 @@ export default function User() {
   return (
     <div>
       <NavDropdown title="Perfil" id="user">
-
         <NavDropdown.Item href="/perfil">Perfil</NavDropdown.Item>
 
         <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
 
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/" onClick={() => deleteUser()}>
+        <NavDropdown.Item href="" onClick={() => deleteUser()}>
           Cerrar sesión
         </NavDropdown.Item>
       </NavDropdown>

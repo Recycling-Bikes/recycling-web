@@ -1,17 +1,26 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from 'react'
-import { Container, Breadcrumb, Row,Col } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Container, Breadcrumb, Row,Col, Carousel } from 'react-bootstrap'
+import PropTypes from 'prop-types'
+import BicisContext from 'context/Bicis/BicisContext'
+import Image from 'next/image'
+
+export default function Vista()  {
+  const {bici, CDN} = useContext(BicisContext)
+  
+
+  const listLink = bici.filesUrl ? bici.filesUrl : []
 
 
-export default function Vista() {
+  const [primaryVista, setPrimaryVista] = useState([])
 
-  const listLink = ["/Mountain.png", "/segundavista.png"]
-    
-  const [primaryVista, setPrimaryVista] = useState(listLink[1])
 
-    
+  useEffect(()=>{
 
+    setPrimaryVista( listLink[0]? listLink[0] : [""] )
+
+  },[listLink])
 
   return (
     <>
@@ -19,28 +28,36 @@ export default function Vista() {
     <Row className='mt-4'>
         <Breadcrumb>
       <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-      <Breadcrumb.Item href="#">
-        Library
+      <Breadcrumb.Item href="/parking">
+        Parking
       </Breadcrumb.Item>
-      <Breadcrumb.Item active>Data</Breadcrumb.Item>
+      <Breadcrumb.Item active>SKU: {bici.id}</Breadcrumb.Item>
     </Breadcrumb>
 
     </Row>
     <Row>
-      <Col md="1">
+      <Col md="2" className='d-none d-lg-block' >
 
+        {listLink.map(links => <Image src={CDN + links} alt="" key={links} width={50} height={50} className="m-2 cover" onClick={() => setPrimaryVista(links)} />)}
 
-
-        {listLink.map(links => <img src={links} key={links} width={50} height={50} className="m-2" onClick={() => setPrimaryVista(links)}/>
-
-            
-        )}
       </Col>
-      <Col>
-      <Container>
-        <img src={primaryVista} className="img-fluid"/>
+      <Col className='d-none d-lg-block'>
+      <Container >
+        <img src={CDN + primaryVista} className="img-fluid p-0" />
         </Container>
       </Col>
+
+      <Col className='d-lg-none' >
+      <Carousel>
+      {listLink.map(links => <Carousel.Item key={links}>
+        <img src={CDN + links}
+          className="d-block w-100"
+          alt="First slide"
+        />
+      </Carousel.Item>
+      )}
+      
+    </Carousel></Col>
     </Row>
     </>
   )

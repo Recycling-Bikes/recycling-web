@@ -1,4 +1,4 @@
-import { GET_BICI, CREATE_BICI, GET_MARCAS} from "../types";
+import { GET_BICI, CREATE_BICI, GET_MARCAS, DELETE_BICI} from "../types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
@@ -9,6 +9,11 @@ export default (state, action) => {
       return {
         ...state,
         bici: payload[0],
+      };
+      case DELETE_BICI:
+      return {
+        ...state,
+        bici: {},
       };
       case CREATE_BICI:
 
@@ -22,6 +27,8 @@ export default (state, action) => {
         ...state,
         marcas: payload,
       };
+      
+
 
     default:
       return state;

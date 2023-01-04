@@ -78,16 +78,11 @@ export default function Promesas() {
         <div>
 
           <Button variant="primary" className='d-inline' 
-          style={{ width: "auto" }} >Encuentra una bici para ti</Button>
+          style={{ width: "auto" }} onClick={()=>{localStorage.removeItem('items'); router.push("/publicar/uno")}}>Encuentra una bici para ti</Button>
 
         </div>
         <br />
         <div>
-
-          <Link href="/" className='link-custom-text' >
-            Quiero vender mi bici <MdKeyboardArrowRight />
-
-          </Link>
 
         </div>
 

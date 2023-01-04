@@ -24,7 +24,7 @@ const Footer = (props) => {
 
               <Link href='/'>
 
-                <img src='/recycling-2x.png' alt=''
+                <img src='/recyclingLogo.png' alt=''
                   className='img-fluid pb-5'
                 />
 
