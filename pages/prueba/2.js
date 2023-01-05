@@ -18,7 +18,7 @@ export default function App() {
   return (
     <Contenedor>
       <Container>
-        <div className="">
+        <div className=" mb-4">
           <ImageUploading
             multiple
             value={images}
