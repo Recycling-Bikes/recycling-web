@@ -1,6 +1,6 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Contenedor from "components/home/Contenedor";
 
 export default function App() {
@@ -42,19 +42,19 @@ export default function App() {
               onClick={onImageUpload}
               {...dragProps}
             >
-              Click or Drop here
+              Subir o arrastrar fotos
             </Button>
             &nbsp;
-            <Button onClick={onImageRemoveAll}>Remove all images</Button>
+            <Button onClick={onImageRemoveAll}>Quitar todas las imágenes</Button>
             </div>
 
             <Row>
             {imageList.map((image, index) => (
               <Col lg={4} xs={6} key={index} className="image-item d-flex align-items-end mb-3">
-                <img src={image["data_url"]} alt="" width="100" />
+                <Image src={image["data_url"]} alt="" width="100" />
                 <div className="image-item__btn-wrapper">
-                  <Button className="m-1" onClick={() => onImageUpdate(index)}>Update</Button>
-                  <Button className="m-1"  onClick={() => onImageRemove(index)}>Remove</Button>
+                  <Button className="m-1" onClick={() => onImageUpdate(index)}>Actualizar</Button>
+                  <Button className="m-1"  onClick={() => onImageRemove(index)}>Remover</Button>
                 </div>
               </Col>
             ))}
