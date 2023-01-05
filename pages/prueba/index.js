@@ -34,7 +34,7 @@ export default function Prueba() {
         </Card.Body>
       </Card> */}
 
-        <InputFile id={3} className="my-5"/>
+        <InputFile id={3} multiple accept="image/*,video/*," className="my-5"/>
       <div className="d-xl-block mb-5"/>
       <div className="d-xl-block mb-5"/>
       <div className="d-xl-block mb-5"/>
