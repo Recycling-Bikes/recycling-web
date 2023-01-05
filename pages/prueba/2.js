@@ -53,7 +53,7 @@ export default function App() {
 
                   <Row style={{ minHeight: "150px" }} className="mb-4" >
                     {imageList.length > 0 ? (
-                      <Row className="mx-4">
+                      <Row className="mx-1 justify-content-center justify-content-lg-start">
                         <Col
                           lg={4}
                           xs={6}
