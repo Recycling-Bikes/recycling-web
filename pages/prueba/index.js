@@ -6,7 +6,7 @@ import InputFile from "components/Custom/InputFile";
 export default function Prueba() {
   return (
     <FormNovatos>
-      {/* <div className="mt-5 d-none d-xl-block" />
+      <div className="mt-5 d-none d-xl-block" />
       <h1 className="py-5 mb-3" style={{ color: "#06433D" }}>
         ¿Buscas una bici? A veces, el proceso puede ser un poco intimidante.
         Estamos aquí para ayudar.
@@ -32,9 +32,9 @@ export default function Prueba() {
             <Card.Text style={{color: "#6C757D"}}>Accederás al Marketplace directamente.</Card.Text>
           </Form.Check>
         </Card.Body>
-      </Card> */}
+      </Card>
 
-        <InputFile id={3} multiple accept="image/*,video/*," className="my-5"/>
+        {/* <InputFile id={3} multiple accept="image/*,video/*," className="my-5"/> */}
       <div className="d-xl-block mb-5"/>
       <div className="d-xl-block mb-5"/>
       <div className="d-xl-block mb-5"/>
