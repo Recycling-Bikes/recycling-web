@@ -8,19 +8,12 @@ import Image from 'next/image'
 
 export default function Vista()  {
   const {bici, CDN} = useContext(BicisContext)
-  
 
-  const listLink = bici.filesUrl ? bici.filesUrl : []
+  useEffect(() => {
+    /* console.log(1) */
+  })
 
-
-  const [primaryVista, setPrimaryVista] = useState([])
-
-
-  useEffect(()=>{
-
-    setPrimaryVista( listLink[0]? listLink[0] : [""] )
-
-  },[listLink])
+  const [primaryVista, setPrimaryVista] = useState(bici.filesUrl.length === 0 ? [] : bici.filesUrl[0])
 
   return (
     <>
@@ -38,7 +31,7 @@ export default function Vista()  {
     <Row>
       <Col md="2" className='d-none d-lg-block' >
 
-        {listLink.map(links => <Image src={CDN + links} alt="" key={links} width={50} height={50} className="m-2 cover" onClick={() => setPrimaryVista(links)} />)}
+        {bici.filesUrl.map(link => <Image src={CDN + link} alt="" key={link} width={50} height={50} className="m-2 cover" onClick={() => setPrimaryVista(link)} />)}
 
       </Col>
       <Col className='d-none d-lg-block'>
@@ -49,8 +42,8 @@ export default function Vista()  {
 
       <Col className='d-lg-none' >
       <Carousel>
-      {listLink.map(links => <Carousel.Item key={links}>
-        <img src={CDN + links}
+      {bici.filesUrl.map(link => <Carousel.Item key={link}>
+        <img src={CDN + link}
           className="d-block w-100"
           alt="First slide"
         />

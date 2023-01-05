@@ -12,7 +12,7 @@ import UserContext from "context/User/UserContext";
 const BicisState = (props) => {
   const initialState = {
     /* marcas:[], */
-    CDN : "https://mmducfdpxruujxivibfv.supabase.co/storage/v1/object/public/imagesbicis/",
+    CDN: "https://mmducfdpxruujxivibfv.supabase.co/storage/v1/object/public/imagesbicis/",
     bici: {},
     publicacion: {},
   };
@@ -63,23 +63,21 @@ const BicisState = (props) => {
   };
 
   const getBici = async (id) => {
-
-    
-
     const { data: bicis, error } = await supabase
       .from("bicis")
-      .select(`id, price, title , filesUrl , models (name), size (name), bici_conditions (name)`)
+      .select(
+        `id, price, title , filesUrl , models (name), size (name), bici_conditions (name)`
+      )
       .eq("id", id);
 
     /*   */
     bicis
-      ? bicis.length > 0 
+      ? bicis.length > 0
         ? dispatch({ type: GET_BICI, payload: bicis })
         : null
       : null;
 
-
-    return state.bici;
+    return bicis ? bicis[0] : null;
   };
 
   const createBici = (publicacion) => {
@@ -94,25 +92,21 @@ const BicisState = (props) => {
   const UploadImagesBici = (files, userID) => {
     const carpeta = v4();
     let filesUrl = [];
-  
+
     const promises = files.map(async (file) => {
       const { data, error } = await supabase.storage
         .from("imagesbicis")
         .upload(userID + "/" + carpeta + "/" + v4(), file);
-  
+
       filesUrl.push(data.path);
       error ? console.log(error) : null;
       return null;
     });
-  
+
     return Promise.all(promises).then(() => {
       return filesUrl;
     });
   };
-  
-
-  
-
 
   const prueba = async () => {
     let { data: bicis, error } = await supabase.from("bicis").select(`
@@ -134,21 +128,19 @@ const BicisState = (props) => {
     price,
     filesUrl,
   }) => {
-    const { data, error } = await supabase
-      .from("bicis")
-      .insert([
-        {
-          bici_condition,
-          year,
-          model,
-          size,
-          transmission,
-          title,
-          description,
-          price,
-          filesUrl,
-        },
-      ]);
+    const { data, error } = await supabase.from("bicis").insert([
+      {
+        bici_condition,
+        year,
+        model,
+        size,
+        transmission,
+        title,
+        description,
+        price,
+        filesUrl,
+      },
+    ]);
 
     console.log(data);
     console.log(error);

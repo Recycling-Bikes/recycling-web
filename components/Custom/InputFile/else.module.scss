@@ -1,21 +1,16 @@
 .else {
     label {
 
-        height: 150px;
-
+        min-height: 150px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        margin: 10px;
-
-        background-color: #eee;
-
-        border: 4px dashed gray;
+        background-color: #F8F9FA;
+        border: 1px dashed #ADB5BD;
         border-radius: 10px;
 
-        
     }
 
     img {

@@ -11,21 +11,23 @@ import { useQuery } from "@tanstack/react-query";
 import BicisContext from "context/Bicis/BicisContext";
 import { useState } from "react";
 import Error from "next/error";
+import Custom404 from "pages/404";
 
 const Vender = () => {
   let { getBici } = useContext(BicisContext);
   const { id } = useRouter().query;
-  const [isLoading, setIsLoading] = useState(true);
-  const [bici, setBici] = useState({});
+
+  const {data , isLoading, isError} = useQuery({
+    queryKey: ["productos", id],
+    queryFn: () => getBici(id),
+}
+  );
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getBici(id);
-      setBici(data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, [id, getBici]);
+
+    console.log(data);
+  }, [data]);
+
 
   if (isLoading) {
     return (
@@ -48,8 +50,11 @@ const Vender = () => {
       </Contenedor>
     );
   }
+  if(isError){
+    return <Custom404 />
+  }
 
-  return bici.id ? (
+  return  (
     <Contenedor>
       <Container>
         <Row className="d-flex justify-content-center">
@@ -79,8 +84,7 @@ const Vender = () => {
 
       <Article Title="Explora más bicis" />
     </Contenedor>
-  ) : <Error />
-
+  )
 };
 
 export default Vender;

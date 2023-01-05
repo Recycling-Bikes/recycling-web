@@ -18,6 +18,7 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import { useQuery } from "@tanstack/react-query";
 import UserContext from "context/User/UserContext";
+import InputFile from "components/Custom/InputFile";
 
 const schema = yup.object().shape({
   description: yup.string().required("El año es requerido"),
@@ -76,6 +77,7 @@ export default function Partdos() {
                 price: publicacion.price ? publicacion.price : "",
                 files: publicacion.files ? publicacion.files : {},
               }}
+
             >
               {({
                 handleSubmit,
@@ -150,7 +152,7 @@ export default function Partdos() {
                           </div>
                         </Form.Label>
 
-                        <Form.Control
+                        <InputFile
                           className=""
                           type="file"
                           multiple={true}
@@ -160,13 +162,14 @@ export default function Partdos() {
                           onChange={(e) => {
                             const pawa = {
                               target: {
-                                ...e.target,
+
                                 value: Object.values(e.target.files),
+                                id: e.target.id,
                               },
                             };
-
                             handleChange(pawa);
                           }}
+
                           required
                         />
                       </FormGroup>
