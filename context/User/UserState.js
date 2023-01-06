@@ -27,15 +27,57 @@ const UserState = (props) => {
     }
   };
 
-
-
-  const updateUser = (userJson = null) => {
-    const user = userJson ? userJson.user : null
-
-      dispatch({ type: GET_USER, payload: user });
-
+  const signInUser = async ({email, password}) => {
+    const user = await supabase.auth.signInWithPassword(
+      {
+        email,
+        password,
+      }
+    )
+    console.log(user)
+    return user
   };
 
+
+
+  const updateUser = (user = null) => {
+      dispatch({ type: GET_USER, payload: user });
+  };
+
+
+  const resetPasswordEmail = async ({email}) =>{
+
+
+    const data = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: 'https://www.recyclingbikes.co/form/newpass',
+    })
+    return data
+  
+  }
+  const postUser = async ({email, password, first_name, last_name}) => {
+    const data = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          first_name,
+          last_name,
+        },
+      },
+    });
+    
+    return data
+    
+  }
+
+  const updatePassword = async ({password}) =>{
+    const data = await supabase.auth.updateUser({
+      password
+    })
+
+    return data
+  
+  }
 
   const deleteUser = async () => {
     try {
@@ -49,7 +91,7 @@ const UserState = (props) => {
 
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("sb-mmducfdpxruujxivibfv-auth-token"))
-    user ? updateUser(user) :null
+    user ? updateUser(user.user) :null
   },[])
 
 
@@ -59,7 +101,11 @@ const UserState = (props) => {
         user: state.user,
         getUser,
         deleteUser,
-        updateUser
+        updateUser,
+        signInUser,
+        resetPasswordEmail,
+        updatePassword, 
+        postUser
       }}
     >
       {props.children}

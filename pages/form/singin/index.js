@@ -1,108 +1,120 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Register from 'components/formlogin/Register';
-import { useEffect, useState } from 'react';
-import { supabase } from 'supabase/client';
-import {useRouter} from "next/router"
-import UserContext from 'context/User/UserContext';
-import React, {useContext} from 'react'
+import { Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Register from "components/formlogin/Register";
+import { useRouter } from "next/router";
+import UserContext from "context/User/UserContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import * as yup from "yup";
+import { useContext} from "react";
+
+const schema = yup.object({
+  password: yup
+    .string()
+    .required("La contraseña es requerida"),
+  email: yup.string().required("El correo es requerido")
+
+})
+
+export default function Singin(props) {
+  const router = useRouter();
 
 
-export default function Singin() {
+  const {
+    handleSubmit,
+    register,
+    setError,
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema)
+  });
 
-  const router = useRouter()
-  
+  const { signInUser, updateUser } = useContext(UserContext);
 
-  const {getUser} = useContext(UserContext)
+  const onSubmit = async (event) => {
 
-  const [confirmPass, setConfirmPass] = useState(null)
-
-  const [validated, setValidated] = useState(false);
-
-  
-
-  const handleSubmit = async (event) => {
-    const form = event.currentTarget;
-    
-
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-
-    }
-    
-    else {
-      
-      const reset = (error) =>{
-
-        if (error.indexOf("credentials") != -1) {
-          setConfirmPass("Contraseña o usuario incorrectos") 
-          console.log("2dfsasdfasdf")
-        }
-        if(error.indexOf("Email") != -1) {
-          setConfirmPass("No se a confirmado el correo")
-          console.log("confirmPass")
-
-        }
-        formPassword.value = ""
-        console.log(confirmPass)
+    const reset = (error) => {
+      if (error?.indexOf("credentials") != -1) {
+        setError("email",{message:"Contraseña o usuario incorrectos"});
+        return
       }
+      if (error?.indexOf("Email") != -1) {
+        setError("email",{message: "No se a confirmado el correo"});
+        return
+      }
+      return setError("account",{message: error});;
+    };
 
-      event.preventDefault();
 
-      const {data:{user}, error}= await supabase.auth.signInWithPassword(
-          {
-            email: formEmail.value,
-            password: formPassword.value
-          }
-        )
-        
-        user ? (getUser(), router.push("/"))
-        : (reset(error.message), console.log(error.message));
-        };
+    const {
+      data: { user },
+      error,
+    } = await signInUser(event);
 
-        
-
-    setValidated(true);
+    user
+      ? (await updateUser(user),router.push("/"))
+      : (reset(error?.message), console.log(error.message));
   };
 
-
   return (
-
     <Register>
+      <Container
+        className="d-flex flex-column justify-content-center align-content-center align-items-center"
+        style={{ maxHeight: "90vh", height: "-webkit-fill-available" }}
+      >
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="mb-4">Accede a Recycling</h1>
 
-      <Container className='d-flex flex-column justify-content-center align-content-center align-items-center' style={{ maxHeight: "90vh", height: "-webkit-fill-available" }} >
-
-        <Form noValidate validated={validated} onSubmit={handleSubmit} >
-          <h1 className='mb-4'>Accede a Recycling</h1>
           <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Correo Electrónico</Form.Label>
-            <Form.Control type="email" placeholder="nombre@email.com" required />
+            <Form.Label>Correo Electrónico</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="nombre@email.com"
+              {...register("email")}
+
+              isInvalid={errors?.email ? true : false}
+            />
             <Form.Control.Feedback type="invalid">
-                Debes escribir un correo
+              {errors.email?.message}
+
             </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" required />
+            <Form.Control
+              type="password"
+              {...register("password")}
+              isInvalid={errors?.password ? true : false}
+            />
             <Form.Control.Feedback type="invalid">
-              {confirmPass ? confirmPass : "Debes escribir una contraseña"}
+              {errors.password?.message}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Mantener sesión iniciada" />
           </Form.Group>
-          <Button style={{ width: "100%" }} variant="primary" type="submit" className='mb-3'>
+          {errors?.account ? <p style={{color: "#dc3545"}} >{errors?.account?.message}</p> : null}
+          <Button
+            style={{ width: "100%" }}
+            variant="primary"
+            type="submit"
+            className="mb-3"
+          >
             Submit
           </Button>
-          <Link href="./forget" style={{ width: "100%" }} className='d-flex justify-content-center ' >
+          <Link
+            href="./forget"
+            style={{ width: "100%" }}
+            className="d-flex justify-content-center "
+          >
             Olvidé mi contraseña
           </Link>
         </Form>
-
       </Container>
     </Register>
   );

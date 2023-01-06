@@ -4,6 +4,8 @@ import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Contenedor from "components/home/Contenedor";
 import { HiPlus } from "react-icons/hi";
 
+
+
 export default function App() {
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
@@ -80,12 +82,14 @@ export default function App() {
                             lg={4}
                             xs={6}
                             key={index}
-                            className=" d-flex align-items-center mt-3 flex-column justify-content-end"
+                            className=" d-flex align-items-center mt-3 flex-column justify-content-end ImageUpload"
                             style={{height: "200px",
                             width: "200px",}}
                           >
                             <Image src={image["data_url"]} alt="" width="100" height="100"
-                            onClick={() => onImageRemove(index)}
+                            className=""
+                            onClick={() => onImageRemove(index)
+                            }
                             />
                             <div className="image-item__btn-wrapper">
                               <Button
