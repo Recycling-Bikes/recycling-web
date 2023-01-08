@@ -3,7 +3,7 @@ import Contenedor from "components/home/Contenedor";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import BicisContext from "context/Bicis/BicisContext";
+import BicisContext from "context/BicisNot/BicisContext";
 import Progres2 from "./progres2";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -15,14 +15,19 @@ const schema = yup.object().shape({
   transmission: yup.string().required("La marca es requerida"),
 });
 
-
 export default function Partdos() {
   const router = useRouter();
 
-  const { getMarcas, getModels, createBici, publicacion, localDataBici, getMaterials,
+  const {
+    getMarcas,
+    getModels,
+    createBici,
+    publicacion,
+    localDataBici,
+    getMaterials,
     getTallas,
-    getTransmision, } =
-    useContext(BicisContext);
+    getTransmision,
+  } = useContext(BicisContext);
 
   const listTallas = useQuery({
     queryKey: ["Tallas"],
@@ -71,8 +76,10 @@ export default function Partdos() {
               onSubmit={(estado) => SaveData(estado)}
               initialValues={{
                 size: publicacion.size ? publicacion.size : "",
-                materials: publicacion.materials ? publicacion.materials: "",
-                transmission: publicacion.transmission ? publicacion.transmission : "",
+                materials: publicacion.materials ? publicacion.materials : "",
+                transmission: publicacion.transmission
+                  ? publicacion.transmission
+                  : "",
               }}
             >
               {({
@@ -91,7 +98,6 @@ export default function Partdos() {
                       <Form.Group className="mb-3" controlId="size">
                         <Form.Label>size</Form.Label>
                         <Form.Select
-
                           name="size"
                           onChange={handleChange}
                           isInvalid={!!errors.size}
@@ -99,7 +105,6 @@ export default function Partdos() {
                         >
                           <option value="">Selecciona una talla</option>
                           {selectList(listTallas, values.size)}
-                          
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.size}
@@ -109,7 +114,6 @@ export default function Partdos() {
                       <Form.Group className="mb-3" controlId="materials">
                         <Form.Label>materials</Form.Label>
                         <Form.Select
-
                           onChange={handleChange}
                           name="materials"
                           isInvalid={!!errors.materials}
@@ -118,7 +122,6 @@ export default function Partdos() {
                           <option value="">Selecciona un materials</option>
 
                           {selectList(listMaterial, values.materials)}
-
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.materials}
@@ -137,7 +140,6 @@ export default function Partdos() {
                           <option value="">Selecciona una Transmision</option>
 
                           {selectList(listTransmision, values.transmission)}
-
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.transmission}
@@ -151,7 +153,6 @@ export default function Partdos() {
 
                         <Button variant="primary" type="submit">
                           Guardar
-
                         </Button>
                       </div>
                     </div>

@@ -11,10 +11,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const schema = yup.object({
   email: yup.string().required("El correo es requerido"),
-})
+});
 
 export default function Forget() {
-
   const { resetPasswordEmail, updateUser } = useContext(UserContext);
   const router = useRouter();
 
@@ -24,7 +23,7 @@ export default function Forget() {
     setError,
     formState: { isValid, errors },
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (event) => {
@@ -32,16 +31,14 @@ export default function Forget() {
 
     const reset = (error) => {
       if (error?.indexOf("security") != -1) {
-        setError("email",
-          {message:"Por motivos de seguridad, solo puede solicitar esto una vez cada 60 segundos."}
-          
-        );
-        return
+        setError("email", {
+          message:
+            "Por motivos de seguridad, solo puede solicitar esto una vez cada 60 segundos.",
+        });
+        return;
       }
-      return setError("email",
-      {message: error}
-    );lse;
-
+      return setError("email", { message: error });
+      lse;
     };
 
     const { error } = await resetPasswordEmail(event);
@@ -64,8 +61,8 @@ export default function Forget() {
             <Form.Control
               type="email"
               placeholder="nombre@email.com"
-              {...register("email",)}
-              isInvalid={(errors?.email ? true : false)}
+              {...register("email")}
+              isInvalid={errors?.email ? true : false}
             />
 
             <Form.Control.Feedback type="invalid">

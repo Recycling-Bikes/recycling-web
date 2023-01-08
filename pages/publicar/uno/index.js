@@ -4,7 +4,7 @@ import Contenedor from "components/home/Contenedor";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 
 import Link from "next/link";
-import BicisContext from "context/Bicis/BicisContext";
+import BicisContext from "context/BicisNot/BicisContext";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import Progres from "./progres";
@@ -20,9 +20,8 @@ const schema = yup.object().shape({
 export default function PartUno() {
   const router = useRouter();
 
-  const { getMarcas, getModels,createBici, publicacion, localDataBici } = useContext(BicisContext);
-
-
+  const { getMarcas, getModels, createBici, publicacion, localDataBici } =
+    useContext(BicisContext);
 
   const marcas = useQuery({
     queryKey: ["marcas"],
@@ -40,13 +39,11 @@ export default function PartUno() {
   });
 
   const SaveData = (items) => {
+    createBici(items);
 
-    createBici(items)
-    
-    router.push("./two") 
-    return null
-  }
-
+    router.push("./two");
+    return null;
+  };
 
   /* 
 
@@ -63,7 +60,6 @@ export default function PartUno() {
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
-            
             <Formik
               validationSchema={schema}
               onSubmit={(estado) => SaveData(estado)}
@@ -82,8 +78,6 @@ export default function PartUno() {
                 isValid,
                 errors,
               }) => {
-
-
                 return (
                   <Form className="py-5" noValidate onSubmit={handleSubmit}>
                     <Progres />
@@ -92,7 +86,6 @@ export default function PartUno() {
                       <Form.Group className="mb-3" controlId="brands">
                         <Form.Label>Marca</Form.Label>
                         <Form.Select
-                          
                           aria-label="Default select example"
                           name="brands"
                           onChange={handleChange}
@@ -100,13 +93,15 @@ export default function PartUno() {
                           value={values.brands}
                         >
                           <option value="">Seleciona una Marca</option>
-                          {marcas.isLoading
-                            ? <option value={values.Marca}/>
-                            : marcas.data.map((marca) => (
-                                <option key={marca.id} value={marca.id}>
-                                  {marca.name}
-                                </option>
-                              ))}
+                          {marcas.isLoading ? (
+                            <option value={values.Marca} />
+                          ) : (
+                            marcas.data.map((marca) => (
+                              <option key={marca.id} value={marca.id}>
+                                {marca.name}
+                              </option>
+                            ))
+                          )}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.brands}
@@ -116,7 +111,6 @@ export default function PartUno() {
                       <Form.Group className="mb-3" controlId="model">
                         <Form.Label>modelo</Form.Label>
                         <Form.Select
-                          
                           aria-label="Default select example"
                           onChange={handleChange}
                           name="model"
@@ -125,14 +119,15 @@ export default function PartUno() {
                         >
                           <option value="">Selecciona un modelo</option>
 
-                          {modelos.isLoading
-                            ? <option value={values.model}/>
-
-                            : modelos.data.map((data) => (
-                                <option key={data.id} value={data.id}>
-                                  {data.name}
-                                </option>
-                              ))}
+                          {modelos.isLoading ? (
+                            <option value={values.model} />
+                          ) : (
+                            modelos.data.map((data) => (
+                              <option key={data.id} value={data.id}>
+                                {data.name}
+                              </option>
+                            ))
+                          )}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
                           {errors.model}
@@ -142,7 +137,6 @@ export default function PartUno() {
                       <Form.Group className="mb-3" controlId="year">
                         <Form.Label>Año</Form.Label>
                         <Form.Select
-                          
                           aria-label="Default select example"
                           onChange={handleChange}
                           name="year"
@@ -158,7 +152,6 @@ export default function PartUno() {
                           {errors.year}
                         </Form.Control.Feedback>
                       </Form.Group>
-                      
                     </div>
 
                     <div className="d-flex justify-content-end pt-3">

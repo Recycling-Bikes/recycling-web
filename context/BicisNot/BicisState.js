@@ -7,7 +7,6 @@ import { supabase } from "supabase/client";
 
 import { GET_BICI, CREATE_BICI, DELETE_BICI } from "../types";
 import { v4 } from "uuid";
-import UserContext from "context/User/UserContext";
 
 const BicisState = (props) => {
   const initialState = {
@@ -27,8 +26,8 @@ const BicisState = (props) => {
   };
 
   const getMarcas = async () => {
-    let { data: dat, error } = await supabase.from("brands").select("*");
-    return dat;
+    let { data: brands, error } = await supabase.from("brands").select("*");
+    return brands;
   };
 
   const getModels = async () => {
@@ -56,10 +55,10 @@ const BicisState = (props) => {
   };
 
   const getCondicion = async () => {
-    let { data: bici_conditions, error } = await supabase
-      .from("bici_conditions")
+    let { data: conditions, error } = await supabase
+      .from("conditions")
       .select("*");
-    return bici_conditions;
+    return conditions;
   };
 
   const getBici = async (id) => {

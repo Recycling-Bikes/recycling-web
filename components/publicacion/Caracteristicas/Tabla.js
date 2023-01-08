@@ -1,11 +1,23 @@
-import React, { useContext, useEffect } from "react";
+
 import { Table, Col, Row } from "react-bootstrap";
-import PropTypes from "prop-types";
-import BicisContext from "context/Bicis/BicisContext";
+
+import { parkingState } from "context/Parking/ParkingState";
 
 export default function Tabla() {
 
-  const {bici} = useContext(BicisContext)
+  const bici = parkingState((state)=> state.bici)
+
+  const {
+    brand,
+    models,
+    size,
+    material,
+    transmission = null,
+    suspension = null,
+    wheels = null,
+    saddle = null,
+    others = null,
+  } = bici
 
   const data = (name, datum) => {
     return (
@@ -28,6 +40,21 @@ export default function Tabla() {
               <tr></tr>
             </thead>
             <tbody>
+            {brand ? data("Marca", brand) : null}
+
+{models.name ? data("Modelo", models.name) : null}
+
+{size.name ? data("Talla", size.name) : null}
+
+{material ? data("Material", material) : null}
+
+{transmission ? data("Transmisión", transmission) : null}
+
+{suspension ? data("Suspensión", suspension) : null}
+
+{saddle ? data("Sillín", saddle) : null}
+
+{wheels ? data("Rines", wheels) : null}
 
             </tbody>
           </Table>

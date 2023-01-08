@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Contenedor from "components/home/Contenedor";
 import Article from "../Home/Article";
 import Descriptons from "components/publicacion/vender";
@@ -6,28 +6,26 @@ import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Carractristicas from "components/publicacion/Caracteristicas";
 import Vista from "components/publicacion/Vista";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import BicisContext from "context/Bicis/BicisContext";
-import { useState } from "react";
-import Error from "next/error";
+
 import Custom404 from "pages/404";
+import { parkingState } from "context/Parking/ParkingState";
 
 const Vender = () => {
-  let { getBici } = useContext(BicisContext);
   const { id } = useRouter().query;
 
-  const {data , isLoading, isError} = useQuery({
+  const bici = parkingState((state) => state.bici);
+
+  const setBici = parkingState((state) => state.setBici);
+
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["productos", id],
-    queryFn: () => getBici(id),
-}
-  );
+    queryFn: () => setBici(id),
+  });
 
   useEffect(() => {
-
-    console.log(data);
-  }, [data]);
-
+    console.log(bici);
+  }, [bici]);
 
   if (isLoading) {
     return (
@@ -47,11 +45,12 @@ const Vender = () => {
             style={{ width: "200px", height: "200px", fontSize: "90px" }}
           />
         </div>
+        {console.log("================================")}
       </Contenedor>
     );
   }
-  if(isError){
-    return <Custom404 />
+  if (isError) {
+    return <Custom404 />;
   }
 
   return  (
@@ -86,5 +85,6 @@ const Vender = () => {
     </Contenedor>
   )
 };
+
 
 export default Vender;

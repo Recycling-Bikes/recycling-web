@@ -10,19 +10,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
-import { useContext} from "react";
+import { useContext } from "react";
 
 const schema = yup.object({
-  password: yup
-    .string()
-    .required("La contraseña es requerida"),
-  email: yup.string().required("El correo es requerido")
-
-})
+  password: yup.string().required("La contraseña es requerida"),
+  email: yup.string().required("El correo es requerido"),
+});
 
 export default function Singin(props) {
   const router = useRouter();
-
 
   const {
     handleSubmit,
@@ -30,25 +26,23 @@ export default function Singin(props) {
     setError,
     formState: { isValid, errors },
   } = useForm({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
 
   const { signInUser, updateUser } = useContext(UserContext);
 
   const onSubmit = async (event) => {
-
     const reset = (error) => {
       if (error?.indexOf("credentials") != -1) {
-        setError("email",{message:"Contraseña o usuario incorrectos"});
-        return
+        setError("email", { message: "Contraseña o usuario incorrectos" });
+        return;
       }
       if (error?.indexOf("Email") != -1) {
-        setError("email",{message: "No se a confirmado el correo"});
-        return
+        setError("email", { message: "No se a confirmado el correo" });
+        return;
       }
-      return setError("account",{message: error});;
+      return setError("account", { message: error });
     };
-
 
     const {
       data: { user },
@@ -56,7 +50,7 @@ export default function Singin(props) {
     } = await signInUser(event);
 
     user
-      ? (await updateUser(user),router.push("/"))
+      ? (await updateUser(user), router.push("/"))
       : (reset(error?.message), console.log(error.message));
   };
 
@@ -75,12 +69,10 @@ export default function Singin(props) {
               type="email"
               placeholder="nombre@email.com"
               {...register("email")}
-
               isInvalid={errors?.email ? true : false}
             />
             <Form.Control.Feedback type="invalid">
               {errors.email?.message}
-
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -98,7 +90,9 @@ export default function Singin(props) {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Mantener sesión iniciada" />
           </Form.Group>
-          {errors?.account ? <p style={{color: "#dc3545"}} >{errors?.account?.message}</p> : null}
+          {errors?.account ? (
+            <p style={{ color: "#dc3545" }}>{errors?.account?.message}</p>
+          ) : null}
           <Button
             style={{ width: "100%" }}
             variant="primary"

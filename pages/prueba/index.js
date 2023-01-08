@@ -1,11 +1,29 @@
 import FormNovatos from "components/FormNovatos";
 import React from "react";
-import { Card, CardGroup, Form } from "react-bootstrap";
-import InputFile from "components/Custom/InputFile";
+import { Button, Card, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import InputFile from "./prueba2"
 
 export default function Prueba() {
+
+  const {
+    handleSubmit,
+    register,
+    setError,
+    watch,
+
+    formState: { isValid, errors,  },
+  } = useForm();
+
+
+  const onSubmit = (event) => {
+    console.log (event)
+    
+  }
+
   return (
     <FormNovatos>
+      <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-5 d-none d-xl-block" />
       <h1 className="py-5 mb-3" style={{ color: "#06433D" }}>
         ¿Buscas una bici? A veces, el proceso puede ser un poco intimidante.
@@ -40,9 +58,13 @@ export default function Prueba() {
           </Form.Check>
         </Card.Body>
       </Card>
-
-      {/* <InputFile id={3} multiple accept="image/*,video/*," className="my-5"/> */}
+        
+      <InputFile {...register("files")}/>
       <div className="d-xl-block " style={{ height: "20vh" }} />
+      <Button
+      type="submit">Siguiente</Button>
+      </form>
+      
     </FormNovatos>
   );
 }

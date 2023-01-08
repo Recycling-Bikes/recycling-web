@@ -22,20 +22,19 @@ const schema = yup.object({
 
 export default function NewPass() {
   const { updatePassword, updateUser } = useContext(UserContext);
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     handleSubmit,
     register,
     setError,
     clearErrors,
-    formState: { isValid, errors,  },
+    formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (event) => {
-
     const { data, error } = await updatePassword(event);
     console.log(data);
     console.log(error);
@@ -44,7 +43,8 @@ export default function NewPass() {
 
     user
       ? (await updateUser(user), router.push("/"))
-      : (console.log(error.message), setError("password", {message: error.message}));
+      : (console.log(error.message),
+        setError("password", { message: error.message }));
   };
 
   return (

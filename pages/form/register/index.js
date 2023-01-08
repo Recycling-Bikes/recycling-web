@@ -41,15 +41,17 @@ export default function Register({}) {
     const reset = (error) => {
       if (error?.indexOf("credentials") != -1) {
         setError("email", { message: "Contraseña o usuario incorrectos" });
-        return
+        return;
       }
       if (error?.indexOf("Email") != -1) {
         setError("email", { message: "No se a confirmado el correo" });
-        return
+        return;
       }
       if (error?.indexOf("registered") != -1) {
-        setError("account", { message: "El usuario ya se encuentra registrado" });
-        return
+        setError("account", {
+          message: "El usuario ya se encuentra registrado",
+        });
+        return;
       }
 
       setError("account", { message: error });
@@ -135,7 +137,9 @@ export default function Register({}) {
             </Form.Control.Feedback>
           </Form.Group>
 
-          {errors?.account ? <p style={{color: "#dc3545"}} >{errors?.account?.message}</p> : null}
+          {errors?.account ? (
+            <p style={{ color: "#dc3545" }}>{errors?.account?.message}</p>
+          ) : null}
 
           <Button style={{ width: "100%" }} variant="primary" type="submit">
             Registrase

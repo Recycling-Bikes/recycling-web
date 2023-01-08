@@ -1,32 +1,37 @@
 import React from "react";
 import ImageUploading from "react-images-uploading";
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
-import Contenedor from "components/home/Contenedor";
+import { Button, Col, Image, Row } from "react-bootstrap";
 import { HiPlus } from "react-icons/hi";
 
 
 
-export default function App() {
-  const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
 
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList);
-    console.log(addUpdateIndex);
+
+export default function App({InitialValues=[], maxNumber= 30 ,...props}) {
+
+  const [images, setImages] = React.useState(InitialValues); 
+
+  const HandleChange = (imageList, addUpdateIndex) => {
+
     setImages(imageList);
+    const event ={target: {value: imageList,
+      name: props.name,
+      id: props.id},
+    }
+
+    props.onChange(event)
   };
 
   return (
-    <Contenedor>
-      <Container>
-        <div className=" mb-4">
           <ImageUploading
+            name={props.name}
             multiple
             value={images}
-            onChange={onChange}
+            onChange={HandleChange}
             maxNumber={maxNumber}
             dataURLKey="data_url"
+            onBlur={props.onBlur}
+            style={props.style}
           >
             {({
               imageList,
@@ -45,7 +50,7 @@ export default function App() {
                 </div>
 
                 <div
-                  className="upload__image-wrapper "
+                  className="upload__image-wrapper mb-4 "
                   style={{
                     backgroundColor: "#F8F9FA",
                     border: "1px dashed #ADB5BD",
@@ -53,13 +58,13 @@ export default function App() {
                   }}
                 >
 
-                  <Row style={{ minHeight: "150px" }} className="mb-4" >
+                  <Row style={{ minHeight: "150px" }} className=" justify-content-center" >
                     {imageList.length > 0 ? (
-                      <Row className="mx-1 justify-content-center  justify-content-sm-start">
+                      <Row className=" justify-content-center  justify-content-sm-start">
                         <Col
                           lg={4}
                           xs={6}
-                          className="image-item d-flex align-items-center   mt-4 flex-column justify-content-center"
+                          className="image-item d-flex align-items-center my-2 flex-column justify-content-center"
                           onClick={onImageUpload}
                           {...dragProps}
                           style={{height: "200px",
@@ -70,11 +75,12 @@ export default function App() {
                             borderRadius: "10px",
                             height: "160px",
                             width: "160px",
+                            color: isDragging ? "red" : "gray",
                         }}>
                             <HiPlus />
                             <center>Subir o arrastrar fotos</center>
                             </div>
-                          
+
                         </Col>
 
                         {imageList.map((image, index) => (
@@ -82,7 +88,7 @@ export default function App() {
                             lg={4}
                             xs={6}
                             key={index}
-                            className=" d-flex align-items-center mt-3 flex-column justify-content-end ImageUpload"
+                            className=" d-flex align-items-center mb-3 flex-column justify-content-end ImageUpload"
                             style={{height: "200px",
                             width: "200px",}}
                           >
@@ -108,8 +114,7 @@ export default function App() {
                         style={{
                           height: "150px",
                           width: "100%",
-                          padding: "auto",
-                          color: isDragging ? "red" : "",
+                          color: isDragging ? "red" : "gray",
                         }}
                         onClick={onImageUpload}
                         {...dragProps}
@@ -123,8 +128,6 @@ export default function App() {
               </div>
             )}
           </ImageUploading>
-        </div>
-      </Container>
-    </Contenedor>
+
   );
 }

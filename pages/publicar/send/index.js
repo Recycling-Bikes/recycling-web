@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import BicisContext from "context/Bicis/BicisContext";
+import BicisContext from "context/BicisNot/BicisContext";
 import Progres2 from "./progres2";
 import * as yup from "yup";
 import { Formik } from "formik";
@@ -31,7 +31,6 @@ export default function Partdos() {
   const router = useRouter();
   const { user } = useContext(UserContext);
 
-
   const { createBici, publicacion, localDataBici, saveBici, UploadImagesBici } =
     useContext(BicisContext);
 
@@ -39,25 +38,24 @@ export default function Partdos() {
     queryKey: ["localDataBici"],
     queryFn: localDataBici,
   });
-  
 
   const SaveData = async (items) => {
     const uploadPromise = UploadImagesBici(items.files, user.id);
-  
+
     const pathImages = await uploadPromise;
-  
+
     items = {
       ...items,
       filesUrl: pathImages,
     };
-  
-    console.log(JSON.stringify(items)); 
-  
+
+    console.log(JSON.stringify(items));
+
     createBici(items);
     saveBici(publicacion);
-  
+
     localStorage.removeItem("items");
-  
+
     router.push("/parking");
   };
 
@@ -77,7 +75,6 @@ export default function Partdos() {
                 price: publicacion.price ? publicacion.price : "",
                 files: publicacion.files ? publicacion.files : {},
               }}
-
             >
               {({
                 handleSubmit,
@@ -162,14 +159,12 @@ export default function Partdos() {
                           onChange={(e) => {
                             const pawa = {
                               target: {
-
                                 value: Object.values(e.target.files),
                                 id: e.target.id,
                               },
                             };
                             handleChange(pawa);
                           }}
-
                           required
                         />
                       </FormGroup>
