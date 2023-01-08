@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { userState } from "context/User/UserState";
 
 const schema = yup.object({
   email: yup.string().required("El correo es requerido"),
