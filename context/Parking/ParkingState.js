@@ -34,11 +34,11 @@ export const parkingState = create(
           const data = await getBicis();
           set({
             parking: {
-              ...get.parking,
               ...data,
               live: true,
             },
           });
+          return data;
         },
 
         clearParking: () => {
@@ -65,11 +65,12 @@ export const parkingState = create(
 );
 
 const getBicis = async () => {
-  let { data: bicis, error } = await supabase.from("bicis").select(`
+  const { data: bicis, error } = await supabase.from("bicis").select(`
     id,price,title,
     models (name)`);
   console.log(error);
-  return error ? error : bicis;
+  console.log(bicis);
+  return error ? error : await bicis;
 };
 
 const getBici = async (id) => {
