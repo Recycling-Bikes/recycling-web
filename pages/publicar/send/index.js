@@ -17,8 +17,9 @@ import Progres2 from "./progres2";
 import * as yup from "yup";
 import { Formik } from "formik";
 import { useQuery } from "@tanstack/react-query";
-import UserContext from "context/User/UserContext";
+
 import InputFile from "components/Custom/InputFile";
+import { userState } from "context/User/UserState";
 
 const schema = yup.object().shape({
   description: yup.string().required("El año es requerido"),
@@ -29,7 +30,7 @@ const schema = yup.object().shape({
 
 export default function Partdos() {
   const router = useRouter();
-  const { user } = useContext(UserContext);
+  const user = userState(state => (state.user))
 
   const { createBici, publicacion, localDataBici, saveBici, UploadImagesBici } =
     useContext(BicisContext);

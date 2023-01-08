@@ -23,9 +23,10 @@ export const parkingState = create(
         },
 
         clearBici: () => {
-          set({
+          set(state =>({
+            ...state,
             bici: {},
-          });
+          }));
         },
 
         parking: {},
@@ -42,14 +43,15 @@ export const parkingState = create(
         },
 
         clearParking: () => {
-          set({
+          set(state =>({
+            ...state,
             parking: {},
-          });
+          }));
         },
 
         clearAll: () => {
-          get.clearParking();
-          get.clearBici();
+          get().clearParking();
+          get().clearBici();
         },
 
         CDN: "https://mmducfdpxruujxivibfv.supabase.co/storage/v1/object/public/imagesbicis/",

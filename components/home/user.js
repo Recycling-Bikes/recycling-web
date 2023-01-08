@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+
 import { NavDropdown, Nav } from "react-bootstrap";
-import UserContext from "context/User/UserContext";
+
+import { userState } from "context/User/UserState";
 
 export default function User() {
-  const { deleteUser } = useContext(UserContext);
+
+  const signOut = userState(state => (state.signOut))
   return (
     <div>
       <NavDropdown title="Perfil" id="user">
@@ -12,7 +14,7 @@ export default function User() {
         <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
 
         <NavDropdown.Divider />
-        <NavDropdown.Item href="" onClick={() => deleteUser()}>
+        <NavDropdown.Item href="" onClick={() => signOut()}>
           Cerrar sesión
         </NavDropdown.Item>
       </NavDropdown>

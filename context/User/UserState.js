@@ -1,116 +1,106 @@
-import React, { useEffect, useReducer } from "react";
+import { supabase } from "supabase/client";
+import { persist, devtools } from "zustand/middleware";
+import create from "zustand";
 
-import UserContext from "./UserContext";
-import UserReducer from "./UserReducer";
-import {supabase} from 'supabase/client';
+export const userState = create(
+  devtools(
+    persist(
+      (set, get) => ({
+        user: {},
 
-
-import { GET_USER } from "../types";
-
-
-const UserState = (props) => {
-  const initialState = {
-    user: props.user,
-  };
-
-  const [state, dispatch] = useReducer(UserReducer, initialState);
-
-  const getUser = async () => {
-    try {
-      const {data} = await supabase.auth.getUser()
-      const res = data.user
-
-      dispatch({ type: GET_USER, payload: res });
-
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const signInUser = async ({email, password}) => {
-    const user = await supabase.auth.signInWithPassword(
-      {
-        email,
-        password,
-      }
-    )
-    console.log(user)
-    return user
-  };
-
-
-
-  const updateUser = (user = null) => {
-      dispatch({ type: GET_USER, payload: user });
-  };
-
-
-  const resetPasswordEmail = async ({email}) =>{
-
-
-    const data = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://www.recyclingbikes.co/form/newpass',
-    })
-    return data
-  
-  }
-  const postUser = async ({email, password, first_name, last_name}) => {
-    const data = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          first_name,
-          last_name,
+        signIn: async (data) => {
+          const user = await signInUser(data);
+          set((state) => ({ ...state, user: user.data.user }));
+          return user;
         },
-      },
-    });
-    
-    return data
-    
-  }
 
-  const updatePassword = async ({password}) =>{
-    const data = await supabase.auth.updateUser({
-      password
-    })
+        getUser: async () => {
+          const user = await getInfoUser();
+          return user;
+        },
+        updateSession: (user) => {
+          set((state) => ({ ...state, user }));
+        },
+        registerUser: async (data) => {
+          const user = await registerNewUser(data);
+          set((state) => ({ ...state, user: user.data.user }));
+          return user;
+        },
+        resetPassword: async (data) => {
+          const user = await resetPassword(data);
+          set((state) => ({ ...state, user: user.data.user }));
+          return user;
+        },
+        emailResetPassword: async (data) => {
+          return await emailResetPassword(data);
+        },
 
-    return data
-  
-  }
-
-  const deleteUser = async () => {
-    try {
-      await supabase.auth.signOut()
-      updateUser()
-    } catch (error) {
-      console.error(error); 
+        signOut: () => {
+          signOutUser();
+          set(
+            (state) => ({
+              ...state,
+              user: {},
+            }),
+            true
+          );
+        },
+      }),
+      { name: "UserData" }
+    ),
+    {
+      anonymousActionType: "UserData",
+      enabled: true,
+      name: "UserData",
     }
-  };
+  )
+);
 
+const getInfoUser = async () => {
+  const { data: user, error } = await supabase.auth.getUser();
 
-  useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem("sb-mmducfdpxruujxivibfv-auth-token"))
-    user ? updateUser(user.user) :null
-  },[])
-
-
-  return (
-    <UserContext.Provider
-      value={{
-        user: state.user,
-        getUser,
-        deleteUser,
-        updateUser,
-        signInUser,
-        resetPasswordEmail,
-        updatePassword, 
-        postUser
-      }}
-    >
-      {props.children}
-    </UserContext.Provider>
-  );
+  return error ? error : user;
 };
 
-export default UserState;
+const signInUser = async ({ email, password }) => {
+  const user = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+  console.log(user);
+  return user;
+};
+
+const signOutUser = async () => {
+  const { error } = await supabase.auth.signOut();
+  error ? console.log(error) : null;
+};
+
+const emailResetPassword = async ({ email }) => {
+  const data = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://www.recyclingbikes.co/form/newpass",
+  });
+  return data;
+};
+
+const registerNewUser = async ({ email, password, first_name, last_name }) => {
+  const data = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        first_name,
+        last_name,
+      },
+    },
+  });
+
+  return data;
+};
+
+const resetPassword = async ({ password }) => {
+  const data = await supabase.auth.updateUser({
+    password,
+  });
+  return data;
+};

@@ -5,20 +5,23 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Register from "components/formlogin/Register";
 import { useRouter } from "next/router";
-import UserContext from "context/User/UserContext";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { userState } from "context/User/UserState";
 
 import * as yup from "yup";
-import { useContext } from "react";
 
 const schema = yup.object({
   password: yup.string().required("La contraseña es requerida"),
   email: yup.string().required("El correo es requerido"),
 });
 
-export default function Singin(props) {
+export default function Singing(props) {
+
+  const signIn = userState(state => state.signIn)
   const router = useRouter();
+
 
   const {
     handleSubmit,
@@ -28,8 +31,6 @@ export default function Singin(props) {
   } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const { signInUser, updateUser } = useContext(UserContext);
 
   const onSubmit = async (event) => {
     const reset = (error) => {
@@ -47,11 +48,11 @@ export default function Singin(props) {
     const {
       data: { user },
       error,
-    } = await signInUser(event);
+    } = await signIn(event);
 
-    user
-      ? (await updateUser(user), router.push("/"))
-      : (reset(error?.message), console.log(error.message));
+    error
+      ? (reset(error?.message), console.log(error.message))
+      : router.push("/");
   };
 
   return (

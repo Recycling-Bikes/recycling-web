@@ -3,8 +3,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRouter } from "next/router";
-import UserContext from "context/User/UserContext";
-import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -25,7 +23,8 @@ const schema = yup.object({
 
 export default function Register({}) {
   const router = useRouter();
-  const { postUser, updateUser } = useContext(UserContext);
+  const registerUser = userState(state => state.registerUser)
+
 
   const {
     handleSubmit,
@@ -57,11 +56,11 @@ export default function Register({}) {
       setError("account", { message: error });
     };
 
-    const { data: user, error } = await postUser(event);
+    const { data: user, error } = await registerUser(event);
 
     error
       ? (reset(error.message), console.log(error.message))
-      : (updateUser(user), router.push("/"));
+      : router.push("/");
   };
 
   return (

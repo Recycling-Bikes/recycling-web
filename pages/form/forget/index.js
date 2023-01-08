@@ -1,20 +1,19 @@
 import Login from "components/formlogin/Login";
-import UserContext from "context/User/UserContext";
 import { useRouter } from "next/router";
-import { useContext } from "react";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
-
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { userState } from "context/User/UserState";
 const schema = yup.object({
   email: yup.string().required("El correo es requerido"),
 });
 
 export default function Forget() {
-  const { resetPasswordEmail, updateUser } = useContext(UserContext);
+
+  const emailResetPassword = userState(state => state.emailResetPassword)
   const router = useRouter();
 
   const {
@@ -27,7 +26,6 @@ export default function Forget() {
   });
 
   const onSubmit = async (event) => {
-    console.log(event);
 
     const reset = (error) => {
       if (error?.indexOf("security") != -1) {
@@ -38,10 +36,10 @@ export default function Forget() {
         return;
       }
       return setError("email", { message: error });
-      lse;
+      
     };
 
-    const { error } = await resetPasswordEmail(event);
+    const { error } = await emailResetPassword(event);
 
     error
       ? (reset(error.message), console.log(error.message))

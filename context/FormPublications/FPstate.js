@@ -12,17 +12,18 @@ export const FPState = create(
         publication: {},
 
         setPublication: (data) => {
-          set({ publication:{...get.publication, ...data} });
+          set({ publication:{...get().publication, ...data} });
         },
 
         postPublication: () => {
-          postBici(get.publication);
+          postBici(get().publication);
         },
 
         clearPublication: () => {
-          set({
+          set(state =>({
+            ...state,
             publication: {},
-          });
+          }));
         },
 
         form: {},
@@ -31,7 +32,7 @@ export const FPState = create(
           const data = await getData(valor, parameters);
           set({
             form: {
-              ...get.form,
+              ...get().form,
               ...data,
               live: true,
             },
@@ -39,21 +40,22 @@ export const FPState = create(
         },
 
         clearForm: () => {
-          set({
+          set(state=> ({
+            ...state,
             form: {},
-          });
+          }));
         },
 
         UpdateImages: async (files, userID) => {
           const paths = await postImages(files, userID);
           set({
-            publication: { ...get.publication, filesUrl: paths },
+            publication: { ...get().publication, filesUrl: paths },
           });
         },
 
         clearAll: () => {
-          get.clearForm();
-          get.clearPublication();
+          get().clearForm();
+          get().clearPublication();
         },
       }),
       { name: "FormPublicationData" }

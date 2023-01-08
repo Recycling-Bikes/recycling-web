@@ -2,12 +2,11 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Login from "components/formlogin/Login";
-import UserContext from "context/User/UserContext";
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { userState } from "context/User/UserState";
 
 const schema = yup.object({
   password: yup
@@ -21,7 +20,7 @@ const schema = yup.object({
 });
 
 export default function NewPass() {
-  const { updatePassword, updateUser } = useContext(UserContext);
+  const resetPassword = userState((state) => state.resetPassword);
   const router = useRouter();
 
   const {
@@ -35,16 +34,14 @@ export default function NewPass() {
   });
 
   const onSubmit = async (event) => {
-    const { data, error } = await updatePassword(event);
-    console.log(data);
+    const { data: user, error } = await resetPassword(event);
+
     console.log(error);
 
-    updateUser(user);
-
-    user
-      ? (await updateUser(user), router.push("/"))
-      : (console.log(error.message),
-        setError("password", { message: error.message }));
+    error
+      ? (console.log(error.message),
+        setError("password", { message: error.message }))
+      : router.push("/");
   };
 
   return (
