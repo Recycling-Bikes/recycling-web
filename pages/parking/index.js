@@ -6,7 +6,6 @@ import { Container, Row, Col } from "react-bootstrap";
 export default function Todasbicis() {
   return (
     <Contenedor>
-      <BicisState>
         <Container className="my-5">
           <Row>
             <h2 className="px-4">Bicis a la venta</h2>
@@ -20,7 +19,6 @@ export default function Todasbicis() {
             </Col>
           </Row>
         </Container>
-      </BicisState>
     </Contenedor>
   );
 }
