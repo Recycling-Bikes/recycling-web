@@ -9,7 +9,7 @@ export default function Bicis({ width, clase }) {
   const parking = parkingState((state) => state.parking)
 
 
-  const { isLoading, isErrorn, error, data } = useQuery({
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ["productos"],
     queryFn: setParking,
   });
