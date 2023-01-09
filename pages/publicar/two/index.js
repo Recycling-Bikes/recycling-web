@@ -1,16 +1,22 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import Contenedor from "components/home/Contenedor";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import BicisContext from "context/BicisNot/BicisContext";
+
 import Progres2 from "./progres2";
+
+
 import * as yup from "yup";
-import { Formik } from "formik";
-import { useQuery } from "@tanstack/react-query";
+
+import shallow from "zustand/shallow";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FPState } from "context/FormPublications/FPstate";
+import { DevTool } from "@hookform/devtools";
 
 const schema = yup.object().shape({
-  materials: yup.string().required("El año es requerido"),
+  material: yup.string().required("El año es requerido"),
   size: yup.string().required("El modelo es requerido"),
   transmission: yup.string().required("La marca es requerida"),
 });
@@ -18,131 +24,103 @@ const schema = yup.object().shape({
 export default function Partdos() {
   const router = useRouter();
 
+  const [publication, form] = FPState(
+    (state) => [state.publication, state.form],
+    shallow
+  );
+
+  const [setPublication, setForm] = FPState(
+    (state) => [state.setPublication, state.setForm],
+    shallow
+  );
+
   const {
-    getMarcas,
-    getModels,
-    createBici,
-    publicacion,
-    localDataBici,
-    getMaterials,
-    getTallas,
-    getTransmision,
-  } = useContext(BicisContext);
+    handleSubmit,
+    register,
+    setError,
+    control,
 
-  const listTallas = useQuery({
-    queryKey: ["Tallas"],
-    queryFn: getTallas,
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { ...publication },
   });
 
-  const listMaterial = useQuery({
-    queryKey: ["Materiales"],
-    queryFn: getMaterials,
-  });
-  const listTransmision = useQuery({
-    queryKey: ["transmission"],
-    queryFn: getTransmision,
+  useEffect(() => {
+    if (!form.brands || !form.models) {
+      setForm();
+    }
+
   });
 
-  const datosda = useQuery({
-    queryKey: ["localDataBici"],
-    queryFn: localDataBici,
-  });
-
-  const SaveData = (items) => {
-    createBici(items);
+  const onSubmit = (items) => {
+    console.log()
+    setPublication(items);
     router.push("./tres");
-    return true;
   };
 
-  const selectList = (list, value) => {
-    return list.isLoading ? (
-      <option value={value} />
-    ) : (
-      list.data.map((data) => (
-        <option key={data.id} value={data.id}>
-          {data.name}
+  const selectList = (list) => {
+    return list?.map((item) => {
+      return (
+        <option key={item.id} value={item.id}>
+          {item.name}
         </option>
-      ))
-    );
+      );
+    });
   };
 
   return (
     <Contenedor>
+      <DevTool control={control} />
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
-            <Formik
-              validationSchema={schema}
-              onSubmit={(estado) => SaveData(estado)}
-              initialValues={{
-                size: publicacion.size ? publicacion.size : "",
-                materials: publicacion.materials ? publicacion.materials : "",
-                transmission: publicacion.transmission
-                  ? publicacion.transmission
-                  : "",
-              }}
-            >
-              {({
-                handleSubmit,
-                handleChange,
-                handleBlur,
-                values,
-                touched,
-                isValid,
-                errors,
-              }) => {
-                return (
-                  <Form className=" py-5" onSubmit={handleSubmit}>
+
+                  <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
                     <Progres2 />
                     <div className="my-5">
                       <Form.Group className="mb-3" controlId="size">
                         <Form.Label>size</Form.Label>
                         <Form.Select
-                          name="size"
-                          onChange={handleChange}
                           isInvalid={!!errors.size}
-                          value={values.size}
+                          {...register("size")}
                         >
                           <option value="">Selecciona una talla</option>
-                          {selectList(listTallas, values.size)}
+                          {selectList(form.sizes)}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                          {errors.size}
+                          {errors?.size?.message}
                         </Form.Control.Feedback>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="materials">
                         <Form.Label>materials</Form.Label>
                         <Form.Select
-                          onChange={handleChange}
-                          name="materials"
-                          isInvalid={!!errors.materials}
-                          value={values.materials}
+                          isInvalid={!!errors.material}
+                          {...register("material")}
+
                         >
                           <option value="">Selecciona un materials</option>
 
-                          {selectList(listMaterial, values.materials)}
+                          {selectList(form?.materials)}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                          {errors.materials}
+                          {errors?.material?.message}
                         </Form.Control.Feedback>
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="transmission">
                         <Form.Label>Transmisión</Form.Label>
                         <Form.Select
-                          aria-label="Default select example"
-                          onChange={handleChange}
-                          name="transmission"
-                          isInvalid={errors.transmission}
-                          value={values.transmission}
-                        >
-                          <option value="">Selecciona una Transmision</option>
 
-                          {selectList(listTransmision, values.transmission)}
+                          isInvalid={errors?.transmission}
+                          {...register("transmission")}
+                        >
+                          <option value="">Selecciona una Transmisión</option>
+                          {selectList(form?.transmissions)}
                         </Form.Select>
                         <Form.Control.Feedback type="invalid">
-                          {errors.transmission}
+                          {errors?.transmission?.message}
                         </Form.Control.Feedback>
                       </Form.Group>
 
@@ -157,9 +135,6 @@ export default function Partdos() {
                       </div>
                     </div>
                   </Form>
-                );
-              }}
-            </Formik>
           </Col>
         </Row>
       </Container>

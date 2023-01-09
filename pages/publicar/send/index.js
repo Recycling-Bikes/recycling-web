@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, {  useEffect, useState,} from "react";
 import Contenedor from "components/home/Contenedor";
 import {
   Row,
@@ -12,182 +12,164 @@ import {
 } from "react-bootstrap";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import BicisContext from "context/BicisNot/BicisContext";
+
 import Progres2 from "./progres2";
 import * as yup from "yup";
-import { Formik } from "formik";
-import { useQuery } from "@tanstack/react-query";
 
-import InputFile from "components/Custom/InputFile";
+
+import shallow from "zustand/shallow";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FPState } from "context/FormPublications/FPstate";
+import { DevTool } from "@hookform/devtools";
+
 import { userState } from "context/User/UserState";
+import InputFile2 from "components/Custom/InputFile/inputFile2";
 
 const schema = yup.object().shape({
-  description: yup.string().required("El año es requerido"),
-  title: yup.string().required("El modelo es requerido"),
-  price: yup.string().required("La marca es requerida"),
-  files: yup.array().required(),
+  description: yup.string().required("La descripción es requerida"),
+  title: yup.string().required("El titulo es requerido"),
+  price: yup.number().required("El precio es requerida") ,
+  files: yup.array().required("Se deben subir archivos").min(3, "Se deben subir al 3 una foto" ),
 });
 
 export default function Partdos() {
   const router = useRouter();
-  const user = userState(state => (state.user))
 
-  const { createBici, publicacion, localDataBici, saveBici, UploadImagesBici } =
-    useContext(BicisContext);
+  const user = userState((state) => state.user);
 
-  const datosda = useQuery({
-    queryKey: ["localDataBici"],
-    queryFn: localDataBici,
+  const [publication, form] = FPState(
+    (state) => [state.publication, state.form],
+    shallow
+  );
+
+  const { setPublication, setForm, UpdateImages, clearAll, postPublication } =
+    FPState();
+
+  useEffect(() => {
+
+    if (!form.brands || !form.models) {
+      setForm();
+    }
   });
 
-  const SaveData = async (items) => {
-    const uploadPromise = UploadImagesBici(items.files, user.id);
+  const {
+    handleSubmit,
+    register,
+    setError,
+    control,
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { ...publication },
+  });
 
-    const pathImages = await uploadPromise;
+  const onSubmit = async (items) => {
+
+
+    const filesUrl = await UpdateImages(items.files, user.id);
 
     items = {
       ...items,
-      filesUrl: pathImages,
-    };
+      filesUrl
+    }
 
-    console.log(JSON.stringify(items));
+    await setPublication(items);
 
-    createBici(items);
-    saveBici(publicacion);
 
-    localStorage.removeItem("items");
+
+    await postPublication(items);
+
+    await clearAll();
 
     router.push("/parking");
   };
 
   return (
     <Contenedor>
+      <DevTool control={control} />
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
-            <Formik
-              validationSchema={schema}
-              onSubmit={(estado) => SaveData(estado)}
-              initialValues={{
-                title: publicacion.title ? publicacion.title : "",
-                description: publicacion.description
-                  ? publicacion.description
-                  : "",
-                price: publicacion.price ? publicacion.price : "",
-                files: publicacion.files ? publicacion.files : {},
-              }}
-            >
-              {({
-                handleSubmit,
-                handleChange,
-                handleBlur,
-                values,
+            
+            <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
+              <Progres2 />
+              <div className="my-5">
+                <Row className="mb-3">
+                  <Form.Group as={Col} controlId="title">
+                    <Form.Label>Titulo</Form.Label>
+                    <Form.Control
+                      {...register("title")}
+                      isInvalid={errors.title}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors?.title?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-                touched,
-                isValid,
-                errors,
-              }) => {
-                return (
-                  <Form className=" py-5" onSubmit={handleSubmit}>
-                    <Progres2 />
-                    <div className="my-5">
-                      <Row className="mb-3">
-                        <Form.Group as={Col} controlId="title">
-                          <Form.Label>Titulo</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="title"
-                            required
-                            onChange={handleChange}
-                            value={values.title}
-                          />
-                        </Form.Group>
+                  <Form.Group as={Col} controlId="validationCustomUsername">
+                    <Form.Label>Precio</Form.Label>
+                    <InputGroup hasValidation>
+                      <InputGroup.Text>$</InputGroup.Text>
+                      <Form.Control
+                        isInValue={errors?.price}
+                        {...register("price")}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors?.price?.message}
+                      </Form.Control.Feedback>
+                    </InputGroup>
+                  </Form.Group>
+                </Row>
 
-                        <Form.Group
-                          as={Col}
-                          controlId="validationCustomUsername"
-                        >
-                          <Form.Label>Precio</Form.Label>
-                          <InputGroup hasValidation>
-                            <InputGroup.Text>$</InputGroup.Text>
-                            <Form.Control
-                              type="number"
-                              placeholder="500"
-                              required
-                              min="1"
-                              pattern="^[0-9]+"
-                              name="price"
-                              value={values.price}
-                              onChange={handleChange}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                              Please choose a username.
-                            </Form.Control.Feedback>
-                          </InputGroup>
-                        </Form.Group>
-                      </Row>
+                <Form.Group className="mb-3" controlId="formGridAddress1">
+                  <Form.Label>Descripción</Form.Label>
+                  <FloatingLabel controlId="description">
+                    <Form.Control
+                      as="textarea"
+                      className="p-2"
+                      isInValue={!errors?.description}
+                      style={{ height: "100px" }}
+                      {...register("description")}
+                    />
+                  </FloatingLabel>
+                  <Form.Control.Feedback type="invalid">
+                        {errors?.description?.message}
+                    </Form.Control.Feedback>
 
-                      <Form.Group className="mb-3" controlId="formGridAddress1">
-                        <Form.Label>Descripción</Form.Label>
-                        <FloatingLabel controlId="description">
-                          <Form.Control
-                            className="p-2"
-                            as="textarea"
-                            name="description"
-                            onChange={handleChange}
-                            value={values.description}
-                            required
-                            style={{ height: "100px" }}
-                          />
-                        </FloatingLabel>
-                      </Form.Group>
 
-                      <FormGroup className="mb-3">
-                        <Form.Label className="d-flex">
-                          Fotos del producto{" "}
-                          <div className="mx-1" style={{ color: "red" }}>
-                            *
-                          </div>
-                        </Form.Label>
+                </Form.Group>
 
-                        <InputFile
-                          className=""
-                          type="file"
-                          multiple={true}
-                          name="files"
-                          id="files"
-                          accept="image/*,video/*,"
-                          onChange={(e) => {
-                            const pawa = {
-                              target: {
-                                value: Object.values(e.target.files),
-                                id: e.target.id,
-                              },
-                            };
-                            handleChange(pawa);
-                          }}
-                          required
-                        />
-                      </FormGroup>
+                <FormGroup className="mb-3">
+                  <InputFile2
+                    multiple={true}
+                    {...register("files")}
+                    isInValue={errors?.files}
+                     
+                  />
 
-                      <div className="d-flex justify-content-end pt-3 align-items-center">
-                        <Link href="./cuatro" className="mx-3">
-                          Atrás
-                        </Link>
+                  {errors?.files? errors?.files?.message: null}
 
-                        <Button variant="primary" type="submit">
-                          Guardar
-                        </Button>
-                      </div>
-                    </div>
-                  </Form>
-                );
-              }}
-            </Formik>
 
-            {/* {imageBicis 
-            ? <Image alt="" width={500} height={32} src={ `  ./{imageBicis}`} />
-            :null} */}
+
+                  </FormGroup>
+                  <input type="file" onChange={(e)=> console.log(e.target.files)}/>
+    
+                  
+
+                
+
+                <div className="d-flex justify-content-end pt-3 align-items-center">
+                  <Link href="./cuatro" className="mx-3">
+                    Atrás
+                  </Link>
+
+                  <Button variant="primary" type="submit">
+                    Guardar
+                  </Button>
+                </div>
+              </div>
+            </Form>
           </Col>
         </Row>
       </Container>

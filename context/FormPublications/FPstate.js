@@ -11,19 +11,22 @@ export const FPState = create(
       (set, get) => ({
         publication: {},
 
-        setPublication: (data) => {
-          set({ publication:{...get().publication, ...data} });
+        setPublication: async (data) => {
+          set({ publication: { ...data } });
         },
 
-        postPublication: () => {
-          postBici(get().publication);
+        postPublication: async (items) => {
+          return await postBici(items);
         },
 
         clearPublication: () => {
-          set(state =>({
-            ...state,
-            publication: {},
-          }));
+          set(
+            (state) => ({
+              ...state,
+              publication: {},
+            }),
+            true
+          );
         },
 
         form: {},
@@ -40,17 +43,25 @@ export const FPState = create(
         },
 
         clearForm: () => {
-          set(state=> ({
-            ...state,
-            form: {},
-          }));
+          set(
+            (state) => ({
+              ...state,
+              form: {},
+            }),
+            true
+          );
         },
 
         UpdateImages: async (files, userID) => {
           const paths = await postImages(files, userID);
-          set({
-            publication: { ...get().publication, filesUrl: paths },
+
+          Promise.resolve(paths).then((images) => {
+            set({
+              publication: { filesUrl: [...images] },
+            });
           });
+
+          return paths;
         },
 
         clearAll: () => {
@@ -60,9 +71,11 @@ export const FPState = create(
       }),
       { name: "FormPublicationData" }
     ),
-    { anonymousActionType: 'FormPublicationData',
-        enabled: true,
-        name: "FormPublicationData" }
+    {
+      anonymousActionType: "FormPublicationData",
+      enabled: true,
+      name: "FormPublicationData",
+    }
   )
 );
 
@@ -81,7 +94,7 @@ export const getData = async (name = null, parameters = "*") => {
       brands: await getDatum("brands", parameters),
       models: await getDatum("models", parameters),
       transmissions: await getDatum("transmissions", parameters),
-      size: await getDatum("size", parameters),
+      sizes: await getDatum("sizes", parameters),
       materials: await getDatum("materials", parameters),
       conditions: await getDatum("conditions", parameters),
     };
@@ -116,7 +129,7 @@ const postBici = async ({
   price,
   filesUrl,
 }) => {
-  const { data, error } = await supabase.from("bicis").insert([
+  const res = await supabase.from("bicis").insert([
     {
       condition,
       year,
@@ -130,6 +143,5 @@ const postBici = async ({
     },
   ]);
 
-  console.log(data);
-  console.log(error);
+  return res;
 };

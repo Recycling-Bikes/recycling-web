@@ -10,13 +10,11 @@ export const parkingState = create(
 
         setBici: async (id) => {
           if (id != get().bici.id && id != undefined) {
-
             console.log("server")
             const data = await getBici(id);
-            set({ bici: { ...get().bici, ...data } });
+            set({ bici: {...data } });
             return data;
           } else {
-
             console.log("cache")
             return { ...get().bici };
           }
@@ -26,7 +24,7 @@ export const parkingState = create(
           set(state =>({
             ...state,
             bici: {},
-          }));
+          }),true);
         },
 
         parking: {},
@@ -36,7 +34,6 @@ export const parkingState = create(
           set({
             parking: {
               ...data,
-              live: true,
             },
           });
           return data;
@@ -46,7 +43,7 @@ export const parkingState = create(
           set(state =>({
             ...state,
             parking: {},
-          }));
+          }),true);
         },
 
         clearAll: () => {

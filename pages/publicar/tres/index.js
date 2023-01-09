@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Contenedor from "components/home/Contenedor";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
@@ -9,59 +9,66 @@ import Progres3 from "./progres3";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useQuery } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { FPState } from "context/FormPublications/FPstate";
+import shallow from "zustand/shallow";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { DevTool } from "@hookform/devtools";
 
 const schema = yup.object().shape({
-  bici_condition: yup.string().required(),
+  condition: yup.string(),
 });
 
 export default function Parttres() {
   const router = useRouter();
 
-  const { createBici, publicacion, getCondicion } = useContext(BicisContext);
+  const [publication, form] = FPState(
+    (state) => [state.publication, state.form],
+    shallow
+  );
 
-  const listCondiciones = useQuery({
-    queryKey: ["bici_condition"],
-    queryFn: getCondicion,
+  const [setPublication, setForm] = FPState(
+    (state) => [state.setPublication, state.setForm],
+    shallow
+  );
+
+  
+  const {
+    handleSubmit,
+    register,
+    setError,
+    control,
+
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { ...publication },
   });
 
-  const SaveData = (items) => {
-    createBici(items);
+  useEffect(() => {
+    if (!form.brands || !form.models) {
+      setForm();
+    }
+    console.log(form);
+  });
+
+  const onSubmit = (items) => {
+    setPublication(items);
     router.push("./cuatro");
-    return null;
   };
 
   return (
     <Contenedor>
+      <DevTool control={control} />
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
-            <Formik
-              validationSchema={schema}
-              onSubmit={(estado) => SaveData(estado)}
-              initialValues={{
-                bici_condition: publicacion.bici_condition
-                  ? publicacion.bici_condition
-                  : "",
-              }}
-            >
-              {({
-                handleSubmit,
-                handleChange,
-                handleBlur,
-                values,
-                touched,
-                isValid,
-                errors,
-              }) => {
-                return (
-                  <Form className=" py-5" onSubmit={handleSubmit}>
-                    <Progres3 />
 
+                  <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
+                    <Progres3 />
                     <div className="mt-5">
                       <Container>
-                        {listCondiciones.isLoading
-                          ? ""
-                          : listCondiciones.data.map((datum) => {
+                        {form?.conditions?.map((datum) => {
                               return (
                                 <Form.Group key={datum.id} required>
                                   <div className="d-flex justify-content-sm-between flex-column flex-sm-row my-4 ">
@@ -73,14 +80,14 @@ export default function Parttres() {
                                         <Form.Check.Input
                                           required
                                           type="radio"
-                                          name="bici_condition"
                                           value={datum.id}
-                                          onChange={handleChange}
+
+                                          {...register("conditions")}
+
                                         />
 
                                         <Form.Check.Label>
                                           {datum.name}
-                                          {}
                                         </Form.Check.Label>
                                       </Form.Check>
                                     </Col>
@@ -105,9 +112,6 @@ export default function Parttres() {
                       </Button>
                     </div>
                   </Form>
-                );
-              }}
-            </Formik>
           </Col>
         </Row>
       </Container>

@@ -15,13 +15,12 @@ import { userState } from 'context/User/UserState';
 
 
 
+
  
 
 export default function NavB({}) {
 
   const user = userState(state => (state.user))
-
-
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light" sticky="top" className='hover-custom shadow-sm'>
@@ -41,41 +40,16 @@ export default function NavB({}) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
 
-          <Nav className="mr-auto flex-fill">
+          <Nav className="ms-auto flex-fill">
 
           </Nav>
 
           <Nav className="me-auto flex-fill">
-            <NavDropdown title="Comprar" id="collasible-nav-dropdown">
 
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <Nav.Link className='/parking' href="#features">Comprar</Nav.Link>
+            <Nav.Link className='' href="#features">Vender</Nav.Link>
 
-              <NavDropdown.Item href="#action/3.2">Another actio</NavDropdown.Item>
-
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-
-              <NavDropdown.Divider />
-
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-
-            </NavDropdown>
-
-
-            <NavDropdown title="Vender" id="collasible-nav-dropdown">
-
-              <NavDropdown.Item href="/vender">vender h1</NavDropdown.Item>
-
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-
-              <NavDropdown.Divider />
-
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-
-            </NavDropdown>
+            <Nav.Link className='' href="#features">Avaluador</Nav.Link>
 
             <Nav.Link className='' href="#features">Aparta tu bici</Nav.Link>
 
@@ -86,8 +60,7 @@ export default function NavB({}) {
           <Nav>
             <Nav.Link href="#deets" ><BiSearchAlt size={23} /> </Nav.Link>
             <Nav.Link href="#deets" ><FiShoppingCart size={22}/> </Nav.Link>
-            {user?.id ? <User /> 
-            : <Nav.Link href="/form/singin" className=' text-primary'><BsPersonCircle /> Acceder</Nav.Link>}
+            <User/>
             
           </Nav>
 

@@ -12,6 +12,7 @@ import { userState } from "context/User/UserState";
 
 import * as yup from "yup";
 
+
 const schema = yup.object({
   password: yup.string().required("La contraseña es requerida"),
   email: yup.string().required("El correo es requerido"),

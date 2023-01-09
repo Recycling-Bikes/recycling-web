@@ -2,7 +2,7 @@ import FormNovatos from "components/FormNovatos";
 import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import InputFile from "./prueba2"
+import InputFile from "../../components/Custom/InputFile/inputFile2"
 
 export default function Prueba() {
 
