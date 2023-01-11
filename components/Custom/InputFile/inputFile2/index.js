@@ -41,8 +41,8 @@ export default function InputFile2({
       onChange={HandleChange}
       maxNumber={maxNumber}
       dataURLKey="data_url"
-
       onBlur={props.onBlur}
+      className={props.className}
       style={props.style}
     >
       {({

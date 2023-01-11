@@ -148,12 +148,11 @@ export default function Partdos() {
                      
                   />
 
-                  {errors?.files? errors?.files?.message: null}
+                  {errors?.files? <p style={{ color: "#dc3545" }}>{errors?.files?.message}</p>: null}
 
 
 
                   </FormGroup>
-                  <input type="file" onChange={(e)=> console.log(e.target.files)}/>
     
                   
 
