@@ -21,11 +21,11 @@ function Presentation() {
           <p>Explora +12.000 bicicletas en nuestra plataforma</p>
           <div className="d-flex flex-column justify-content-center align-items-baseline w-100">
 
-            <Button variant="primary" onClick={() => router.push("/parking")} className="mx-auto mx-lg-0 d-lg-none justify-content-center w-100 d-flex">
+            <Button variant="primary" onClick={() => router.push("/compra")} className="mx-auto mx-lg-0 d-lg-none justify-content-center w-100 d-flex">
               Comprar bicis
             </Button>
 
-            <Button variant="primary" onClick={() => router.push("/parking")} className="mx-auto mx-lg-0 d-none d-lg-flex ">
+            <Button variant="primary" onClick={() => router.push("/compra")} className="mx-auto mx-lg-0 d-none d-lg-flex ">
               Comprar bicis
             </Button>
 

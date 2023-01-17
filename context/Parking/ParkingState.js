@@ -10,21 +10,24 @@ export const parkingState = create(
 
         setBici: async (id) => {
           if (id != get().bici.id && id != undefined) {
-            console.log("server")
+            console.log("server");
             const data = await getBici(id);
-            set({ bici: {...data } });
+            set({ bici: { ...data } });
             return data;
           } else {
-            console.log("cache")
+            console.log("cache");
             return { ...get().bici };
           }
         },
 
         clearBici: () => {
-          set(state =>({
-            ...state,
-            bici: {},
-          }),true);
+          set(
+            (state) => ({
+              ...state,
+              bici: {},
+            }),
+            true
+          );
         },
 
         parking: {},
@@ -40,10 +43,13 @@ export const parkingState = create(
         },
 
         clearParking: () => {
-          set(state =>({
-            ...state,
-            parking: {},
-          }),true);
+          set(
+            (state) => ({
+              ...state,
+              parking: {},
+            }),
+            true
+          );
         },
 
         clearAll: () => {
@@ -55,6 +61,7 @@ export const parkingState = create(
       }),
       { name: "ParkingData" }
     ),
+
     {
       anonymousActionType: "ParkingData",
       enabled: true,
@@ -83,6 +90,6 @@ const getBici = async (id) => {
     : { error: { message: "id = undefined" }, bicis: [] };
 
   console.log(error);
-  
+
   return error ? error : bicis[0];
 };

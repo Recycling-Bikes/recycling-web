@@ -88,9 +88,9 @@ export default function Promesas() {
           </Button>
         </Link>
 
-        <br />
+        <br />  
         <div>
-          <Link href="/vender" className="link-custom-text">
+          <Link href="/intermedio" className="link-custom-text">
             vender mi bici <MdKeyboardArrowRight />
           </Link>
         </div>

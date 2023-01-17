@@ -37,23 +37,15 @@ export default function Prueba() {
   const questions = [
     {
       value: 3,
-      title: "1-3 años",
+      title: "Menos de 1.68m",
     },
     {
       value: 4,
-      title: "3-4 años",
+      title: "Entre 1.68m y 1.82m",
     },
     {
       value: 5,
-      title: "4-5 años",
-    },
-    {
-      value: 6,
-      title: "5-7 años",
-    },
-    {
-      value: 7,
-      title: "7 años o más",
+      title: "Más de 1.82m",
     },
   ];
 
@@ -64,14 +56,14 @@ export default function Prueba() {
         <div className="mt-5 d-none d-xl-block" />
         <ProgressBar className="mb-3" now={25} />
 
-        <h4 className="mb-3 pt-3">¿De qué edad?</h4>
+        <h4 className="mb-3 pt-3">¿Cuánto mides?</h4>
 
         {questions.map((data, index) => (
           <Selects
             register={register}
             data={data}
             index={index}
-            name="hola"
+            name="size"
             key={index}
             HandleClick={HandleClick}
             className="mb-3"

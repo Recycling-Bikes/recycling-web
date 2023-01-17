@@ -1,7 +1,9 @@
 import FormNovatos from "components/FormNovatos";
 import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import { useRouter } from "next/router";
 
 export default function Clases() {
+  const router = useRouter();
   const setQuest = formNovatosState((state) => state.setQuest);
 
   const onSubmit = (event) => {
@@ -22,11 +24,12 @@ export default function Clases() {
 
   return (
     <FormNovatos
-      title={""}
-      description={"¿Qué tipo de conducción planeas hacer?"}
+      description={"¿Estás buscando una e-bike (bicicleta asistida)?"}
       questions={questions}
       onSubmit={onSubmit}
-      nameForm={"clases"}
+      nameForm={"E-Bike"}
+      back={"/parking"}
+      progress={30}
     />
   );
 }

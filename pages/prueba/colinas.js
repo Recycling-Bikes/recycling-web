@@ -1,3 +1,4 @@
+
 import FormNovatos from "components/FormNovatos";
 import { formNovatosState } from "context/FormNovatos/FormNovatosState";
 
@@ -11,12 +12,12 @@ export default function Clases() {
 
   const questions = [
     {
-      value: false,
-      title: "No",
+      value: true,
+      title: "Subiendo y bajando colinas",
     },
     {
-      value: true,
-      title: "Si",
+      value: false,
+      title: "Estrictamente cuesta abajo",
     },
   ];
 
@@ -26,7 +27,8 @@ export default function Clases() {
       description={"¿Qué tipo de conducción planeas hacer?"}
       questions={questions}
       onSubmit={onSubmit}
-      nameForm={"clases"}
+      nameForm={"colinas"}
+      back={"hola"}
     />
   );
 }

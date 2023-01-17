@@ -11,22 +11,35 @@ export default function Clases() {
 
   const questions = [
     {
-      value: false,
-      title: "No",
+      value: 3,
+      title: "$500 - $1000",
     },
     {
-      value: true,
-      title: "Si",
+      value: 4,
+      title: "$1001 - $1500",
+    },
+    {
+      value: 5,
+      title: "$1501 - $2000",
+    },
+    {
+      value: 6,
+      title: "$2001 - $2500",
+    },
+    {
+      value: 7,
+      title: "$3000 o más",
     },
   ];
 
   return (
     <FormNovatos
       title={""}
-      description={"¿Qué tipo de conducción planeas hacer?"}
+      description={"¿Cuál es tu presupuesto?"}
       questions={questions}
       onSubmit={onSubmit}
-      nameForm={"clases"}
+      nameForm={"price"}
+      back={"./"}
     />
   );
 }

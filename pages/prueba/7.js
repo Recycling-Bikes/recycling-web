@@ -1,28 +1,38 @@
-import FormNovatos, { Selects } from "components/FormNovatos";
-import React from "react";
-import { Button, Card, Form, ProgressBar } from "react-bootstrap";
+import FormNovatos, { Selects } from "components/FormNovatos/component";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DevTool } from "@hookform/devtools";
+import { formNovatosState } from "context/FormNovatos/FormNovatosstate";
+import { useRouter } from "next/router";
+import { ProgressBar } from "react-bootstrap";
 
 const schema = yup.object({
-  option: yup.bool().required(),
+  hola: yup.string().required(),
 });
 
 export default function Prueba() {
-  const def = {};
+  const router = useRouter();
 
-  const {
-    handleSubmit,
-    register,
-    control,
+  const quest = formNovatosState((state) => state.quest);
+  const setQuest = formNovatosState((state) => state.setQuest);
 
-    formState: { isValid, errors },
-  } = useForm({
+  const { handleSubmit, register, control } = useForm({
     resolve: yupResolver(schema),
-    defaultValues: def,
+    defaultValues: quest,
   });
+
+  const submit = useRef(null);
+
+  const HandleClick = () => {
+    submit.current.click();
+  };
+
+  const onSubmit = (event) => {
+    setQuest(event);
+    console.log(event);
+  };
 
   const questions = [
     {
@@ -45,10 +55,6 @@ export default function Prueba() {
     },
   ];
 
-  const onSubmit = (event) => {
-    console.log(event);
-  };
-
   return (
     <FormNovatos>
       <DevTool control={control}></DevTool>
@@ -57,21 +63,23 @@ export default function Prueba() {
         <ProgressBar className="mb-3" now={25} />
 
         <h4 className="mb-3 pt-3">
-        ¿Qué tan complejos son los senderos que planeas recorrer?
+          ¿Qué tan complejos son los senderos que planeas recorrer?
         </h4>
 
         {questions.map((data, index) => (
           <Selects
-            {...register("hola")}
-            {...data}
+            register={register}
+            data={data}
+            index={index}
+            name="hola"
             key={index}
-            def={def.hola}
+            HandleClick={HandleClick}
             className="mb-3"
           />
         ))}
 
-        {/* <InputFile {...register("files")} /> */}
-        <div className="d-xl-block " style={{ height: "20vh" }} />
+        <div className="d-xl-none" style={{ height: "20vh" }} />
+        <button ref={submit} type="submit" className="d-none" />
       </form>
     </FormNovatos>
   );

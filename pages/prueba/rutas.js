@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DevTool } from "@hookform/devtools";
-import { formNovatosState } from "context/FormNovatos/FormNovatosstate";
+import { formNovatosState } from "context/FormNovatos/FormNovatosState";
 import { useRouter } from "next/router";
 import { ProgressBar } from "react-bootstrap";
 
@@ -37,23 +37,21 @@ export default function Prueba() {
   const questions = [
     {
       value: 3,
-      title: "1-3 años",
+      title: "Caminos pavimentados",
+      description:
+        "Carreteras con superficies lisas (carreteras y carreteras de ciudades o condados mantenidas).",
     },
     {
       value: 4,
-      title: "3-4 años",
+      title: "Caminos de grava o tierra",
+      description:
+        "Caminos con superficies rugosas (caminos de incendios, caminos de servicio forestal, caminos urbanos de tierra o grava).",
     },
     {
       value: 5,
-      title: "4-5 años",
-    },
-    {
-      value: 6,
-      title: "5-7 años",
-    },
-    {
-      value: 7,
-      title: "7 años o más",
+      title: "Mezclado",
+      description:
+        "Principalmente pavimento con un sendero conector ocasional de grava o tierra.",
     },
   ];
 
@@ -64,7 +62,9 @@ export default function Prueba() {
         <div className="mt-5 d-none d-xl-block" />
         <ProgressBar className="mb-3" now={25} />
 
-        <h4 className="mb-3 pt-3">¿De qué edad?</h4>
+        <h4 className="mb-3 pt-3">
+          ¿En qué tipo de carreteras circularás principalmente?
+        </h4>
 
         {questions.map((data, index) => (
           <Selects
