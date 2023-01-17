@@ -44,7 +44,7 @@ export function Size() {
   return (
     <FormNovatos
       progress={60}
-      description={"¿Qué tipo de conducción planeas hacer?"}
+      description={"¿Cuánto mides?"}
       questions={questions}
       onSubmit={onSubmit}
       nameForm={nameForm}
