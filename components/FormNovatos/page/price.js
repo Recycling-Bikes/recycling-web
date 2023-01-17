@@ -45,6 +45,7 @@ export function Price() {
       onSubmit={onSubmit}
       nameForm={nameForm}
       back={"./"}
+      progress={90}
     />
   );
 }
