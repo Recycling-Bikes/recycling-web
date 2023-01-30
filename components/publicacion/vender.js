@@ -18,7 +18,7 @@ export default function Descriptons() {
       <h2 className="my-4">${bici.price.toLocaleString("en")}</h2>
 
       <Button className="mb-2">Añadir al carrito</Button>
-      <Button className="mb-2" variant="outline-primary">
+      <Button className="mb-2" variant="outline-primary btn-outline">
         Trade - in
       </Button>
       <div className="d-flex justify-content-center">

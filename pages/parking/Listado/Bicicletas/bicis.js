@@ -1,4 +1,4 @@
-import { Card, Badge, Spinner } from "react-bootstrap";
+import { Card, Badge, Spinner, Col } from "react-bootstrap";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { parkingState } from "context/Parking/ParkingState";
@@ -38,7 +38,8 @@ export default function Bicis({ width, clase }) {
     <>
       {data
         ? data.map((bici) => (
-            <Card style={{ width: width }} className={clase} key={bici.id}>
+
+            <Card  className={clase} key={bici.id}>
               <Link href={`/parking/${bici.id}`} passHref>
                 <div className="m-3">
                   <Badge bg="primary" style={{ color: "white" }}>
@@ -59,6 +60,7 @@ export default function Bicis({ width, clase }) {
                 </Card.Body>
               </Link>
             </Card>
+
           ))
         : ""}
     </>

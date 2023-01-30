@@ -46,10 +46,9 @@ export default function PartUno() {
   });
 
   useEffect(() => {
-    if (!form.brands || !form.models) {
+    if (!(form.brands || form.models)) {
       setForm();
     }
-
   });
 
   const onSubmit = (items) => {
@@ -69,7 +68,7 @@ export default function PartUno() {
 
   return (
     <Contenedor>
-      <DevTool control={control}  />
+      <DevTool control={control} />
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
@@ -136,7 +135,7 @@ export default function PartUno() {
           </Col>
         </Row>
       </Container>
-      <div className="d-none d-lg-block" style={{ height: "20rem" }}></div>
+      <div className="d-none d-lg-block" style={{ height: "20rem" }}/>
     </Contenedor>
   );
 }

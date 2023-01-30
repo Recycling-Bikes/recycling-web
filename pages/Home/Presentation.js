@@ -31,7 +31,7 @@ function Presentation() {
 
             <Link
               href="/intermedio"
-              className="link-custom-text pt-2 mx-auto mx-lg-0 d-lg-none justify-content-center w-100 d-flex "
+              className="link-custom-text pt-2 mx-auto mx-lg-0 d-lg-none justify-content-center w-100 d-flex align-items-center "
               passHref
             >
               Vender mi bici <MdKeyboardArrowRight />
@@ -39,7 +39,7 @@ function Presentation() {
 
             <Link
               href="/intermedio"
-              className="link-custom-text pt-2 d-none d-lg-flex "
+              className="link-custom-text pt-2 d-none d-lg-flex align-items-center "
               passHref
             >
               Vender mi bici <MdKeyboardArrowRight />

@@ -37,7 +37,7 @@ export function Position() {
 
   return (
     <FormNovatos
-      description={"¿En qué tipo de carreteras circularás principalmente?"}
+      description={"¿Qué posición del cuerpo prefieres?"}
       questions={questions}
       onSubmit={onSubmit}
       nameForm={nameForm}

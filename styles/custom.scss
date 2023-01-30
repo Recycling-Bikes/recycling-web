@@ -14,6 +14,7 @@ $blue:    #0FA899 !default;
 
 body{
     font-family: 'Karla', sans-serif !important;
+    color: white;
 }
 
 
@@ -72,6 +73,7 @@ a {
     text-decoration: none;
 }
 
+
 .footer-customs{
     background-color: #F8F9FA !important;
     color: $blue-700!important;
@@ -83,16 +85,19 @@ a {
 
 .hover-custom :hover{
     color: $blue !important;
-
 }
 
-.btn-primary, .btn-outline-primary:hover {
+.btn-primary, .btn-outline:hover {
     color: white !important;
     border-Top: rgba(111, 111, 111, 0.06);
 }
 
 .separador{
     border-top: 1px solid #dee2e6;
+}
+
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+    color: white;
 }
 
 
@@ -105,7 +110,6 @@ a {
 .accordion-body{
     padding-top: 0px!important;
 }
-
 
 
 .tittle-custom{
@@ -168,7 +172,7 @@ a {
       "minimo guion maximo"; 
   }
   
-  .minimo { grid-area: minimo; }
+/*   .minimo { grid-area: minimo; }
   
   .maximo { grid-area: maximo; }
   
@@ -204,6 +208,19 @@ a {
     width: 100%;
     height: 100%;
     fill: #fff;
+} */
+
+.bicis{
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(
+            14.8rem,
+            1fr
+        ),
+        
+    );
+    gap: 16px ;
 }
 
 

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
-import { Container, Breadcrumb, Row, Col, Carousel } from "react-bootstrap";
+import { Breadcrumb, Row, Col, Carousel } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 import Image from "next/image";
@@ -41,10 +41,12 @@ export default function Vista() {
             />
           ))}
         </Col>
-        <Col className="d-none d-lg-block">
-          <Container>
-            <img src={CDN + primaryVista} className="img-fluid p-0" />
-          </Container>
+        <Col className="d-none d-lg-block" style={{height: "620px"}}>
+
+            <Image src={CDN + primaryVista} height={500} width={500} style={{
+              maxHeight: "600px"
+            }}  className="img-fluid p-0" />
+
         </Col>
 
         <Col className="d-lg-none">

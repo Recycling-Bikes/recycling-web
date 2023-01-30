@@ -21,9 +21,9 @@ export default function NavB({}) {
       bg="light"
       variant="light"
       sticky="top"
-      className="hover-custom shadow-sm"
+      className="hover-custom shadow-sm w-100"
     >
-      <Container>
+      <Container >
         <Link href="/">
           <Image
             src="/recycling.png"

@@ -26,19 +26,34 @@ export function Size() {
   const questions = [
     {
       value: 3,
-      title: "Menos de 1.68m",
+      title: "Menos de 1.65m",
       router: "/price"
     },
     {
       value: 4,
-      title: "Entre 1.68m y 1.82m",
+      title: "Entre 1.65 y 1.70m",
       router: "/price"
     },
     {
       value: 5,
-      title: "Más de 1.82m",
+      title: "Entre 1.70m y 175m",
       router: "/price"
     },
+    {
+      value: 6,
+      title: "Entre 1.75m y 1.80m",
+      router: "/price"
+    },
+    {
+      value: 7,
+      title: "Entre 1.80m y 1.85m ",
+      router: "/price"
+    },
+    {
+      value: 8,
+      title: "Más de 1.85m",
+      router: "/price"
+    }
   ];
 
   return (

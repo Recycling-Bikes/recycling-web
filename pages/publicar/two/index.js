@@ -47,7 +47,7 @@ export default function Partdos() {
   });
 
   useEffect(() => {
-    if (!form.brands || !form.models) {
+    if (!(form.brands || form.models)) {
       setForm();
     }
 
@@ -138,7 +138,7 @@ export default function Partdos() {
           </Col>
         </Row>
       </Container>
-      <div className="d-none d-lg-block" style={{ height: "20rem" }}></div>
+      <div className="d-none d-lg-block" style={{ height: "20rem" }}/>
     </Contenedor>
   );
 }

@@ -84,7 +84,7 @@ const getBici = async (id) => {
     ? await supabase
         .from("bicis")
         .select(
-          `id, price, title , filesUrl , models (name), size (name), conditions (name)`
+          "id, price, title , filesUrl , models (name), size (name), conditions (name)"
         )
         .eq("id", id)
     : { error: { message: "id = undefined" }, bicis: [] };

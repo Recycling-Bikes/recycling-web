@@ -38,23 +38,23 @@ export default function Filtro() {
 
         <Form.Check 
             type={"checkbox"}
-            id={`default-checkbox`}
-            label={`default checkbox`}
+            id={"default-checkbox"}
+            label={"default checkbox"}
           />
           <Form.Check 
             type={"checkbox"}
-            id={`default-checkbox`}
-            label={`default checkbox`}
+            id={"default-checkbox"}
+            label={"default checkbox"}
           />
           <Form.Check 
             type={"checkbox"}
-            id={`default-checkbox`}
-            label={`default checkbox`}
+            id={"default-checkbox"}
+            label={"default checkbox"}
           />
           <Form.Check 
             type={"checkbox"}
-            id={`default-checkbox`}
-            label={`default checkbox`}
+            id={"default-checkbox"}
+            label={"default checkbox"}
           />
 
         </Accordion.Body>

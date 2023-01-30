@@ -25,10 +25,10 @@ export const formNovatosState = create(
           );
         },
 
-
         clearAll: () => {
           get().clearQuest();
         },
+
       }),
       { name: "FormNovatosData" }
     ),
@@ -39,5 +39,4 @@ export const formNovatosState = create(
     }
   )
 );
-
 
