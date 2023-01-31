@@ -1,3 +1,5 @@
+import { avaluadorState } from "context/Avaluador/avaluadorState";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { Button, Form, InputGroup, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -5,9 +7,12 @@ import IndexAvaluador from "./AvalatorComponet";
 
 export default function Index() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (e) => {
+  const setBrand = avaluadorState((state) => state.setBrand);
+  const router = useRouter()
 
-  
+  const onSubmit = (e) => {
+    setBrand(e.search);
+    router.push("/avaluador/search")
   };
 
   return (
@@ -23,9 +28,9 @@ export default function Index() {
           type="search"
           className="me-2"
           style={{borderRadius: "0.375rem"}}
-          {...register("search")}
+          {...register("search", {required: true })}
         />
-          <InputGroup.Text className="p-0 d-flex " style={{borderRadius: "0.375rem"}}>
+          <InputGroup.Text className="p-0 d-flex " style={{border: "none", background: "none"}}>
             <Button variant="primary" className=" " type="submit">
               Search
             </Button>

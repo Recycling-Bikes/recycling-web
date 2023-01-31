@@ -87,8 +87,13 @@ const getDatum = async (name, parameters = "*") => {
 
 export const getData = async (name = null, parameters = "*") => {
   let data = {};
+  
   if (name !== null) {
     data[name] = await getDatum(name, parameters);
+
+    return await data
+    
+    
   } else {
     data = {
       brands: await getDatum("brands", parameters),
@@ -99,6 +104,7 @@ export const getData = async (name = null, parameters = "*") => {
       conditions: await getDatum("conditions", parameters),
     };
   }
+
   return data;
 };
 

@@ -42,9 +42,9 @@ export default function NavB({}) {
             <Nav.Link href="/parking">
               Comprar
             </Nav.Link>
-            <Nav.Link href="/publicar">Vender</Nav.Link>
+            <Nav.Link href="/intermedio">Vender</Nav.Link>
 
-            <Nav.Link href="#features" disabled>
+            <Nav.Link href="/avaluador">
               Avaluador
             </Nav.Link>
 
