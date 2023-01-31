@@ -66,16 +66,6 @@ function MyVerticallyCenteredModal(props) {
               </Form.Group>
             );
           })}
-
-          <div className="d-flex justify-content-end pt-3 align-items-center">
-            <Link href="" className="mx-3" type="submit">
-              Atras
-            </Link>
-
-            <Button variant="primary" type="submit">
-              Valor de tu bici
-            </Button>
-          </div>
         </form>
       </Modal.Body>
     </Modal>
