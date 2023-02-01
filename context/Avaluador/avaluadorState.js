@@ -1,5 +1,5 @@
 import { getData } from "context/FormPublications/FPstate";
-import create from "zustand";
+import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const avaluadorState = create(

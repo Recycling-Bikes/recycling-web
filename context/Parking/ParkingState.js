@@ -1,5 +1,5 @@
 import { supabase } from "supabase/client";
-import create from "zustand";
+import {create} from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
@@ -57,7 +57,7 @@ export const parkingState = create(
           get().clearBici();
         },
 
-        CDN: "https://mmducfdpxruujxivibfv.supabase.co/storage/v1/object/public/imagesbicis/",
+        CDN: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
       }),
       { name: "ParkingData" }
     ),
