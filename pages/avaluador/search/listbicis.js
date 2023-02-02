@@ -10,8 +10,9 @@ export default function ListBicis({
   image,
   setModalShow,
   setCardSelected
-}) {
-  return data.map((datum) => {
+})
+{
+  return data?.map((datum) => {
         let { name, price, year, id, brands } = datum;
 
         if (

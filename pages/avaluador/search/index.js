@@ -58,15 +58,6 @@ export default function IndexAvaluador(props) {
     queryFn: setParking,
   });
 
-  data = data ?? [
-    { image, name, price, year: "2020" },
-    { image, name, price, year: "2021" },
-    { image, name, price, year: "2019" },
-    { image, name, price, year: "2020" },
-    { image, name, price, year: "2020" },
-    { image, name, price, year: "2022" },
-  ];
-
   const state = {
     data: parking,
     quest,
