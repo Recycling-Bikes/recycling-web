@@ -3,7 +3,7 @@ import { Card, Col, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import React, { use, useEffect, useRef, useState } from "react";
 
-export  function ListBicis({
+export default function ListBicis({
   data,
   quest,
   brand,
