@@ -1,7 +1,7 @@
 import Contenedor from "components/home/Contenedor";
 import { avaluadorState } from "context/Avaluador/avaluadorState";
 import Link from "next/link";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -19,63 +19,12 @@ import { shallow } from "zustand/shallow";
 import ButtonsYears from "./ButtonsYears";
 
 import { useQuery } from "@tanstack/react-query";
-
-function MyVerticallyCenteredModal(props) {
-  const conditions = avaluadorState((state) => state.conditions);
-
-  const {
-    handleSubmit,
-    register,
-    setError,
-    control,
-
-    formState: { isValid, errors },
-  } = useForm();
-
-  const onSubmit = (e) => {
-    console.log(e);
-  };
-
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body>
-        <form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
-          {conditions?.map((datum) => {
-            return (
-              <Form.Group key={datum.id} required>
-                <div className="d-flex justify-content-sm-between flex-column flex-sm-row my-4 ">
-                  <Col className="mx=sm-4 my-2 my-sm-0">
-                    <Form.Check type="radio" id={`radio-${datum.id}`}>
-                      <Form.Check.Input
-                        required
-                        type="radio"
-                        value={datum.id}
-                        {...register("conditions")}
-                      />
-
-                      <Form.Check.Label>{datum.name}</Form.Check.Label>
-                    </Form.Check>
-                  </Col>
-
-                  <Col sm="5" className="">
-                    {datum.description}
-                  </Col>
-                </div>
-              </Form.Group>
-            );
-          })}
-        </form>
-      </Modal.Body>
-    </Modal>
-  );
-}
+import { ListBicis } from "./listbicis";
+import { Pop } from "./pop";
 
 export default function IndexAvaluador(props) {
+  const [modalShow, setModalShow] = useState(false);
+
   const quest = avaluadorState((state) => state.quest, shallow);
 
   const brand = avaluadorState((state) => state.brand);
@@ -84,9 +33,15 @@ export default function IndexAvaluador(props) {
 
   const parking = avaluadorState((state) => state.parking);
 
-  const setParking = avaluadorState((state) => state.setParking );
+  const setParking = avaluadorState((state) => state.setParking);
 
-  const [models, setModels] =useState(<></>)
+  const setCardSelected = avaluadorState((state) => state.setCardSelected);
+
+  const conditions = avaluadorState((state) => state.conditions);
+
+  const setConditions = avaluadorState((state) => state.setConditions);
+
+  const [models, setModels] = useState(<></>);
 
   const { register, handleSubmit } = useForm();
 
@@ -111,17 +66,26 @@ export default function IndexAvaluador(props) {
     { image, name, price, year: "2020" },
     { image, name, price, year: "2022" },
   ];
-  
+
+  const state = {
+    data: parking,
+    quest,
+    brand,
+    image,
+    modalShow,
+    setModalShow,
+    setCardSelected,
+  };
+
   useEffect(() => {
+    if (conditions.length === 0) {
+      setConditions();
+    }
+  }, [modalShow]);
 
-    !isLoading ?
-    setModels(listBicis(parking, quest, brand, image))
-   : []
-
-
-  }, [quest.years]);
-
-
+  useEffect(() => {
+    setModels(ListBicis(state));
+  }, [quest.years, brand, parking]);
 
   return (
     <Contenedor>
@@ -182,40 +146,10 @@ export default function IndexAvaluador(props) {
 
           <Relleno />
         </div>
+
+        <Pop show={modalShow} onHide={() => setModalShow(false)} />
       </Container>
       <div className="mb-5 " />
     </Contenedor>
   );
-}
-
-function listBicis(data, quest, brand, image) {
-  return data.flatMap(({ name, price, year, id, brands }) => {
-    /* const [modalShow, setModalShow] = useState(false); */
-    if (
-      (quest.years.length === 0 || quest.years?.includes(year)) &&
-      (name.toLowerCase().includes(brand.toLowerCase()) || brands.name.toLowerCase().includes(brand.toLowerCase()))
-    ) {
-      return (
-        <div key={id}>
-          <Card
-            style={{ width: "auto", maxWidth: "514px", }}
-            /* onClick={() => setModalShow(true)} */
-          >
-            <div className="m-3">
-              <Card.Img variant="top" src={image} />
-            </div>
-            <Card.Body>
-              <Card.Title>{brands.name}, {name}</Card.Title>
-            </Card.Body>
-          </Card>
-
-          <MyVerticallyCenteredModal
-            /* show={modalShow} */
-            /* onHide={() => setModalShow(false)} */
-          />
-        </div>
-      );
-    }
-    return [];
-  });
 }

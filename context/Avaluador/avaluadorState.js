@@ -26,6 +26,14 @@ export const avaluadorState = create(
         );
       },
 
+      cardSelected: {},
+
+      setCardSelected: (data) => {
+        set(state => ({cardSelected: {...data}}))
+
+      },
+
+
       setBrand: (title) => {
         set((state) => ({
           brand: title,
