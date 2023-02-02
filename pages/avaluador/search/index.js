@@ -82,13 +82,11 @@ export default function IndexAvaluador(props) {
 
   const setBrand = avaluadorState((state) => state.setBrand);
 
-  const conditions = avaluadorState((state) => state.conditions);
-
-  const setConditions = avaluadorState((state) => state.setConditions);
-
   const parking = avaluadorState((state) => state.parking);
 
   const setParking = avaluadorState((state) => state.setParking );
+
+  const [models, setModels] =useState(<></>)
 
   const { register, handleSubmit } = useForm();
 
@@ -115,13 +113,15 @@ export default function IndexAvaluador(props) {
   ];
   
   useEffect(() => {
-    conditions.length === 0 ? setConditions() : null;
 
-  }, []);
+    !isLoading ?
+    setModels(listBicis(parking, quest, brand, image))
+   : []
 
-  const models = !isLoading ?
-  listBicis(parking, quest, brand, image)
-  : []
+
+  }, [quest.years]);
+
+
 
   return (
     <Contenedor>
@@ -191,10 +191,9 @@ export default function IndexAvaluador(props) {
 function listBicis(data, quest, brand, image) {
   return data.flatMap(({ name, price, year, id, brands }) => {
     /* const [modalShow, setModalShow] = useState(false); */
-    console.log(String(year))
     if (
       (quest.years.length === 0 || quest.years?.includes(year)) &&
-      name.includes(brand) || brands.name.includes(brand)
+      (name.toLowerCase().includes(brand.toLowerCase()) || brands.name.toLowerCase().includes(brand.toLowerCase()))
     ) {
       return (
         <div key={id}>
