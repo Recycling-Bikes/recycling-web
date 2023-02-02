@@ -41,7 +41,7 @@ export default function IndexAvaluador(props) {
 
   const setConditions = avaluadorState((state) => state.setConditions);
 
-  const [models, setModels] = useState(<></>);
+  const [models, setModels] = useState([]);
 
   const { register, handleSubmit } = useForm();
 
@@ -87,6 +87,8 @@ export default function IndexAvaluador(props) {
     setModels(ListBicis(state));
   }, [quest.years, brand, parking]);
 
+  
+
   return (
     <Contenedor>
       <Container>
@@ -112,7 +114,7 @@ export default function IndexAvaluador(props) {
         </form>
 
         <h1 style={{ color: "#06433D", fontStyle: "Bold" }}>{brand}</h1>
-        <p>{models.length} Resultados</p>
+        <p>{models.filter(n => n!== null).length} Resultados</p>
 
         <ButtonsYears />
 

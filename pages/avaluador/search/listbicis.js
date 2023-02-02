@@ -11,7 +11,7 @@ export default function ListBicis({
   setModalShow,
   setCardSelected
 }) {
-  return data.flatMap((datum) => {
+  return data.map((datum) => {
         let { name, price, year, id, brands } = datum;
 
         if (
@@ -41,7 +41,7 @@ export default function ListBicis({
           );
         }
 
-        return [];
+        return null;
       }
   );
 }

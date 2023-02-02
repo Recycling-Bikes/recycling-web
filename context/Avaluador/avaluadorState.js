@@ -48,7 +48,7 @@ export const avaluadorState = create(
 
       setParking: async () => {
         const data = await getBicis();
-        console.log("🚀 ~ file: avaluadorState.js:42 ~ setParking: ~ data", data)
+
         set({
           parking: 
             [...data],
@@ -79,8 +79,6 @@ export const avaluadorState = create(
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bmodels").select(`
     id,price,name,year,brands (name), category`);
-  console.log(error);
-  console.log("🚀 ~ file: avaluadorState.js:74 ~ getBicis ~ error", error)
-  console.log(bicis);
+  error? console.log(error) :null
   return error ? error : await bicis;
 };
