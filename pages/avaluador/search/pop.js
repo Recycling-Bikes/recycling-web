@@ -2,7 +2,7 @@ import { avaluadorState } from "context/Avaluador/avaluadorState";
 import { Col, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
-export function Pop(props) {
+export default function Pop(props) {
     const conditions = avaluadorState((state) => state.conditions);
   
     const {

@@ -19,8 +19,8 @@ import { shallow } from "zustand/shallow";
 import ButtonsYears from "./ButtonsYears";
 
 import { useQuery } from "@tanstack/react-query";
-import { ListBicis } from "./listbicis";
-import { Pop } from "./pop";
+import  ListBicis  from "./listbicis";
+import  Pop  from "./pop";
 
 export default function IndexAvaluador(props) {
   const [modalShow, setModalShow] = useState(false);
