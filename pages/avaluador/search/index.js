@@ -11,11 +11,14 @@ import {
   InputGroup,
   Modal,
   Row,
+  Spinner,
 } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Relleno from "utils/relleno";
 import { shallow } from "zustand/shallow";
 import ButtonsYears from "./ButtonsYears";
+
+import { useQuery } from "@tanstack/react-query";
 
 function MyVerticallyCenteredModal(props) {
   const conditions = avaluadorState((state) => state.conditions);
@@ -83,6 +86,9 @@ export default function IndexAvaluador(props) {
 
   const setConditions = avaluadorState((state) => state.setConditions);
 
+  const parking = avaluadorState((state) => state.parking);
+
+  const setParking = avaluadorState((state) => state.setParking );
 
   const { register, handleSubmit } = useForm();
 
@@ -91,24 +97,31 @@ export default function IndexAvaluador(props) {
   };
 
   const image = "/imagec.png";
-  const title = "Specialized S-Works Tarmac SL7 Road Bike - 2021, 56cm";
+  const name = "Specialized S-Works Tarmac SL7 Road Bike - 2021, 56cm";
   const price = 500;
 
-  let data = [
-    { image, title, price, year: "2020" },
-    { image, title, price, year: "2021" },
-    { image, title, price, year: "2019" },
-    { image, title, price, year: "2020" },
-    { image, title, price, year: "2020" },
-    { image, title, price, year: "2022" },
-  ];
+  let { isLoading, isError, error, data } = useQuery({
+    queryKey: ["models"],
+    queryFn: setParking,
+  });
 
+  data = data ?? [
+    { image, name, price, year: "2020" },
+    { image, name, price, year: "2021" },
+    { image, name, price, year: "2019" },
+    { image, name, price, year: "2020" },
+    { image, name, price, year: "2020" },
+    { image, name, price, year: "2022" },
+  ];
+  
   useEffect(() => {
     conditions.length === 0 ? setConditions() : null;
 
   }, []);
 
-  const models = listBicis(data, quest, brand);
+  const models = !isLoading ?
+  listBicis(parking, quest, brand, image)
+  : []
 
   return (
     <Contenedor>
@@ -147,7 +160,25 @@ export default function IndexAvaluador(props) {
           }}
           className="mt-3"
         >
-          {models}
+          {isLoading ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "90hv",
+                textAlign: "center",
+              }}
+            >
+              <Spinner
+                animation="border"
+                variant="secondary"
+                style={{ width: "200px", height: "200px", fontSize: "90px" }}
+              />
+            </div>
+          ) : (
+            models
+          )}
 
           <Relleno />
         </div>
@@ -157,31 +188,31 @@ export default function IndexAvaluador(props) {
   );
 }
 
-function listBicis(data, quest, brand) {
-  return data.flatMap(({ image, title, price, year }, index) => {
-    const [modalShow, setModalShow] = useState(false);
-
+function listBicis(data, quest, brand, image) {
+  return data.flatMap(({ name, price, year, id, brands }) => {
+    /* const [modalShow, setModalShow] = useState(false); */
+    console.log(String(year))
     if (
       (quest.years.length === 0 || quest.years?.includes(year)) &&
-      title.includes(brand)
+      name.includes(brand) || brands.name.includes(brand)
     ) {
       return (
-        <div key={index}>
+        <div key={id}>
           <Card
-            style={{ width: "auto", maxWidth: "514px" }}
-            onClick={() => setModalShow(true)}
+            style={{ width: "auto", maxWidth: "514px", }}
+            /* onClick={() => setModalShow(true)} */
           >
             <div className="m-3">
               <Card.Img variant="top" src={image} />
             </div>
             <Card.Body>
-              <Card.Title>{title}</Card.Title>
+              <Card.Title>{brands.name}, {name}</Card.Title>
             </Card.Body>
           </Card>
 
           <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
+            /* show={modalShow} */
+            /* onHide={() => setModalShow(false)} */
           />
         </div>
       );

@@ -1,6 +1,9 @@
 import { getData } from "context/FormPublications/FPstate";
+import { supabase } from "supabase/client";
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
+
+
 
 export const avaluadorState = create(
   devtools(
@@ -33,6 +36,19 @@ export const avaluadorState = create(
         get().clearQuest();
       },
 
+      parking: [],
+
+      setParking: async () => {
+        const data = await getBicis();
+        console.log("🚀 ~ file: avaluadorState.js:42 ~ setParking: ~ data", data)
+        set({
+          parking: 
+            [...data],
+          
+        });
+        return data;
+      },
+
       conditions: [],
 
       setConditions: async () => {
@@ -42,24 +58,6 @@ export const avaluadorState = create(
           ...data,
         }));
       },
-
-      /*       results: 0,
-
-      setResults: () => {
-        set((state) => ({
-          results: state.results + 1,
-        }))
-      },
-
-      clearResults: () => {
-        set(
-          (state) => ({
-            ...state,
-            results: 0,
-          }),
-          true
-        );
-      }, */
     }),
     {
       anonymousActionType: "Avaluator",
@@ -68,3 +66,13 @@ export const avaluadorState = create(
     }
   )
 );
+
+
+const getBicis = async () => {
+  const { data: bicis, error } = await supabase.from("bmodels").select(`
+    id,price,name,year,brands (name), category`);
+  console.log(error);
+  console.log("🚀 ~ file: avaluadorState.js:74 ~ getBicis ~ error", error)
+  console.log(bicis);
+  return error ? error : await bicis;
+};
