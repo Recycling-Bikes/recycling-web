@@ -44,7 +44,7 @@ export default function Parttres() {
   });
 
   useEffect(() => {
-    if (!form.brands || !form.models) {
+    if (!(form.brands || form.models)) {
       setForm();
     }
   });
@@ -104,7 +104,7 @@ export default function Parttres() {
           </Col>
         </Row>
       </Container>
-      <div className="d-none d-lg-block" style={{ height: "10rem" }}></div>
+      <div className="d-none d-lg-block" style={{ height: "10rem" }}/>
     </Contenedor>
   );
 }

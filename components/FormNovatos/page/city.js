@@ -27,7 +27,7 @@ export function City() {
     },
     {
       value: "exercise",
-      title: "Montar para hacer ejercicio",
+      title: "Montar para hacer un poco de ejercicio",
       router: "/size",
     },
     {

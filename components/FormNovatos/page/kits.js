@@ -13,7 +13,8 @@ export function Kits() {
     setQuest(event);
 
     const salida = questions.find((datum) => {
-      return datum.value == event[nameForm];
+      // rome-ignore lint/suspicious/noDoubleEquals: <explanation>
+      return  datum.value == event[nameForm];
     });
 
     router.push(router.pathname + salida.router);

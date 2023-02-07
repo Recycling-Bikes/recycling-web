@@ -23,10 +23,6 @@ const Vender = () => {
     queryFn: () => setBici(id),
   });
 
-  useEffect(() => {
-    console.log(bici);
-  }, [bici]);
-
   if (isLoading) {
     return (
       <Contenedor>

@@ -49,7 +49,7 @@ export function Suspension() {
   return (
     <FormNovatos
       progress={60}
-      description={"¿Qué tan complejos son los senderos que planeas recorrer?"}
+      description={"¿Qué tipo de suspensión quieres?"}
       questions={questions}
       onSubmit={onSubmit}
       nameForm={nameForm}

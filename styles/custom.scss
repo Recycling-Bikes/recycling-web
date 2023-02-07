@@ -14,6 +14,7 @@ $blue:    #0FA899 !default;
 
 body{
     font-family: 'Karla', sans-serif !important;
+    color: white;
 }
 
 
@@ -72,6 +73,7 @@ a {
     text-decoration: none;
 }
 
+
 .footer-customs{
     background-color: #F8F9FA !important;
     color: $blue-700!important;
@@ -83,16 +85,19 @@ a {
 
 .hover-custom :hover{
     color: $blue !important;
-
 }
 
-.btn-primary, .btn-outline-primary:hover {
+.btn-primary, .btn-outline:hover {
     color: white !important;
     border-Top: rgba(111, 111, 111, 0.06);
 }
 
 .separador{
     border-top: 1px solid #dee2e6;
+}
+
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+    color: white;
 }
 
 
@@ -105,7 +110,6 @@ a {
 .accordion-body{
     padding-top: 0px!important;
 }
-
 
 
 .tittle-custom{
@@ -155,56 +159,6 @@ a {
     --#{$prefix}accordion-active-bg: #{$accordion-bg};
     // scss-docs-end accordion-css-vars
   }
-
-
-
-  .price {  display: grid;
-    grid-template-columns: 1.3fr 0.2fr 1.4fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "minimo . maximo"
-      "minimo guion maximo"; 
-  }
-  
-  .minimo { grid-area: minimo; }
-  
-  .maximo { grid-area: maximo; }
-  
-  .guion { grid-area: guion; }
-
-  .inputfile-5 + label {
-    color: #c39f77!important;
-}
-
-.inputfile-5:focus + label,
-.inputfile-5.has-focus + label,
-.inputfile-5 + label:hover {
-    color: #9f8465;
-}
-
-.inputfile-5 + label figure {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #c39f77;
-    display: block;
-    padding: 20px;
-    margin: 0 auto 10px;
-}
-
-.inputfile-5:focus + label figure,
-.inputfile-5.has-focus + label figure,
-.inputfile-5 + label:hover figure {
-    background-color: #9f8465;
-}
-
-.inputfile-5 + label svg {
-    width: 100%;
-    height: 100%;
-    fill: #fff;
-}
 
 
 

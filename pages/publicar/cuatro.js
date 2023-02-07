@@ -13,7 +13,6 @@ import {
 import Link from "next/link";
 import { MdOutlinePedalBike } from "react-icons/md";
 import { BsCardChecklist, BsThreeDots } from "react-icons/bs";
-import { TbArrowsRightLeft } from "react-icons/tb";
 import Mountain from "../../public/Mountain.png";
 import Image from "next/image";
 
@@ -133,7 +132,7 @@ export default function uno() {
           </div>
         </Container>
 
-        <div className="d-none d-lg-block" style={{ height: "10rem" }}></div>
+        <div className="d-none d-lg-block" style={{ height: "10rem" }} />
       </div>
     </Contenedor>
   );

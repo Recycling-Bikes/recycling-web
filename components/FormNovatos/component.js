@@ -39,7 +39,7 @@ export const Selects = ({ name, data, register, ...props }) => {
                 }, 10);
               }}
               {...register(name)}
-            ></Form.Check>
+            />
             <Card.Text className="ms-4" style={{ color: "#6C757D" }}>
               {data.description}
             </Card.Text>

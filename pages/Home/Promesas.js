@@ -7,9 +7,13 @@ import {
   BsFillPersonCheckFill,
 } from "react-icons/bs";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 export default function Promesas() {
+
+  const router = useRouter()
+
   const cartas = [
     {
       message: "Tienes múltiples opciones a la hora de elegir",
@@ -22,6 +26,7 @@ export default function Promesas() {
       Icon: BsFillPersonCheckFill,
     },
   ];
+
   return (
     <Container
       style={{ backgroundColor: "rgba(207, 238, 235, 0.4)" }}
@@ -38,7 +43,9 @@ export default function Promesas() {
           {cartas.map((Carta, index) => {
             return (
               <Card
+              // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={index}
+                
                 style={{
                   width: "17rem",
                   height: "10rem",
@@ -90,9 +97,9 @@ export default function Promesas() {
 
         <br />  
         <div>
-          <Link href="/intermedio" className="link-custom-text">
-            vender mi bici <MdKeyboardArrowRight />
-          </Link>
+          <Button onClick={()=> router.push("/intermedio")} variant="link">
+            Vender mi bici <MdKeyboardArrowRight />
+          </Button>
         </div>
       </div>
     </Container>
