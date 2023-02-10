@@ -8,18 +8,18 @@ export function IndexF() {
   const nameForm = "index";
 
   const questions = [
-    {
-      value: "true",
-      title: "No sé mucho",
-      description: "Te ayudaremos con el proceso.",
-      router: "/compra/class",
-    },
-    {
-      value: "false",
-      title: "Soy un experto",
-      description: "Accederás al Marketplace directamente.",
-      router: "/parking",
-    },
+      {
+          value: "true",
+          title: "No sé mucho",
+          description: "Te ayudaremos con el proceso.",
+          router: "/compra/class",
+      },
+      {
+          value: "false",
+          title: "Lo tengo claro",
+          description: "Accederás al Marketplace directamente.",
+          router: "/parking",
+      },
   ];
 
   const onSubmit = (event) => {
@@ -33,15 +33,15 @@ export function IndexF() {
   };
 
   return (
-    <FormNovatos
-      title={
-        "¿Buscas una bici? A veces, el proceso puede ser un poco intimidante. Estamos aquí para ayudar."
-      }
-      description={"¿Qué tanto sabes de bicicletas?"}
-      questions={questions}
-      onSubmit={onSubmit}
-      nameForm={nameForm}
-      back={"/"}
-    />
+      <FormNovatos
+          title={
+              "¿Buscas una bici? A veces, el proceso puede ser un poco intimidante. Estamos aquí para ayudar."
+          }
+          description={"¿Sabes lo que estás buscando?"}
+          questions={questions}
+          onSubmit={onSubmit}
+          nameForm={nameForm}
+          back={"/"}
+      />
   );
 }
