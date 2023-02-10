@@ -40,7 +40,7 @@ const Footer = (props) => {
                                         md="3"
                                         lg="2"
                                         xl="2"
-                                        className="me-auto pb-2"
+                                        className="me-auto mb-md-0 mb-4 pb-2"
                                     >
                                         <h6 className="text-uppercase fw-bold mb-3">
                                             Bicis
@@ -72,7 +72,7 @@ const Footer = (props) => {
                                         md="4"
                                         lg="3"
                                         xl="2"
-                                        className="me-auto mb-4 pb-2"
+                                        className="me-auto mb-md-0 mb-4 pb-2"
                                     >
                                         <h6 className="text-uppercase fw-bold mb-3">
                                             Otros Servicios
@@ -179,23 +179,23 @@ const Footer = (props) => {
                 <Container fluid className="py-4">
                     <Row className="justify-content-between p-4">
                         <Col xs="auto">
-                            <div className="text-left text-final-footer">
+                            <div className="text-reset mb-3">
                                 2023 © Recycling. Todos los derechos reservados
                             </div>
                         </Col>
 
                         <Col xs="auto">
-                            <a href="#!" className="text-reset mr-3">
+                            <a href="#!" className="text-reset ms-3">
                                 Política de privacidad{" "}
                             </a>
 
-                            <a href="#!" className="text-reset mr-3">
+                            <a href="#!" className="text-reset ms-3">
                                 Cookies{" "}
                             </a>
-                            <a href="#!" className="text-reset mr-3">
+                            <a href="#!" className="text-reset ms-3">
                                 Aviso Legal{" "}
                             </a>
-                            <a href="#!" className="text-reset">
+                            <a href="#!" className="text-reset ms-3">
                                 Condiciones de Uso{" "}
                             </a>
                         </Col>
