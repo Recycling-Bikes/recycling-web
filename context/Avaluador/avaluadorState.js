@@ -78,7 +78,7 @@ export const avaluadorState = create(
 
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bmodels").select(`
-    id,price,name,year,brands (name), category`);
+    id,price,name,year, brands (name), category, imageUrl`);
   error? console.log(error) :null
   return error ? error : await bicis;
 };

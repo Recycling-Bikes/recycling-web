@@ -4,12 +4,9 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Card,
-  Col,
   Container,
   Form,
   InputGroup,
-  Modal,
   Row,
   Spinner,
 } from "react-bootstrap";
@@ -19,8 +16,8 @@ import { shallow } from "zustand/shallow";
 import ButtonsYears from "./ButtonsYears";
 
 import { useQuery } from "@tanstack/react-query";
-import  ListBicis  from "./listbicis";
-import  Pop  from "./pop";
+import ListBicis from "./listbicis";
+import Pop from "./pop";
 
 export default function IndexAvaluador(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -49,10 +46,6 @@ export default function IndexAvaluador(props) {
     setBrand(e.search);
   };
 
-  const image = "/imagec.png";
-  const name = "Specialized S-Works Tarmac SL7 Road Bike - 2021, 56cm";
-  const price = 500;
-
   let { isLoading, isError, error, data } = useQuery({
     queryKey: ["models"],
     queryFn: setParking,
@@ -62,7 +55,6 @@ export default function IndexAvaluador(props) {
     data: parking,
     quest,
     brand,
-    image,
     modalShow,
     setModalShow,
     setCardSelected,
@@ -76,9 +68,7 @@ export default function IndexAvaluador(props) {
 
   useEffect(() => {
     setModels(ListBicis(state));
-  }, [quest.years, brand, parking]);
-
-  
+  }, [quest, brand, parking]);
 
   return (
     <Contenedor>
@@ -105,7 +95,7 @@ export default function IndexAvaluador(props) {
         </form>
 
         <h1 style={{ color: "#06433D", fontStyle: "Bold" }}>{brand}</h1>
-        <p>{models.filter(n => n!== null).length} Resultados</p>
+        <p>{models.filter((n) => n !== null).length} Resultados</p>
 
         <ButtonsYears />
 
