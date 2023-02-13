@@ -19,6 +19,7 @@ export function NoEBike() {
         router.push(router.pathname + salida.router);
     };
 
+    // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
     const questions = [
         {
             value: "true",
