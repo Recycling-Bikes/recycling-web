@@ -1,11 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { MDBFooter, MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Link from "next/link";
 import React from "react";
 import { BsInstagram } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
-import { IoLocationSharp, IoLogoWhatsapp } from "react-icons/io5";
-import { MdEmail } from "react-icons/md";
 import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,7 +11,7 @@ import Col from "react-bootstrap/Col";
 const Footer = (props) => {
     return (
         <Container style={{}}>
-            <MDBFooter className="text-center text-lg-start text-muted footer-customs">
+            <div className="text-center text-lg-start text-muted footer-customs">
                 <section className="d-flex justify-content-center justify-content-lg-between p-1">
                     <MDBContainer
                         className="text-center text-md-start mt-5"
@@ -46,24 +44,24 @@ const Footer = (props) => {
                                             Bicis
                                         </h6>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Comprar bicis
-                                            </a>
+                                            </Link>
                                         </p>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Vender bicis
-                                            </a>
+                                            </Link>
                                         </p>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Lista de espera
-                                            </a>
+                                            </Link>
                                         </p>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Lista de espera
-                                            </a>
+                                            </Link>
                                         </p>
                                     </MDBCol>
 
@@ -78,14 +76,14 @@ const Footer = (props) => {
                                             Otros Servicios
                                         </h6>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Nombre de la página
-                                            </a>
+                                            </Link>
                                         </p>
                                         <p>
-                                            <a href="#!" className="text-reset">
+                                            <Link href="#!" className="text-reset">
                                                 Nombre de la página
-                                            </a>
+                                            </Link>
                                         </p>
                                     </MDBCol>
 
@@ -101,28 +99,28 @@ const Footer = (props) => {
                                         </h6>
                                         <div className="">
                                             <p>
-                                                <a
+                                                <Link
                                                     href="#!"
                                                     className="text-reset"
                                                 >
                                                     Escríbenos por WhatsApp
-                                                </a>
+                                                </Link>
                                             </p>
                                             <p>
-                                                <a
+                                                <Link
                                                     href="#!"
                                                     className="text-reset"
                                                 >
                                                     Envíanos un Correo
-                                                </a>
+                                                </Link>
                                             </p>
                                             <p>
-                                                <a
+                                                <Link
                                                     href="#!"
                                                     className="text-reset"
                                                 >
                                                     Visítanos
-                                                </a>
+                                                </Link>
                                             </p>
                                         </div>
 
@@ -160,12 +158,12 @@ const Footer = (props) => {
                                         <h6 className="text-uppercase fw-bold mb-3 text-reset">
                                             Síguenos
                                         </h6>
-                                        <a href="" className="me-2 text-reset">
+                                        <Link href="" className="me-2 text-reset">
                                             <BsInstagram size={25} />
-                                        </a>
-                                        <a href="" className="text-reset">
+                                        </Link>
+                                        <Link href="" className="text-reset">
                                             <FaFacebook size={25} />
-                                        </a>
+                                        </Link>
                                     </MDBCol>
                                 </MDBRow>
                             </MDBCol>
@@ -185,23 +183,23 @@ const Footer = (props) => {
                         </Col>
 
                         <Col xs="auto">
-                            <a href="#!" className="text-reset ms-3">
+                            <Link href="#!" className="text-reset ms-3">
                                 Política de privacidad{" "}
-                            </a>
+                            </Link>
 
-                            <a href="#!" className="text-reset ms-3">
+                            <Link href="#!" className="text-reset ms-3">
                                 Cookies{" "}
-                            </a>
-                            <a href="#!" className="text-reset ms-3">
+                            </Link>
+                            <Link href="#!" className="text-reset ms-3">
                                 Aviso Legal{" "}
-                            </a>
-                            <a href="#!" className="text-reset ms-3">
+                            </Link>
+                            <Link href="#!" className="text-reset ms-3">
                                 Condiciones de Uso{" "}
-                            </a>
+                            </Link>
                         </Col>
                     </Row>
                 </Container>
-            </MDBFooter>
+            </div>
         </Container>
     );
 };
