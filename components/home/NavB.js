@@ -1,73 +1,87 @@
+import React from "react";
+import { userState } from "context/User/UserState";
+import User from "./user";
 import Image from "next/image";
-import Container from "react-bootstrap/Container";
-
+import Link from "next/link";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { BsPersonCircle } from "react-icons/bs";
+import Container from "react-bootstrap/Container";
+import { Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import { FiShoppingCart } from "react-icons/fi";
 import { BiSearchAlt } from "react-icons/bi";
-import User from "./user";
-import Link from "next/link";
-import { userState } from "context/User/UserState";
 
 export default function NavB({}) {
-  const user = userState((state) => state.user);
+    const user = userState((state) => state.user);
 
-  return (
-    <Navbar
-      collapseOnSelect
-      expand="lg"
-      bg="light"
-      variant="light"
-      sticky="top"
-      className="hover-custom shadow-sm w-100"
-    >
-      <Container >
-        <Link href="/">
-          <Image
-            src="/recycling.png"
-            width="60"
-            height="30"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />
-        </Link>
+    return (
+        <Navbar
+            collapseOnSelect
+            expand="lg"
+            bg="light"
+            variant="light"
+            sticky="top"
+            className="hover-custom shadow-sm w-100"
+        >
+            <Container>
+                {/* Logo */}
+                <Link href="/">
+                    <Image
+                        src="/recycling.png"
+                        width="60"
+                        height="30"
+                        className="d-inline-block align-top"
+                        alt="React Bootstrap logo"
+                    />
+                </Link>
+                {/* End Logo */}
 
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto flex-fill"></Nav>
+                {/* NavBar */}
+                <div className="d-lg-none d-flex align-items-baseline ">
+                    {/* Search */}
+                    <Form.Control
+                        className="d-flex flex-grow-1"
+                        type="search"
+                        placeholder="Buscar..."
+                        style={{ borderRadius: "0.375rem" }}
+                    />
 
-          <Nav className="me-auto flex-fill">
-            <Nav.Link href="/parking">
-              Comprar
-            </Nav.Link>
-            <Nav.Link href="/intermedio">Vender</Nav.Link>
+                    {/* Cart */}
+                    <Nav.Link href="#deets" className="mx-2">
+                        <FiShoppingCart size={24} />
+                    </Nav.Link>
+                </div>
 
-            <Nav.Link href="/avaluador">
-              Avaluador
-            </Nav.Link>
+                {/* NavBar Toggle */}
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="ms-auto flex-fill"></Nav>
 
-            <Nav.Link href="#features" disabled>
-              Aparta tu bici
-            </Nav.Link>
+                    <Nav className="me-auto flex-fill">
+                        <Nav.Link href="/parking">Comprar</Nav.Link>
+                        <Nav.Link href="/intermedio">Vender</Nav.Link>
 
-            <Nav.Link href="#pricing" disabled>
-              Lista de espera
-            </Nav.Link>
-          </Nav>
+                        <Nav.Link href="/avaluador">Avaluador</Nav.Link>
 
-          <Nav>
-            <Nav.Link href="#deets">
-              <BiSearchAlt size={23} />{" "}
-            </Nav.Link>
-            <Nav.Link href="#deets">
-              <FiShoppingCart size={22} />{" "}
-            </Nav.Link>
-            <User />
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
+                        <Nav.Link href="#features" disabled>
+                            Aparta tu bici
+                        </Nav.Link>
+
+                        <Nav.Link href="#pricing" disabled>
+                            Lista de espera
+                        </Nav.Link>
+                    </Nav>
+
+                    <Nav>
+                        <Nav.Link href="#deets" className="d-none d-lg-block">
+                            <BiSearchAlt size={23} />{" "}
+                        </Nav.Link>
+                        <Nav.Link href="#deets" className="d-none d-lg-block">
+                            <FiShoppingCart size={22} />{" "}
+                        </Nav.Link>
+                        <User />
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+    );
 }
