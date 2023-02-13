@@ -20,30 +20,30 @@ export function Suspension() {
   };
 
   const questions = [
-    {
-      value: 3,
-      title: "Trasera y delantera",
-      description: "Full Suspension",
-      router: "/complex",
-    },
-    {
-      value: 4,
-      title: "Solo delantera",
-      description: "Hardtail",
-      router: "/size",
-    },
-    {
-      value: 5,
-      title: "Sin suspension",
-      description: "Horquilla rígida",
-      router: "/size",
-    },
-    {
-      value: 6,
-      title: "No sé",
-      description: "Te ayudaremos a decidir",
-      router: "/size",
-    },
+      {
+          value: 4,
+          title: "Sólo delantera",
+          description: "Hardtail",
+          router: "/size",
+      },
+      {
+          value: 3,
+          title: "Trasera y delantera",
+          description: "Full Suspension",
+          router: "/complex",
+      },
+      {
+          value: 5,
+          title: "Sin suspension",
+          description: "Horquilla rígida",
+          router: "/size",
+      },
+      {
+          value: 6,
+          title: "No sé",
+          description: "Te mostraremos todas las opciones",
+          router: "/size",
+      },
   ];
 
   return (
