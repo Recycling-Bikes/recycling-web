@@ -36,7 +36,7 @@ export default function NavB({}) {
                 {/* End Logo */}
 
                 {/* NavBar */}
-                <div className="d-lg-none d-flex align-items-baseline ">
+                <div className="d-lg-none d-flex col align-items-baseline mx-2">
                     {/* Search */}
                     <Form.Control
                         className="d-flex flex-grow-1"
@@ -46,7 +46,7 @@ export default function NavB({}) {
                     />
 
                     {/* Cart */}
-                    <Nav.Link href="#deets" className="mx-2">
+                    <Nav.Link href="#deets" className="ms-2">
                         <FiShoppingCart size={24} />
                     </Nav.Link>
                 </div>
