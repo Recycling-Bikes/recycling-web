@@ -35,11 +35,11 @@ export function NoEBike() {
 
     return (
         <FormNovatos
-            progress={60}
             description={"¿Qué tipo de conducción planeas hacer?"}
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
+            progress={45}
             back={"./"}
         />
     );

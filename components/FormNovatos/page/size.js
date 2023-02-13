@@ -55,7 +55,7 @@ export function Size() {
 
     return (
         <FormNovatos
-            progress={60}
+            progress={75}
             description={"¿Cuánto mides?"}
             questions={questions}
             onSubmit={onSubmit}

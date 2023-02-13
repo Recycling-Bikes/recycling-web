@@ -42,7 +42,7 @@ export function Timon() {
             onSubmit={onSubmit}
             nameForm={nameForm}
             back={"./"}
-            progress={30}
+            progress={45}
         />
     );
 }

@@ -42,7 +42,7 @@ export function Charge() {
             onSubmit={onSubmit}
             nameForm={nameForm}
             back={"./"}
-            progress={30}
+            progress={60}
         />
     );
 }

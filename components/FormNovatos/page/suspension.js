@@ -49,11 +49,11 @@ export function Suspension() {
 
     return (
         <FormNovatos
-            progress={60}
             description={"¿Qué tipo de suspensión quieres?"}
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
+            progress={60}
             back={"./"}
         />
     );
