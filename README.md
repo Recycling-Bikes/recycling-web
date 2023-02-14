@@ -1,5 +1,4 @@
-# Recycling
-
+# Re-Cycling PTY
 ## Flujo de Trabajo
 - Clickup (Tareas) -> Pensar en lo que se debe hacer -> 
 - -> Figma -> Trabajar en Interfaz -> Logica -> Checkeo | Verificar response.
