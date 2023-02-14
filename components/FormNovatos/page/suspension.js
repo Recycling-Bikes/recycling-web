@@ -31,7 +31,7 @@ export function Suspension() {
             value: 3,
             title: "Trasera y delantera",
             description: "Full Suspension",
-            router: "/size",
+            router: "/complex",
         },
         {
             value: 5,
