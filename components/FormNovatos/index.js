@@ -58,7 +58,7 @@ export default function FormNovatos({
                         className="mb-3"
                     />
                 ))}
-                {/* Button Back*/}
+                {/* Button Back con condicionales de visibilidad*/}
                 {backButtonVision ? (
                     <Button
                         variant="link"
@@ -68,7 +68,7 @@ export default function FormNovatos({
                         <MdKeyboardArrowLeft /> Atrás
                     </Button>
                 ) : null}
-                {/*Agrega el checkbox */}
+                {/*Agrega el checkbox con condicionales de visibilidad */}
                 {checkbox ? (
                     <Form.Check
                         type="checkbox"
