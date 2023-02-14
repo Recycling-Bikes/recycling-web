@@ -58,6 +58,7 @@ export default function FormNovatos({
                         className="mb-3"
                     />
                 ))}
+
                 {/* Button Back con condicionales de visibilidad*/}
                 {backButtonVision ? (
                     <Button
@@ -68,6 +69,8 @@ export default function FormNovatos({
                         <MdKeyboardArrowLeft /> Atrás
                     </Button>
                 ) : null}
+                {/* Button Back End*/}
+
                 {/*Agrega el checkbox con condicionales de visibilidad */}
                 {checkbox ? (
                     <Form.Check
@@ -77,7 +80,7 @@ export default function FormNovatos({
                     />
                 ) : null}
                 {/* End checkbox */}
-                {/* Button Back End*/}
+
                 <button ref={submit} type="submit" className="d-none" />
             </form>
         </FormNovatosComponent>
