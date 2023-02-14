@@ -130,7 +130,7 @@ export default function Partdos() {
                         </Link>
 
                         <Button variant="primary" type="submit">
-                          Guardar
+                        Valor de tu bici
                         </Button>
                       </div>
                     </div>

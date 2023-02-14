@@ -1,79 +1,21 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Contenedor from "components/home/Contenedor";
-import {
-  Row,
-  Form,
-  Col,
-  Container,
-  Button,
-  ProgressBar,
-} from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
-import { MdOutlinePedalBike } from "react-icons/md";
-import { BsCardChecklist, BsThreeDots } from "react-icons/bs";
-import Mountain from "../../public/Mountain.png";
+import Mountain from "public/Mountain.png";
 import Image from "next/image";
+/* import { avaluadorState } from "context/Avaluador/avaluadorState"; */
 import { BsHandbag, BsPencilSquare, BsTag } from "react-icons/bs";
 import { HiArrowsRightLeft} from "react-icons/hi2"
 
-export default function uno() {
+
+export default function Value() {
+  /* const cardSelected = avaluadorState((state) => state.cardSelected); */
   return (
     <Contenedor>
-      <div className="py-3 my-md-0">
-        <Container className=" ">
-          <Row className="justify-content-md-center ">
-            <Col md="8" xl="6">
-              <Form className=" py-5">
-                <div className="py-2">
-                  <Row className="my-1 d-flex ">
-                    <div className="d-flex justify-content-between">
-                      <>
-                        <MdOutlinePedalBike
-                          size="40"
-                          className="p-2"
-                          style={{
-                            borderRadius: "50%",
-                            backgroundColor: "#CFEEEB",
-                            color: "#0FA899",
-                          }}
-                        />
-                      </>
-
-                      <>
-                        <BsCardChecklist
-                          size="40"
-                          className="p-2"
-                          style={{
-                            borderRadius: "50%",
-                            backgroundColor: "#CFEEEB",
-                            color: "#0FA899",
-                          }}
-                        />
-                      </>
-
-                      <>
-                        <BsThreeDots
-                          size="40"
-                          className="p-2"
-                          style={{
-                            borderRadius: "50%",
-                            backgroundColor: "#CFEEEB",
-                            color: "#0FA899",
-                          }}
-                        />
-                      </>
-                    </div>
-                  </Row>
-                </div>
-                <ProgressBar now={100} className="mb-4" />
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-        <Container className="justify-content-center">
-          <Row className="justify-content-center">
+      <Container className="justify-content-center my-5">
+        
+        <Row className="justify-content-center">
           <Col sm={100} md={6} lg={5} className="justify-content-center">
             <Container>
               <Image src={Mountain} alt="" className="img-fluid" />
@@ -122,8 +64,8 @@ export default function uno() {
           </Col>
         </Row>
 
-          <div className="justify-content-around mt-2 py-3 align-items-center d-none d-md-flex">
-          <Link href="./tres" className="mx-3">
+        <div className="justify-content-around mt-2 py-3 align-items-center d-none d-md-flex">
+          <Link href="./search" className="mx-3">
             Atrás
           </Link>
           <div>
@@ -141,15 +83,14 @@ export default function uno() {
                 }}
                 type="submit"
               >
-                <BsHandbag size={16} /> Publícala en Marketplace
+                <BsHandbag size={16} /> Publicarla en el Marketplace
               </Button>
             </Link>
           </div>
         </div>
-        </Container>
+      </Container>
 
-        <div className="d-none d-lg-block" style={{ height: "10rem" }} />
-      </div>
+      <div className="d-none d-lg-block" style={{ height: "10rem" }} />
     </Contenedor>
   );
 }
