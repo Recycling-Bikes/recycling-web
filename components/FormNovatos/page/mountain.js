@@ -29,7 +29,7 @@ export function Mountain() {
         {
             value: "true",
             title: "Sí",
-            router: "/complex",
+            router: "/size",
         },
     ];
 
