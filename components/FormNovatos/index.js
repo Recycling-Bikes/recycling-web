@@ -3,11 +3,11 @@ import FormNovatosComponent, {
 } from "components/FormNovatos/component";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 import { formNovatosState } from "context/FormNovatos/FormNovatosState";
 import { Button, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import Form from "react-bootstrap/Form";
 
 export default function FormNovatos({
     questions,
@@ -16,6 +16,8 @@ export default function FormNovatos({
     onSubmit,
     nameForm,
     back,
+    backButtonVision, // <--- Hace visible on invisible el boton de Atrás
+    checkbox, // <--- Agrega la propiedad "checkbox"
     progress,
 }) {
     const router = useRouter();
@@ -35,7 +37,6 @@ export default function FormNovatos({
         <FormNovatosComponent>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-5 d-none d-xl-block" />
-
                 {progress ? (
                     <ProgressBar className="mt-5" now={progress} />
                 ) : null}
@@ -46,7 +47,6 @@ export default function FormNovatos({
                 <h3 className="mb-3" style={{ color: "#212928" }}>
                     {description}
                 </h3>
-
                 {questions.map((data, index) => (
                     <Selects
                         register={register}
@@ -58,17 +58,26 @@ export default function FormNovatos({
                         className="mb-3"
                     />
                 ))}
-                <Button
-                    variant=""
-                    onClick={() => router.push(back)}
-                    style={{ color: "#0FA899" }}
-                >
-                    {" "}
-                    <MdKeyboardArrowLeft /> Atrás
-                </Button>
-
-                <div className="d-xl-none" style={{ height: "20vh" }} />
-
+                {/* Button Back*/}
+                {backButtonVision ? (
+                    <Button
+                        variant="link"
+                        onClick={() => back && router.push(back)}
+                        style={{ color: "#0FA899" }}
+                    >
+                        <MdKeyboardArrowLeft /> Atrás
+                    </Button>
+                ) : null}
+                {/*Agrega el checkbox */}
+                {checkbox ? (
+                    <Form.Check
+                        type="checkbox"
+                        id="checkbox"
+                        label="No volver a mostrar pregunta"
+                    />
+                ) : null}
+                {/* End checkbox */}
+                {/* Button Back End*/}
                 <button ref={submit} type="submit" className="d-none" />
             </form>
         </FormNovatosComponent>
