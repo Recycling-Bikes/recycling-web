@@ -41,8 +41,9 @@ export function Timon() {
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
-            back={"./"}
             progress={45}
+            back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

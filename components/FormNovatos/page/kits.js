@@ -60,8 +60,9 @@ export function Kits() {
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
-            back={"./"}
             progress={30}
+            back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

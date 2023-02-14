@@ -41,6 +41,7 @@ export function NoEBike() {
             nameForm={nameForm}
             progress={45}
             back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

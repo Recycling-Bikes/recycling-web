@@ -41,8 +41,9 @@ export function Charge() {
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
-            back={"./"}
             progress={60}
+            back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

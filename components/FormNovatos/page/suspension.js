@@ -55,6 +55,7 @@ export function Suspension() {
             nameForm={nameForm}
             progress={60}
             back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

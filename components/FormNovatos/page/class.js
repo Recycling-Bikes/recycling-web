@@ -58,6 +58,7 @@ export function Class() {
             nameForm={nameForm}
             progress={15}
             back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }

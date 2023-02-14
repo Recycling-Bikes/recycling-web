@@ -61,6 +61,7 @@ export function Size() {
             onSubmit={onSubmit}
             nameForm={nameForm}
             back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
         />
     );
 }
