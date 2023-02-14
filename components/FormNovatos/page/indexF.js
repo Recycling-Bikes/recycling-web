@@ -42,8 +42,8 @@ export function IndexF() {
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
-            noMostrar={true} // <--- No volver a mostrar pregunta
-            // back={"/"}
+            checkbox={true} // <--- No volver a mostrar pregunta
+            backButtonVision={false} // <--- Hace invisible al botón de atrás
         />
     );
 }
