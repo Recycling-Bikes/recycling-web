@@ -3,48 +3,45 @@ import { formNovatosState } from "context/FormNovatos/FormNovatosState";
 import { useRouter } from "next/router";
 
 export function NoEBike() {
+    const router = useRouter();
 
-  const router = useRouter()
+    const nameForm = "hill";
 
-  const nameForm = "hill"
+    const setQuest = formNovatosState((state) => state.setQuest);
 
-  const setQuest = formNovatosState((state) => state.setQuest);
+    const onSubmit = (event) => {
+        setQuest(event);
 
-  const onSubmit = (event) => {
+        const salida = questions.find((datum) => {
+            return datum.value == event[nameForm];
+        });
 
+        router.push(router.pathname + salida.router);
+    };
 
-    setQuest(event);
+    // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
+    const questions = [
+        {
+            value: "true",
+            title: "Subiendo y bajando montañas",
+            router: "/suspension",
+        },
+        {
+            value: "false",
+            title: "Estrictamente cuesta abajo",
+            router: "/size",
+        },
+    ];
 
-    const salida = questions.find((datum) => {
-      return datum.value == event[nameForm];
-    });
-
-    router.push(router.pathname + salida.router);
-
-  };
-
-  const questions = [
-    {
-      value: "true",
-      title: "Subiendo y bajando colinas",
-      router: "/suspension"
-      
-    },
-    {
-      value: "false",
-      title: "Estrictamente cuesta abajo",
-      router: "/size"
-    },
-  ];
-
-  return (
-    <FormNovatos
-      progress={60}
-      description={"¿Qué tipo de conducción planeas hacer?"}
-      questions={questions}
-      onSubmit={onSubmit}
-      nameForm={nameForm}
-      back={"./"}
-    />
-  );
+    return (
+        <FormNovatos
+            description={"¿Qué tipo de conducción planeas hacer?"}
+            questions={questions}
+            onSubmit={onSubmit}
+            nameForm={nameForm}
+            progress={45}
+            back={"./"}
+            backButtonVision={true} // <--- Hace visible al botón de atrás
+        />
+    );
 }
