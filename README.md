@@ -11,7 +11,7 @@
 - Next
 - Zustant
 - React-Bootstrap
-- Supabaseg
+- Supabase
 
 ## Proyecto
 - Componentes `Custom` son cosas muy pequenos y practicos (botones, forms, etc...)
