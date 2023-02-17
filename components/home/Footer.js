@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 
 const Footer = (props) => {
     return (
-        <Container style={{}}>
+        <Container style={{}} className="border-top">
             <div className="text-center text-lg-start text-muted footer-customs">
                 <section className="d-flex justify-content-center justify-content-lg-between p-1">
                     <MDBContainer
