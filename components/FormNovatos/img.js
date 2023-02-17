@@ -6,9 +6,9 @@ export default function ImagePrueba() {
     return (
         <Image
             src={ImagePrincipal}
-            alt=""
-            className="ratio ratio-1x1 d-none d-xl-block"
-            style={{ maxHeight: "800px", maxWidth: "800px" }}
+            alt="Bicicletas"
+            className="ratio ratio-1x1 d-none d-xl-block rounded-5 my-3 mx-3 w-auto"
+            style={{ maxHeight: "700px", maxWidth: "700px" }}
         />
     );
 }
