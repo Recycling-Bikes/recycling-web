@@ -28,18 +28,21 @@ export default function Promesas() {
   ];
 
   return (
+    <div style={{ backgroundColor: "rgba(207, 238, 235, 0.4)" }}>
     <Container
-      style={{ backgroundColor: "rgba(207, 238, 235, 0.4)" }}
-      fluid
+      
       className="mt-5 pb-5 px-auto d-flex flex-column 
       justify-content-center "
     >
-      <Row className="pt-5 mx-sm-5 d-flex justify-content-center" fluid="true">
+      <Row className="pt-5 mx-1 d-flex justify-content-center">
         <h1 className="d-flex justify-content-center tittle-custom">
           ¿Por qué comprar con nosotros?
         </h1>
 
-        <Row className="d-flex justify-content-center py-3 w-100">
+        <Row className="py-5 d-grid gap-3 px-0 "
+            style={{
+                gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr)",
+            }}>
           {cartas.map((Carta, index) => {
             return (
               <Card
@@ -47,12 +50,12 @@ export default function Promesas() {
                 key={index}
                 
                 style={{
-                  width: "17rem",
+                  width: "auto",
                   height: "10rem",
                   color: "primary",
                   backgroundColor: "none",
                 }}
-                className="m-3 py-2 px-3"
+                className=" py-2 px-3"
               >
                 <Card.Body>
                   <Carta.Icon
@@ -97,11 +100,13 @@ export default function Promesas() {
 
         <br />  
         <div>
-          <Button onClick={()=> router.push("/intermedio")} variant="link">
+          <Link href="/intermedio">
             Vender mi bici <MdKeyboardArrowRight />
-          </Button>
+          </Link>
         </div>
       </div>
     </Container>
+    </div>
   );
 }
+
