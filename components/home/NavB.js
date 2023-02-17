@@ -11,7 +11,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { BiSearchAlt } from "react-icons/bi";
 
 export default function NavB({}) {
-    const user = userState((state) => state.user);
+    const user = userState((state) => state.user); // User state
 
     return (
         <Navbar
@@ -81,6 +81,7 @@ export default function NavB({}) {
                         <User />
                     </Nav>
                 </Navbar.Collapse>
+                {/* End NavBar Toggle */}
             </Container>
         </Navbar>
     );
