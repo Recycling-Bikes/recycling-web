@@ -19,7 +19,9 @@ function Presentation() {
                       Compra o vende tu bici de manera fácil y segura con
                       nosotros
                   </h1>
-                  <p>Explora +12.000 bicicletas en nuestra plataforma</p>
+                  <p className="fw-semibold">
+                      Explora +12.000 bicicletas en nuestra plataforma
+                  </p>
                   <div className="d-flex flex-column justify-content-center align-items-baseline w-100">
                       <Button
                           variant="primary"
