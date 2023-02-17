@@ -128,7 +128,7 @@ export default function PartUno() {
               <div className="d-flex justify-content-end pt-3">
                 {" "}
                 <Button variant="primary" type="submit">
-                  Guardar cambios
+                Detalles de tu bici
                 </Button>
               </div>
             </Form>
