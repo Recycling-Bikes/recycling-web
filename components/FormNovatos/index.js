@@ -35,7 +35,7 @@ export default function FormNovatos({
 
     return (
         <FormNovatosComponent>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
                     <ProgressBar className="mt-5" now={progress} />
@@ -76,6 +76,7 @@ export default function FormNovatos({
                     <Form.Check
                         type="checkbox"
                         id="checkbox"
+                        className="mb-5 pb-5"
                         label="No volver a mostrar pregunta"
                     />
                 ) : null}
