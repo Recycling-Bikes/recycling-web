@@ -48,7 +48,7 @@ const Footer = (props) => {
                                                 href="#!"
                                                 className="text-reset"
                                             >
-                                                Comprar bicis
+                                                Comprar
                                             </Link>
                                         </p>
                                         <p>
@@ -56,7 +56,15 @@ const Footer = (props) => {
                                                 href="#!"
                                                 className="text-reset"
                                             >
-                                                Vender bicis
+                                                Vender
+                                            </Link>
+                                        </p>
+                                        <p>
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
+                                                Avaluador
                                             </Link>
                                         </p>
                                         <p>
@@ -84,7 +92,7 @@ const Footer = (props) => {
                                                 href="#!"
                                                 className="text-reset"
                                             >
-                                                Nombre de la página
+                                                Bike Fitting
                                             </Link>
                                         </p>
                                         <p>
@@ -92,7 +100,7 @@ const Footer = (props) => {
                                                 href="#!"
                                                 className="text-reset"
                                             >
-                                                Nombre de la página
+                                                Mantenimiento
                                             </Link>
                                         </p>
                                     </MDBCol>
