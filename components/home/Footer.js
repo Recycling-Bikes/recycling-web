@@ -18,7 +18,7 @@ const Footer = (props) => {
                         fluid="true"
                     >
                         {/*Container*/}
-                        <MDBRow className="text-center text-md-start mt-5">
+                        <MDBRow className="text-center text-md-start mt-3">
                             {/*Logo*/}
                             <MDBCol md="3" lg="2" xl="3">
                                 <Link href="/">
@@ -44,22 +44,26 @@ const Footer = (props) => {
                                             Bicis
                                         </h6>
                                         <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Comprar bicis
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Vender bicis
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Lista de espera
-                                            </Link>
-                                        </p>
-                                        <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Lista de espera
                                             </Link>
                                         </p>
@@ -76,12 +80,18 @@ const Footer = (props) => {
                                             Otros Servicios
                                         </h6>
                                         <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Nombre de la página
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Nombre de la página
                                             </Link>
                                         </p>
@@ -153,12 +163,15 @@ const Footer = (props) => {
                                         md="3"
                                         lg="3"
                                         xl="2"
-                                        className="me-auto pb-5"
+                                        className="me-auto pb-3"
                                     >
                                         <h6 className="text-uppercase fw-bold mb-3 text-reset">
                                             Síguenos
                                         </h6>
-                                        <Link href="" className="me-2 text-reset">
+                                        <Link
+                                            href=""
+                                            className="me-2 text-reset"
+                                        >
                                             <BsInstagram size={25} />
                                         </Link>
                                         <Link href="" className="text-reset">
@@ -174,15 +187,14 @@ const Footer = (props) => {
                 </section>
 
                 {/*Bottom Footer*/}
-                <Container fluid className="py-4">
+                <Container fluid className="pt-2 pb-3 text-center">
                     <Row className="justify-content-between p-4">
-                        <Col xs="auto">
-                            <div className="text-reset mb-3">
-                                2023 © Recycling. Todos los derechos reservados
+                        <Col xl="auto">
+                            <div className="xxl:text-center text-reset mb-4">
+                                2023 © Recycling. Todos los derechos reservados{" "}
                             </div>
-                        </Col>
-
-                        <Col xs="auto">
+                        </Col>{" "}
+                        <Col xl="auto">
                             <Link href="#!" className="text-reset ms-3">
                                 Política de privacidad{" "}
                             </Link>
