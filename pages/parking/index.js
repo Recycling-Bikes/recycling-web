@@ -8,7 +8,7 @@ export default function Todasbicis() {
     <Contenedor>
         <Container className="my-5">
           <Row>
-            <h2 className="px-4">Bicis a la venta</h2>
+            <h2 className="px-4">Estas bicis son para ti</h2>
           </Row>
           <Row>
             <Col className="px-4 d-none d-xl-grid" xl="3">

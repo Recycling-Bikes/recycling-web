@@ -18,7 +18,8 @@ export default function Bicicletas() {
             </Col>
             <Col lg="auto" className="d-grid gap-2 py-3">
               <Button style={{ width: "auto" }} variant="outline-primary">
-                Go somewhere
+                {/* //Add bell */}
+                Notificarme
               </Button>
             </Col>
           </Row>
