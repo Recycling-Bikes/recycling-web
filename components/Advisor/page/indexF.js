@@ -1,10 +1,10 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function IndexF() {
     const router = useRouter();
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
     const nameForm = "index";
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
@@ -34,7 +34,7 @@ export function IndexF() {
     };
 
     return (
-        <FormNovatos
+        <Advisor
             title={
                 "¿Buscas una bici? A veces, el proceso puede ser un poco intimidante. Estamos aquí para ayudar."
             }

@@ -1,11 +1,5 @@
-import { Suspension } from "components/FormNovatos/page/suspension";
-
+import { Suspension } from "components/Advisor/page/suspension";
 
 export default function SuspensionF() {
-
-
-
-  return (
-    <Suspension/>
-  );
+    return <Suspension />;
 }

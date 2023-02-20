@@ -1,10 +1,10 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Price() {
     const router = useRouter();
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
     const nameForm = "price";
 
     const onSubmit = (event) => {
@@ -12,8 +12,8 @@ export function Price() {
         setQuest(event);
         console.log(event);
         router.push("/parking");
-  };
-  
+    };
+
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
     const questions = [
         {
@@ -43,7 +43,7 @@ export function Price() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             title={""}
             description={"¿Cuál es tu presupuesto?"}
             questions={questions}

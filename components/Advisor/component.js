@@ -5,7 +5,7 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import ImagePrueba from "./img";
 import PropTypes from "prop-types";
 
-export default function FormNovatosComponent(props) {
+export default function AdvisorComponent(props) {
     return (
         <Contenedor>
             <Container>

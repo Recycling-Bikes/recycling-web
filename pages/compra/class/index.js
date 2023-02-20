@@ -1,5 +1,5 @@
-import { Class } from "components/FormNovatos/page/class";
+import { Class } from "components/Advisor/page/class";
 
 export default function ClassF() {
-  return <Class />;
+    return <Class />;
 }

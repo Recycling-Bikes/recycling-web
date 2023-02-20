@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Class() {
@@ -7,7 +7,7 @@ export function Class() {
 
     const nameForm = "class";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -50,7 +50,7 @@ export function Class() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             title={"¡Encontremos tu bici ideal!"}
             description={"¿Para qué usarás la bici?"}
             questions={questions}

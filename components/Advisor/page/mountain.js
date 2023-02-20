@@ -1,13 +1,13 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
-export function Position() {
+export function Mountain() {
     const router = useRouter();
 
-    const nameForm = "position";
+    const nameForm = "e-bike";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -22,26 +22,24 @@ export function Position() {
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
     const questions = [
         {
-            value: "aggressive",
-            title: "Agresiva",
-            description: "Prefieres la velocidad a la comodidad",
-            router: "/size",
+            value: "false",
+            title: "No",
+            router: "/no-e-bike",
         },
         {
-            value: "relaxed",
-            title: "Menos agresiva",
-            description: "Una posición cómoda para largas distancias",
+            value: "true",
+            title: "Sí",
             router: "/size",
         },
     ];
 
     return (
-        <FormNovatos
-            description={"¿Qué posición del cuerpo prefieres?"}
+        <Advisor
+            description={"¿Estás buscando una e-bike (bicicleta asistida)?"}
             questions={questions}
             onSubmit={onSubmit}
             nameForm={nameForm}
-            progress={45}
+            progress={30}
             back={"./"}
             backButtonVision={true} // <--- Hace visible al botón de atrás
         />

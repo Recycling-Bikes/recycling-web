@@ -1,15 +1,13 @@
-import FormNovatosComponent, {
-    Selects,
-} from "components/FormNovatos/component";
+import AdvisorComponent, { Selects } from "components/Advisor/component";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { Button, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
-export default function FormNovatos({
+export default function Advisor({
     questions,
     title,
     description,
@@ -21,7 +19,7 @@ export default function FormNovatos({
     progress,
 }) {
     const router = useRouter();
-    const quest = formNovatosState((state) => state.quest);
+    const quest = advisorState((state) => state.quest);
 
     const { handleSubmit, register, control } = useForm({
         defaultValues: quest,
@@ -34,7 +32,7 @@ export default function FormNovatos({
     };
 
     return (
-        <FormNovatosComponent>
+        <AdvisorComponent>
             <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
@@ -84,6 +82,6 @@ export default function FormNovatos({
 
                 <button ref={submit} type="submit" className="d-none" />
             </form>
-        </FormNovatosComponent>
+        </AdvisorComponent>
     );
 }

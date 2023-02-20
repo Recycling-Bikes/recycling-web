@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Suspension() {
@@ -7,7 +7,7 @@ export function Suspension() {
 
     const nameForm = "suspension";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -48,7 +48,7 @@ export function Suspension() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             description={"¿Qué tipo de suspensión quieres?"}
             questions={questions}
             onSubmit={onSubmit}
