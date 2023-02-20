@@ -118,7 +118,8 @@ const Footer = (props) => {
                                         <div className="">
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="https://wa.me/50769240795?text=%C2%A1Hola!"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Escríbenos por WhatsApp
@@ -126,7 +127,8 @@ const Footer = (props) => {
                                             </p>
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="mailto:recyclingpty@gmail.com"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Envíanos un Correo
@@ -134,7 +136,8 @@ const Footer = (props) => {
                                             </p>
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="https://www.google.com/maps/dir//recycling+PTY/@2.9069104,-78.839756,5z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8faca7cbe870317b:0xd9b358867bc19d5!2m2!1d-79.5692743!2d8.9810987"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Visítanos
@@ -177,12 +180,17 @@ const Footer = (props) => {
                                             Síguenos
                                         </h6>
                                         <Link
-                                            href=""
+                                            href="https://www.instagram.com/recyclingpty/"
+                                            target="_blank"
                                             className="me-2 text-reset"
                                         >
                                             <BsInstagram size={25} />
                                         </Link>
-                                        <Link href="" className="text-reset">
+                                        <Link
+                                            href="https://www.facebook.com/recyclingpty/"
+                                            target="_blank"
+                                            className="text-reset"
+                                        >
                                             <FaFacebook size={25} />
                                         </Link>
                                     </MDBCol>
