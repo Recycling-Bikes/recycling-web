@@ -17,7 +17,7 @@ const Contenedor = (props) => {
 
         {props.children}
 
-        <Container fluid className="footer-customs">
+        <Container fluid className="footer-customs border-top">
           <Footer />
         </Container>
       </SSRProvider>

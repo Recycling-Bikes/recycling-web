@@ -18,7 +18,7 @@ const Footer = (props) => {
                         fluid="true"
                     >
                         {/*Container*/}
-                        <MDBRow className="text-center text-md-start mt-5">
+                        <MDBRow className="text-center text-md-start mt-3">
                             {/*Logo*/}
                             <MDBCol md="3" lg="2" xl="3">
                                 <Link href="/">
@@ -44,22 +44,34 @@ const Footer = (props) => {
                                             Bicis
                                         </h6>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Comprar bicis
+                                            <Link
+                                                href="/compra/"
+                                                className="text-reset"
+                                            >
+                                                Comprar
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Vender bicis
+                                            <Link
+                                                href="/vender"
+                                                className="text-reset"
+                                            >
+                                                Vender
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Lista de espera
+                                            <Link
+                                                href="/avaluador"
+                                                className="text-reset"
+                                            >
+                                                Avaluador
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
                                                 Lista de espera
                                             </Link>
                                         </p>
@@ -76,13 +88,19 @@ const Footer = (props) => {
                                             Otros Servicios
                                         </h6>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Nombre de la página
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
+                                                Bike Fitting
                                             </Link>
                                         </p>
                                         <p>
-                                            <Link href="#!" className="text-reset">
-                                                Nombre de la página
+                                            <Link
+                                                href="#!"
+                                                className="text-reset"
+                                            >
+                                                Mantenimiento
                                             </Link>
                                         </p>
                                     </MDBCol>
@@ -100,7 +118,8 @@ const Footer = (props) => {
                                         <div className="">
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="https://wa.me/50769240795?text=%C2%A1Hola!"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Escríbenos por WhatsApp
@@ -108,7 +127,8 @@ const Footer = (props) => {
                                             </p>
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="mailto:recyclingpty@gmail.com"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Envíanos un Correo
@@ -116,7 +136,8 @@ const Footer = (props) => {
                                             </p>
                                             <p>
                                                 <Link
-                                                    href="#!"
+                                                    href="https://www.google.com/maps/dir//recycling+PTY/@2.9069104,-78.839756,5z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8faca7cbe870317b:0xd9b358867bc19d5!2m2!1d-79.5692743!2d8.9810987"
+                                                    target="_blank"
                                                     className="text-reset"
                                                 >
                                                     Visítanos
@@ -153,15 +174,23 @@ const Footer = (props) => {
                                         md="3"
                                         lg="3"
                                         xl="2"
-                                        className="me-auto pb-5"
+                                        className="me-auto pb-3"
                                     >
                                         <h6 className="text-uppercase fw-bold mb-3 text-reset">
                                             Síguenos
                                         </h6>
-                                        <Link href="" className="me-2 text-reset">
+                                        <Link
+                                            href="https://www.instagram.com/recyclingpty/"
+                                            target="_blank"
+                                            className="me-2 text-reset"
+                                        >
                                             <BsInstagram size={25} />
                                         </Link>
-                                        <Link href="" className="text-reset">
+                                        <Link
+                                            href="https://www.facebook.com/recyclingpty/"
+                                            target="_blank"
+                                            className="text-reset"
+                                        >
                                             <FaFacebook size={25} />
                                         </Link>
                                     </MDBCol>
@@ -174,15 +203,14 @@ const Footer = (props) => {
                 </section>
 
                 {/*Bottom Footer*/}
-                <Container fluid className="py-4">
+                <Container fluid className="pt-2 pb-3 text-center">
                     <Row className="justify-content-between p-4">
-                        <Col xs="auto">
-                            <div className="text-reset mb-3">
-                                2023 © Recycling. Todos los derechos reservados
+                        <Col xl="auto">
+                            <div className="xxl:text-center text-reset mb-4">
+                                2023 © Recycling. Todos los derechos reservados{" "}
                             </div>
-                        </Col>
-
-                        <Col xs="auto">
+                        </Col>{" "}
+                        <Col xl="auto">
                             <Link href="#!" className="text-reset ms-3">
                                 Política de privacidad{" "}
                             </Link>
