@@ -18,6 +18,7 @@ import ButtonsYears from "./ButtonsYears";
 import { useQuery } from "@tanstack/react-query";
 import ListBicis from "./listbicis";
 import Pop from "./pop";
+import { avaluadorSelect } from "context/Avaluador/avaluadorSelectState";
 
 export default function IndexAvaluador(props) {
   const [modalShow, setModalShow] = useState(false);
@@ -32,7 +33,7 @@ export default function IndexAvaluador(props) {
 
   const setParking = avaluadorState((state) => state.setParking);
 
-  const setCardSelected = avaluadorState((state) => state.setCardSelected);
+  const setCardSelected = avaluadorSelect((state) => state.setCardSelected);
 
   const conditions = avaluadorState((state) => state.conditions);
 

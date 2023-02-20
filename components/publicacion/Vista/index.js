@@ -11,7 +11,7 @@ export default function Vista() {
   const [bici, CDN] = parkingState((state) => [state.bici, state.CDN]);
 
   useEffect(() => {
-    /* console.log(1) */
+    console.log(bici.filesUrl.map((link) => (CDN +link)))
   });
 
   const [primaryVista, setPrimaryVista] = useState(

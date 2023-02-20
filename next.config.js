@@ -9,6 +9,10 @@ const  nextConfig = {
         hostname: '**.supabase.co',
         pathname: '/storage/v1/object/public/imagesbicis/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'trek.scene7.com',
+      },
     ],
   },
 }
