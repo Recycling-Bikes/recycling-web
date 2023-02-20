@@ -1,6 +1,11 @@
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { FcGoogle } from "react-icons/fc";
-import { BsStarFill, BsShieldFillCheck, BsBoxArrowUpRig } from "react-icons/bs";
+import {
+    BsStarFill,
+    BsShieldFillCheck,
+    BsBoxArrowUpRig,
+    BsBoxArrowUpRight,
+} from "react-icons/bs";
 
 import { Autoplay, Pagination } from "swiper";
 
@@ -123,9 +128,10 @@ function Reviews(props) {
                                         }}
                                     >
                                         {" "}
-                                        <div>
+                                        <div className="d-flex gap-1 align-items-center">
                                             <BsShieldFillCheck /> Ir a las
                                             reseñas
+                                            <BsBoxArrowUpRight className="ms-1" />
                                         </div>{" "}
                                     </Link>
                                 </Row>
@@ -192,9 +198,10 @@ function Reviews(props) {
                                         }}
                                     >
                                         {" "}
-                                        <div>
+                                        <div className="d-flex gap-1 align-items-center">
                                             <BsShieldFillCheck /> Ir a las
                                             reseñas
+                                            <BsBoxArrowUpRight className="ms-1" />
                                         </div>{" "}
                                     </Link>
                                 </Row>
@@ -260,9 +267,10 @@ function Reviews(props) {
                                         }}
                                     >
                                         {" "}
-                                        <div>
+                                        <div className="d-flex gap-1 align-items-center">
                                             <BsShieldFillCheck /> Ir a las
                                             reseñas
+                                            <BsBoxArrowUpRight className="ms-1" />
                                         </div>{" "}
                                     </Link>
                                 </Row>
