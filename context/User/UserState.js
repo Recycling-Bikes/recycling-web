@@ -10,7 +10,7 @@ export const userState = create(
 
         signIn: async (data) => {
           const user = await signInUser(data);
-          set((state) => ({ ...state, user: user.data.user }));
+          set((state) => ({ user: user.data.user }));
           return user;
         },
 
@@ -19,20 +19,27 @@ export const userState = create(
           return user;
         },
         updateSession: (user) => {
-          set((state) => ({ ...state, user }));
+          set((state) => ({ user }));
         },
         registerUser: async (data) => {
           const user = await registerNewUser(data);
-          set((state) => ({ ...state, user: user.data.user }));
+          set((state) => ({  user: user.data.user }));
           return user;
         },
         resetPassword: async (data) => {
           const user = await resetPassword(data);
-          set((state) => ({ ...state, user: user.data.user }));
+          set((state) => ({ user: user.data.user }));
           return user;
         },
         emailResetPassword: async (data) => {
           return await emailResetPassword(data);
+        },
+
+        confirmUser: async (gata) => {
+          const {data :user , error} = await supabase.auth.getUser()
+
+          set((state) => ({ user: user.user }));
+          return user
         },
 
         signOut: () => {

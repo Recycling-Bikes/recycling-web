@@ -6,7 +6,7 @@ import { persist, devtools } from "zustand/middleware";
 
 
 export const avaluadorState = create(
-  devtools(
+  
     (set, get) => ({
       brand: "",
 
@@ -25,14 +25,6 @@ export const avaluadorState = create(
           true
         );
       },
-
-      cardSelected: {},
-
-      setCardSelected: (data) => {
-        set(state => ({cardSelected: {...data}}))
-
-      },
-
 
       setBrand: (title) => {
         set((state) => ({
@@ -66,11 +58,6 @@ export const avaluadorState = create(
           ...data,
         }));
       },
-    }),
-    {
-      anonymousActionType: "Avaluator",
-      enabled: true,
-      name: "Avaluator",
     }
   )
 );

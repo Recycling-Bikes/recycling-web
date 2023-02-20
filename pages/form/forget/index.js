@@ -73,7 +73,7 @@ export default function Forget() {
             type="submit"
             className="mb-3"
           >
-            Submit
+            Enviar
           </Button>
         </Form>
       </Container>
