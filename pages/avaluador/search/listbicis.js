@@ -13,8 +13,6 @@ export default function ListBicis({
   return data?.map((datum) => {
     let { name, price, year, id, brands, imageUrl } = datum;
 
-    console.log(quest.years?.includes(year));
-
     if (
       (quest.years.length === 0 || quest.years?.includes(year)) &&
       (name.toLowerCase().includes(brand.toLowerCase()) ||

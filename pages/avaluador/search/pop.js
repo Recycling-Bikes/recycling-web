@@ -1,3 +1,4 @@
+import { avaluadorSelect } from "context/Avaluador/avaluadorSelectState";
 import { avaluadorState } from "context/Avaluador/avaluadorState";
 import { useRouter } from "next/router";
 import { Button, Col, Form, Modal } from "react-bootstrap";
@@ -7,17 +8,21 @@ export default function Pop(props) {
 
     const router = useRouter()
     const conditions = avaluadorState((state) => state.conditions);
+    const setCardSelected = avaluadorSelect((state) => state.setCardSelected);
   
     const {
       handleSubmit,
       register,
       setError,
       control,
-  
       formState: { isValid, errors },
     } = useForm();
   
-    const onSubmit = (e) => {
+    const onSubmit = (data) => {
+
+      setCardSelected(data)
+      
+      
       router.push("./value")
     };
   
@@ -39,8 +44,8 @@ export default function Pop(props) {
                         <Form.Check.Input
                           required
                           type="radio"
-                          value={datum.id}
-                          {...register("conditions")}
+                          value={datum.off}
+                          {...register("off")}
                         />
   
                         <Form.Check.Label>{datum.name}</Form.Check.Label>

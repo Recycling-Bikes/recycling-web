@@ -20,6 +20,8 @@ export default function User() {
     return <Spinner animation="grow" />;
   }
 
+  
+  try {
   if (Object.keys(user).length !== 0) {
     const first_name =
       user.user_metadata.first_name[0].toUpperCase() +
@@ -45,6 +47,8 @@ export default function User() {
       </div>
     );
   }
+}catch (error){
+}
 
   return (
     <div>
