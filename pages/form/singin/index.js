@@ -101,7 +101,7 @@ export default function Singing(props) {
             type="submit"
             className="mb-3"
           >
-            Submit
+            Iniciar
           </Button>
           <Link
             href="./forget"
