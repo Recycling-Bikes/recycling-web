@@ -52,8 +52,8 @@ export default function PopLogin(props) {
   };
 
   return (
-    <div>
-        <div>
+    <div className='d-grid justify-content-center align-items-center' style={{minHeight: "100vh"}}>
+        <div style={{width: "600px" }}>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <center>
           <h3 className="mb-4">Accede a Recycling para vender tu bici</h3>
@@ -81,9 +81,6 @@ export default function PopLogin(props) {
             <Form.Control.Feedback type="invalid">
               {errors.password?.message}
             </Form.Control.Feedback>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Mantener sesión iniciada" />
           </Form.Group>
           {errors?.account ? (
             <p style={{ color: "#dc3545" }}>{errors?.account?.message}</p>
