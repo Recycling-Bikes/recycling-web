@@ -14,7 +14,7 @@ export default function Advisor({
     onSubmit,
     nameForm,
     back,
-    backButtonVision, // <--- Hace visible on invisible el boton de Atrás
+    backButtonVision, // <--- Hace visible on invisible el botón de Atrás
     checkbox, // <--- Agrega la propiedad "checkbox"
     progress,
 }) {
@@ -33,6 +33,10 @@ export default function Advisor({
 
     return (
         <AdvisorComponent>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a730fd07fdbd8b7f38f52b6a9cefaf21a1ddeb59
             <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
@@ -60,9 +64,15 @@ export default function Advisor({
                 {/* Button Back con condicionales de visibilidad*/}
                 {backButtonVision ? (
                     <Button
-                        variant="link"
+                        variant="light"
                         onClick={() => back && router.push(back)}
-                        style={{ color: "#0FA899" }}
+                        className="mb-5 pb-5 mb-xl-0 pb-xl-0"
+                        style={{
+                            color: "#0FA899",
+                            background: "none",
+                            border: "none",
+                            shadow: "none",
+                        }}
                     >
                         <MdKeyboardArrowLeft /> Atrás
                     </Button>
@@ -74,7 +84,7 @@ export default function Advisor({
                     <Form.Check
                         type="checkbox"
                         id="checkbox"
-                        className="mb-5 pb-5"
+                        className="mb-5 pb-5 mb-xl-0 pb-xl-0"
                         label="No volver a mostrar pregunta"
                     />
                 ) : null}
