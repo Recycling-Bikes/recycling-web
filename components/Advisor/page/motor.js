@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Motor() {
@@ -7,7 +7,7 @@ export function Motor() {
 
     const nameForm = "motor";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -34,7 +34,7 @@ export function Motor() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             description={"¿Quieres una bici con motor?"}
             questions={questions}
             onSubmit={onSubmit}

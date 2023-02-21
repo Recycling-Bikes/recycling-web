@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Highway() {
@@ -7,7 +7,7 @@ export function Highway() {
 
     const nameForm = "type";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -37,7 +37,7 @@ export function Highway() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             description={
                 "¿En qué tipo de carreteras circularás principalmente?"
             }

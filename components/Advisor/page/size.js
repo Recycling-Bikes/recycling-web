@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Size() {
@@ -7,7 +7,7 @@ export function Size() {
 
     const nameForm = "size";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -54,7 +54,7 @@ export function Size() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             progress={75}
             description={"¿Cuánto mides?"}
             questions={questions}

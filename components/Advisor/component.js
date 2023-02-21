@@ -5,7 +5,7 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import ImagePrueba from "./img";
 import PropTypes from "prop-types";
 
-export default function FormNovatosComponent(props) {
+export default function AdvisorComponent(props) {
     return (
         <Contenedor>
             <Container>
@@ -25,10 +25,10 @@ export const Selects = ({ name, data, register, ...props }) => {
     return (
         <div className={props.className}>
             <label className="w-100">
-                <Card className="">
+                <Card>
                     <Card.Body>
                         <Form.Check
-                            style={{ color: "#212928" }}
+                            style={{ color: "#212928", fontWeight: 600 }}
                             type="radio"
                             value={data.value}
                             label={data.title}
@@ -39,7 +39,7 @@ export const Selects = ({ name, data, register, ...props }) => {
                                 }, 10);
                             }}
                             {...register(name)}
-                        />
+                        />{" "}
                         <Card.Text
                             className="ms-4"
                             style={{ color: "#6C757D" }}

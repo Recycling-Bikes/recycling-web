@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function Timon() {
@@ -7,7 +7,7 @@ export function Timon() {
 
     const nameForm = "timon";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -36,7 +36,7 @@ export function Timon() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             description={"¿Qué estilo de timón prefieres?"}
             questions={questions}
             onSubmit={onSubmit}

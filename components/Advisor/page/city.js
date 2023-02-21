@@ -1,5 +1,5 @@
-import FormNovatos from "components/FormNovatos";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import Advisor from "components/Advisor";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function City() {
@@ -7,7 +7,7 @@ export function City() {
 
     const nameForm = "city";
 
-    const setQuest = formNovatosState((state) => state.setQuest);
+    const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
         setQuest(event);
@@ -44,7 +44,7 @@ export function City() {
     ];
 
     return (
-        <FormNovatos
+        <Advisor
             description={"¿Para qué actividad vas a usarla principalmente?"}
             questions={questions}
             onSubmit={onSubmit}

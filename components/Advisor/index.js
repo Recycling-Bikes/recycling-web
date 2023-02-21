@@ -1,27 +1,25 @@
-import FormNovatosComponent, {
-    Selects,
-} from "components/FormNovatos/component";
+import AdvisorComponent, { Selects } from "components/Advisor/component";
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { formNovatosState } from "context/FormNovatos/FormNovatosState";
+import { advisorState } from "context/Advisor/AdvisorState";
 import { Button, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
-export default function FormNovatos({
+export default function Advisor({
     questions,
     title,
     description,
     onSubmit,
     nameForm,
     back,
-    backButtonVision, // <--- Hace visible on invisible el boton de Atrás
+    backButtonVision, // <--- Hace visible on invisible el botón de Atrás
     checkbox, // <--- Agrega la propiedad "checkbox"
     progress,
 }) {
     const router = useRouter();
-    const quest = formNovatosState((state) => state.quest);
+    const quest = advisorState((state) => state.quest);
 
     const { handleSubmit, register, control } = useForm({
         defaultValues: quest,
@@ -34,7 +32,8 @@ export default function FormNovatos({
     };
 
     return (
-        <FormNovatosComponent>
+        <AdvisorComponent>
+
             <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
@@ -62,9 +61,15 @@ export default function FormNovatos({
                 {/* Button Back con condicionales de visibilidad*/}
                 {backButtonVision ? (
                     <Button
-                        variant="link"
+                        variant="light"
                         onClick={() => back && router.push(back)}
-                        style={{ color: "#0FA899" }}
+                        className="mb-5 pb-5 mb-xl-0 pb-xl-0"
+                        style={{
+                            color: "#0FA899",
+                            background: "none",
+                            border: "none",
+                            shadow: "none",
+                        }}
                     >
                         <MdKeyboardArrowLeft /> Atrás
                     </Button>
@@ -76,7 +81,7 @@ export default function FormNovatos({
                     <Form.Check
                         type="checkbox"
                         id="checkbox"
-                        className="mb-5 pb-5"
+                        className="mb-5 pb-5 mb-xl-0 pb-xl-0"
                         label="No volver a mostrar pregunta"
                     />
                 ) : null}
@@ -84,6 +89,6 @@ export default function FormNovatos({
 
                 <button ref={submit} type="submit" className="d-none" />
             </form>
-        </FormNovatosComponent>
+        </AdvisorComponent>
     );
 }

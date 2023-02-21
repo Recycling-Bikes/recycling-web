@@ -1,5 +1,5 @@
-import { Mountain } from "components/FormNovatos/page/mountain";
+import { Mountain } from "components/Advisor/page/mountain";
 
 export default function MountainF() {
-  return <Mountain />;
+    return <Mountain />;
 }
