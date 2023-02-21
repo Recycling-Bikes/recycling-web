@@ -32,12 +32,8 @@ export default function Advisor({
     };
 
     return (
-        <AdvisorComponent>
-<<<<<<< HEAD
-=======
-
->>>>>>> a730fd07fdbd8b7f38f52b6a9cefaf21a1ddeb59
-            <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
+        <FormNovatosComponent>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
                     <ProgressBar className="mt-5" now={progress} />
