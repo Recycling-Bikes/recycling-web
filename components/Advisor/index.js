@@ -33,6 +33,7 @@ export default function Advisor({
 
     return (
         <AdvisorComponent>
+
             <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                 <div className="mt-5 d-none d-xl-block" />
                 {progress ? (
