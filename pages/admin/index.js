@@ -93,22 +93,8 @@ export default function PopLogin(props) {
           >
             Iniciar
           </Button>
-          <Link
-            href="/form/forget"
-            style={{ width: "100%" }}
-            className="d-flex justify-content-center "
-          >
-            Olvidé mi contraseña
-          </Link>
         </Form>
-        <div className='mt-3 mb-3 d-flex justify-content-center'>
 
-        ¿Aún no tienes cuenta?
-        <Link href="/form/register" className='ms-2'>
-        
-          Regístrate
-        </Link>
-        </div>
 
         </div>
     </div>
