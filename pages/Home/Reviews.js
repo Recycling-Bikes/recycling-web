@@ -30,7 +30,7 @@ const reviews = [
     },
     {
         date: "Hace un mes",
-        rating: 4,
+        rating: 5,
         photo: "/person2.png",
         text: "“Super confiable y seguro, conseguí mi bicicleta en excelente estado y ademas con opcion de abono. Buena atención del staff”",
         author: "Jackeline Morales",
