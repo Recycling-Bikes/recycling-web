@@ -30,11 +30,7 @@ const reviews = [
     },
     {
         date: "Hace un mes",
-<<<<<<< HEAD
-        rating: 5,
-=======
-        rating: 5,
->>>>>>> a1b02f7 (reviews massive change)
+        rating: 4,
         photo: "/person2.png",
         text: "“Super confiable y seguro, conseguí mi bicicleta en excelente estado y ademas con opcion de abono. Buena atención del staff”",
         author: "Jackeline Morales",
