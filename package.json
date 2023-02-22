@@ -12,7 +12,11 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.2.0",
         "@hookform/resolvers": "^2.9.10",
+<<<<<<< HEAD
         "@next/swc-linux-x64-gnu": "^13.1.6",
+=======
+        "@next/swc-win32-x64-msvc": "^13.1.6",
+>>>>>>> 90f9ac5 (package)
         "@supabase/supabase-js": "2.1.1",
         "@tanstack/react-query": "^4.19.1",
         "bootstrap": "^5.2.2",
