@@ -48,12 +48,12 @@ export default function PopLogin(props) {
 
     error
       ? (reset(error?.message), console.log(error.message))
-      : props.setModalShow(false)
+      : console.log
   };
 
   return (
-    <Modal centered {...props}>
-        <Modal.Body>
+    <div>
+        <div>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <center>
           <h3 className="mb-4">Accede a Recycling para vender tu bici</h3>
@@ -96,24 +96,10 @@ export default function PopLogin(props) {
           >
             Iniciar
           </Button>
-          <Link
-            href="/form/forget"
-            style={{ width: "100%" }}
-            className="d-flex justify-content-center "
-          >
-            Olvidé mi contraseña
-          </Link>
         </Form>
-        <div className='mt-3 mb-3 d-flex justify-content-center'>
 
-        ¿Aún no tienes cuenta?
-        <Link href="/form/register" className='ms-2'>
-        
-          Regístrate
-        </Link>
+
         </div>
-
-        </Modal.Body>
-    </Modal>
+    </div>
   )
 }
