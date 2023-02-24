@@ -1,6 +1,4 @@
 import "../styles/custom.scss";
-
-import BicisState from "context/BicisNot/BicisState";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 function MyApp({ Component, pageProps }) {
@@ -8,9 +6,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-        <BicisState>
           <Component {...pageProps} />
-        </BicisState>
     </QueryClientProvider>
   );
 }

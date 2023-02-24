@@ -122,7 +122,7 @@ export default function Value() {
           </div>
         </div>
 
-        <PopLogin show={modalShow} onHide={() => setModalShow(false)} />
+        <PopLogin show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} />
       </Container>
 
       <div className="d-none d-lg-block" style={{ height: "10rem" }} />
