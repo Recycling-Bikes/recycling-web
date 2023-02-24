@@ -4,8 +4,7 @@ import { Accordion, Form, Row, Col } from "react-bootstrap";
 export default function Filtro() {
     return (
         <div className="separador">
-        <Accordion defaultActiveKey={["0", "8"]} flush alwaysOpen>
-          
+            <Accordion defaultActiveKey={["0", "8"]} flush alwaysOpen>
                 {/* Start - Categoría */}
                 <Accordion.Item eventKey="0">
                     <Accordion.Header className="py-0">
@@ -14,17 +13,17 @@ export default function Filtro() {
                     <Accordion.Body>
                         <Form.Check
                             type={"checkbox"}
-                            id={`cicloruta-checkbox`}
+                            id={"cicloruta-checkbox"}
                             label={`Cicloruta`}
                         />
                         <Form.Check
                             type={"checkbox"}
-                            id={`montana-checkbox`}
+                            id={"montana-checkbox"}
                             label={`Montaña`}
                         />
                         <Form.Check
                             type={"checkbox"}
-                            id={`ruta-checkbox`}
+                            id={"ruta-checkbox"}
                             label={`Ruta`}
                         />
                     </Accordion.Body>
@@ -176,6 +175,16 @@ export default function Filtro() {
                             id={"titanio-checkbox"}
                             label={"Titanio"}
                         />
+                        <Form.Check
+                            type={"checkbox"}
+                            id={"cromoldy-checkbox"}
+                            label={"Cromoldy"}
+                        />
+                        <Form.Check
+                            type={"checkbox"}
+                            id={"acero-checkbox"}
+                            label={"Acero"}
+                        />
                     </Accordion.Body>
                 </Accordion.Item>
                 {/* End - Material del marco */}
@@ -244,8 +253,8 @@ export default function Filtro() {
                 </Accordion.Item>
                 {/* End - Rines */}
 
-          {/* --------------------- */}
-          
+                {/* --------------------- */}
+
                 {/* Start - Año */}
                 <Accordion.Item eventKey="7">
                     <Accordion.Header>
