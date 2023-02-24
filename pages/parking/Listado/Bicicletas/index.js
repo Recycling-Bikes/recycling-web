@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col, Form } from "react-bootstrap";
+import { BsBell } from "react-icons/bs";
 import GetBicis from "./bicis";
 
 export default function Bicicletas() {
@@ -19,6 +20,7 @@ export default function Bicicletas() {
             <Col lg="auto" className="d-grid gap-2 py-3">
               <Button style={{ width: "auto" }} variant="outline-primary">
                 {/* //Add bell */}
+                <BsBell className="me-2" />
                 Notificarme
               </Button>
             </Col>
