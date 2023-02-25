@@ -1,9 +1,9 @@
-import React from 'react'
-import { ProgressBar, Row } from 'react-bootstrap'
-import { BsCardChecklist, BsThreeDots } from 'react-icons/bs'
-import { MdOutlinePedalBike } from 'react-icons/md'
+import React from "react";
+import { ProgressBar, Row } from "react-bootstrap";
+import { BsListCheck, BsThreeDots } from "react-icons/bs";
+import { MdOutlinePedalBike } from "react-icons/md";
 
-export default function Progres() {
+export default function Progress() {
     return (
         <>
             <div className="py-2">
@@ -16,13 +16,17 @@ export default function Progres() {
                                     className="p-2"
                                     style={{
                                         borderRadius: "50%",
+                                        marginRight: "5px",
                                         backgroundColor: "#CFEEEB",
                                         color: "#0FA899",
                                     }}
                                 />
                             </div>
                             <div className="px-1">
-                                <p className="m-0 p-0" style={{ color: "#0FA899" }}>
+                                <p
+                                    className="m-0 p-0"
+                                    style={{ color: "#0FA899" }}
+                                >
                                     Paso 1/3
                                 </p>
                                 <p className="m-0 p-0">
@@ -32,7 +36,7 @@ export default function Progres() {
                         </div>
 
                         <>
-                            <BsCardChecklist
+                            <BsListCheck
                                 size="40"
                                 className="p-2"
                                 style={{
@@ -59,5 +63,5 @@ export default function Progres() {
             </div>
             <ProgressBar now={30} className="mb-4" />
         </>
-    )
+    );
 }
