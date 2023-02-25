@@ -25,3 +25,6 @@
 - Estar pendientes de Clickup con Kanban.
 - Usar chatGPT para optimizar el codigo y comentarlo.
 - Semanalmente actualizarnos sobre lo que fue hecho.
+
+Snippet
+- "@next/swc-win32-x64-msvc": "^13.1.6",
