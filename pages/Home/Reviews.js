@@ -15,8 +15,37 @@ import { Container, Card, Row, Col, Image } from "react-bootstrap";
 import React from "react";
 import Link from "next/link";
 
+const google = {
+    platform: "Google Reviews",
+    link: "https://www.google.com/search?q=recycling+pty+reviews&sxsrf=AJOqlzXcDs1l6ISn8olyOBEe-UO3XdTSlA%3A1676638734699&ei=DnrvY-KpKuSo1sQPw5a7wAY&oq=recycling+PTY+re&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgQIIxAnMgQIIxAnMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDoKCAAQRxDWBBCwAzoKCAAQ8QQQHhCiBDoFCAAQogQ6CAgAEIAEEMsBOgYIIxAnEBM6CwgAEIAEELEDEIMBOgUIABCABEoECEEYAFCaA1iBTGDMVWgDcAF4AYAB8gSIAeAhkgEJMi01LjUuMi4xmAEAoAEByAEHwAEB&sclient=gws-wiz-serp#lrd=0x8faca7cbe870317b:0xd9b358867bc19d5,1,,,,",
+};
+
+const reviews = [
+    {
+        date: "Hace un mes",
+        rating: 5,
+        photo: "/person.png",
+        text: '"Excelente servicio, muy buena asesoría y venta rápida y lo más importante todo claro y sin tramuñas. Sigan de esta forma y llegarán lejos."',
+        author: "Reinaldo Calojero",
+    },
+    {
+        date: "Hace un mes",
+        rating: 5,
+        photo: "/person2.png",
+        text: "“Super confiable y seguro, conseguí mi bicicleta en excelente estado y ademas con opcion de abono. Buena atención del staff”",
+        author: "Jackeline Morales",
+    },
+    {
+        date: "Hace un mes",
+        rating: 4,
+        photo: "/person3.png",
+        text: "“Impresionante, postearon la bici hoy a media mañana, en la tarde me pidieron que la llevara, que un interesado quería verla, se vendió de una vez y me hicieron la transferencia de inmediato.”",
+        author: "Alex Villarreta",
+    },
+];
+
 function Reviews(props) {
-    let cardswight = "auto";
+    const cardWidth = "auto";
 
     return (
         <Container className="px-2 my-2 mt-5">
@@ -46,12 +75,10 @@ function Reviews(props) {
                             slidesPerView: 1.15,
                             spaceBetween: 40,
                         },
-
                         768: {
                             slidesPerView: 1.5,
                             spaceBetween: 40,
                         },
-
                         992: {
                             slidesPerView: 2,
                             spaceBetween: 40,
@@ -67,216 +94,92 @@ function Reviews(props) {
                     }}
                     slidesPerView="auto"
                 >
-                    <SwiperSlide>
-                        {" "}
-                        <Card style={{ width: cardswight }}>
-                            <Card.Body style={{ fontSize: 16 }}>
-                                <div className="d-flex justify-content-between ">
-                                    <div
-                                        style={{ color: "gray" }}
-                                        className="d-flex align-items-center "
-                                    >
-                                        <FcGoogle size={18} className="mr-1" />{" "}
-                                        <p className="d-flex mx-1 align-items-center m-0">
-                                            Google Reviews
-                                        </p>
-                                    </div>
-                                    <Card.Text>Hace un mes</Card.Text>
-                                </div>
-                                <Row>
-                                    <div style={{ width: "auto" }}>
-                                        {" "}
-                                        <Image
-                                            alt=""
-                                            src="/person.png "
-                                            style={{ width: "50px" }}
-                                        />
-                                    </div>
-                                    <Col>
+                    {reviews.map((review, index) => (
+                        <SwiperSlide key={index}>
+                            <Card style={{ width: cardWidth }}>
+                                <Card.Body style={{ fontSize: 16 }}>
+                                    <div className="d-flex justify-content-between ">
                                         <div
+                                            style={{ color: "gray" }}
+                                            className="d-flex align-items-center "
+                                        >
+                                            <FcGoogle
+                                                size={18}
+                                                className="mr-1"
+                                            />{" "}
+                                            <p className="d-flex mx-1 align-items-center m-0">
+                                                {google.platform}
+                                            </p>
+                                        </div>
+                                        <Card.Text> {review.date}</Card.Text>
+                                    </div>
+                                    <Row className="mt-3">
+                                        {/* Image */}
+                                        <div
+                                            style={{ width: "auto" }}
+                                            className="mt-1"
+                                        >
+                                            <Image
+                                                alt="Person"
+                                                src={review.photo}
+                                                width={42}
+                                            />
+                                        </div>
+                                        {/* End Image */}
+                                        <Col>
+                                            <div
+                                                style={{
+                                                    color: "rgba(255, 193, 7, 1)",
+                                                }}
+                                            >
+                                                <span>
+                                                    {" "}
+                                                    {[
+                                                        ...Array(review.rating),
+                                                    ].map((star, index) => {
+                                                        return (
+                                                            <React.Fragment
+                                                                key={index}
+                                                            >
+                                                                <BsStarFill />{" "}
+                                                            </React.Fragment>
+                                                        );
+                                                    })}
+                                                </span>
+                                            </div>
+                                            <Card.Title
+                                                style={{ fontSize: 16 }}
+                                            >
+                                                {review.text}
+                                            </Card.Title>
+                                            <Card.Text
+                                                style={{ color: "gray" }}
+                                            >
+                                                {review.author}
+                                            </Card.Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Link
+                                            href={google.link}
+                                            target="_blank"
+                                            className="d-flex flex-row-reverse align-items-center"
                                             style={{
-                                                color: "rgba(255, 193, 7, 1)",
+                                                color: "rgba(25, 135, 84, 1)",
+                                                fontSize: 14,
                                             }}
                                         >
-                                            <BsStarFill /> <BsStarFill />{" "}
-                                            <BsStarFill /> <BsStarFill />{" "}
-                                            <BsStarFill />
-                                        </div>
-                                        <Card.Title style={{ fontSize: 16 }}>
-                                            {'"'}Excelente servicio, muy buena
-                                            asesoría y venta rápida y lo más
-                                            importante todo claro y sin
-                                            tramuñas. Sigan de esta forma y
-                                            llegarán lejos.
-                                            {'"'}
-                                        </Card.Title>
-                                        <Card.Text style={{ color: "gray" }}>
-                                            Reinaldo Calojero
-                                        </Card.Text>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    {" "}
-                                    <Link
-                                        //Link original de todas las reviews + _blank
-                                        href="https://www.google.com/search?q=recycling+pty+reviews&sxsrf=AJOqlzXcDs1l6ISn8olyOBEe-UO3XdTSlA%3A1676638734699&ei=DnrvY-KpKuSo1sQPw5a7wAY&oq=recycling+PTY+re&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgQIIxAnMgQIIxAnMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDoKCAAQRxDWBBCwAzoKCAAQ8QQQHhCiBDoFCAAQogQ6CAgAEIAEEMsBOgYIIxAnEBM6CwgAEIAEELEDEIMBOgUIABCABEoECEEYAFCaA1iBTGDMVWgDcAF4AYAB8gSIAeAhkgEJMi01LjUuMi4xmAEAoAEByAEHwAEB&sclient=gws-wiz-serp#lrd=0x8faca7cbe870317b:0xd9b358867bc19d5,1,,,,"
-                                        target="_blank"
-                                        className="d-flex flex-row-reverse align-items-center"
-                                        style={{
-                                            color: "rgba(25, 135, 84, 1)",
-                                            fontSize: 14,
-                                        }}
-                                    >
-                                        {" "}
-                                        <div className="d-flex gap-1 align-items-center">
-                                            <BsShieldFillCheck /> Ir a las
-                                            reseñas
-                                            <BsBoxArrowUpRight className="ms-1" />
-                                        </div>{" "}
-                                    </Link>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                    </SwiperSlide>
-
-                    <SwiperSlide>
-                        {" "}
-                        <Card style={{ width: cardswight }}>
-                            <Card.Body style={{ fontSize: 16 }}>
-                                <div className="d-flex justify-content-between ">
-                                    <div
-                                        style={{ color: "gray" }}
-                                        className="d-flex align-items-center "
-                                    >
-                                        <FcGoogle size={18} className="mr-1" />{" "}
-                                        <p className="d-flex mx-1 align-items-center m-0">
-                                            Google Reviews
-                                        </p>
-                                    </div>
-                                    <Card.Text>Hace un mes</Card.Text>
-                                </div>
-                                <Row>
-                                    <div style={{ width: "auto" }}>
-                                        {" "}
-                                        <Image
-                                            alt=""
-                                            src="/person.png "
-                                            style={{ width: "50px" }}
-                                        />
-                                    </div>
-                                    <Col>
-                                        <div
-                                            style={{
-                                                color: "rgba(255, 193, 7, 1)",
-                                            }}
-                                        >
-                                            <BsStarFill /> <BsStarFill />{" "}
-                                            <BsStarFill /> <BsStarFill />
-                                        </div>
-                                        <Card.Title style={{ fontSize: 16 }}>
-                                            {'"'}Mi primera vez comprando una
-                                            bicicleta, super sencillo de buscar
-                                            en su pagina web, tienen muchas
-                                            opciones y lo mejor es que se evita
-                                            estafas. Gracias ReCycling!{'"'}
-                                        </Card.Title>
-                                        <Card.Text style={{ color: "gray" }}>
-                                            Carlos Marquez
-                                        </Card.Text>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    {" "}
-                                    <Link
-                                        //Link original de todas las reviews + _blank
-                                        href="https://www.google.com/search?q=recycling+pty+reviews&sxsrf=AJOqlzXcDs1l6ISn8olyOBEe-UO3XdTSlA%3A1676638734699&ei=DnrvY-KpKuSo1sQPw5a7wAY&oq=recycling+PTY+re&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgQIIxAnMgQIIxAnMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDoKCAAQRxDWBBCwAzoKCAAQ8QQQHhCiBDoFCAAQogQ6CAgAEIAEEMsBOgYIIxAnEBM6CwgAEIAEELEDEIMBOgUIABCABEoECEEYAFCaA1iBTGDMVWgDcAF4AYAB8gSIAeAhkgEJMi01LjUuMi4xmAEAoAEByAEHwAEB&sclient=gws-wiz-serp#lrd=0x8faca7cbe870317b:0xd9b358867bc19d5,1,,,,"
-                                        target="_blank"
-                                        className="d-flex flex-row-reverse align-items-center"
-                                        style={{
-                                            color: "rgba(25, 135, 84, 1)",
-                                            fontSize: 14,
-                                        }}
-                                    >
-                                        {" "}
-                                        <div className="d-flex gap-1 align-items-center">
-                                            <BsShieldFillCheck /> Ir a las
-                                            reseñas
-                                            <BsBoxArrowUpRight className="ms-1" />
-                                        </div>{" "}
-                                    </Link>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        {" "}
-                        <Card style={{ width: cardswight }}>
-                            <Card.Body style={{ fontSize: 16 }}>
-                                <div className="d-flex justify-content-between ">
-                                    <div
-                                        style={{ color: "gray" }}
-                                        className="d-flex align-items-center "
-                                    >
-                                        <FcGoogle size={18} className="mr-1" />{" "}
-                                        <p className="d-flex mx-1 align-items-center m-0">
-                                            Google Reviews
-                                        </p>
-                                    </div>
-                                    <Card.Text>Hace un mes</Card.Text>
-                                </div>
-                                <Row>
-                                    <div style={{ width: "auto" }}>
-                                        {" "}
-                                        <Image
-                                            alt=""
-                                            src="/person.png "
-                                            style={{ width: "50px" }}
-                                        />
-                                    </div>
-                                    <Col>
-                                        <div
-                                            style={{
-                                                color: "rgba(255, 193, 7, 1)",
-                                            }}
-                                        >
-                                            <BsStarFill /> <BsStarFill />{" "}
-                                            <BsStarFill /> <BsStarFill />
-                                        </div>
-                                        <Card.Title style={{ fontSize: 16 }}>
-                                            {'"'}El servicio es muy rápido y
-                                            profesional. A través de ReCycling
-                                            PTY, conseguí vender mi bicicleta a
-                                            lo que quería en tan sólo días.
-                                            Recomiendo sus servicios{'"'}
-                                        </Card.Title>
-                                        <Card.Text style={{ color: "gray" }}>
-                                            Pedro Rachadell
-                                        </Card.Text>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    {" "}
-                                    <Link
-                                        //Link original de todas las reviews + _blank
-                                        href="https://www.google.com/search?q=recycling+pty+reviews&sxsrf=AJOqlzXcDs1l6ISn8olyOBEe-UO3XdTSlA%3A1676638734699&ei=DnrvY-KpKuSo1sQPw5a7wAY&oq=recycling+PTY+re&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgQIIxAnMgQIIxAnMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDoKCAAQRxDWBBCwAzoKCAAQ8QQQHhCiBDoFCAAQogQ6CAgAEIAEEMsBOgYIIxAnEBM6CwgAEIAEELEDEIMBOgUIABCABEoECEEYAFCaA1iBTGDMVWgDcAF4AYAB8gSIAeAhkgEJMi01LjUuMi4xmAEAoAEByAEHwAEB&sclient=gws-wiz-serp#lrd=0x8faca7cbe870317b:0xd9b358867bc19d5,1,,,,"
-                                        target="_blank"
-                                        className="d-flex flex-row-reverse align-items-center"
-                                        style={{
-                                            color: "rgba(25, 135, 84, 1)",
-                                            fontSize: 14,
-                                        }}
-                                    >
-                                        {" "}
-                                        <div className="d-flex gap-1 align-items-center">
-                                            <BsShieldFillCheck /> Ir a las
-                                            reseñas
-                                            <BsBoxArrowUpRight className="ms-1" />
-                                        </div>{" "}
-                                    </Link>
-                                </Row>
-                            </Card.Body>
-                        </Card>
-                    </SwiperSlide>
+                                            <div className="d-flex gap-1 align-items-center">
+                                                <BsShieldFillCheck /> Ir a las
+                                                reseñas
+                                                <BsBoxArrowUpRight className="ms-1" />
+                                            </div>
+                                        </Link>
+                                    </Row>
+                                </Card.Body>
+                            </Card>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </Container>
         </Container>
