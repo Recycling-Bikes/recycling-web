@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "recycling",
   "version": "0.1.0",
   "private": true,
@@ -40,8 +39,7 @@
     "eslint": "^8.26.0",
     "eslint-config-next": "^12.0.4",
     "rome": "^11.0.0"
-  }
-=======
+  },
     "name": "recycling",
     "version": "0.1.0",
     "private": true,
@@ -83,5 +81,4 @@
         "eslint-config-next": "^12.0.4",
         "rome": "^11.0.0"
     }
->>>>>>> 2f0db1c (add linux to json)
 }
