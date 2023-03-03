@@ -14,7 +14,7 @@ import * as yup from "yup";
 
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { isValidNumber, parsePhoneNumberFromString } from "libphonenumber-js";
 
 const schema = yup.object({
     email: yup.string().required("El correo es requerido"),
@@ -33,35 +33,37 @@ const schema = yup.object({
 export default function Register({}) {
     const router = useRouter();
     const registerUser = userState((state) => state.registerUser);
-    const [phone, setPhone] = useState(""); // Definir el estado de phone
 
+    const [phone, setPhone] = useState("");
     const handlePhoneChange = (value) => {
         setPhone(value);
     };
+
+    //Resto
 
     const {
         handleSubmit,
         register,
         setError,
 
-        formState: { isValid, errors },
+        formState: {isValid, errors },
     } = useForm({
         resolver: yupResolver(schema),
     });
 
     const onSubmit = async (event) => {
         const reset = (error) => {
-            if (error?.indexOf("credentials") != -1) {
+            if (error?.includes("credentials")) {
                 setError("email", {
                     message: "Contraseña o usuario incorrectos",
                 });
                 return;
             }
-            if (error?.indexOf("Email") != -1) {
+            if (error?.includes("Email")) {
                 setError("email", { message: "No se a confirmado el correo" });
                 return;
             }
-            if (error?.indexOf("registered") != -1) {
+            if (error?.includes("registered")) {
                 setError("account", {
                     message: "El usuario ya se encuentra registrado",
                 });
@@ -71,19 +73,11 @@ export default function Register({}) {
             setError("account", { message: error });
         };
 
-        /* const { data: user, error } = await registerUser(event);
+        const { data: user, error } = await registerUser(event);
 
          error
              ? (reset(error.message), console.log(error.message))
              : router.push("/");
-        */
-
-        if (error) {
-            reset(error.message);
-            console.log(error.message);
-        } else {
-            router.push("/");
-        }
     };
 
     return (
@@ -172,18 +166,17 @@ export default function Register({}) {
                             <span className="text-danger"> *</span>
                         </Form.Label>
                         <PhoneInput
-                            name="phone"
                             country={"pa"} // Define el pais por defecto
                             value={phone}
                             onChange={handlePhoneChange}
                             inputProps={{
-                                name: "phone",
                                 required: true,
                                 autoFocus: true,
                                 placeholder: "+507 6234-5678", // Placeholder para Panama
                             }}
-                            enableSearchField // Enable search field for countries
+                            enableSearchField
                         />
+
                         {errors && errors.phone && (
                             <Form.Control.Feedback type="invalid">
                                 {errors.phone?.message}
@@ -236,7 +229,7 @@ export default function Register({}) {
                         variant="primary"
                         type="submit"
                     >
-                        Registrase
+                        Crear cuenta
                     </Button>
                 </Form>
             </Container>
