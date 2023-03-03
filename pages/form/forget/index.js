@@ -47,36 +47,38 @@ export default function Forget() {
   };
 
   return (
-    <Login>
-      <Container
-        fluid
-        className="d-flex flex-column justify-content-center align-content-center align-items-center"
-      >
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <h1 className="mb-4">Recupera tu contraseña</h1>
-          <Form.Group className="mb-5" controlId="formBasicEmail">
-            <Form.Label>Correo electrónico asociado a tu cuenta</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="nombre@email.com"
-              {...register("email")}
-              isInvalid={errors?.email ? true : false}
-            />
-
-            <Form.Control.Feedback type="invalid">
-              {errors?.email?.message}
-            </Form.Control.Feedback>
-          </Form.Group>
-          <Button
-            style={{ width: "100%" }}
-            variant="primary"
-            type="submit"
-            className="mb-3"
+      <Login>
+          <Container
+              fluid
+              className="d-flex flex-column justify-content-center align-content-center align-items-center"
           >
-            Enviar
-          </Button>
-        </Form>
-      </Container>
-    </Login>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                  <h1 className="mb-4">Recupera tu contraseña</h1>
+                  <Form.Group className="mb-5" controlId="formBasicEmail">
+                      <Form.Label>
+                          Correo electrónico asociado a tu cuenta
+                      </Form.Label>
+                      <Form.Control
+                          type="email"
+                          placeholder="nombre@email.com"
+                          {...register("email")}
+                          isInvalid={errors?.email ? true : false}
+                      />
+
+                      <Form.Control.Feedback type="invalid">
+                          {errors?.email?.message}
+                      </Form.Control.Feedback>
+                  </Form.Group>
+                  <Button
+                      style={{ width: "100%" }}
+                      variant="primary"
+                      type="submit"
+                      className="mb-3"
+                  >
+                      Enviar correo de recuperación
+                  </Button>
+              </Form>
+          </Container>
+      </Login>
   );
 }
