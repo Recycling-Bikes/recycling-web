@@ -12,9 +12,9 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.2.0",
         "@hookform/resolvers": "^2.9.10",
+        "@next/swc-linux-x64-gnu": "^13.1.6",
         "@supabase/supabase-js": "2.1.1",
         "@tanstack/react-query": "^4.19.1",
-        "@next/swc-linux-x64-gnu": "^13.1.6",
         "bootstrap": "^5.2.2",
         "formik": "^2.2.9",
         "libphonenumber-js": "^1.10.21",
