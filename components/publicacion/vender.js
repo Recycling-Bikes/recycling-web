@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container, Button, Accordion } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { parkingState } from "context/Parking/ParkingState";
+import { BsChatSquareDots } from "react-icons/bs";
 
 export default function Descriptons() {
   const bici = parkingState((state) => state.bici);
@@ -9,21 +10,22 @@ export default function Descriptons() {
   return (
     <Container className="py-3 mx-3 d-flex flex-column">
       <h2>{bici.title}</h2>
-      <p>SKU: {bici.id}</p>
+      <p className="text-secondary">SKU: {bici.id}</p>
 
-      <p className="mb-0 ">
-        Altura recomendada del ciclista: <strong>1,77m - 1,85m</strong>
+      <p className="mb-0 text-secondary ">
+        Altura recomendada del ciclista: <strong className="text-black">1,77m - 1,85m</strong>
       </p>
       <Link href="#">Guía de tallas</Link>
       <h2 className="my-4">${bici.price.toLocaleString("en")}</h2>
 
-      <Button className="mb-2">Añadir al carrito</Button>
-      <Button className="mb-2" variant="outline-primary btn-outline">
+      <Button className="mb-2 py-2">Añadir al carrito</Button>
+      {/* <Button className="mb-2" variant="outline-primary btn-outline">
         Trade - in
-      </Button>
-      <div className="d-flex justify-content-center">
-        <h6>
-          Dudas sobre la bici? <Link href="#"> Pregúntanos</Link>
+      </Button> */}
+      <div className="mt-3 d-flex justify-content-center">
+        <h6 className="fw-bold">
+          <BsChatSquareDots className="me-2"/>
+          Dudas sobre la bici? <Link href="#" className="fw-normal"> Pregúntanos</Link>
         </h6>
       </div>
 
