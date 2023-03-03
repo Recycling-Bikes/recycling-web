@@ -62,7 +62,7 @@ export default function NavB({}) {
 
                         <Nav.Link href="/avaluador">Avaluador</Nav.Link>
 
-                        <Nav.Link href="#pricing" disabled>
+                        <Nav.Link href="/espera">
                             Lista de espera
                         </Nav.Link>
 

@@ -69,7 +69,7 @@ const Footer = (props) => {
                                         </p>
                                         <p>
                                             <Link
-                                                href="#!"
+                                                href="/espera"
                                                 className="text-reset"
                                             >
                                                 Lista de espera
