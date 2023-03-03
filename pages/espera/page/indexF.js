@@ -1,10 +1,10 @@
-import Advisor from "components/Advisor";
-import { advisorState } from "context/Advisor/AdvisorState";
+import Espera from "components/Espera";
+import { esperaState } from "context/Espera/EsperaState";
 import { useRouter } from "next/router";
 
 export function IndexF() {
     const router = useRouter();
-    const setQuest = advisorState((state) => state.setQuest);
+    const setQuest = esperaState((state) => state.setQuest);
     const nameForm = "index";
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
@@ -34,7 +34,7 @@ export function IndexF() {
     };
 
     return (
-        <Advisor
+        <Espera
             title={
                 "¿Buscas una bici? A veces, el proceso puede ser un poco intimidante. Estamos aquí para ayudar."
             }
