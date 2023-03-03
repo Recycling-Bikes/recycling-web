@@ -25,11 +25,10 @@ function Martket() {
                 </Col>
 
                 <Col className="mx-4 px-2 d-flex flex-column justify-content-center align-items-baseline">
-                    <h3 className=" tittle-custom">
+                    <h3 className=" tittle-custom pb-4">
                         Nuestro proceso es 100% seguro y transparente{" "}
                     </h3>
                     <div
-                        gap={1}
                         className="d-grid"
                         style={{
                             gridTemplateColumns:
@@ -43,7 +42,10 @@ function Martket() {
                                     style={styleIcons}
                                 />
                             </Col>
-                            <Col className="d-flex flex-column" lg={5}>
+                            <Col
+                                className="d-flex flex-column text-secondary"
+                                lg={5}
+                            >
                                 Revisamos y certificamos cada bicicleta y nos
                                 aseguramos de que todo está en regla.
                             </Col>
@@ -56,7 +58,10 @@ function Martket() {
                                     style={styleIcons}
                                 />
                             </Col>
-                            <Col className="p-2 d-flex flex-column" lg={5}>
+                            <Col
+                                className="p-2 d-flex flex-column text-secondary"
+                                lg={5}
+                            >
                                 Nos aseguramos de que la venta sea segura y que
                                 recibas tu dinero.
                             </Col>
@@ -69,7 +74,10 @@ function Martket() {
                                     style={styleIcons}
                                 />
                             </Col>
-                            <Col className="p-2 d-flex flex-column" lg={5}>
+                            <Col
+                                className="p-2 d-flex flex-column text-secondary"
+                                lg={5}
+                            >
                                 Realizamos el envío con un distribuidor de
                                 confianza.
                             </Col>
@@ -82,7 +90,10 @@ function Martket() {
                                     style={styleIcons}
                                 />
                             </Col>
-                            <Col className="p-2 d-flex flex-column" lg={5}>
+                            <Col
+                                className="p-2 d-flex flex-column text-secondary"
+                                lg={5}
+                            >
                                 Brindamos soporte, antes, durante y luego de que
                                 recibas tu bici.
                             </Col>
