@@ -52,8 +52,8 @@ export default function PopLogin(props) {
   };
 
   return (
-    <div>
-        <div>
+    <div className='d-grid justify-content-center align-items-center' style={{minHeight: "100vh"}}>
+        <div style={{width: "600px" }}>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <center>
           <h3 className="mb-4">Accede a Recycling para vender tu bici</h3>
