@@ -8,9 +8,9 @@ export default function ImageAvaluador({style, ...props}) {
     <Image
       src={ImagePrincipal}
       alt=""
-      className="ratio ratio-16x9 p-0 img-fluid"
-      style={{ maxHeight: "800px",
-      maxWidth: "800px",
+            className="ratio ratio-1x1 d-none d-xl-block rounded-5 my-3 mx-3 w-auto"
+      style={{ maxHeight: "600px",
+      maxWidth: "600px",
       ...style
      }}
     />

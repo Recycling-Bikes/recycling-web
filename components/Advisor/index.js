@@ -1,11 +1,12 @@
 import AdvisorComponent, { Selects } from "components/Advisor/component";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { advisorState } from "context/Advisor/AdvisorState";
 import { Button, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import Form from "react-bootstrap/Form";
+import { helperState } from "context/Helper/HelperState";
 
 export default function Advisor({
     questions,
@@ -20,6 +21,16 @@ export default function Advisor({
 }) {
     const router = useRouter();
     const quest = advisorState((state) => state.quest);
+    const setNoMolestar = helperState((state) => state.setNoMolestar);
+    const noMolestar = helperState((state) => state.noMolestar);
+    
+    useEffect(() => {
+            
+        if (noMolestar) {
+        router.push("/parking");
+        }
+    }, [])
+    
 
     const { handleSubmit, register, control } = useForm({
         defaultValues: quest,
@@ -83,6 +94,7 @@ export default function Advisor({
                         id="checkbox"
                         className="mb-5 pb-5 mb-xl-0 pb-xl-0"
                         label="No volver a mostrar pregunta"
+                        onclick={ () => setNoMolestar(true)}
                     />
                 ) : null}
                 {/* End checkbox */}

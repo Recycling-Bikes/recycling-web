@@ -82,6 +82,9 @@ export default function PopLogin(props) {
               {errors.password?.message}
             </Form.Control.Feedback>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Mantener sesión iniciada" />
+          </Form.Group>
           {errors?.account ? (
             <p style={{ color: "#dc3545" }}>{errors?.account?.message}</p>
           ) : null}

@@ -12,7 +12,7 @@ export default function Formimg() {
         <Link href="/" passHref>
         <Image
               src="/recycling.png"
-              className="   img-fluid"
+              className="   img-fluid mt-2 mt-md-0 ms-2 ms-md-0"
               alt="React Bootstrap logo"
               style={{position: "absolute",
                 left: "2.72vw",
