@@ -29,7 +29,7 @@ export default function Advisor({
         if (noMolestar) {
         router.push("/parking");
         }
-    }, [])
+    }, [noMolestar])
     
 
     const { handleSubmit, register, control } = useForm({
@@ -94,7 +94,7 @@ export default function Advisor({
                         id="checkbox"
                         className="mb-5 pb-5 mb-xl-0 pb-xl-0"
                         label="No volver a mostrar pregunta"
-                        onclick={ () => setNoMolestar(true)}
+                        onClick={ () => setNoMolestar(true)}
                     />
                 ) : null}
                 {/* End checkbox */}

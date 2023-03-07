@@ -13,6 +13,10 @@ const  nextConfig = {
         protocol: 'https',
         hostname: 'trek.scene7.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.google.com',
+      },
     ],
   },
 }

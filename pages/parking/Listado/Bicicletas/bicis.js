@@ -3,10 +3,12 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
+import { filtersState } from "context/Filters/filtersState";
 
 export default function GetBicis(props) {
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
+  const filters = filtersState((state) => state.filters);
 
   const { isLoading, isError, error, data } = useQuery({
     queryKey: ["productos"],
@@ -37,6 +39,8 @@ export default function GetBicis(props) {
     );
   }
 
+  // Resto del código para renderizar los resultados filtrados
+
   return (
     <div
       className="d-grid gap-3 my-4"
@@ -50,7 +54,7 @@ export default function GetBicis(props) {
           - Resuelve un error
           */}
       {Array.isArray(data)
-        ? data.map((bici) => (
+        ? filteredData(data, filters).map((bici) => (
             <Card className="p-0" key={bici.id}>
               <Link href={`/parking/${bici.id}`} passHref>
                 <div className="m-3">
@@ -85,4 +89,64 @@ export default function GetBicis(props) {
       <Relleno />
     </div>
   );
+}
+function filteredData(data, filters) {
+  return data.filter((datum) => {
+    let passesFilter = true;
+
+    if (filters.city?.length > 0 && !filters.city.includes(datum.city)) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.category?.length > 0 &&
+      !filters.category.includes(datum.category)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.subcategory?.length > 0 &&
+      !filters.subcategory.includes(datum.subcategory)
+    ) {
+      passesFilter = false;
+    }
+
+    if (filters.size?.length > 0 && !filters.size.includes(datum.size)) {
+      passesFilter = false;
+    }
+
+    if (filters.brands?.length > 0 && !filters.brands.includes(datum.brand)) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.materials?.length > 0 &&
+      !filters.materials.includes(datum.material)
+    ) {
+      passesFilter = false;
+    }
+
+    if (filters.frenos?.length > 0 && !filters.frenos.includes(datum.frenos)) {
+      passesFilter = false;
+    }
+
+    if (filters?.rine?.length > 0 && !filters.rine.includes(datum.rine)) {
+      passesFilter = false;
+    }
+
+    if (filters.years?.length > 0 && !filters.years.includes(datum.year)) {
+      passesFilter = false;
+    }
+
+    if (filters?.minPrice !== null && datum.price < filters.minPrice) {
+      passesFilter = false;
+    }
+
+    if (filters?.maxPrice !== null && datum.price > filters.maxPrice) {
+      passesFilter = false;
+    }
+
+    return passesFilter;
+  });
 }
