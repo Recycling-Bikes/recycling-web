@@ -1,0 +1,26 @@
+const Brands = [
+    { id: "allied", label: "Allied" },
+    { id: "bmc", label: "BMC" },
+    { id: "cannondale", label: "Cannondale" },
+    { id: "canyon", label: "Canyon" },
+    { id: "cervelo", label: "Cervelo" },
+    { id: "diamond", label: "Diamond Back" },
+    { id: "electra", label: "Electra" },
+    { id: "giant", label: "Giant" },
+    { id: "liv", label: "Liv" },
+    { id: "merida", label: "Merida" },
+    { id: "niner", label: "Niner" },
+    { id: "orbea", label: "Orbea" },
+    { id: "pinarello", label: "Pinarello" },
+    { id: "rali", label: "Rali" },
+    { id: "rocky-mountain", label: "Rocky Mountain" },
+    { id: "s-works", label: "S-works" },
+    { id: "santa-cruz", label: "Santa Cruz" },
+    { id: "scott", label: "Scott" },
+    { id: "specialized", label: "Specialized" },
+    { id: "trek", label: "Trek" },
+    { id: "willier-triestina", label: "Willier Triestina" },
+    { id: "yeti", label: "Yeti" },
+];
+
+export default Brands

@@ -9,7 +9,7 @@ import Progres2 from "./progres2";
 
 import * as yup from "yup";
 
-import shallow from "zustand/shallow";
+import {shallow} from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FPState } from "context/FormPublications/FPstate";
