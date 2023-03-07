@@ -1,11 +1,9 @@
 const materials = [
-    { id: "aluminio", label: "Aluminio" },
-    { id: "carbon", label: "Carbón" },
-    { id: "hierro", label: "Hierro" },
-    { id: "titanio", label: "Titanio" },
-    { id: "cromoldy", label: "Cromoldy" },
-    { id: "acero", label: "Acero" },
-  ];
+    { id: "aluminio", label: "Aluminio", category: [], all: true },
+    { id: "carbon", label: "Carbón", category: [], all: true },
+    { id: "titanio", label: "Titanio", category: [], all: true },
+    { id: "cromoldy", label: "Cromoldy", category: [], all: true },
+    { id: "acero", label: "Acero", category: [], all: true },
+];
 
-
-export default materials
+export default materials;
