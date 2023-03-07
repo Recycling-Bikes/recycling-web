@@ -6,6 +6,8 @@ import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
 
 export default function GetBicis(props) {
+
+  const CDN = parkingState((state) => state.CDN);
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
   const filters = filtersState((state) => state.filters);
@@ -61,7 +63,9 @@ export default function GetBicis(props) {
                   <Badge bg="primary" style={{ color: "white" }}>
                     Popular
                   </Badge>
-                  <Card.Img variant="top" src="/imagec.png" />
+                  <Card.Img variant="top" src={CDN +bici.filesUrl[0]} style={{
+                    maxHeight: "200px"
+                  }} />
                 </div>
                 <Card.Body>
                   <Card.Text

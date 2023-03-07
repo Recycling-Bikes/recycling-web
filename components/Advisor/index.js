@@ -23,14 +23,10 @@ export default function Advisor({
     const quest = advisorState((state) => state.quest);
     const setNoMolestar = helperState((state) => state.setNoMolestar);
     const noMolestar = helperState((state) => state.noMolestar);
-    
-    useEffect(() => {
-            
-        if (noMolestar) {
+
+    if (noMolestar) {
         router.push("/parking");
-        }
-    }, [noMolestar])
-    
+    }
 
     const { handleSubmit, register, control } = useForm({
         defaultValues: quest,

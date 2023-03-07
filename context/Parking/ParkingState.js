@@ -73,7 +73,7 @@ export const parkingState = create(
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bicis").select(`
     id,price,title,
-    models (name)`);
+    models (name), filesUrl`);
   console.log(error);
   console.log(bicis);
   return error ? error : await bicis;

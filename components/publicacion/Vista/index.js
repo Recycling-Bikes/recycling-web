@@ -50,12 +50,13 @@ export default function Vista() {
         </Col>
 
         <Col className="d-lg-none">
-          <Carousel>
+          <Carousel style={{height: "70vw"}}>
             {bici.filesUrl.map((link) => (
-              <Carousel.Item key={link}>
+              <Carousel.Item key={link} style={{maxHeight: "70vw"}}>
                 <img
+                  style={{maxHeight: "70vw"}}
                   src={CDN + link}
-                  className="d-block w-100"
+                  className="d-block w-100 img-fluid"
                   alt="First slide"
                 />
               </Carousel.Item>
