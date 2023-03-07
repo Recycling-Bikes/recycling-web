@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Accordion, Form, Row, Col } from "react-bootstrap";
-import years from "./filtros/years";
-import Rines from "./filtros/rines";
-import materials from "./filtros/material";
-import Brands from "./filtros/brands";
-import size from "./filtros/size";
-import category from "./filtros/category";
-import subcategory from "./filtros/subcategory";
-import citys from "./filtros/citys";
-import Frenos from "./filtros/frenos";
+import years from "components/parking/filtros/years";
+import Rines from "components/parking/filtros/rines";
+import materials from "components/parking/filtros/material";
+import Brands from "components/parking/filtros/brands";
+import size from "components/parking/filtros/size";
+import category from "components/parking/filtros/category";
+import subcategory from "components/parking/filtros/subcategory";
+import citys from "components/parking/filtros/citys";
+import Frenos from "components/parking/filtros/frenos";
 import { filtersState } from "context/Filters/filtersState";
 
 export default function Filtro() {
