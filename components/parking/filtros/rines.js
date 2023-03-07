@@ -8,7 +8,7 @@ const rines = [
     { id: "rin-27", label: "27.5''" },
     { id: "rin-29", label: "29''" },
     { id: "600-c", label: "600C" },
-    { id: "700c", label: "700C" },
+    { id: "700-c", label: "700C" },
 ];
 
 export default rines;
