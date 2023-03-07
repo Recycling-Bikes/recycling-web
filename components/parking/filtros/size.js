@@ -1,4 +1,11 @@
 const size = [
+    { id: "xxl", label: "XXL", category: ["mtb"], all: true },
+    { id: "xl;", label: "XL", category: ["mtb"], all: true },
+    { id: "l;", label: "L", category: ["mtb"], all: true },
+    { id: "m;", label: "M", category: ["mtb"], all: true },
+    { id: "s;", label: "S", category: ["mtb"], all: true },
+    { id: "xs;", label: "XS", category: ["mtb"], all: true },
+    { id: "xxs;", label: "XXS", category: ["mtb"], all: true },
     { id: "xxl-64", label: "64", category: [], all: true },
     { id: "xxl-63", label: "63", category: [], all: true },
     { id: "xxl-62", label: "62", category: [], all: true },
@@ -21,13 +28,6 @@ const size = [
     { id: "xxs-46", label: "46", category: [], all: true },
     { id: "xxs-45", label: "45", category: [], all: true },
     { id: "xxs-44", label: "44", category: [], all: true },
-    { id: "xxl", label: "XXL", category: ["mtb"], all: true },
-    { id: "xl;", label: "XL", category: ["mtb"], all: true },
-    { id: "l;", label: "L", category: ["mtb"], all: true },
-    { id: "m;", label: "M", category: ["mtb"], all: true },
-    { id: "s;", label: "S", category: ["mtb"], all: true },
-    { id: "xs;", label: "XS", category: ["mtb"], all: true },
-    { id: "xxs;", label: "XXS", category: ["mtb"], all: true },
 ];
 
 export default size;
