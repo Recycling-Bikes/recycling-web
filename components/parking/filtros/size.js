@@ -2,9 +2,10 @@ const size = [
     { id: "xxl-64", label: "XXL || 64" },
     { id: "xxl-63", label: "XXL || 63" },
     { id: "xxl-62", label: "XXL || 62" },
-    { id: "xl-61", label: "XL || 61" },
+    { id: "xxl-61", label: "XXL || 61" },
     { id: "xl-60", label: "XL || 60" },
     { id: "xl-59", label: "XL || 59" },
+    { id: "xl-58", label: "XL || 58" },
     { id: "l-57", label: "L || 57" },
     { id: "l-56", label: "L || 56" },
     { id: "l-55", label: "L || 55" },
@@ -20,5 +21,6 @@ const size = [
     { id: "xxs-46", label: "XXS || 46" },
     { id: "xxs-45", label: "XXS || 45" },
     { id: "xxs-44", label: "XXS || 44" },
-    ];
-export default size
+];
+
+export default size;

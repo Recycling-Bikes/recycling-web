@@ -1,4 +1,4 @@
-const  Subcategory = [
+const subcategory = [
     { id: "aero", label: "Aero" },
     { id: "crosscountry", label: "Cross country" },
     { id: "trail", label: "Trail" },
@@ -7,7 +7,7 @@ const  Subcategory = [
     { id: "endurance", label: "Endurance" },
     { id: "hibrida", label: "Hibrida" },
     { id: "viaje", label: "Viaje" },
-    { id: "crucero", label: "Crucero" }
-  ];
+    { id: "crucero", label: "Crucero" },
+];
 
-export default Subcategory
+export default subcategory;

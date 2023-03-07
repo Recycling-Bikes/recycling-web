@@ -6,7 +6,6 @@ const category = [
     { id: "bmx", label: "BMX" },
     { id: "ninos", label: "NIÑOS" },
     { id: "accesorios", label: "ACCESORIOS" },
-  ];
+];
 
-
-  export default category
+export default category;

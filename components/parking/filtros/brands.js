@@ -1,4 +1,4 @@
-const Brands = [
+const brands = [
     { id: "allied", label: "Allied" },
     { id: "bmc", label: "BMC" },
     { id: "cannondale", label: "Cannondale" },
@@ -23,4 +23,4 @@ const Brands = [
     { id: "yeti", label: "Yeti" },
 ];
 
-export default Brands
+export default brands;
