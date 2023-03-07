@@ -72,7 +72,7 @@ export default function Filtro() {
 
     return (
         <div className="separador">
-            <Accordion defaultActiveKey={["1", "9"]} flush alwaysOpen>
+            <Accordion defaultActiveKey={["1", "10"]} flush alwaysOpen>
                 {/* Start - País */}
                 <Accordion.Item eventKey="0">
                     <Accordion.Header className="py-0">
@@ -147,7 +147,7 @@ export default function Filtro() {
                 {/* End - Suspension */}
 
                 {/* Start - Frenos */}
-                <Accordion.Item eventKey="6">
+                <Accordion.Item eventKey="7">
                     <Accordion.Header>
                         <h5 className="fw-bolder fs-6">Frenos</h5>
                     </Accordion.Header>
@@ -156,7 +156,7 @@ export default function Filtro() {
                 {/* End - Frenos */}
 
                 {/* Start - Rines */}
-                <Accordion.Item eventKey="7">
+                <Accordion.Item eventKey="8">
                     <Accordion.Header>
                         <h5 className="fw-bolder fs-6">Rines</h5>
                     </Accordion.Header>
@@ -165,7 +165,7 @@ export default function Filtro() {
                 {/* End - Rines */}
 
                 {/* Start - Año */}
-                <Accordion.Item eventKey="8">
+                <Accordion.Item eventKey="9">
                     <Accordion.Header>
                         <h5 className="fw-bolder fs-6">Año</h5>
                     </Accordion.Header>
@@ -174,7 +174,7 @@ export default function Filtro() {
                 {/* End - Año */}
 
                 {/* Start - Precio */}
-                <Accordion.Item eventKey="9">
+                <Accordion.Item eventKey="10">
                     <Accordion.Header>
                         <h5 className="fw-bolder fs-6">Precio</h5>
                     </Accordion.Header>
