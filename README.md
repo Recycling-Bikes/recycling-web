@@ -1,4 +1,4 @@
-# Re-Cycling ING
+# Re-Cycling Bikes
 ## Flujo de Trabajo
 - Clickup (Tareas) -> Pensar en lo que se debe hacer -> 
 - -> Figma -> Trabajar en Interfaz -> Logica -> Checkeo | Verificar response.
