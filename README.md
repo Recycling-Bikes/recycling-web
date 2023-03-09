@@ -38,8 +38,8 @@ Si no puedes eliminar esta dependencia, puedes intentar agregar una configuraci√
 Luego, ejecuta el comando npm install nuevamente. Esto establecer√° la variable de entorno npm_config_platform en linux antes de instalar cualquier dependencia y puede ayudar a resolver el problema.
 
 ## Desarrollo
--Bajar proyecto
--Bajar variables de entorno
--Instalar dependencia "npm i"
--Inicar proyecto en desarrollo "npm run dev"
+- Bajar proyecto
+- Bajar variables de entorno
+- Instalar dependencia "npm i"
+- Inicar proyecto en desarrollo "npm run dev"
 
