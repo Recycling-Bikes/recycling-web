@@ -12,12 +12,38 @@ export default function GetBicis(props) {
   const parking = parkingState((state) => state.parking);
   const filters = filtersState((state) => state.filters);
 
-  const { isLoading, isError, error, data } = useQuery({
-    queryKey: ["productos"],
-    queryFn: setParking,
-  });
 
-  if (isLoading) {
+    const { isLoading, isError, error, data } = useQuery({
+        queryKey: ["productos"],
+        queryFn: setParking,
+    });
+
+    if (isLoading) {
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "90hv",
+                    textAlign: "center",
+                }}
+            >
+                <Spinner
+                    animation="border"
+                    variant="secondary"
+                    style={{
+                        width: "200px",
+                        height: "200px",
+                        fontSize: "90px",
+                    }}
+                />
+            </div>
+        );
+    }
+
+    // Resto del código para renderizar los resultados filtrados
+
     return (
       <div
         style={{
@@ -55,6 +81,7 @@ export default function GetBicis(props) {
           - Se cambió para checkear que la estructura de "data" es un array, antes de usar el método "map"
           - Resuelve un error
           */}
+
       {Array.isArray(data)
         ? filteredData(data, filters).map((bici) => (
             <Card className="p-0" key={bici.id}>
@@ -95,62 +122,79 @@ export default function GetBicis(props) {
   );
 }
 function filteredData(data, filters) {
-  return data.filter((datum) => {
-    let passesFilter = true;
+    return data.filter((datum) => {
+        let passesFilter = true;
 
-    if (filters.city?.length > 0 && !filters.city.includes(datum.city)) {
-      passesFilter = false;
-    }
+        if (
+            filters.country?.length > 0 &&
+            !filters.country.includes(datum.country)
+        ) {
+            passesFilter = false;
+        }
 
-    if (
-      filters.category?.length > 0 &&
-      !filters.category.includes(datum.category)
-    ) {
-      passesFilter = false;
-    }
+        if (
+            filters.category?.length > 0 &&
+            !filters.category.includes(datum.category)
+        ) {
+            passesFilter = false;
+        }
 
-    if (
-      filters.subcategory?.length > 0 &&
-      !filters.subcategory.includes(datum.subcategory)
-    ) {
-      passesFilter = false;
-    }
+        if (
+            filters.subcategory?.length > 0 &&
+            !filters.subcategory.includes(datum.subcategory)
+        ) {
+            passesFilter = false;
+        }
 
-    if (filters.size?.length > 0 && !filters.size.includes(datum.size)) {
-      passesFilter = false;
-    }
+        if (filters.size?.length > 0 && !filters.size.includes(datum.size)) {
+            passesFilter = false;
+        }
 
-    if (filters.brands?.length > 0 && !filters.brands.includes(datum.brand)) {
-      passesFilter = false;
-    }
+        if (
+            filters.brands?.length > 0 &&
+            !filters.brands.includes(datum.brand)
+        ) {
+            passesFilter = false;
+        }
 
-    if (
-      filters.materials?.length > 0 &&
-      !filters.materials.includes(datum.material)
-    ) {
-      passesFilter = false;
-    }
+        if (
+            filters.materials?.length > 0 &&
+            !filters.materials.includes(datum.material)
+        ) {
+            passesFilter = false;
+        }
 
-    if (filters.frenos?.length > 0 && !filters.frenos.includes(datum.frenos)) {
-      passesFilter = false;
-    }
+        if (
+            filters.suspension?.length > 0 &&
+            !filters.suspension.includes(datum.suspension)
+        ) {
+            passesFilter = false;
+        }
+        if (
+            filters.frenos?.length > 0 &&
+            !filters.frenos.includes(datum.frenos)
+        ) {
+            passesFilter = false;
+        }
 
-    if (filters?.rine?.length > 0 && !filters.rine.includes(datum.rine)) {
-      passesFilter = false;
-    }
+        if (filters?.rine?.length > 0 && !filters.rine.includes(datum.rine)) {
+            passesFilter = false;
+        }
 
-    if (filters.years?.length > 0 && !filters.years.includes(datum.year)) {
-      passesFilter = false;
-    }
+        if (filters.years?.length > 0 && !filters.years.includes(datum.year)) {
+            passesFilter = false;
+        }
 
-    if (filters?.minPrice !== null && datum.price < filters.minPrice) {
-      passesFilter = false;
-    }
+        if (filters?.minPrice !== null && datum.price < filters.minPrice) {
+            passesFilter = false;
+        }
 
-    if (filters?.maxPrice !== null && datum.price > filters.maxPrice) {
-      passesFilter = false;
-    }
+        if (filters?.maxPrice !== null && datum.price > filters.maxPrice) {
+            passesFilter = false;
+        }
 
-    return passesFilter;
-  });
+        return passesFilter;
+    });
+
+
 }

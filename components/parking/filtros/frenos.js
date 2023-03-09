@@ -1,8 +1,8 @@
-const Frenos = [
-    { id: "coaster", label: "Coaster" },
-    { id: "disco-hidraulico", label: "Disco - Hidráulico" },
-    { id: "disco-mecanico", label: "Disco - Mecánico" },
-    { id: "rin", label: "Rin" },
-  ];
 
-  export default Frenos
+const frenos = [
+    { id: "rim-brake", label: "Rim Brake", category: ["ruta"] },
+    { id: "freno-disco", label: "Freno de Disco", category: ["ruta"] },
+];
+
+export default frenos;
+
