@@ -102,8 +102,10 @@ export const getData = async (name = null, parameters = "*") => {
       sizes: await getDatum("sizes", parameters),
       materials: await getDatum("materials", parameters),
       conditions: await getDatum("conditions", parameters),
+      category: await getDatum("category", parameters),
+      years: await getDatum("year", parameters)
     };
-  }
+  } 
 
   return data;
 };
