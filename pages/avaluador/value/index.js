@@ -10,25 +10,32 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 import { userState } from "context/User/UserState";
 import { useRouter } from "next/router";
 import PopLogin from "./modal";
+import Condition from "yup/lib/Condition";
+import { avaluadorState } from "context/Avaluador/avaluadorState";
+import ModalCondition from "./modalcondition";
 
 export default function Value() {
-
-  const [hydration, setHydration]= useState(true)
-  const { off, price, imageUrl, ...cardSelected } = avaluadorSelect((state) => state.cardSelected);
+  const [hydration, setHydration] = useState(true);
+  const { nameCondition, off, price, imageUrl, ...cardSelected } =
+    avaluadorSelect((state) => state.cardSelected);
 
   useEffect(() => {
     console.log(cardSelected);
-  },[]);
+  }, []);
 
   const [modalShow, setModalShow] = useState(false);
 
   const confirmUser = userState((state) => state.confirmUser);
   const router = useRouter();
 
+  const [popCondition, setPopCondition] = useState(false);
+
+
+
   const Valued = (valueA, valueB) => {
-    const devalueA = parseInt(off) + valueA;
+    const devalueA = parseInt(off ?? 0) + valueA;
     const priceA = (price - price * (devalueA / 100)).toLocaleString("en");
-    const devalueB = parseInt(off) + valueB;
+    const devalueB = parseInt(off ?? 0) + valueB;
     const priceB = (price - price * (devalueB / 100)).toLocaleString("en");
     return `$${priceA} - $${priceB}`;
   };
@@ -40,16 +47,24 @@ export default function Value() {
   };
 
   useEffect(() => {
-    setHydration(false)
-  },[])
+    setHydration(false);
+  }, []);
 
-  return hydration ? "" : (
+  return hydration ? (
+    ""
+  ) : (
     <Contenedor>
       <Container className="justify-content-center my-5">
         <Row className="justify-content-center">
           <Col sm={100} md={6} lg={5} className="justify-content-center">
             <Container>
-              <Image src={imageUrl} width={500} height={400} alt="" className="img-fluid" />
+              <Image
+                src={imageUrl}
+                width={500}
+                height={400}
+                alt=""
+                className="img-fluid"
+              />
             </Container>
           </Col>
           <Col md="auto" className="d-flex d-md-block justify-content-center">
@@ -78,19 +93,22 @@ export default function Value() {
                 </Col>
                 <Col className="d-flex flex-column">
                   <p className="my-0">Si estuviera nueva</p>
-                  <h5>${(price)?.toLocaleString("en")}</h5>
+                  <h5>${price?.toLocaleString("en")}</h5>
                 </Col>
               </Row>
               <Row
                 sm="auto"
                 className=" mb-2 ps-2"
                 style={{ color: "rgba(15, 168, 153, 1)" }}
+                onClick={() => {
+                  setPopCondition(true)
+                }}
               >
                 <Col className="d-flex col-auto pe-0 align-items-center">
                   <BsPencilSquare size={14} />
                 </Col>
                 <Col className="d-flex ps-1 flex-column">
-                  Condición Aceptable
+                  Condición {nameCondition ?? Excelente}
                 </Col>
               </Row>
             </div>
@@ -121,8 +139,13 @@ export default function Value() {
             </Button>
           </div>
         </div>
+        <ModalCondition modalShow={popCondition} setModalShow={setPopCondition} />
 
-        <PopLogin show={modalShow} onHide={() => setModalShow(false)} setModalShow={setModalShow} />
+        <PopLogin
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          setModalShow={setModalShow}
+        />
       </Container>
 
       <div className="d-none d-lg-block" style={{ height: "10rem" }} />

@@ -73,11 +73,20 @@ export const parkingState = create(
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bicis").select(`
     id,price,title,
-    models (name)`);
+    models (name), filesUrl, propiedades (transmission,
+      category ,
+      subcategory ,
+      brand, 
+      material ,
+      suspension ,
+      freno,
+      rine), size, country, year`);
   console.log(error);
   console.log(bicis);
   return error ? error : await bicis;
 };
+
+
 
 const getBici = async (id) => {
   const { data: bicis, error } = id

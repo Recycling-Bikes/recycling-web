@@ -3,12 +3,14 @@ import { avaluadorState } from "context/Avaluador/avaluadorState";
 import { useRouter } from "next/router";
 import { Button, Col, Form, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import {useEffect} from "react"
 
-export default function Pop(props) {
+export default function ModalCondition(props) {
 
     const router = useRouter()
     const conditions = avaluadorState((state) => state.conditions);
     const setCardSelected = avaluadorSelect((state) => state.setCardSelected);
+    const setConditions = avaluadorState((state) => state.setConditions);
   
     const {
       handleSubmit,
@@ -21,16 +23,22 @@ export default function Pop(props) {
     const onSubmit = (data) => {
 
       const datum =conditions.filter(condition => condition.id == data.nameCondition)[0]
-      console.log(datum);
+
       setCardSelected({nameCondition: datum.name, off: datum.off})
       
-      
-      router.push("./value")
+      props.setModalShow(false)
     };
+
+    useEffect(() => {
+      if (conditions.length === 0) {
+        setConditions();
+      }
+    }, []);
   
     return (
       <Modal
-        {...props}
+        show={props.modalShow} 
+        onHide={() => props.setModalShow(false)}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered

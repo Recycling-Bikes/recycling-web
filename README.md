@@ -1,4 +1,4 @@
-# Re-Cycling PTY
+# Re-Cycling Bikes
 ## Flujo de Trabajo
 - Clickup (Tareas) -> Pensar en lo que se debe hacer -> 
 - -> Figma -> Trabajar en Interfaz -> Logica -> Checkeo | Verificar response.
@@ -36,3 +36,10 @@ Si no puedes eliminar esta dependencia, puedes intentar agregar una configuraci√
 "preinstall": "SET npm_config_platform=linux"
 
 Luego, ejecuta el comando npm install nuevamente. Esto establecer√° la variable de entorno npm_config_platform en linux antes de instalar cualquier dependencia y puede ayudar a resolver el problema.
+
+## Desarrollo
+- Bajar proyecto
+- Bajar variables de entorno
+- Instalar dependencia "npm i"
+- Inicar proyecto en desarrollo "npm run dev"
+

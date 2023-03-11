@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+
 export const filtersState = create((set, get) => ({
     filters: {
         country: [],
@@ -21,3 +22,4 @@ export const filtersState = create((set, get) => ({
         set((state) => ({ filters: { ...data } }));
     },
 }));
+
