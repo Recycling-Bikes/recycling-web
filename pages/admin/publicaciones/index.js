@@ -61,13 +61,13 @@ export default function Publicaciones() {
               prepareRow(row);
               return (
                 // Añadimos las propiedades a la fila
-                <tr {...row.getRowProps()}>
+                <tr key={row.id} {...row.getRowProps()}>
                   {
                     // Recorremos cada celda de la fila
                     row.cells.map((cell) => {
                       // Añadimos las propiedades a cada celda de la fila
                       return (
-                        <td {...cell.getCellProps()}>
+                        <td key={cell.value} {...cell.getCellProps()}>
                           {
                             // Pintamos el contenido de la celda
                             cell.render("Cell")
