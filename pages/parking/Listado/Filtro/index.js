@@ -148,7 +148,7 @@ export default function Filtro() {
           <Accordion.Header>
             <h5 className="fw-bolder fs-6">Rines</h5>
           </Accordion.Header>
-          <Accordion.Body>{Iters(rines, "rine")}</Accordion.Body>
+          <Accordion.Body>{Iters(rines, "rines")}</Accordion.Body>
         </Accordion.Item>
         {/* End - Rines */}
 

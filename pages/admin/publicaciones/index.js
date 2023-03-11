@@ -4,7 +4,11 @@ import { Form } from "react-bootstrap";
 
 
 import { useTable, useSortBy } from "react-table";
+
+
 export default function Publicaciones() {
+  //FIXME: key errors pages admin
+  return ""
   const columns = useColumns();
   const data = useRows();
   const table = useTable({ columns, data }, useSortBy);

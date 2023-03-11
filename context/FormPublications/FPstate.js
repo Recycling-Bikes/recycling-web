@@ -153,7 +153,7 @@ const postBici = async ({
   const res = await supabase.from("bicis").insert([
     {
       condition: conditions,
-      year: 2,
+      year,
       model,
       size,
       title,
