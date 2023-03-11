@@ -1,6 +1,6 @@
 import { supabase } from "supabase/client";
 import { v4 } from "uuid";
-import {create} from "zustand";
+import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
@@ -87,13 +87,11 @@ const getDatum = async (name, parameters = "*") => {
 
 export const getData = async (name = null, parameters = "*") => {
   let data = {};
-  
+
   if (name !== null) {
     data[name] = await getDatum(name, parameters);
 
-    return await data
-    
-    
+    return await data;
   } else {
     data = {
       brands: await getDatum("brands", parameters),
@@ -103,9 +101,9 @@ export const getData = async (name = null, parameters = "*") => {
       materials: await getDatum("materials", parameters),
       conditions: await getDatum("conditions", parameters),
       category: await getDatum("category", parameters),
-      years: await getDatum("year", parameters)
+      years: await getDatum("years", parameters),
     };
-  } 
+  }
 
   return data;
 };
@@ -125,29 +123,46 @@ export const postImages = async (files, userID) => {
 };
 
 const postBici = async ({
-  condition,
+  conditions,
   year,
   model,
-  brands,
+  category,
+  brand,
   size,
-  materials,
+  material,
   transmission,
   title,
   description,
   price,
   filesUrl,
+  user_id
 }) => {
+  const propsres = await supabase.from("propiedades").insert([
+    {
+      transmission,
+      category,
+      subcategory: 3,
+      brand, 
+      material,
+      suspension: 1,
+      freno: 2,
+      rine: 3,
+    },
+  ]).select("*");;
+
   const res = await supabase.from("bicis").insert([
     {
-      condition,
-      year,
+      condition: conditions,
+      year: 2,
       model,
       size,
-      transmission,
       title,
       description,
       price,
       filesUrl,
+      user_id,
+      country: 1,
+      propiedades: propsres.data[0].id
     },
   ]);
 

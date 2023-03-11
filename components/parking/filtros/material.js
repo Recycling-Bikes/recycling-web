@@ -1,9 +1,9 @@
 const materials = [
-    { id: "aluminio", label: "Aluminio", category: [], all: true },
-    { id: "carbon", label: "Carbón", category: [], all: true },
-    { id: "titanio", label: "Titanio", category: [], all: true },
-    { id: "cromoldy", label: "Cromoldy", category: [], all: true },
-    { id: "acero", label: "Acero", category: [], all: true },
+    { id: 1, label: "Aluminio", category: [], all: true },
+    { id: 2, label: "Carbón", category: [], all: true },
+    { id: 3, label: "Titanio", category: [], all: true },
+    { id: 4, label: "Cromoldy", category: [], all: true },
+    { id: 5, label: "Acero", category: [], all: true },
 ];
 
 export default materials;

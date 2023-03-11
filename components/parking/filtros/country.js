@@ -1,7 +1,7 @@
 const country = [
-    { id: "panama", label: "Panamá", category: [] },
-    { id: "costa-rica", label: "Costa Rica", category: [] },
-    { id: "guatemala", label: "Guatemala", category: [] },
+  { id: 1, label: "Panamá", category: [] },
+  { id: 2, label: "Costa Rica", category: [] },
+  { id: 3, label: "Guatemala", category: [] },
 ];
 
 export default country;

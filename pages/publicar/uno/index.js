@@ -147,9 +147,7 @@ export default function PartUno() {
                     /* value={values.year} */
                   >
                     <option value="">Selecciona un año</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
+                    {selectList(form?.years)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.year?.message}

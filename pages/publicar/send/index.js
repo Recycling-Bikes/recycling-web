@@ -45,6 +45,8 @@ export default function Partdos() {
     shallow
   );
 
+  const [button, setButton] = useState(false)
+
   const { setPublication, setForm, UpdateImages, clearAll, postPublication } =
     FPState();
 
@@ -52,7 +54,8 @@ export default function Partdos() {
     if (!form.brands || !form.models) {
       setForm();
     }
-  });
+    console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ publication:", publication)
+  },[]);
 
   const {
     handleSubmit,
@@ -66,16 +69,23 @@ export default function Partdos() {
   });
 
   const onSubmit = async (items) => {
+
+    setButton(true)
     const filesUrl = await UpdateImages(items.files, user.id);
 
     items = {
+      
       ...items,
       filesUrl,
+      user_id: user.id
     };
+    console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ items:", items)
+    
 
     await setPublication(items);
 
-    await postPublication(items);
+   let res = await postPublication(items);
+    console.log(res)
 
     await clearAll();
 
@@ -150,7 +160,7 @@ export default function Partdos() {
                     Atrás
                   </Link>
 
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" type="submit" disabled={button}>
                     Guardar
                   </Button>
                 </div>
