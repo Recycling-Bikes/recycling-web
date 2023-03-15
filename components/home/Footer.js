@@ -136,7 +136,7 @@ const Footer = (props) => {
                                             </p>
                                             <p>
                                                 <Link
-                                                    href="https://www.google.com/maps/dir//recycling+PTY/@2.9069104,-78.839756,5z/data=!4m8!4m7!1m0!1m5!1m1!1s0x8faca7cbe870317b:0xd9b358867bc19d5!2m2!1d-79.5692743!2d8.9810987"
+                                                    href="https://goo.gl/maps/R9pZyU568yBsnzcc7"
                                                     target="_blank"
                                                     className="text-reset"
                                                 >
