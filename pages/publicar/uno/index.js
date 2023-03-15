@@ -18,6 +18,7 @@ const schema = yup.object().shape({
   category: yup.string().required("La categoría es requerida"),
   model: yup.string().required("El modelo es requerido"),
   brand: yup.string().required("La marca es requerida"),
+  
 });
 
 export default function PartUno() {
@@ -39,6 +40,8 @@ export default function PartUno() {
     register,
     setError,
     control,
+    watch,
+    getValues,
 
     formState: { isValid, errors },
   } = useForm({
@@ -50,13 +53,15 @@ export default function PartUno() {
     if (!(form.brands || form.models)) {
       setForm();
     }
-  }, []);
+  });
 
   useEffect(() => {
     setHydrated(false);
   }, []);
 
   const onSubmit = (items) => {
+    /* console.log(items)
+ */
     setPublication(items);
     router.push("./two");
   };

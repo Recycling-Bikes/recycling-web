@@ -18,6 +18,7 @@ const schema = yup.object().shape({
   material: yup.string().required("El año es requerido"),
   size: yup.string().required("El modelo es requerido"),
   transmission: yup.string().required("La marca es requerida"),
+  other: yup.string().min(3, "Debe tener mínimo tres caracteres"),
 });
 
 export default function Partdos() {
@@ -38,6 +39,7 @@ export default function Partdos() {
     (state) => [state.setPublication, state.setForm],
     shallow
   );
+/* TODO: Coloque unas cosas de forma temporal mientras se hacen las demás paginas  */
 
   const {
     handleSubmit,
@@ -58,7 +60,17 @@ export default function Partdos() {
   });
 
   const onSubmit = (items) => {
-    console.log();
+    if (publication.model !== "1") {
+      model =
+        form.models.find((model) => {
+          model?.id === items?.model;
+        })
+
+      items["other"] = model?.name ?? "error model"
+
+      items["subcategory"] = model?.subcategory ?? "error model"
+    }
+
     setPublication(items);
     router.push("./tres");
   };
@@ -82,7 +94,46 @@ export default function Partdos() {
           <Col md="8" xl="6">
             <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
               <Progres2 />
+
               <div className="my-5">
+                {publication.model === "1" ? (
+                  <Form.Group className="mb-3" controlId="model">
+                    <Form.Label>
+                      Name Model <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Control
+                      isInvalid={!!errors?.other}
+                      /* value={values.model} */
+                      {...register("other")}
+                    ></Form.Control>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.other?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
+
+                {publication.model === "1" ? (
+                  <Form.Group className="mb-3" controlId="subcategory">
+                    <Form.Label>
+                      Subcategoria <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Select
+                      isInvalid={!!errors.subcategory}
+                      {...register("subcategory")}
+                    >
+                      <option value="">Selecciona una talla</option>
+                      {selectList(form?.subcategory)}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.subcategory?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
+                
                 {/* Talla */}
                 <Form.Group className="mb-3" controlId="size">
                   <Form.Label>
@@ -90,7 +141,7 @@ export default function Partdos() {
                   </Form.Label>
                   <Form.Select isInvalid={!!errors.size} {...register("size")}>
                     <option value="">Selecciona una talla</option>
-                    {selectList(form.sizes)}
+                    {selectList(form?.sizes)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors?.size?.message}
@@ -129,6 +180,50 @@ export default function Partdos() {
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors?.transmission?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* Rin */}
+                <Form.Group className="mb-3" controlId="rin">
+                  <Form.Label>Rin</Form.Label>
+                  <Form.Select
+                    isInvalid={errors?.transmission}
+                    {...register("rin")}
+                  >
+                    <option value="">Selecciona un rin</option>
+                    {selectList(form?.rines)}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    {errors?.rin?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* freno */}
+                <Form.Group className="mb-3" controlId="freno">
+                  <Form.Label>freno</Form.Label>
+                  <Form.Select isInvalid={errors?.freno} {...register("freno")}>
+                    <option value="">Selecciona un freno</option>
+                    {selectList(form?.frenos)}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    {errors?.freno?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* suspension */}
+                <Form.Group className="mb-3" controlId="suspension">
+                  <Form.Label>
+                    Suspension
+                  </Form.Label>
+                  <Form.Select
+                    isInvalid={errors?.suspension}
+                    {...register("suspension")}
+                  >
+                    <option value="">Selecciona una Suspension</option>
+                    {selectList(form?.suspensions)}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    {errors?.suspension?.message}
                   </Form.Control.Feedback>
                 </Form.Group>
 

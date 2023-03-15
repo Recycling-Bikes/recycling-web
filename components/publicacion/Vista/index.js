@@ -8,11 +8,13 @@ import Image from "next/image";
 import { parkingState } from "context/Parking/ParkingState";
 
 export default function Vista() {
-  const [bici, CDN] = parkingState((state) => [state.bici, state.CDN]);
+  const [bici, CDN2] = parkingState((state) => [state.bici, state.CDN2]);
+
+  const CDN = "https://yrdmpvdxobghopvoevsg.supabase.co/storage/v1/object/public/imagesbicis/"
 
   useEffect(() => {
     console.log(bici.filesUrl.map((link) => (CDN +link)))
-  });
+  },[bici.filesUrl]);
 
   const [primaryVista, setPrimaryVista] = useState(
     bici.filesUrl.length === 0 ? [] : bici.filesUrl[0]

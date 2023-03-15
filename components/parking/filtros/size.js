@@ -1,10 +1,13 @@
 const size = [
-    { id: 33, label: "XXL", category: ["mtb"], all: true },
+    { id: 33, label: "XXS  (46, 45, 44cm)", category: ["mtb"], all: true },
+    { id: 28, label: "XS (46, 45, 44cm)", category: ["mtb"], all: true },
+    { id: 29, label: "S (46, 45, 44cm)", category: ["mtb"], all: true },
+    { id: 30, label: "M (46, 45, 44cm)", category: ["mtb"], all: true },
     { id: 32, label: "XL", category: ["mtb"], all: true },
     { id: 31, label: "L", category: ["mtb"], all: true },
-    { id: 30, label: "M", category: ["mtb"], all: true },
-    { id: 29, label: "S", category: ["mtb"], all: true },
-    { id: 28, label: "XS", category: ["mtb"], all: true },
+    
+    
+
     { id: 27, label: "XXS", category: ["mtb"], all: true },
     { id: 26, label: "64", category: [], all: true },
     { id: 25, label: "63", category: [], all: true },
