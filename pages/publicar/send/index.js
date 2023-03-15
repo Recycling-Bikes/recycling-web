@@ -20,7 +20,6 @@ import shallow from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FPState } from "context/FormPublications/FPstate";
-import { DevTool } from "@hookform/devtools";
 
 import { userState } from "context/User/UserState";
 import InputFile2 from "components/Custom/InputFile/inputFile2";

@@ -57,7 +57,7 @@ export const parkingState = create(
           get().clearBici();
         },
 
-        CDN: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
+        CDN2: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
       }),
       { name: "ParkingData" }
     ),

@@ -102,6 +102,11 @@ export const getData = async (name = null, parameters = "*") => {
       conditions: await getDatum("conditions", parameters),
       category: await getDatum("category", parameters),
       years: await getDatum("years", parameters),
+      frenos: await getDatum("frenos", parameters),
+      subcategory: await getDatum("subcategory", parameters),
+      rines: await getDatum("rines", parameters),
+      country: await getDatum("country", parameters),
+      suspensions: await getDatum("suspension", parameters),
     };
   }
 
@@ -133,7 +138,12 @@ const postBici = async ({
   transmission,
   title,
   description,
+  other,
+  suspension,
+  freno,
+  rin,
   price,
+  subcategory,
   filesUrl,
   user_id
 }) => {
@@ -141,14 +151,17 @@ const postBici = async ({
     {
       transmission,
       category,
-      subcategory: 3,
+      subcategory,
+      model: other, 
       brand, 
       material,
-      suspension: 1,
-      freno: 2,
-      rine: 3,
+      suspension,
+      freno,
+      rine: rin,
     },
   ]).select("*");;
+
+  console.log(propsres)
 
   const res = await supabase.from("bicis").insert([
     {
@@ -162,7 +175,7 @@ const postBici = async ({
       filesUrl,
       user_id,
       country: 1,
-      propiedades: propsres.data[0].id
+      propiedades: propsres?.data[0]?.id ?? 12
     },
   ]);
 

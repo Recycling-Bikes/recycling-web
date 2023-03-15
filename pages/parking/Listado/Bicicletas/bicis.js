@@ -6,7 +6,7 @@ import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
 
 export default function GetBicis(props) {
-  const CDN = parkingState((state) => state.CDN);
+  const CDN = "https://yrdmpvdxobghopvoevsg.supabase.co/storage/v1/object/public/imagesbicis/"/* parkingState((state) => state.CDN2); */
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
   const filters = filtersState((state) => state.filters);
