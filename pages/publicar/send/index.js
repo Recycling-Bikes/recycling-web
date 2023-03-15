@@ -83,10 +83,11 @@ export default function Partdos() {
 
     await setPublication(items);
 
-   let res = await postPublication(items);
-    console.log(res)
+   await postPublication(items);
 
     await clearAll();
+
+    setButton(false)
 
     router.push("/parking");
   };

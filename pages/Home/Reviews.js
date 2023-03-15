@@ -17,7 +17,7 @@ import Link from "next/link";
 
 const google = {
     platform: "Google Reviews",
-    link: "https://www.google.com/search?q=recycling+pty+reviews&sxsrf=AJOqlzXcDs1l6ISn8olyOBEe-UO3XdTSlA%3A1676638734699&ei=DnrvY-KpKuSo1sQPw5a7wAY&oq=recycling+PTY+re&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAxgBMgQIIxAnMgQIIxAnMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDIGCAAQFhAeMgYIABAWEB4yCQgAEBYQHhDxBDIJCAAQFhAeEPEEMgkIABAWEB4Q8QQyCQgAEBYQHhDxBDoKCAAQRxDWBBCwAzoKCAAQ8QQQHhCiBDoFCAAQogQ6CAgAEIAEEMsBOgYIIxAnEBM6CwgAEIAEELEDEIMBOgUIABCABEoECEEYAFCaA1iBTGDMVWgDcAF4AYAB8gSIAeAhkgEJMi01LjUuMi4xmAEAoAEByAEHwAEB&sclient=gws-wiz-serp#lrd=0x8faca7cbe870317b:0xd9b358867bc19d5,1,,,,",
+    link: "https://goo.gl/maps/R9pZyU568yBsnzcc7",
 };
 
 const reviews = [
