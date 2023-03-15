@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, {useState} from "react";
 import Contenedor from "components/home/Contenedor";
 import {
   Row,
@@ -18,9 +18,23 @@ import Image from "next/image";
 import { BsHandbag, BsPencilSquare, BsTag } from "react-icons/bs";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 import { useRouter } from "next/router";
+import PopLogin from "./modal";
+import { userState } from "context/User/UserState";
 
 export default function Avaluador() {
+
+  const [ModalShow, setModalShow]= useState(false)
   const router = useRouter();
+
+  const confirmUser = userState((state) => state.confirmUser);
+
+  const userStatus = async () => {
+    const { user } = await confirmUser();
+
+    user ? router.push("./send") : setModalShow(true);
+  };
+
+
   return (
     <Contenedor>
       <div className="py-3 my-md-0">
@@ -137,8 +151,9 @@ export default function Avaluador() {
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
               </Link>
-              <Link href={"./send"}>
+
                 <Button
+                onClick={userStatus}
                   variant="primary"
                   style={{
                     backgroundColor: "rgba(111, 66, 193, 1)",
@@ -148,7 +163,7 @@ export default function Avaluador() {
                 >
                   <BsHandbag size={16} /> Publícala en Marketplace
                 </Button>
-              </Link>
+
             </div>
           </div>
 
@@ -163,7 +178,7 @@ export default function Avaluador() {
             </Button>
 
             <Button
-              onClick={() => router.push("./send")}
+              onClick={userStatus}
               variant="primary"
               style={{
                 backgroundColor: "rgba(111, 66, 193, 1)",
@@ -186,6 +201,11 @@ export default function Avaluador() {
         </Container>
 
         <div className="d-none d-lg-block" style={{ height: "10rem" }} />
+        <PopLogin
+          ModalShow={ModalShow}
+          setModalShow={setModalShow}
+          router={"./send"}
+        />
       </div>
     </Contenedor>
   );
