@@ -29,10 +29,7 @@ function Presentation() {
                         <Button
                             className=""
                             variant="primary"
-                            onClick={() => {
-                                localStorage.removeItem("items");
-                                router.push("/publicar/uno");
-                            }}
+                            onClick={() => router.push("/publicar/uno")}
                         >
                             Vender bici ahora
                         </Button>
