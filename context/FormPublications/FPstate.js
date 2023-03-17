@@ -147,6 +147,8 @@ const postBici = async ({
   filesUrl,
   user_id
 }) => {
+
+
   const propsres = await supabase.from("propiedades").insert([
     {
       transmission,
@@ -155,13 +157,11 @@ const postBici = async ({
       model: other, 
       brand, 
       material,
-      suspension,
-      freno,
-      rine: rin,
+      suspension: suspension? suspension : null,
+      freno: freno ? freno : null,
+      rine: rin ? rin : null ,
     },
   ]).select("*");;
-
-  console.log(propsres)
 
   const res = await supabase.from("bicis").insert([
     {
@@ -175,7 +175,7 @@ const postBici = async ({
       filesUrl,
       user_id,
       country: 1,
-      propiedades: propsres?.data[0]?.id ?? 12
+      propiedades: propsres?.data[0]?.id ?? 8
     },
   ]);
 

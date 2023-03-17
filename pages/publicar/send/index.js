@@ -44,7 +44,7 @@ export default function Partdos() {
     shallow
   );
 
-  const [button, setButton] = useState(false)
+  const [button, setButton] = useState(false);
 
   const { setPublication, setForm, UpdateImages, clearAll, postPublication } =
     FPState();
@@ -53,8 +53,11 @@ export default function Partdos() {
     if (!form.brands || !form.models) {
       setForm();
     }
-    console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ publication:", publication)
-  },[]);
+    console.log(
+      "🚀 ~ file: index.js:77 ~ onSubmit ~ publication:",
+      publication
+    );
+  }, []);
 
   const {
     handleSubmit,
@@ -68,28 +71,29 @@ export default function Partdos() {
   });
 
   const onSubmit = async (items) => {
+    setButton(true);
+    try {
+      const filesUrl = await UpdateImages(items.files, user.id);
 
-    setButton(true)
-    const filesUrl = await UpdateImages(items.files, user.id);
+      items = {
+        ...items,
+        filesUrl,
+        user_id: user.id,
+      };
+      console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ items:", items);
 
-    items = {
-      
-      ...items,
-      filesUrl,
-      user_id: user.id
-    };
-    console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ items:", items)
-    
+      await setPublication(items);
 
-    await setPublication(items);
+      await postPublication(items);
 
-   await postPublication(items);
+      await clearAll();
 
-    await clearAll();
+      router.push("/parking");
+    } catch (err) {
+      setError("general", err);
+    }
 
-    setButton(false)
-
-    router.push("/parking");
+    setButton(false);
   };
 
   return (
