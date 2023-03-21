@@ -12,13 +12,15 @@ export const filtersState = create((set, get) => ({
         materials: [],
         suspension: [],
         frenos: [],
-        rine: [],
+        rines: [],
         years: [],
         minPrice: 0,
         maxPrice: Infinity,
     },
 
-    setFilters: (data) => {
+    setFilters: (fn) => {
+
+        const data = fn(get().filters);
         set((state) => ({ filters: { ...data } }));
     },
 }));

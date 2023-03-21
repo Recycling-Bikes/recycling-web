@@ -17,48 +17,43 @@ import { filtersState } from "context/Filters/filtersState";
 export default function Filtro() {
   const setFilters = filtersState((state) => state.setFilters);
 
-  const [selectedFilters, setSelectedFilters] = useState({
-    country: [],
-    category: [],
-    subcategory: [],
-    size: [],
-    brands: [],
-    materials: [],
-    suspension: [],
-    frenos: [],
-    rines: [],
-    years: [],
-    minPrice: null,
-    maxPrice: null,
-  });
-
   const Iters = (data, category) => {
+    const { filters } = filtersState();
+  
     return (
       <>
         {data.map((option, index) => {
-          return (
-            <Form.Check
-              key={index}
-              type={"checkbox"}
-              id={option.id + "-checkbox-" + category}
-              label={option.label}
-              value={option.id}
-              onChange={(e) => {
-                setSelectedFilters((prevFilters) => {
-                  let filters = { ...prevFilters };
-                  if (e.target.checked) {
-                    filters[category] = [...filters[category], option.id];
-                  } else {
-                    filters[category] = filters[category].filter(
-                      (filter) => filter !== option.id
-                    );
-                  }
-                  setFilters(filters);
-                  return filters;
-                });
-              }}
-            />
-          );
+          // Verificar si la opción pertenece a la categoría seleccionada
+          if (
+            filters.category.length === 0 ||
+            option?.category?.some((c) => filters.category.includes(c)) ||
+            option.all
+          ) {
+            return (
+              <Form.Check
+                key={index}
+                type={"checkbox"}
+                id={option.id + "-checkbox-" + category}
+                label={option.label}
+                value={option.id}
+                onChange={(e) => {
+                  setFilters((prevFilters) => {
+                    let filters = { ...prevFilters };
+                    if (e.target.checked) {
+                      filters[category] = [...filters[category], option.id];
+                    } else {
+                      filters[category] = filters[category].filter(
+                        (filter) => filter !== option.id
+                      );
+                    }
+                    return filters;
+                  });
+                }}
+              />
+            );
+          } else {
+            return null; // Omitir la opción si no pertenece a la categoría seleccionada
+          }
         })}
       </>
     );
@@ -182,12 +177,9 @@ export default function Filtro() {
                       minPrice = parseInt(e.target.value);
                     }
 
-                    setSelectedFilters((prevFilters) => {
-                      setFilters({ minPrice: minPrice });
-                      return {
-                        ...prevFilters,
-                        minPrice: minPrice,
-                      };
+                    setFilters((prevFilters) => {
+                      
+                      return {minPrice: minPrice,};
                     });
                   }}
                 />
@@ -203,7 +195,7 @@ export default function Filtro() {
                   type="number"
                   placeholder="$ 0.00"
                   onChange={(e) =>
-                    setSelectedFilters((prevFilters) => {
+                    setFilters((prevFilters) => {
                       let maxPrice;
                       if (e.target.value === "") {
                         maxPrice = Infinity;
@@ -211,8 +203,7 @@ export default function Filtro() {
                         maxPrice = parseInt(e.target.value);
                       }
 
-                      setFilters({ maxPrice: maxPrice });
-                      return { ...prevFilters, maxPrice };
+                      return { maxPrice };
                     })
                   }
                 />

@@ -10,6 +10,7 @@ export function Mountain() {
     const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
+        
         setQuest(event);
 
         const salida = questions.find((datum) => {

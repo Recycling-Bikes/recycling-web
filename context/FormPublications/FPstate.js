@@ -153,7 +153,7 @@ const postBici = async ({
     {
       transmission,
       category,
-      subcategory,
+      subcategory: subcategory? subcategory : null,
       model: other, 
       brand, 
       material,
