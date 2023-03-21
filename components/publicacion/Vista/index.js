@@ -12,12 +12,8 @@ export default function Vista() {
 
   const CDN = "https://yrdmpvdxobghopvoevsg.supabase.co/storage/v1/object/public/imagesbicis/"
 
-  useEffect(() => {
-    console.log(bici.filesUrl.map((link) => (CDN +link)))
-  },[bici.filesUrl]);
-
   const [primaryVista, setPrimaryVista] = useState(
-    bici.filesUrl.length === 0 ? [] : bici.filesUrl[0]
+    bici?.filesUrl[0] ? bici?.filesUrl[0] :"https://via.placeholder.com/500x500" 
   );
 
   return (
@@ -45,7 +41,7 @@ export default function Vista() {
         </Col>
         <Col className="d-none d-lg-block" style={{height: "620px"}}>
 
-            <Image src={CDN + primaryVista} height={500} width={500} style={{
+            <Image src={CDN + primaryVista} height={500} width={500} alt="" style={{
               maxHeight: "600px"
             }}  className="img-fluid p-0" />
 

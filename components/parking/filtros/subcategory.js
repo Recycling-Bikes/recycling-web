@@ -1,14 +1,14 @@
 
 const subcategory = [
-    { id: 1, label: "Aero", category: ["ruta"] },
-    { id: 2, label: "Cross country", category: ["mtb"] },
-    { id: 3, label: "Trail", category: ["mtb"] },
-    { id: 4, label: "Down Hill", category: ["mtb"] },
-    { id: 5, label: "Escaladora", category: ["ruta"] },
-    { id: 6, label: "Endurance", category: ["ruta"] },
-    { id: 7, label: "Hibrida", category: ["urbana"] },
-    { id: 8, label: "Viaje", category: ["urbana"] },
-    { id: 9, label: "Crucero", category: ["urbana"] },
+    { id: 1, label: "Aero", category: [2] },
+    { id: 2, label: "Cross country", category: [1] },
+    { id: 3, label: "Trail", category: [1] },
+    { id: 4, label: "Down Hill", category: [1] },
+    { id: 5, label: "Escaladora", category: [2] },
+    { id: 6, label: "Endurance", category: [2] },
+    { id: 7, label: "Hibrida", category: [3] },
+    { id: 8, label: "Viaje", category: [3] },
+    { id: 9, label: "Crucero", category: [3] },
 ];
 
 export default subcategory;

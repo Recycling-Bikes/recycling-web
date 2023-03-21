@@ -72,15 +72,15 @@ export const parkingState = create(
 
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bicis").select(`
-    id,price,title,
-    models (name), filesUrl, propiedades (transmission,
-      category ,
-      subcategory ,
-      brand, 
-      material ,
-      suspension ,
-      freno,
-      rine), size, country, year`);
+  id,price,title,
+  models (name), filesUrl, propiedades (transmission,
+  category ,
+  subcategory ,
+  brand, 
+  material ,
+  suspension ,
+  freno,
+  rine), size, country, year`);
   console.log(error);
   console.log(bicis);
   return error ? error : await bicis;
@@ -89,11 +89,21 @@ const getBicis = async () => {
 
 
 const getBici = async (id) => {
+  console.log("🚀 ~ file: ParkingState.js:92 ~ getBici ~ id:", id)
   const { data: bicis, error } = id
     ? await supabase
         .from("bicis")
-        .select(
-          "id, price, title , filesUrl , models (name), size (name), conditions (name)"
+        .select(`
+        id,price,title,
+          models (name), filesUrl, propiedades (transmission (name),
+          category (name) ,
+          subcategory (name) ,
+          brands (name), 
+          materials (name),
+          model,
+          suspension (name) ,
+          frenos (name),
+          rines (name)), size (name), country (name), year  (name)`
         )
         .eq("id", id)
     : { error: { message: "id = undefined" }, bicis: [] };

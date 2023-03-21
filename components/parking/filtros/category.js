@@ -1,11 +1,11 @@
 const category = [
-    { id: 1, label: "MTB" },
-    { id: 2, label: "RUTA" },
-    { id: 3, label: "URBANA" },
-    { id: 4, label: "GRAVEL" },
-    { id: 5, label: "BMX" },
-    { id: 6, label: "NIÑOS" },
-    { id: 7, label: "ACCESORIOS" },
+    { id: 1, label: "MTB", all: true },
+    { id: 2, label: "RUTA", all: true },
+    { id: 3, label: "URBANA", all: true },
+    { id: 4, label: "GRAVEL", all: true },
+    { id: 5, label: "BMX", all: true },
+    { id: 6, label: "NIÑOS", all: true },
+    { id: 7, label: "ACCESORIOS", all: true },
   ];
 
 

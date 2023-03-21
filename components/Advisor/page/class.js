@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export function Class() {
     const router = useRouter();
 
-    const nameForm = "class";
+    const nameForm = "category";
 
     const setQuest = advisorState((state) => state.setQuest);
 
@@ -22,27 +22,27 @@ export function Class() {
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
     const questions = [
         {
-            value: "mountain",
+            value: "1",
             title: "Ciclismo de montaña",
             description:
                 "Single track, senderos de montaña, parques de ciclismo",
             router: "/mountain",
         },
         {
-            value: "highway",
+            value: "2",
             title: "Ciclismo de ruta o carretera",
             description:
                 "Ciclismo de mayor distancia en caminos pavimentados o de grava",
             router: "/highway",
         },
         {
-            value: "city",
+            value: "3",
             title: "Ciclismo en la ciudad",
             description: "Montar distancias cortas en un entorno urbano",
             router: "/city",
         },
         {
-            value: "kits",
+            value: "6",
             title: "Para niños",
             description: "Las bicicletas que deseabas tener cuando eras niño",
             router: "/kits",
