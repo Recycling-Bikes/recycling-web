@@ -17,7 +17,7 @@ export function Position() {
                 setFilter(() => ({ category: [2,8], subcategory: [1] }));
                 break;
             case "relaxed":
-                setFilter(() => ({ category: [4], subcategory: [] }));
+                setFilter(() => ({ category: [2], subcategory: [5,6] }));
                 break;
         }
                 
