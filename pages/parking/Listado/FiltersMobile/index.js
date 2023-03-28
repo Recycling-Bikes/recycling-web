@@ -1,3 +1,4 @@
+import { filtersState } from "context/Filters/filtersState";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
@@ -7,6 +8,7 @@ import Filtro from "../Filtro";
 
 export default function FiltrosMobile(props) {
   const [show, setShow] = useState(false);
+  const ClearFilters = filtersState(state => state.ClearFilters)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,8 +41,10 @@ export default function FiltrosMobile(props) {
         <Offcanvas.Body>
         <div className="sticky-bottom d-grid gap-2">
           
-          <Button>Limpiar</Button>
-          <Button variant="primary">Aplicar</Button>
+          <Button onClick={()=>{ ClearFilters()
+          handleClose()
+          }}>Limpiar</Button>
+          <Button onClick={handleClose} variant="primary">Aplicar</Button>
 
         </div>
         <Filtro/>
