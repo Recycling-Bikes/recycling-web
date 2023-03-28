@@ -15,16 +15,16 @@ export function Suspension() {
   const onSubmit = (event) => {
     switch (event[nameForm]) {
       case 4:
-        setFilter(() => ({ subcategory: [1] }));
+        setFilter(() => ({ suspension: [1] }));
         break;
       case 3:
-        setFilter(() => ({ subcategory: [2] }));
+        setFilter(() => ({ suspension: [2] }));
         break;
       case 5:
         setFilter(() => ({ subcategory: [], category: [7] }));
         break;
       case 6:
-        setFilter(() => ({ subcategory: [1, 2] }));
+        setFilter(() => ({ suspension: [1, 2] }));
         break;
     }
 
