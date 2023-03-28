@@ -14,10 +14,10 @@ export function Position() {
     const onSubmit = (event) => {
         switch (event[nameForm]) {
             case "aggressive":
-                setFilter(() => ({ category: [], subcategory: [5,6] }));
+                setFilter(() => ({ category: [2,8], subcategory: [1] }));
                 break;
             case "relaxed":
-                setFilter(() => ({ category: [4], subcategory: [] }));
+                setFilter(() => ({ category: [2], subcategory: [5,6] }));
                 break;
         }
                 

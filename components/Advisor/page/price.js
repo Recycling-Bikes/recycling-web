@@ -11,23 +11,23 @@ export function Price() {
 
     const onSubmit = (event) => {
         switch (event[nameForm]) {
-            case 2:
+            case "2":
                 setFilter(() => ({ minPrice: 0, maxPrice: 500 }));
                 break;
-            case 3:
+            case "3":
                 setFilter(() => ({ minPrice: 500, maxPrice: 1000 }));
                 break;
-            case 4:
+            case "4":
                 setFilter(() => ({ minPrice: 1000, maxPrice: 1500 }));
                 break;
-            case 5:
+            case "5":
 
                 setFilter(() => ({ minPrice: 1500, maxPrice: 2000 }));
                 break;
-            case 6:
+            case "6":
                 setFilter(() => ({ minPrice: 2000, maxPrice: 2500 }));
                 break;
-            case 7:
+            case "7":
                 setFilter(() => ({ minPrice: 3000, maxPrice: 1000000 }));
                 break;
         }
