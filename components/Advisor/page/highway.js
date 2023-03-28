@@ -14,7 +14,7 @@ export function Highway() {
     const onSubmit = (event) => {
         switch (event[nameForm]) {
             case "pavement":
-                setFilter(() => ({ category: [], subcategory: [2,8] }));
+                setFilter(() => ({ category: [3], subcategory: [2,8] }));
                 router.push(router.pathname + "/position");
                 break;
             case "mix":
