@@ -1,22 +1,27 @@
 import Advisor from "components/Advisor";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Charge() {
     const router = useRouter();
 
     const nameForm = "charge";
+    const setFilter = filtersState(state => state.setFiltersB)
 
     const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
-        setQuest(event);
+        switch (event[nameForm]) {
+            case "true":
+                setFilter(() => ({ subcategory: [7, 8], category: [] }));
+                break;
+            case "false":
+                setFilter(() => ({ subcategory: [7], category: [] }));
+                break;
+        }
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
-
-        router.push(router.pathname + salida.router);
+        router.push(router.pathname + "/size");
     };
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.

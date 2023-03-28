@@ -3,55 +3,66 @@ import { advisorState } from "context/Advisor/AdvisorState";
 import { useRouter } from "next/router";
 
 export function City() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const nameForm = "city";
+  const nameForm = "city";
 
-    const setQuest = advisorState((state) => state.setQuest);
+  const setQuest = advisorState((state) => state.setQuest);
 
-    const onSubmit = (event) => {
-        setQuest(event);
+  const onSubmit = (event) => {
+    //FIXME: Corección de la subcategoria caso 2,3,4
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
+    switch (event[nameForm]) {
+      case "1":
+        router.push(router.pathname + "/motor");
+        return;
+      case "2":
+        setQuest(() => ({ subcategory: [2] }));
+        break;
+      case "3":
+        setQuest(() => ({ subcategory: [8] }));
+        break;
+      case "4":
+        setQuest(() => ({ subcategory: [9] }));
+        break;
+    }
 
-        router.push(router.pathname + salida.router);
-    };
+    router.push(router.pathname + "/size");
+  };
 
-    // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
-    const questions = [
-        {
-            value: "daily",
-            title: "Ir al trabajo o a la escuela",
-            router: "/motor",
-        },
-        {
-            value: "exercise",
-            title: "Montar para hacer un poco de ejercicio",
-            router: "/size",
-        },
-        {
-            value: "shop",
-            title: "Ir de compras",
-            router: "/size",
-        },
-        {
-            value: "transport",
-            title: "Transportar a los niños por la ciudad",
-            router: "/size",
-        },
-    ];
+  // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
+  const questions = [
+    {
+      value: "1",
+      title: "Ir al trabajo o a la escuela",
+      router: "/motor",
+    },
+    {
+      value: "2",
+      title: "Montar para hacer un poco de ejercicio",
+      router: "/size",
+    },
+    {
+      value: "3",
+      title: "Ir de compras",
+      router: "/size",
+    },
+    {
+      value: "4",
+      title: "Transportar a los niños por la ciudad",
+      router: "/size",
+    },
+  ];
 
-    return (
-        <Advisor
-            description={"¿Para qué actividad vas a usarla principalmente?"}
-            questions={questions}
-            onSubmit={onSubmit}
-            nameForm={nameForm}
-            progress={30}
-            back={"./"}
-            backButtonVision={true} // <--- Hace visible al botón de atrás
-        />
-    );
+  return (
+    <Advisor
+      description={"¿Para qué actividad vas a usarla principalmente?"}
+      questions={questions}
+      onSubmit={onSubmit}
+      nameForm={nameForm}
+      progress={30}
+      back={"./"}
+      backButtonVision={true} // <--- Hace visible al botón de atrás
+    />
+  );
 }

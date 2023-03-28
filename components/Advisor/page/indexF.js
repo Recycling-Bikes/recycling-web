@@ -24,13 +24,15 @@ export function IndexF() {
     ];
 
     const onSubmit = (event) => {
-        setQuest(event);
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
-
-        router.push(salida.router);
+        switch (event[nameForm]) {
+            case "true":
+                router.push("/compra/class")
+                break;
+            case "false":
+                router.push("/parking")
+                break;
+        }
     };
 
     return (

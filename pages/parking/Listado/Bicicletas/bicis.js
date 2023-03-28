@@ -134,19 +134,19 @@ function filteredData(data, filters) {
       passesFilter = false;
     }
 
-    if (filters.rines?.length > 0 && !filters.rines.includes(datum.propiedades.rine)) {
+    if (filters?.rines?.length > 0 && !filters.rines.includes(datum.propiedades.rine)) {
       passesFilter = false;
     }
 
-    if (filters.years?.length > 0 && !filters.years.includes(datum.year)) {
+    if (filters?.years?.length > 0 && !filters.years.includes(datum.year)) {
       passesFilter = false;
     }
 
-    if (filters.minPrice !== null && datum.price < filters.minPrice) {
+    if (filters?.minPrice !== null && datum.price < filters.minPrice) {
       passesFilter = false;
     }
 
-    if (filters.maxPrice !== null && datum.price > filters.maxPrice) {
+    if (filters?.maxPrice !== null && datum.price > filters.maxPrice) {
       passesFilter = false;
     }
 

@@ -1,8 +1,11 @@
 import Advisor from "components/Advisor";
+import category from "components/parking/filtros/category";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Class() {
+    const setFilter = filtersState(state => state.setFiltersB)
     const router = useRouter();
 
     const nameForm = "category";
@@ -10,13 +13,27 @@ export function Class() {
     const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
-        setQuest(event);
 
-        const salida = questions.find((datum) => {
+        switch (event[nameForm]) {
+            case "1":
+                setFilter(()=> ({category: [1]}))
+                return router.push(router.pathname + "/mountain")
+            case "2":
+                setFilter(()=> ({category: [2]}))   
+                return router.push(router.pathname + "/highway")
+            case "3":
+                 setFilter(()=> ({category: [3]}))
+                 return router.push(router.pathname + "/city")
+            case "6":
+                setFilter(()=> ({category: [6]}))
+                return router.push(router.pathname + "/kits")
+        }
+
+/*         const salida = questions.find((datum) => {
             return datum.value == event[nameForm];
         });
 
-        router.push(router.pathname + salida.router);
+        router.push(router.pathname + salida.router); */
     };
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.

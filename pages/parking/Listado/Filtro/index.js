@@ -15,10 +15,15 @@ import years from "components/parking/filtros/years";
 import { filtersState } from "context/Filters/filtersState";
 
 export default function Filtro() {
+  const [hydration, setHydration] = useState(false)
+
+  useEffect(() => {
+    setHydration(true)
+  },[])
   const setFilters = filtersState((state) => state.setFilters);
+  const filters = filtersState((state) => state.filters);
 
   const Iters = (data, category) => {
-    const { filters } = filtersState();
   
     return (
       <>
@@ -34,8 +39,10 @@ export default function Filtro() {
                 key={index}
                 type={"checkbox"}
                 id={option.id + "-checkbox-" + category}
+                name={option.id + "-checkbox-" + category}
                 label={option.label}
                 value={option.id}
+                defaultChecked={filters[category]?.includes(option.id)}
                 onChange={(e) => {
                   setFilters((prevFilters) => {
                     let filters = { ...prevFilters };
@@ -59,7 +66,7 @@ export default function Filtro() {
     );
   };
 
-  return (
+  return hydration ? (
     <div className="separador">
       <Accordion defaultActiveKey={["1", "10"]} flush alwaysOpen>
         {/* Start - País */}
@@ -179,7 +186,7 @@ export default function Filtro() {
 
                     setFilters((prevFilters) => {
                       
-                      return {minPrice: minPrice,};
+                      return {minPrice: minPrice};
                     });
                   }}
                 />
@@ -214,5 +221,5 @@ export default function Filtro() {
         {/* End - Precio */}
       </Accordion>
     </div>
-  );
+  ): null;
 }

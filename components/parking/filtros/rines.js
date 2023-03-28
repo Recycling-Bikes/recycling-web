@@ -1,4 +1,4 @@
-
+ 
 const rines = [
     { id: 1, label: "12''", category: [6] },
     { id: 2, label: "14''", category: [6] },

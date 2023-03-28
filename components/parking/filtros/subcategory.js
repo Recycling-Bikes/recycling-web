@@ -9,6 +9,7 @@ const subcategory = [
     { id: 7, label: "Hibrida", category: [3] },
     { id: 8, label: "Viaje", category: [3] },
     { id: 9, label: "Crucero", category: [3] },
+    { id: 10, label: "E-Bike", category: [1] },
 ];
 
 export default subcategory;

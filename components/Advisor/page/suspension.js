@@ -1,61 +1,73 @@
 import Advisor from "components/Advisor";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Suspension() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const nameForm = "suspension";
+  const setFilter = filtersState((state) => state.setFiltersB);
 
-    const setQuest = advisorState((state) => state.setQuest);
+  const nameForm = "suspension";
 
-    const onSubmit = (event) => {
-        setQuest(event);
+  const setQuest = advisorState((state) => state.setQuest);
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
+  const onSubmit = (event) => {
+    switch (event[nameForm]) {
+      case 4:
+        setFilter(() => ({ subcategory: [1] }));
+        break;
+      case 3:
+        setFilter(() => ({ subcategory: [2] }));
+        break;
+      case 5:
+        setFilter(() => ({ subcategory: [], category: [7] }));
+        break;
+      case 6:
+        setFilter(() => ({ subcategory: [1, 2] }));
+        break;
+    }
 
-        router.push(router.pathname + salida.router);
-    };
+    router.push(router.pathname + "/size");
+  };
 
-    // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
-    const questions = [
-        {
-            value: 4,
-            title: "Sólo delantera",
-            description: "Hardtail",
-            router: "/size",
-        },
-        {
-            value: 3,
-            title: "Trasera y delantera",
-            description: "Full Suspension",
-            router: "/size",
-        },
-        {
-            value: 5,
-            title: "Sin suspension",
-            description: "Horquilla rígida",
-            router: "/size",
-        },
-        {
-            value: 6,
-            title: "No sé",
-            description: "Te mostraremos todas las opciones",
-            router: "/size",
-        },
-    ];
+  // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
+  const questions = [
+    {
+      value: 4,
+      title: "Sólo delantera",
+      description: "Hardtail",
+      router: "/size",
+    },
+    {
+      value: 3,
+      title: "Trasera y delantera",
+      description: "Full Suspension",
+      router: "/size",
+    },
+    {
+      value: 5,
+      title: "Sin suspension",
+      description: "Horquilla rígida",
+      router: "/size",
+    },
+    {
+      value: 6,
+      title: "No sé",
+      description: "Te mostraremos todas las opciones",
+      router: "/size",
+    },
+  ];
 
-    return (
-        <Advisor
-            description={"¿Qué tipo de suspensión quieres?"}
-            questions={questions}
-            onSubmit={onSubmit}
-            nameForm={nameForm}
-            progress={60}
-            back={"./"}
-            backButtonVision={true} // <--- Hace visible al botón de atrás
-        />
-    );
+  return (
+    <Advisor
+      description={"¿Qué tipo de suspensión quieres?"}
+      questions={questions}
+      onSubmit={onSubmit}
+      nameForm={nameForm}
+      progress={60}
+      back={"./"}
+      backButtonVision={true} // <--- Hace visible al botón de atrás
+    />
+  );
 }
