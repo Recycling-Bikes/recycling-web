@@ -37,7 +37,14 @@ export default function FiltrosMobile(props) {
           <Offcanvas.Title className="fw-bold">Filtrar/Ordenar</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
+        <div className="sticky-bottom d-grid gap-2">
+          
+          <Button>Limpiar</Button>
+          <Button variant="primary">Aplicar</Button>
+
+        </div>
         <Filtro/>
+        
           
         </Offcanvas.Body>
       </Offcanvas>

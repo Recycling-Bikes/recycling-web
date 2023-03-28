@@ -1,5 +1,6 @@
 import Advisor from "components/Advisor";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Highway() {
@@ -8,15 +9,23 @@ export function Highway() {
     const nameForm = "type";
 
     const setQuest = advisorState((state) => state.setQuest);
+    const setFilter = filtersState(state => state.setFiltersB)
 
     const onSubmit = (event) => {
-        setQuest(event);
+        switch (event[nameForm]) {
+            case "pavement":
+                setFilter(() => ({ category: [], subcategory: [2,8] }));
+                router.push(router.pathname + "/position");
+                break;
+            case "mix":
+                setFilter(() => ({ category: [4], subcategory: [7,8] }));
+                router.push(router.pathname + "/timon");
+                break;
+        }
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
 
-        router.push(router.pathname + salida.router);
+        
+        
     };
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.

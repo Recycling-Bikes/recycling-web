@@ -1,17 +1,24 @@
 import Advisor from "components/Advisor";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Mountain() {
     const router = useRouter();
+
+    const setFilter = filtersState(state => state.setFiltersB)
 
     const nameForm = "e-bike";
 
     const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
-        
-        setQuest(event);
+
+        if (event[nameForm] == "true") {
+            setFilter(()=> ({subcategory: [10],
+            }))
+        }
+
 
         const salida = questions.find((datum) => {
             return datum.value == event[nameForm];

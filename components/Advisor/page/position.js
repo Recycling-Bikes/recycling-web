@@ -1,22 +1,29 @@
 import Advisor from "components/Advisor";
 import { advisorState } from "context/Advisor/AdvisorState";
+import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 
 export function Position() {
     const router = useRouter();
 
     const nameForm = "position";
+    const setFilter = filtersState(state => state.setFiltersB)
 
     const setQuest = advisorState((state) => state.setQuest);
 
     const onSubmit = (event) => {
-        setQuest(event);
+        switch (event[nameForm]) {
+            case "aggressive":
+                setFilter(() => ({ category: [], subcategory: [5,6] }));
+                break;
+            case "relaxed":
+                setFilter(() => ({ category: [4], subcategory: [] }));
+                break;
+        }
+                
+        
 
-        const salida = questions.find((datum) => {
-            return datum.value == event[nameForm];
-        });
-
-        router.push(router.pathname + salida.router);
+        router.push(router.pathname +"/size");
     };
 
     // En value, nunca uses booleanos. Apenas números o palabras para representarlo.
