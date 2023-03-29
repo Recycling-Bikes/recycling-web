@@ -14,16 +14,17 @@ export function City() {
 
     switch (event[nameForm]) {
       case "1":
+        setQuest(() => ({ subcategory: [10] }));
         router.push(router.pathname + "/motor");
         return;
       case "2":
-        setQuest(() => ({ subcategory: [2] }));
+        setQuest(() => ({ subcategory: [7, 11] }));
         break;
       case "3":
-        setQuest(() => ({ subcategory: [8] }));
+        setQuest(() => ({ subcategory: [13,14] }));
         break;
       case "4":
-        setQuest(() => ({ subcategory: [9] }));
+        setQuest(() => ({ subcategory: [12] }));
         break;
     }
 
