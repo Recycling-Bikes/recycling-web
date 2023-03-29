@@ -21,7 +21,7 @@ export function Suspension() {
         setFilter(() => ({ suspension: [2] }));
         break;
       case "5":
-        setFilter(() => ({ subcategory: [7] }));
+        setFilter(() => ({ category: [3], subcategory: [7] }));
         break;
       case "6":
         setFilter(() => ({ suspension: [1, 2] }));
