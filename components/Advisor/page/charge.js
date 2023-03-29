@@ -14,10 +14,10 @@ export function Charge() {
     const onSubmit = (event) => {
         switch (event[nameForm]) {
             case "true":
-                setFilter(() => ({ subcategory: [7, 8] }));
+                setFilter(() => ({category: [3], subcategory: [7, 8] }));
                 break;
             case "false":
-                setFilter(() => ({ subcategory: [7] }));
+                setFilter(() => ({category: [3], subcategory: [7] }));
                 break;
         }
 
