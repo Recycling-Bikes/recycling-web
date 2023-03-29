@@ -16,7 +16,7 @@ export function Motor() {
                 setFilter(() => ({ category: [3], subcategory: [] }));
                 break;
             case "true":
-                setFilter(() => ({ category: [], subcategory: [10] }));
+                setFilter(() => ({ category: [3], subcategory: [10] }));
                 break;
         }
         

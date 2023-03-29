@@ -19,7 +19,7 @@ export function Timon() {
         router.push(router.pathname + "/size");
         break;
       case "flat":
-        setFilter(() => ({ category: [], subcategory: [7, 8] }));
+        setFilter(() => ({ category: [3], subcategory: [7, 8] }));
         router.push(router.pathname + "/charge");
         break;
     }
