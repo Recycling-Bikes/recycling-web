@@ -39,7 +39,7 @@ export default function Partdos() {
     (state) => [state.setPublication, state.setForm],
     shallow
   );
-/* TODO: Coloque unas cosas de forma temporal mientras se hacen las demás paginas  */
+  /* TODO: Coloque unas cosas de forma temporal mientras se hacen las demás paginas  */
 
   const {
     handleSubmit,
@@ -54,21 +54,47 @@ export default function Partdos() {
   });
 
   useEffect(() => {
-    if (!(form.brands || form.models)) {
-      setForm();
-    }
-  });
+    const updateFormState = (property, parameter, equal, column) => {
+      if (
+        !form[property] ||
+        form[property]?.length === 0 ||
+        form[property] === null
+      ) {
+        setForm(property, parameter);
+      }
+      console.log(form[property]);
+    };
+
+    updateFormState("subcategory");
+    updateFormState("sizes");
+    updateFormState("materials");
+    updateFormState("transmissions");
+    updateFormState("frenos");
+    updateFormState("rines", "*", publication.model, "category");
+    updateFormState("suspension");
+  }, [
+    form.sizes,
+    form.materials,
+    form.transmissions,
+    setForm,
+    form.frenos,
+    form.rines,
+    form.suspension,
+    form.subcategory,
+    form,
+    publication.model,
+  ]);
 
   const onSubmit = (items) => {
-    if (publication.model !== "1") {
-      model =
-        form.models.find((model) => {
-          model?.id === items?.model;
-        })
+    if (publication?.model !== "1") {
+      let model = form?.models?.find((model) => {
+        return model?.id == items?.model;
+      });
+      
 
-      items["other"] = model?.name ?? "error model"
+      items["other"] = model?.name ? model?.name :"error model";
 
-      items["subcategory"] = model?.subcategory ?? "error model"
+      items["subcategory"] = model?.subcategory ?? "No asignado";
     }
 
     setPublication(items);
@@ -133,7 +159,7 @@ export default function Partdos() {
                 ) : (
                   ""
                 )}
-                
+
                 {/* Talla */}
                 <Form.Group className="mb-3" controlId="size">
                   <Form.Label>
@@ -184,48 +210,63 @@ export default function Partdos() {
                 </Form.Group>
 
                 {/* Rin */}
-                <Form.Group className="mb-3" controlId="rin">
-                  <Form.Label>Rin</Form.Label>
-                  <Form.Select
-                    isInvalid={errors?.transmission}
-                    {...register("rin")}
-                  >
-                    <option value="">Selecciona un rin</option>
-                    {selectList(form?.rines)}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.rin?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                {publication?.category === "1" ||
+                publication?.category === "3" ||
+                publication?.category === "6" ? (
+                  <Form.Group className="mb-3" controlId="rin">
+                    <Form.Label>Rin</Form.Label>
+                    <Form.Select
+                      isInvalid={errors?.transmission}
+                      {...register("rin")}
+                    >
+                      <option value="">Selecciona un rin</option>
+                      {selectList(form?.rines)}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors?.rin?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
 
                 {/* freno */}
-                <Form.Group className="mb-3" controlId="freno">
-                  <Form.Label>freno</Form.Label>
-                  <Form.Select isInvalid={errors?.freno} {...register("freno")}>
-                    <option value="">Selecciona un freno</option>
-                    {selectList(form?.frenos)}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.freno?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                {publication?.category === "2" ? (
+                  <Form.Group className="mb-3" controlId="freno">
+                    <Form.Label>freno</Form.Label>
+                    <Form.Select
+                      isInvalid={errors?.freno}
+                      {...register("freno")}
+                    >
+                      <option value="">Selecciona un freno</option>
+                      {selectList(form?.frenos)}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors?.freno?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
 
                 {/* suspension */}
-                <Form.Group className="mb-3" controlId="suspension">
-                  <Form.Label>
-                    Suspension
-                  </Form.Label>
-                  <Form.Select
-                    isInvalid={errors?.suspension}
-                    {...register("suspension")}
-                  >
-                    <option value="">Selecciona una Suspension</option>
-                    {selectList(form?.suspensions)}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.suspension?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                {(publication?.category === "1") ? (
+                  <Form.Group className="mb-3" controlId="suspension">
+                    <Form.Label>Suspension</Form.Label>
+                    <Form.Select
+                      isInvalid={errors?.suspension}
+                      {...register("suspension")}
+                    >
+                      <option value="">Selecciona una Suspension</option>
+                      {selectList(form?.suspension)}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors?.suspension?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                ) : (
+                  ""
+                )}
 
                 {/* Botones */}
                 <div className="d-flex justify-content-end pt-3 align-items-center">

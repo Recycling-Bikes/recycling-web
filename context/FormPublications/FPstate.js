@@ -31,12 +31,24 @@ export const FPState = create(
 
         form: {},
 
-        setForm: async (valor, parameters = "*") => {
-          const data = await getData(valor, parameters);
+        setForm: async (valor, parameters = "*", equal = null, column = "") => {
+          const data = await getData(valor, parameters, equal, column);
+
           set({
             form: {
               ...get().form,
               ...data,
+              live: true,
+            },
+          });
+        },
+
+        setModels: async (category, brand) => {
+          let data = await getModels(category, brand);
+          set({
+            form: {
+              ...get().form,
+              models: [...data],
               live: true,
             },
           });
@@ -79,38 +91,47 @@ export const FPState = create(
   )
 );
 
-const getDatum = async (name, parameters = "*") => {
-  let { data: data, error } = await supabase.from(name).select(parameters);
+const getModels = async (category, brand) => {
+  // converter brand to id
+
+  let { data, error } = await supabase
+    .from("models")
+    .select("id,name")
+    .eq("brand", parseInt(brand))
+    .eq("category", parseInt(category));
 
   return error ? error : data;
 };
 
-export const getData = async (name = null, parameters = "*") => {
+const getDatum = async (name, parameters = "*") => {
+  let { data: data, error } = await supabase.from(name).select(parameters);
+  console.log(data);
+  console.log(error);
+
+  return error ? error : data;
+};
+
+const getDatumEqual = async (name, parameters = "*", equal, column) => {
+  let { data: data, error } = await supabase
+    .from(name)
+    .select(parameters)
+    .eq(column, parseInt(equal));
+  console.log(data);
+  console.log(error);
+
+  return error ? error : data;
+};
+
+export const getData = async ( name = null,parameters = "*",equal = null,column = "") => {
   let data = {};
 
-  if (name !== null) {
-    data[name] = await getDatum(name, parameters);
-
+  if (equal) {
+    data[name] = await getDatumEqual(valor, parameters, equal, column);
     return await data;
-  } else {
-    data = {
-      brands: await getDatum("brands", parameters),
-      models: await getDatum("models", parameters),
-      transmissions: await getDatum("transmissions", parameters),
-      sizes: await getDatum("sizes", parameters),
-      materials: await getDatum("materials", parameters),
-      conditions: await getDatum("conditions", parameters),
-      category: await getDatum("category", parameters),
-      years: await getDatum("years", parameters),
-      frenos: await getDatum("frenos", parameters),
-      subcategory: await getDatum("subcategory", parameters),
-      rines: await getDatum("rines", parameters),
-      country: await getDatum("country", parameters),
-      suspensions: await getDatum("suspension", parameters),
-    };
   }
+  data[name] = await getDatum(name, parameters);
 
-  return data;
+  return await data;
 };
 
 export const postImages = async (files, userID) => {
@@ -145,23 +166,24 @@ const postBici = async ({
   price,
   subcategory,
   filesUrl,
-  user_id
+  user_id,
 }) => {
-
-
-  const propsres = await supabase.from("propiedades").insert([
-    {
-      transmission,
-      category,
-      subcategory: subcategory? subcategory : null,
-      model: other, 
-      brand, 
-      material,
-      suspension: suspension? suspension : null,
-      freno: freno ? freno : null,
-      rine: rin ? rin : null ,
-    },
-  ]).select("*");;
+  const propsres = await supabase
+    .from("propiedades")
+    .insert([
+      {
+        transmission,
+        category,
+        subcategory: subcategory ? subcategory : null,
+        model: other,
+        brand,
+        material,
+        suspension: suspension ? suspension : null,
+        freno: freno ? freno : null,
+        rine: rin ? rin : null,
+      },
+    ])
+    .select("*");
 
   const res = await supabase.from("bicis").insert([
     {
@@ -175,7 +197,7 @@ const postBici = async ({
       filesUrl,
       user_id,
       country: 1,
-      propiedades: propsres?.data[0]?.id ?? 8
+      propiedades: propsres?.data[0]?.id ?? 8,
     },
   ]);
 

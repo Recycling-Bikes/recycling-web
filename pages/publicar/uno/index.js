@@ -18,7 +18,6 @@ const schema = yup.object().shape({
   category: yup.string().required("La categoría es requerida"),
   model: yup.string().required("El modelo es requerido"),
   brand: yup.string().required("La marca es requerida"),
-  
 });
 
 export default function PartUno() {
@@ -30,8 +29,8 @@ export default function PartUno() {
     shallow
   );
 
-  const [setPublication, setForm] = FPState(
-    (state) => [state.setPublication, state.setForm],
+  const [setPublication, setForm, setModels] = FPState(
+    (state) => [state.setPublication, state.setForm, state.setModels],
     shallow
   );
 
@@ -49,11 +48,26 @@ export default function PartUno() {
     defaultValues: { ...publication },
   });
 
+  const [viewModels, setViewModels] = useState(true);
+
   useEffect(() => {
-    if (!(form.brands || form.models)) {
-      setForm();
+    if (!(form.brands || form.category || form.years)) {
+      setForm("brands");
+      setForm("category");
+      setForm("years");
     }
-  });
+  }, [form.brands, form.category, form.years, setForm]);
+
+  useEffect(() => {
+    if (watch("brand") && watch("category")) {
+      (async () => {
+        await setModels(getValues("category"), getValues("brand"));
+        setViewModels(false);
+      })();
+    } else {
+      setViewModels(true);
+    }
+  }, [watch("brand"), watch("category")]);
 
   useEffect(() => {
     setHydrated(false);
@@ -61,7 +75,8 @@ export default function PartUno() {
 
   const onSubmit = (items) => {
     /* console.log(items)
- */
+     */
+    
     setPublication(items);
     router.push("./two");
   };
@@ -107,24 +122,6 @@ export default function PartUno() {
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                {/* Modelo */}
-                <Form.Group className="mb-3" controlId="model">
-                  <Form.Label>
-                    Modelo <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    isInvalid={!!errors?.model}
-                    /* value={values.model} */
-                    {...register("model")}
-                  >
-                    <option value="">Selecciona un modelo</option>
-                    {selectList(form?.models)}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.model?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
                 {/* Categoria */}
                 <Form.Group className="mb-3" controlId="category">
                   <Form.Label>
@@ -143,9 +140,34 @@ export default function PartUno() {
                   </Form.Control.Feedback>
                 </Form.Group>
 
+                {/* Modelo */}
+                <Form.Group className="mb-3" controlId="model">
+                  <Form.Label>
+                    Modelo <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Select
+                    disabled={viewModels}
+                    isInvalid={!!errors?.model}
+                    /* value={values.model} */
+                    {...register("model")}
+                  >
+                    <option value="">Selecciona un modelo</option>
+                    {selectList(form.models)}
+                    <option value="1">Otro</option>
+                  </Form.Select>
+                  <span className="text-secondary">
+                    Tienes que seleccionar una categoría y marca primero
+                  </span>
+                  <Form.Control.Feedback type="invalid">
+                    {errors.model?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+
                 {/* Año */}
                 <Form.Group className="mb-3" controlId="year">
-                  <Form.Label>Año</Form.Label>
+                  <Form.Label>
+                    Año <span className="text-danger">*</span>
+                  </Form.Label>
                   <Form.Select
                     {...register("year")}
                     isInvalid={errors?.year}

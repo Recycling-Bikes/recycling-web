@@ -54,9 +54,17 @@ export default function Parttres() {
   });
 
   useEffect(() => {
-    if (!(form.brands || form.models)) {
-      setForm();
-    }
+    const updateFormState = (property) => {
+      if (
+        !form[property] ||
+        form[property]?.length === 0 ||
+        form[property] === null
+      ) {
+        setForm(property);
+      }
+      console.log(form[property]);
+    };
+    updateFormState("conditions");
   });
 
   const onSubmit = (items) => {
