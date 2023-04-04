@@ -21,7 +21,7 @@ export function City() {
         setQuest(() => ({ subcategory: [7, 11] }));
         break;
       case "3":
-        setQuest(() => ({ subcategory: [13,14] }));
+        setQuest(() => ({ subcategory: [13] }));
         break;
       case "4":
         setQuest(() => ({ subcategory: [12] }));

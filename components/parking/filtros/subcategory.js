@@ -11,10 +11,9 @@ const subcategory = [
     { id: 9, label: "Crucero", category: [3] },
     { id: 10, label: "E-Bike", category: [1,3] },
     { id: 11, label: "Paseo", category: [] },
-    { id: 12, label: "Carga para niños", category: [] },
-    { id: 13, label: "Con canastas", category: [] },
-    { id: 14, label: "Alforjas", category: [] },
+    { id: 12, label: "Carga para niños", category: [3] },
+    { id: 13, label: "Canastas y Alforjas", category: [3] },
+    { id: 14, label: "Fixie", category: [3] },
 ];
 
 export default subcategory;
-// TODO: Agregar 9, 10 y 11 a la categoria 1 y 3 y al back

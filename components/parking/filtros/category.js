@@ -7,6 +7,7 @@ const category = [
     { id: 6, label: "NIÑOS", all: true },
     { id: 7, label: "ACCESORIOS", all: true },
     { id: 8, label: "TRIATlÓN", all: true },
+    
   ];
 
 
