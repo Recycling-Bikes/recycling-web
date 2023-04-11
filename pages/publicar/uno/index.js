@@ -29,10 +29,12 @@ export default function PartUno() {
     shallow
   );
 
-  const [setPublication, setForm, setModels] = FPState(
-    (state) => [state.setPublication, state.setForm, state.setModels],
+  const [setPublication, setForm, setModels, clearAll] = FPState(
+    (state) => [state.setPublication, state.setForm, state.setModels, state.clearAll],
     shallow
   );
+
+
 
   const {
     handleSubmit,
@@ -76,7 +78,7 @@ export default function PartUno() {
   const onSubmit = (items) => {
     /* console.log(items)
      */
-    
+
     setPublication(items);
     router.push("./two");
   };
@@ -188,6 +190,7 @@ export default function PartUno() {
 
               <div className="d-flex justify-content-end pt-3">
                 {" "}
+                <Button variant="secondary" onClick={()=> clearAll()}>Limpiar</Button>
                 <Button variant="primary" type="submit">
                   Detalles de tu bici
                   <BsChevronRight
