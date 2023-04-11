@@ -10,7 +10,7 @@ import Progres3 from "./progres3";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { FPState } from "context/FormPublications/FPstate";
-import shallow from "zustand/shallow";
+import {shallow }from "zustand/shallow";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const condicionalesStyle = {
@@ -65,7 +65,7 @@ export default function Parttres() {
       console.log(form[property]);
     };
     updateFormState("conditions");
-  });
+  },[form, setForm]);
 
   const onSubmit = (items) => {
     setPublication(items);
@@ -99,7 +99,6 @@ export default function Parttres() {
                                 value={datum.id}
                                 {...register("conditions")}
                               />
-
                               <Form.Check.Label>{datum.name}</Form.Check.Label>
                             </Form.Check>
                           </Col>

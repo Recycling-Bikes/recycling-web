@@ -31,7 +31,8 @@ export const FPState = create(
 
         form: {},
 
-        setForm: async (valor, parameters = "*", equal = null, column = "") => {
+        setForm: async (valor, parameters = "*", equal= null, column = null) => {
+          console.log(equal, column)
           const data = await getData(valor, parameters, equal, column);
 
           set({
@@ -98,14 +99,14 @@ const getModels = async (category, brand) => {
     .from("models")
     .select("id,name")
     .eq("brand", parseInt(brand))
-    .eq("category", parseInt(category));
+    .eq("category", parseInt(category))
+    .order("name", { ascending: true });
 
   return error ? error : data;
 };
 
 const getDatum = async (name, parameters = "*") => {
-  let { data: data, error } = await supabase.from(name).select(parameters);
-  console.log(data);
+  let { data: data, error } = await supabase.from(name).select(parameters).order("id", { ascending: true });
   console.log(error);
 
   return error ? error : data;
@@ -115,18 +116,21 @@ const getDatumEqual = async (name, parameters = "*", equal, column) => {
   let { data: data, error } = await supabase
     .from(name)
     .select(parameters)
-    .eq(column, parseInt(equal));
-  console.log(data);
+    .eq(column, parseInt(equal))
+    .order("id", { ascending: true });
+
   console.log(error);
 
   return error ? error : data;
 };
 
-export const getData = async ( name = null,parameters = "*",equal = null,column = "") => {
+export const getData = async (name, parameters = "*", equal, column) => {
   let data = {};
+  
+  if (equal !== null) {
+    console.log("🚀 ~ file: FPstate.js:129 ~ getData ~ equal:", equal);
 
-  if (equal) {
-    data[name] = await getDatumEqual(valor, parameters, equal, column);
+    data[name] = await getDatumEqual(name, parameters, equal, column);
     return await data;
   }
   data[name] = await getDatum(name, parameters);
@@ -172,12 +176,12 @@ const postBici = async ({
     .from("propiedades")
     .insert([
       {
-        transmission,
-        category,
+        transmission : transmission ? transmission : null,
+        category : category ? category : null,
         subcategory: subcategory ? subcategory : null,
         model: other,
-        brand,
-        material,
+        brand : brand ? brand : null,
+        material : material ? material : null,
         suspension: suspension ? suspension : null,
         freno: freno ? freno : null,
         rine: rin ? rin : null,

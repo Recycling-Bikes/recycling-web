@@ -1,4 +1,5 @@
 # Custom Dictionary Words
+anio
 avaluador
 Avaluador
 Hardtail
@@ -9,3 +10,6 @@ rine
 rines
 Rines
 rome
+transmision
+Transmision
+valoracion

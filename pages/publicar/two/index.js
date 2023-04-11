@@ -53,48 +53,54 @@ export default function Partdos() {
     defaultValues: { ...publication },
   });
 
-  useEffect(() => {
-    const updateFormState = (property, parameter, equal, column) => {
-      if (
-        !form[property] ||
-        form[property]?.length === 0 ||
-        form[property] === null
-      ) {
-        setForm(property, parameter);
-      }
-      console.log(form[property]);
-    };
+  const [forceUpdate, setForceUpdate] = useState(false);
 
-    updateFormState("subcategory");
-    updateFormState("sizes");
-    updateFormState("materials");
-    updateFormState("transmissions");
-    updateFormState("frenos");
-    updateFormState("rines", "*", publication.model, "category");
-    updateFormState("suspension");
-  }, [
-    form.sizes,
-    form.materials,
-    form.transmissions,
-    setForm,
-    form.frenos,
-    form.rines,
-    form.suspension,
-    form.subcategory,
-    form,
-    publication.model,
-  ]);
+  useEffect(() => {
+    let count = 0;
+    
+   const category = parseInt(publication?.category)
+    const updateFormState = async (property, parameter, equal = null, column = null) => {
+      try {
+        if (!form[property] || (form[property]?.length < 1 && count < 12) || form[property] === null || !Array.isArray(form[property]) || forceUpdate) {
+          console.log(`Updating form state for ${property}`);
+          await setForm(property, parameter, equal, column);
+          count++;
+        } else {
+          console.log(`Form state for ${property} is already updated`);
+        }
+      } catch (error) {
+        console.log(`Error updating form state for ${property}:`, error);
+      }
+    };
+  
+    const updateForm = async () => {
+      await Promise.all([
+        updateFormState("subcategory"),
+        updateFormState("sizes"),
+        updateFormState("materials"),
+        updateFormState("transmissions", "*", category, "category"),
+        updateFormState("rines", "*",category , "category"),
+        updateFormState("frenos"),
+        updateFormState("suspension")
+      ]);
+      setForceUpdate(!forceUpdate);
+    }
+    
+  
+    updateForm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form, publication?.category, publication.model, setForm]);
+
 
   const onSubmit = (items) => {
     if (publication?.model !== "1") {
       let model = form?.models?.find((model) => {
         return model?.id == items?.model;
       });
-      
 
-      items["other"] = model?.name ? model?.name :"error model";
+      items["other"] = model?.name ? model?.name : "error model";
 
-      items["subcategory"] = model?.subcategory ?? "No asignado";
+      items["subcategory"] = null;
     }
 
     setPublication(items);
@@ -102,13 +108,15 @@ export default function Partdos() {
   };
 
   const selectList = (list) => {
-    return list?.map((item) => {
-      return (
-        <option key={item.id} value={item.id}>
-          {item.name}
-        </option>
-      );
-    });
+    return Array.isArray(list)
+      ? list?.map((item) => {
+          return (
+            <option key={item.id} value={item.id}>
+              {item.name}
+            </option>
+          );
+        })
+      : null;
   };
 
   return hydrated ? (
@@ -250,7 +258,7 @@ export default function Partdos() {
                 )}
 
                 {/* suspension */}
-                {(publication?.category === "1") ? (
+                {publication?.category === "1" ? (
                   <Form.Group className="mb-3" controlId="suspension">
                     <Form.Label>Suspension</Form.Label>
                     <Form.Select
