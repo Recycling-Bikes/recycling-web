@@ -55,6 +55,18 @@ export const FPState = create(
           });
         },
 
+        clearTransmision: async () => {
+          set({
+            form: {
+              ...get().form,
+              transmissions: null,
+              suspension: null,
+              frenos: null
+            },
+
+          });
+        },
+
         clearForm: () => {
           set(
             (state) => ({
@@ -107,7 +119,7 @@ const getModels = async (category, brand) => {
 
 const getDatum = async (name, parameters = "*") => {
   let { data: data, error } = await supabase.from(name).select(parameters).order("id", { ascending: true });
-  console.log(error);
+  
 
   return error ? error : data;
 };
@@ -119,7 +131,7 @@ const getDatumEqual = async (name, parameters = "*", equal, column) => {
     .eq(column, parseInt(equal))
     .order("id", { ascending: true });
 
-  console.log(error);
+  
 
   return error ? error : data;
 };

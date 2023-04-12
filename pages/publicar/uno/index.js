@@ -29,8 +29,8 @@ export default function PartUno() {
     shallow
   );
 
-  const [setPublication, setForm, setModels, clearAll] = FPState(
-    (state) => [state.setPublication, state.setForm, state.setModels, state.clearAll],
+  const [setPublication, setForm, setModels, clearAll, clearTransmision] = FPState(
+    (state) => [state.setPublication, state.setForm, state.setModels, state.clearAll, state.clearTransmision],
     shallow
   );
 
@@ -69,7 +69,9 @@ export default function PartUno() {
     } else {
       setViewModels(true);
     }
+    clearTransmision()
   }, [watch("brand"), watch("category")]);
+
 
   useEffect(() => {
     setHydrated(false);
@@ -190,7 +192,10 @@ export default function PartUno() {
 
               <div className="d-flex justify-content-end pt-3">
                 {" "}
-                <Button variant="secondary" onClick={()=> clearAll()}>Limpiar</Button>
+                <Button variant="secondary" onClick={()=> {
+                  clearAll()
+                  router.push("/vender")
+                }}>Limpiar</Button>
                 <Button variant="primary" type="submit">
                   Detalles de tu bici
                   <BsChevronRight

@@ -193,7 +193,7 @@ export default function Avaluador() {
                   <Col className="d-flex flex-column">
                     <p className="my-0">Te la compramos ya por</p>
                     <h5>
-                      ${values?.min} - ${values.max}
+                    ${values.directa.min} - ${values?.directa?.max}
                     </h5>
                   </Col>
                 </Row>
@@ -204,7 +204,8 @@ export default function Avaluador() {
                   <Col className="d-flex flex-column">
                     <p className="my-0">En nuestro Marketplace por</p>
                     <h5>
-                      ${values.directa.min} - ${values?.directa?.max}
+                      
+                      ${values?.min} - ${values.max}
                     </h5>
                   </Col>
                 </Row>

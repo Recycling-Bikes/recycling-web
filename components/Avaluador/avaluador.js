@@ -28,7 +28,7 @@ export function valorarBicicleta(
   }
 
   let precio
-  if (typePrice === 1) {
+  if (typePrice == 1) {
     precio = transmision?.precio1 ?? 800;
   } else {
     precio = transmision?.precio2?? 800;
@@ -42,6 +42,9 @@ export function valorarBicicleta(
   let year = new Date().getFullYear();
 
   switch (true) {
+    case anio == year:
+      multiplicadorEdad = multiplicadores.edad["s"];
+      break;
     case anio >= year - 1:
       multiplicadorEdad = multiplicadores.edad["a"];
       break;
@@ -84,7 +87,7 @@ export function valorarBicicleta(
       min: DirectaMinima.toLocaleString("en"),
       max: DirectaMaxima.toLocaleString("en"),
     },
-    original: valoracionOriginal.toLocaleString("en"),
+    original: (precio * materialStatus).toLocaleString("en"),
   };
 }
 
