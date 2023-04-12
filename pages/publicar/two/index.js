@@ -35,18 +35,16 @@ export default function Partdos() {
     shallow
   );
 
-  const [setPublication, setForm] = FPState(
-    (state) => [state.setPublication, state.setForm],
+  const [setPublication, setForm, clearTransmision] = FPState(
+    (state) => [state.setPublication, state.setForm, state.clearTransmision],
     shallow
   );
-  /* TODO: Coloque unas cosas de forma temporal mientras se hacen las demás paginas  */
 
   const {
     handleSubmit,
     register,
     setError,
     control,
-
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -57,13 +55,10 @@ export default function Partdos() {
 
   useEffect(() => {
     let count = 0;
-
     let category = parseInt(publication?.category);
-
     if (category === 3 || category === 6) {
       category = 1;
     }
-
     const updateFormState = async (
       property,
       parameter,
@@ -82,10 +77,16 @@ export default function Partdos() {
           await setForm(property, parameter, equal, column);
           count++;
         } else {
-          console.log(`Form state for ${property} is already updated`);
+          
+
+          if(equal === null && column === null && count < 12){
+            await setForm(property, parameter, equal, column);
+            count++;
+            
+          }
         }
       } catch (error) {
-        console.log(`Error updating form state for ${property}:`, error);
+        
       }
     };
 
@@ -99,12 +100,15 @@ export default function Partdos() {
         updateFormState("frenos"),
         updateFormState("suspension"),
       ]);
-      setForceUpdate(!forceUpdate);
+      setForceUpdate(false);
     };
+    console.log("publication?.category", publication?.category);
 
     updateForm();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    
+  }, [forceUpdate, publication]);
+
+
 
   const onSubmit = (items) => {
     if (publication?.model !== "1") {
