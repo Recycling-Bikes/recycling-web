@@ -57,11 +57,27 @@ export default function Partdos() {
 
   useEffect(() => {
     let count = 0;
-    
-   const category = parseInt(publication?.category)
-    const updateFormState = async (property, parameter, equal = null, column = null) => {
+
+    let category = parseInt(publication?.category);
+
+    if (category === 3 || category === 6) {
+      category = 1;
+    }
+
+    const updateFormState = async (
+      property,
+      parameter,
+      equal = null,
+      column = null
+    ) => {
       try {
-        if (!form[property] || (form[property]?.length < 1 && count < 12) || form[property] === null || !Array.isArray(form[property]) || forceUpdate) {
+        if (
+          !form[property] ||
+          (form[property]?.length < 1 && count < 12) ||
+          form[property] === null ||
+          !Array.isArray(form[property]) ||
+          forceUpdate
+        ) {
           console.log(`Updating form state for ${property}`);
           await setForm(property, parameter, equal, column);
           count++;
@@ -72,25 +88,23 @@ export default function Partdos() {
         console.log(`Error updating form state for ${property}:`, error);
       }
     };
-  
+
     const updateForm = async () => {
       await Promise.all([
         updateFormState("subcategory"),
         updateFormState("sizes"),
         updateFormState("materials"),
         updateFormState("transmissions", "*", category, "category"),
-        updateFormState("rines", "*",category , "category"),
+        updateFormState("rines", "*", category, "category"),
         updateFormState("frenos"),
-        updateFormState("suspension")
+        updateFormState("suspension"),
       ]);
       setForceUpdate(!forceUpdate);
-    }
-    
-  
-    updateForm();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form, publication?.category, publication.model, setForm]);
+    };
 
+    updateForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = (items) => {
     if (publication?.model !== "1") {
@@ -258,7 +272,9 @@ export default function Partdos() {
                 )}
 
                 {/* suspension */}
-                {publication?.category === "1" ? (
+                {publication?.category === "1" ||
+                publication?.category === "3" ||
+                publication?.category === "6" ? (
                   <Form.Group className="mb-3" controlId="suspension">
                     <Form.Label>Suspension</Form.Label>
                     <Form.Select
