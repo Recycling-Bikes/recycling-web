@@ -80,19 +80,16 @@ export default function Avaluador() {
   });
 
   useEffect(() => {
-
     const condition = form.conditions?.find((condition) => {
-      console.log("🚀 ~ file: cuatro.js:85 ~ condition ~ condition:", condition)
       
       return condition.id === parseInt(publication.conditions);
     });
+    console.log("🚀 ~ file: cuatro.js:84 ~ condition ~ condition:", condition)
     const material = form.materials?.find((material) => {
-      
-      
       return material.id == parseInt(publication.material);
     });
 
-    const transmission = form.transmission?.find((transmission) => {
+    const transmission = form.transmissions?.find((transmission) => {
       return transmission.id === parseInt(publication.transmission);
     });
 
@@ -103,9 +100,29 @@ export default function Avaluador() {
       return year.id === parseInt(publication.year);
     });
 
-    const values = valorarBicicleta(year.name, material?.status ?? "c", transmission?.status ?? "c", marca?.status ?? "c", condition?.status ?? "c");
+    const typePrice = publication?.freno ?? publication.suspension ?? 1;
+
+    const values = valorarBicicleta(
+      transmission,
+      year.name,
+      material.id ?? "1",
+      marca?.status ?? "c",
+      condition?.status ?? "c",
+      typePrice
+    );
     setValues(values);
-  }, [form.brands, form.conditions, form.material, form.transmission, form.years, publication.brand, publication.conditions, publication.material, publication.transmission, publication.year]);
+  }, [
+    form.brands,
+    form.conditions,
+    form.material,
+    form.transmission,
+    form.years,
+    publication.brand,
+    publication.conditions,
+    publication.material,
+    publication.transmission,
+    publication.year,
+  ]);
 
   return (
     <Contenedor>

@@ -1,9 +1,7 @@
 export const multiplicadores = {
   material: {
-    a: 1.2,
-    b: 1.1,
-    c: 1,
-    d: 0.9,
+    1: { 1: 1, 2: 0.9},
+    2: { 1: 1.1, 2: 1},
   },
 
   transmision: {
@@ -33,5 +31,5 @@ export const multiplicadores = {
     b: 0.88,
     c: 0.8,
     d: 0.75,
-    },
+  },
 };

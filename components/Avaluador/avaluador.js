@@ -1,17 +1,39 @@
-import {multiplicadores} from './multiplicadores';
+import { multiplicadores } from "./multiplicadores";
 
-function redondear(numero){
+function redondear(numero) {
   return Math.round(numero.toFixed(0) / 5) * 5;
 }
 
-export function valorarBicicleta(anio, material, transmision, marca, condition) {
+export function valorarBicicleta(
+  transmision,
+  anio,
+  material,
+  marca,
+  condition,
+  typePrice
+) {
+  console.log(transmision, anio, material, marca, condition, typePrice);
 
-  console.log(anio, material, transmision, marca, condition)
+  let materialStatus;
+  if (material != 1 && material != 2) {
+    materialStatus =
+      multiplicadores?.material[
+        parseInt(transmision?.material) ? parseInt(transmision?.material) : 2
+      ][2];
+  } else {
+    materialStatus =
+      multiplicadores.material[
+        parseInt(transmision?.material) ? parseInt(transmision?.material) : 2
+      ][parseInt(material) ? parseInt(material) : 2];
+  }
 
-  let precio = 500;
+  let precio
+  if (typePrice === 1) {
+    precio = transmision?.precio1 ?? 800;
+  } else {
+    precio = transmision?.precio2?? 800;
+  }
 
-  const multiplicadorMaterial = multiplicadores.material[material];
-  const multiplicadorTransmision = multiplicadores.transmision[transmision];
   const multiplicadorMarca = multiplicadores.marca[marca];
   const multiplicadorCondition = multiplicadores.condition[condition];
 
@@ -38,8 +60,7 @@ export function valorarBicicleta(anio, material, transmision, marca, condition) 
   }
 
   const multiplicadorTotal =
-    multiplicadorMaterial *
-    multiplicadorTransmision *
+    materialStatus *
     multiplicadorMarca *
     multiplicadorEdad *
     multiplicadorCondition;
@@ -48,13 +69,13 @@ export function valorarBicicleta(anio, material, transmision, marca, condition) 
 
   const valoracionMinima = redondear(valoracionMaxima * 0.93);
 
-  const DirectaMinima = redondear(valoracionMinima - (valoracionMinima * 0.15));
-  
+  const DirectaMinima = redondear(valoracionMinima - valoracionMinima * 0.15);
 
-  const DirectaMaxima = redondear(valoracionMaxima - (valoracionMaxima * 0.15));
+  const DirectaMaxima = redondear(valoracionMaxima - valoracionMaxima * 0.15);
 
-  const valoracionOriginal = redondear(((precio * multiplicadorTotal/multiplicadorCondition)) * 0.93 );
-  
+  const valoracionOriginal = redondear(
+    ((precio * multiplicadorTotal) / multiplicadorCondition) * 0.93
+  );
 
   return {
     min: valoracionMinima,
@@ -66,7 +87,6 @@ export function valorarBicicleta(anio, material, transmision, marca, condition) 
     original: valoracionOriginal.toLocaleString("en"),
   };
 }
-
 
 /* 
 const precio = 500; // Precio base de la bicicleta en dólares
