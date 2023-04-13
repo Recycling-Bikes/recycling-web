@@ -190,9 +190,9 @@ export default function PartUno() {
                 </Form.Group>
               </div>
 
-              <div className="d-flex justify-content-end pt-3">
+              <div className="d-flex justify-content-between pt-3">
                 {" "}
-                <Button variant="secondary" onClick={()=> {
+                <Button variant="outline-secondary" onClick={()=> {
                   clearAll()
                   router.push("/vender")
                 }}>Limpiar</Button>
