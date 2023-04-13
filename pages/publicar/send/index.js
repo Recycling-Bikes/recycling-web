@@ -25,7 +25,7 @@ import { userState } from "context/User/UserState";
 import InputFile2 from "components/Custom/InputFile/inputFile2";
 
 const schema = yup.object().shape({
-  description: yup.string().required("La descripción es requerida"),
+  description: yup.string(),
   title: yup.string().required("El titulo es requerido"),
   price: yup.number().required("El precio es requerida"),
   files: yup
