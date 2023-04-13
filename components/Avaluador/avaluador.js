@@ -12,8 +12,6 @@ export function valorarBicicleta(
   condition,
   typePrice
 ) {
-  console.log(transmision, anio, material, marca, condition, typePrice);
-
   let materialStatus;
   if (material != 1 && material != 2) {
     materialStatus =
@@ -27,11 +25,11 @@ export function valorarBicicleta(
       ][parseInt(material) ? parseInt(material) : 2];
   }
 
-  let precio
+  let precio;
   if (typePrice == 1) {
     precio = transmision?.precio1 ?? 800;
   } else {
-    precio = transmision?.precio2?? 800;
+    precio = transmision?.precio2 ?? 800;
   }
 
   const multiplicadorMarca = multiplicadores.marca[marca];
@@ -39,26 +37,45 @@ export function valorarBicicleta(
 
   let multiplicadorEdad;
 
-  let year = new Date().getFullYear();
+  function EdadFn(anio, edad) {
+    let year = new Date().getFullYear();
+    switch (true) {
+      case anio == year:
+        return edad["s"];
+      case anio >= year - 1:
+        return edad["a"];
+      case anio >= year - 2:
+        return edad["b"];
+      case anio >= year - 3:
+        return edad["c"];
+      case anio >= year - 4:
+        return edad["d"];
+      case anio <= year - 5:
+        return edad["f"];
+    }
+  }
 
   switch (true) {
-    case anio == year:
-      multiplicadorEdad = multiplicadores.edad["s"];
+    case precio <= 500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[0]);
       break;
-    case anio >= year - 1:
-      multiplicadorEdad = multiplicadores.edad["a"];
+    case precio <= 1000:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[500]);
       break;
-    case anio >= year - 2:
-      multiplicadorEdad = multiplicadores.edad["b"];
+    case precio <= 1500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[1000]);
       break;
-    case anio >= year - 3:
-      multiplicadorEdad = multiplicadores.edad["c"];
+    case precio <= 2500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[1500]);
       break;
-    case anio >= year - 4:
-      multiplicadorEdad = multiplicadores.edad["d"];
+    case precio <= 3500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[2500]);
       break;
-    case anio <= year - 5:
-      multiplicadorEdad = multiplicadores.edad["f"];
+    case precio <= 5500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[3500]);
+      break;
+    case precio > 5500:
+      multiplicadorEdad = EdadFn(anio, multiplicadores.edad[5500]);
       break;
   }
 
@@ -76,10 +93,6 @@ export function valorarBicicleta(
 
   const DirectaMaxima = redondear(valoracionMaxima - valoracionMaxima * 0.15);
 
-  const valoracionOriginal = redondear(
-    ((precio * multiplicadorTotal) / multiplicadorCondition) * 0.93
-  );
-
   return {
     min: valoracionMinima,
     max: valoracionMaxima.toLocaleString("en"),
@@ -87,7 +100,7 @@ export function valorarBicicleta(
       min: DirectaMinima.toLocaleString("en"),
       max: DirectaMaxima.toLocaleString("en"),
     },
-    original: (precio * materialStatus).toLocaleString("en"),
+    original: (precio * materialStatus * multiplicadorMarca).toLocaleString("en"),
   };
 }
 
