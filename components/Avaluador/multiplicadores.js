@@ -43,7 +43,7 @@ export const multiplicadores = {
       c: 0.9,
       d: 0.85,
       f: 0.8,
-      resto: 0.3
+      resto: 0.03
     },
 
     500: {
@@ -53,7 +53,7 @@ export const multiplicadores = {
       c: 0.9,
       d: 0.85,
       f: 0.8,
-      resto: 0.3
+      resto: 0.03
     },
 
     1000: {
@@ -63,7 +63,7 @@ export const multiplicadores = {
       c: 0.8,
       d: 0.75,
       f: 0.7,
-      resto: 0.3
+      resto: 0.03
     },
 
     1500: {
@@ -73,7 +73,7 @@ export const multiplicadores = {
       c: 0.75,
       d: 0.7,
       f: 0.65,
-      resto: 0.3
+      resto: 0.03
     },
 
     2000: {
@@ -83,7 +83,7 @@ export const multiplicadores = {
       c: 0.72,
       d: 0.68,
       f: 0.65,
-      resto: 0.3
+      resto: 0.03
     },
 
     2500: {
@@ -93,7 +93,7 @@ export const multiplicadores = {
       c: 0.68,
       d: 0.65,
       f: 0.62,
-      resto: 0.3
+      resto: 0.03
     },
 
     3000: {
@@ -103,7 +103,7 @@ export const multiplicadores = {
       c: 0.62,
       d: 0.6,
       f: 0.58,
-      resto: 0.3
+      resto: 0.03
     },
 
     3500: {
@@ -113,7 +113,7 @@ export const multiplicadores = {
       c: 0.62,
       d: 0.58,
       f: 0.55,
-      resto: 0.3
+      resto: 0.03
     },
 
     5500: {
