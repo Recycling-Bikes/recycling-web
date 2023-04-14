@@ -18,8 +18,13 @@ export default function Descriptons() {
       </p>
       <Link href="#">Guía de tallas</Link>
       <h2 className="my-4">${bici.price.toLocaleString("en")}</h2>
-
-      <Button className="mb-2 py-2">Añadir al carrito</Button>
+      <Link
+        target="_blank"
+        className="d-flex"
+        href={`https://wa.me/50769240795?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20si%20la%20bicicleta%20con%20identificador%20${bici.id}%20est%C3%A1%20disponible%20para%20su%20compra.%20%C2%BFPodr%C3%ADa%20confirmar%20si%20est%C3%A1%20disponible%20y%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20caracter%C3%ADsticas%20y%20precio%3F%20Gracias.%0Ahttps%3A%2F%2Frecyclingbikes.co%2Fparking%2F${bici.id}`}
+      >
+        <Button className="mb-2 py-2 w-100">Comprar</Button>
+      </Link>
       {/* <Button className="mb-2" variant="outline-primary btn-outline">
         Trade - in
       </Button> */}
