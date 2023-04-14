@@ -96,7 +96,7 @@ export default function Partdos() {
         updateFormState("sizes"),
         updateFormState("materials"),
         updateFormState("transmissions", "*", category, "category"),
-        updateFormState("rines", "*", category, "category"),
+        updateFormState("rines", "*", publication.category ?? null, "category"),
         updateFormState("frenos"),
         updateFormState("suspension"),
       ]);

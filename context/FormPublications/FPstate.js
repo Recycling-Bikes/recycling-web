@@ -31,8 +31,13 @@ export const FPState = create(
 
         form: {},
 
-        setForm: async (valor, parameters = "*", equal= null, column = null) => {
-          console.log(equal, column)
+        setForm: async (
+          valor,
+          parameters = "*",
+          equal = null,
+          column = null
+        ) => {
+          console.log(equal, column);
           const data = await getData(valor, parameters, equal, column);
 
           set({
@@ -61,9 +66,9 @@ export const FPState = create(
               ...get().form,
               transmissions: null,
               suspension: null,
-              frenos: null
+              frenos: null,
+              rines: null,
             },
-
           });
         },
 
@@ -118,8 +123,10 @@ const getModels = async (category, brand) => {
 };
 
 const getDatum = async (name, parameters = "*") => {
-  let { data: data, error } = await supabase.from(name).select(parameters).order("id", { ascending: true });
-  
+  let { data: data, error } = await supabase
+    .from(name)
+    .select(parameters)
+    .order("id", { ascending: true });
 
   return error ? error : data;
 };
@@ -131,14 +138,12 @@ const getDatumEqual = async (name, parameters = "*", equal, column) => {
     .eq(column, parseInt(equal))
     .order("id", { ascending: true });
 
-  
-
   return error ? error : data;
 };
 
 export const getData = async (name, parameters = "*", equal, column) => {
   let data = {};
-  
+
   if (equal !== null) {
     console.log("🚀 ~ file: FPstate.js:129 ~ getData ~ equal:", equal);
 
@@ -188,12 +193,12 @@ const postBici = async ({
     .from("propiedades")
     .insert([
       {
-        transmission : transmission ? transmission : null,
-        category : category ? category : null,
+        transmission: transmission ? transmission : null,
+        category: category ? category : null,
         subcategory: subcategory ? subcategory : null,
         model: other,
-        brand : brand ? brand : null,
-        material : material ? material : null,
+        brand: brand ? brand : null,
+        material: material ? material : null,
         suspension: suspension ? suspension : null,
         freno: freno ? freno : null,
         rine: rin ? rin : null,
