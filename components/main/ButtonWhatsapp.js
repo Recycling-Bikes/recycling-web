@@ -6,7 +6,7 @@ export default function ButtonWhatsapp() {
   return (
           
           <Link
-          href="https://api.whatsapp.com/send?phone=+573003000000"
+          href="https://wa.me/50769240795?text=%C2%A1Hola!"
           className="float d-grid"
           style={{
             position: "fixed",
