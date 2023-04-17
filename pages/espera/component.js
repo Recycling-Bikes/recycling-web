@@ -1,24 +1,24 @@
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import ImagePrueba2 from "./img";
 
 export default function EsperaComponent(props) {
-    return (
-        <Contenedor>
-            <Container>
-                <Row>
-                    <Col className="d-flex justify-content-center flex-column mt-lg-0 mt-5 p-sm-4 p-5">
-                        {props.children}
-                    </Col>
+  return (
+    <Main>
+      <Container>
+        <Row>
+          <Col className="d-flex justify-content-center flex-column mt-lg-0 mt-5 p-sm-4 p-5">
+            {props.children}
+          </Col>
 
-                    <Col className="d-none d-lg-block ">
-                        <ImagePrueba2 />
-                    </Col>
-                </Row>
-            </Container>
-            <div className="mb-5 mb-sm-0 " />
-        </Contenedor>
-    );
+          <Col className="d-none d-lg-block ">
+            <ImagePrueba2 />
+          </Col>
+        </Row>
+      </Container>
+      <div className="mb-5 mb-sm-0 " />
+    </Main>
+  );
 }
 
 // export const Selects = ({ name, data, register, ...props }) => {

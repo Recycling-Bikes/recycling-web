@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import {
   Row,
   Form,
@@ -31,7 +31,7 @@ const schema = yup.object().shape({
   files: yup
     .array()
     .required("Se deben subir archivos")
-    .min(3, "Se deben subir al 3 una foto"),
+    .min(1, "Se deben subir mínimo 1 archivo"),
 });
 
 export default function Partdos() {
@@ -39,8 +39,8 @@ export default function Partdos() {
 
   const user = userState((state) => state.user);
 
-  const [publication, form] = FPState(
-    (state) => [state.publication, state.form],
+  const [publication, form, name] = FPState(
+    (state) => [state.publication, state.form, state.name],
     shallow
   );
 
@@ -97,7 +97,7 @@ export default function Partdos() {
   };
 
   return (
-    <Contenedor>
+    <Main>
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
@@ -110,6 +110,7 @@ export default function Partdos() {
                     <Form.Control
                       {...register("title")}
                       isInvalid={errors.title}
+                      defaultValue={name}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors?.title?.message}
@@ -174,6 +175,6 @@ export default function Partdos() {
         </Row>
       </Container>
       <div className="d-none d-lg-block" style={{ height: "20rem" }}></div>
-    </Contenedor>
+    </Main>
   );
 }

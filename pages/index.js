@@ -1,4 +1,4 @@
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import { Container } from "react-bootstrap";
 import Article from "./Home/Article";
 import Promesas from "./Home/Promesas";
@@ -6,18 +6,18 @@ import Presentation from "./Home/Presentation";
 import Reviews from "./Home/Reviews";
 
 export default function HomePage(props) {
-    return (
-        <Contenedor>
-            <Container fluid className="presentation">
-                <Presentation />
-            </Container>
-            <Article Title="Explora bicis destacadas" data={props.data} />
+  return (
+    <Main>
+      <Container fluid className="presentation">
+        <Presentation />
+      </Container>
+      <Article Title="Explora bicis destacadas" data={props.data} />
 
-            <Reviews />
+      <Reviews />
 
-            <Promesas />
-        </Contenedor>
-    );
+      <Promesas />
+    </Main>
+  );
 }
 
 // export async function getStaticProps(ctx){

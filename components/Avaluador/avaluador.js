@@ -57,12 +57,9 @@ function ventaDirecta(precio) {
       return multiplicadores.directa[1000];
     case precio <= 2000:
       return multiplicadores.directa[1500];
-    case precio <= 2500:
-      return multiplicadores.directa[2000];
     case precio <= 3000:
       return multiplicadores.directa[2500];
-    case precio <= 3500:
-      return multiplicadores.directa[3000];
+
     case precio <= 5500:
       return multiplicadores.directa[3500];
     case precio > 5500:
@@ -124,7 +121,7 @@ export function valorarBicicleta(
   const ValorOriginal = redondear(precio * materialStatus * multiplicadorMarca);
 
   return {
-    min: valoracionMinima,
+    min: valoracionMinima.toLocaleString("en"),
     max: valoracionMaxima.toLocaleString("en"),
     directa: {
       min: DirectaMinima.toLocaleString("en"),
@@ -133,6 +130,11 @@ export function valorarBicicleta(
     original: ValorOriginal.toLocaleString("en"),
   };
 }
+
+
+
+
+
 
 /* 
 const precio = 500; // Precio base de la bicicleta en dólares

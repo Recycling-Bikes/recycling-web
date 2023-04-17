@@ -9,6 +9,13 @@ export const FPState = create(
   devtools(
     persist(
       (set, get) => ({
+
+        name: "",
+        setName: (name) => {
+          set({ name });
+        },
+
+
         publication: {},
 
         setPublication: async (data) => {

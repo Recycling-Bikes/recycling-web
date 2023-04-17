@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import { BsChevronRight } from "react-icons/bs";
 import { useRouter } from "next/router";
@@ -29,12 +29,17 @@ export default function PartUno() {
     shallow
   );
 
-  const [setPublication, setForm, setModels, clearAll, clearTransmision] = FPState(
-    (state) => [state.setPublication, state.setForm, state.setModels, state.clearAll, state.clearTransmision],
-    shallow
-  );
-
-
+  const [setPublication, setForm, setModels, clearAll, clearTransmision] =
+    FPState(
+      (state) => [
+        state.setPublication,
+        state.setForm,
+        state.setModels,
+        state.clearAll,
+        state.clearTransmision,
+      ],
+      shallow
+    );
 
   const {
     handleSubmit,
@@ -69,9 +74,8 @@ export default function PartUno() {
     } else {
       setViewModels(true);
     }
-    clearTransmision()
+    clearTransmision();
   }, [watch("brand"), watch("category")]);
-
 
   useEffect(() => {
     setHydrated(false);
@@ -98,7 +102,7 @@ export default function PartUno() {
   return hydrated ? (
     ""
   ) : (
-    <Contenedor>
+    <Main>
       {/* <DevTool control={control} /> */}
       <Container>
         <Row className="justify-content-md-center">
@@ -192,10 +196,15 @@ export default function PartUno() {
 
               <div className="d-flex justify-content-between pt-3">
                 {" "}
-                <Button variant="outline-secondary" onClick={()=> {
-                  clearAll()
-                  router.push("/vender")
-                }}>Limpiar</Button>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => {
+                    clearAll();
+                    router.push("/vender");
+                  }}
+                >
+                  Limpiar
+                </Button>
                 <Button variant="primary" type="submit">
                   Detalles de tu bici
                   <BsChevronRight
@@ -209,6 +218,6 @@ export default function PartUno() {
         </Row>
       </Container>
       <div className="d-none d-lg-block" style={{ height: "20rem" }} />
-    </Contenedor>
+    </Main>
   );
 }
