@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
 import Mountain from "public/Mountain.png";
@@ -30,8 +30,6 @@ export default function Value() {
 
   const [popCondition, setPopCondition] = useState(false);
 
-
-
   const Valued = (valueA, valueB) => {
     const devalueA = parseInt(off ?? 0) + valueA;
     const priceA = (price - price * (devalueA / 100)).toLocaleString("en");
@@ -53,7 +51,7 @@ export default function Value() {
   return hydration ? (
     ""
   ) : (
-    <Contenedor>
+    <Main>
       <Container className="justify-content-center my-5">
         <Row className="justify-content-center">
           <Col sm={100} md={6} lg={5} className="justify-content-center">
@@ -101,7 +99,7 @@ export default function Value() {
                 className=" mb-2 ps-2"
                 style={{ color: "rgba(15, 168, 153, 1)" }}
                 onClick={() => {
-                  setPopCondition(true)
+                  setPopCondition(true);
                 }}
               >
                 <Col className="d-flex col-auto pe-0 align-items-center">
@@ -139,7 +137,10 @@ export default function Value() {
             </Button>
           </div>
         </div>
-        <ModalCondition modalShow={popCondition} setModalShow={setPopCondition} />
+        <ModalCondition
+          modalShow={popCondition}
+          setModalShow={setPopCondition}
+        />
 
         <PopLogin
           show={modalShow}
@@ -149,6 +150,6 @@ export default function Value() {
       </Container>
 
       <div className="d-none d-lg-block" style={{ height: "10rem" }} />
-    </Contenedor>
+    </Main>
   );
 }

@@ -4,7 +4,7 @@ import Head from "next/head";
 import { SSRProvider } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
-const Contenedor = (props) => {
+const Main = (props) => {
   return (
     <>
       <Head>
@@ -25,4 +25,4 @@ const Contenedor = (props) => {
   );
 };
 
-export default Contenedor;
+export default Main;

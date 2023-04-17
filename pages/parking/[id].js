@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import Article from "../Home/Article";
 import Descriptons from "components/publicacion/vender";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
@@ -25,7 +25,7 @@ const Vender = () => {
 
   if (isLoading) {
     return (
-      <Contenedor>
+      <Main>
         <div
           style={{
             display: "flex",
@@ -41,16 +41,15 @@ const Vender = () => {
             style={{ width: "200px", height: "200px", fontSize: "90px" }}
           />
         </div>
-        
-      </Contenedor>
+      </Main>
     );
   }
   if (isError) {
     return <Custom404 />;
   }
 
-  return  (
-    <Contenedor>
+  return (
+    <Main>
       <Container>
         <Row className="d-flex justify-content-center">
           <Row>
@@ -78,9 +77,8 @@ const Vender = () => {
       </Container>
 
       <Article Title="Explora más bicis" />
-    </Contenedor>
-  )
+    </Main>
+  );
 };
-
 
 export default Vender;

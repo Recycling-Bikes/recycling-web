@@ -1,14 +1,13 @@
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import Image from "react-bootstrap/Image";
 import { Button, Container } from "react-bootstrap";
 import { useRouter } from "next/router";
 
 export default function Custom404() {
-
-        const router = useRouter();
+  const router = useRouter();
 
   return (
-    <Contenedor>
+    <Main>
       <Container
         style={{
           display: "flex",
@@ -23,7 +22,7 @@ export default function Custom404() {
           className="my-5 d-flex justify-content-center flex-column align-content-center align-items-center"
         >
           <div
-          className="d-flex "
+            className="d-flex "
             style={{
               maxWidth: "567px",
             }}
@@ -39,15 +38,24 @@ export default function Custom404() {
             ¡No encontramos esta ruta! Sigue rodando en Recycling
           </h3>
           <div className="w-100 d-flex justify-content-center mb-5">
-            <Button gap={2} color="primary" className="d-md-none w-100" onClick={() => router.push('/')} >
+            <Button
+              gap={2}
+              color="primary"
+              className="d-md-none w-100"
+              onClick={() => router.push("/")}
+            >
               Ir a la Página de Inicio
             </Button>
-            <Button  color="primary" className="d-none d-md-block" onClick={() => router.push('/')} >
+            <Button
+              color="primary"
+              className="d-none d-md-block"
+              onClick={() => router.push("/")}
+            >
               Ir a la Página de Inicio
             </Button>
           </div>
         </div>
       </Container>
-    </Contenedor>
+    </Main>
   );
 }

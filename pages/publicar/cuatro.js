@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import {
   Row,
   Form,
@@ -34,8 +34,8 @@ export default function Avaluador() {
   );
   const [condition, setCondition] = useState("");
 
-  const [setPublication, setForm] = FPState(
-    (state) => [state.setPublication, state.setForm],
+  const [setPublication, setForm, setName] = FPState(
+    (state) => [state.setPublication, state.setForm, state.setName],
     shallow
   );
   useEffect(() => {
@@ -81,10 +81,9 @@ export default function Avaluador() {
 
   useEffect(() => {
     const condition = form.conditions?.find((condition) => {
-      
       return condition.id === parseInt(publication.conditions);
     });
-    console.log("🚀 ~ file: cuatro.js:84 ~ condition ~ condition:", condition)
+
     const material = form.materials?.find((material) => {
       return material.id == parseInt(publication.material);
     });
@@ -96,11 +95,14 @@ export default function Avaluador() {
     const marca = form.brands?.find((brand) => {
       return brand.id === parseInt(publication.brand);
     });
+
     const year = form.years?.find((year) => {
       return year.id === parseInt(publication.year);
     });
 
     const typePrice = publication?.freno ?? publication.suspension ?? 1;
+
+    setName(`${marca?.name}, ${publication.other}, ${year.name}`)
 
     const values = valorarBicicleta(
       transmission,
@@ -125,7 +127,7 @@ export default function Avaluador() {
   ]);
 
   return (
-    <Contenedor>
+    <Main>
       <div className="py-3 my-md-0">
         <Container className=" ">
           <Row className="justify-content-md-center ">
@@ -193,7 +195,7 @@ export default function Avaluador() {
                   <Col className="d-flex flex-column">
                     <p className="my-0">Te la compramos ya por</p>
                     <h5>
-                    ${values.directa.min} - ${values?.directa?.max}
+                      ${values.directa.min} - ${values?.directa?.max}
                     </h5>
                   </Col>
                 </Row>
@@ -204,7 +206,6 @@ export default function Avaluador() {
                   <Col className="d-flex flex-column">
                     <p className="my-0">En nuestro Marketplace por</p>
                     <h5>
-                      
                       ${values?.min} - ${values.max}
                     </h5>
                   </Col>
@@ -300,6 +301,6 @@ export default function Avaluador() {
           router={"./send"}
         />
       </div>
-    </Contenedor>
+    </Main>
   );
 }

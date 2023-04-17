@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Contenedor from "components/home/Contenedor";
+import Main from "components/main";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
@@ -10,7 +10,7 @@ import Progres3 from "./progres3";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { FPState } from "context/FormPublications/FPstate";
-import {shallow }from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const condicionalesStyle = {
@@ -65,7 +65,7 @@ export default function Parttres() {
       console.log(form[property]);
     };
     updateFormState("conditions");
-  },[form, setForm]);
+  }, [form, setForm]);
 
   const onSubmit = (items) => {
     setPublication(items);
@@ -75,7 +75,7 @@ export default function Parttres() {
   return hydrated ? (
     ""
   ) : (
-    <Contenedor>
+    <Main>
       <Container>
         <Row className="justify-content-md-center">
           <Col md="8" xl="6">
@@ -135,6 +135,6 @@ export default function Parttres() {
         </Row>
       </Container>
       <div className="d-none d-lg-block" style={{ height: "10rem" }} />
-    </Contenedor>
+    </Main>
   );
 }

@@ -123,7 +123,7 @@ export const multiplicadores = {
       c: 0.58,
       d: 0.55,
       f: 0.5,
-      resto: 0.3
+      resto: 0.03
     },
   },
 };
