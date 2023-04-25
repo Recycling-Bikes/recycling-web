@@ -12,16 +12,15 @@ export function Size() {
   const setQuest = advisorState((state) => state.setQuest);
 
   const onSubmit = (event) => {
-
     switch (event[nameForm]) {
       case "3":
         setFilters(() => ({
-          size: [8,11],
+          size: [8, 11],
         }));
         break;
       case "4":
         setFilters(() => ({
-          size: [11,14],
+          size: [11, 14],
         }));
         break;
       case "5":

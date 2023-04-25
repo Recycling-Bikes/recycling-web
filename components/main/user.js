@@ -34,7 +34,9 @@ export default function User() {
       return (
         <div>
           <NavDropdown title={delta}>
-            <NavDropdown.Item href="/perfil" disabled>Perfil</NavDropdown.Item>
+            <NavDropdown.Item href="/perfil" disabled>
+              Perfil
+            </NavDropdown.Item>
 
             {/* <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
             <NavDropdown.Divider /> */}

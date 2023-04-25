@@ -45,48 +45,48 @@ export default function NewPass() {
   };
 
   return (
-      <Login>
-          <Container
-              fluid
-              className="d-flex flex-column justify-content-center align-content-center align-items-center mb-5"
-          >
-              <Form onSubmit={handleSubmit(onSubmit)}>
-                  <h1 className="mb-4">
-                      Elige una nueva <br /> contraseña
-                  </h1>
-                  <Form.Group className="mb-3" controlId="1">
-                      <Form.Label>Nueva contraseña</Form.Label>
-                      <Form.Control
-                          type="password"
-                          {...register("password")}
-                          isInvalid={errors?.password ? true : false}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                          {errors.password?.message}
-                      </Form.Control.Feedback>
-                  </Form.Group>
+    <Login>
+      <Container
+        fluid
+        className="d-flex flex-column justify-content-center align-content-center align-items-center mb-5"
+      >
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="mb-4">
+            Elige una nueva <br /> contraseña
+          </h1>
+          <Form.Group className="mb-3" controlId="1">
+            <Form.Label>Nueva contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              {...register("password")}
+              isInvalid={errors?.password ? true : false}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.password?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-                  <Form.Group className="mb-5" controlId="2">
-                      <Form.Label>Confirma tu nueva contraseña</Form.Label>
-                      <Form.Control
-                          type="password"
-                          {...register("confirmPassword")}
-                          isInvalid={errors?.confirmPassword ? true : false}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                          {errors.confirmPassword?.message}
-                      </Form.Control.Feedback>
-                  </Form.Group>
-                  <Button
-                      style={{ width: "100%" }}
-                      variant="primary"
-                      type="submit"
-                      className="mb-3"
-                  >
-                      Recuperar contraseña
-                  </Button>
-              </Form>
-          </Container>
-      </Login>
+          <Form.Group className="mb-5" controlId="2">
+            <Form.Label>Confirma tu nueva contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              {...register("confirmPassword")}
+              isInvalid={errors?.confirmPassword ? true : false}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.confirmPassword?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Button
+            style={{ width: "100%" }}
+            variant="primary"
+            type="submit"
+            className="mb-3"
+          >
+            Recuperar contraseña
+          </Button>
+        </Form>
+      </Container>
+    </Login>
   );
 }

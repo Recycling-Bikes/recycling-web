@@ -15,16 +15,15 @@ import years from "components/parking/filtros/years";
 import { filtersState } from "context/Filters/filtersState";
 
 export default function Filtro() {
-  const [hydration, setHydration] = useState(false)
+  const [hydration, setHydration] = useState(false);
 
   useEffect(() => {
-    setHydration(true)
-  },[])
+    setHydration(true);
+  }, []);
   const setFilters = filtersState((state) => state.setFilters);
   const filters = filtersState((state) => state.filters);
 
   const Iters = (data, category) => {
-  
     return (
       <>
         {data.map((option, index) => {
@@ -185,8 +184,7 @@ export default function Filtro() {
                     }
 
                     setFilters((prevFilters) => {
-                      
-                      return {minPrice: minPrice};
+                      return { minPrice: minPrice };
                     });
                   }}
                 />
@@ -221,5 +219,5 @@ export default function Filtro() {
         {/* End - Precio */}
       </Accordion>
     </div>
-  ): null;
+  ) : null;
 }

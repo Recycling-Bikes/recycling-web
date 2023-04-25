@@ -9,6 +9,8 @@ import {
   Container,
   Button,
   ProgressBar,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import Link from "next/link";
 import { MdOutlinePedalBike } from "react-icons/md";
@@ -23,6 +25,7 @@ import { userState } from "context/User/UserState";
 import { FPState } from "context/FormPublications/FPstate";
 import { shallow } from "zustand/shallow";
 import { valorarBicicleta } from "components/Avaluador/avaluador";
+import { FiAlertCircle } from "react-icons/fi";
 
 export default function Avaluador() {
   const [ModalShow, setModalShow] = useState(false);
@@ -102,7 +105,7 @@ export default function Avaluador() {
 
     const typePrice = publication?.freno ?? publication.suspension ?? 1;
 
-    setName(`${marca?.name}, ${publication.other}, ${year.name}`)
+    setName(`${marca?.name}, ${publication.other}, ${year.name}`);
 
     const values = valorarBicicleta(
       transmission,
@@ -188,37 +191,30 @@ export default function Avaluador() {
             </Col>
             <Col md="auto" className="d-flex d-md-block justify-content-center">
               <div>
-                <Row sm="auto" className=" mb-2">
-                  <Col className="d-flex col-auto pe-0 align-items-center">
-                    <HiArrowsRightLeft color="#0FA899" size={32} />
-                  </Col>
-                  <Col className="d-flex flex-column">
-                    <p className="my-0">Te la compramos ya por</p>
-                    <h5>
-                      ${values.directa.min} - ${values?.directa?.max}
-                    </h5>
-                  </Col>
-                </Row>
-                <Row sm="auto" className=" mb-2">
-                  <Col className="d-flex col-auto pe-0 align-items-center">
-                    <BsHandbag size={32} color="#6F42C1" />
-                  </Col>
-                  <Col className="d-flex flex-column">
-                    <p className="my-0">En nuestro Marketplace por</p>
-                    <h5>
-                      ${values?.min} - ${values.max}
-                    </h5>
-                  </Col>
-                </Row>
-                <Row sm="auto" className="mb-2 d-flex ">
-                  <Col className="d-flex  col-auto pe-0 align-items-center">
-                    <BsTag size={32} color="#0FA899" />
-                  </Col>
-                  <Col className="d-flex flex-column">
-                    <p className="my-0">Si estuviera nueva</p>
-                    <h5>${values?.original}</h5>
-                  </Col>
-                </Row>
+                <span>
+                  <Row sm="auto" className=" mb-2">
+                    <Col className="d-flex col-auto pe-0 align-items-center">
+                      <HiArrowsRightLeft color="#0FA899" size={32} />
+                    </Col>
+                    <Col className="d-flex flex-column">
+                      <p className="my-0">Te la compramos ya por</p>
+                      <h5>
+                        ${values.directa.min} - ${values?.directa?.max} <Trigger/>
+                      </h5>
+                    </Col>
+                  </Row>
+                  <Row sm="auto" className=" mb-2">
+                    <Col className="d-flex col-auto pe-0 align-items-center">
+                      <BsHandbag size={32} color="#6F42C1" />
+                    </Col>
+                    <Col className="d-flex flex-column">
+                      <p className="my-0">En nuestro Marketplace por</p>
+                      <h5>
+                        ${values?.min} - ${values.max}<Trigger/>
+                      </h5>
+                    </Col>
+                  </Row>
+                </span>
                 <Row
                   sm="auto"
                   className=" mb-2 ps-2"
@@ -231,6 +227,15 @@ export default function Avaluador() {
                     Condición {condition}
                   </Col>
                 </Row>
+                <div
+                  className="mt-4"
+                  style={{
+                    maxWidth: "270px",
+                  }}
+                >
+                  *Precios referenciales.
+                  <strong> Puedes modificar el valor al publicar.</strong>
+                </div>
               </div>
             </Col>
           </Row>
@@ -284,7 +289,7 @@ export default function Avaluador() {
             </Button>
 
             <Button
-              variant="ligth"
+              variant="light"
               style={{ color: "#0fa899" }}
               onClick={() => router.push("./tres")}
               className=""
@@ -302,5 +307,41 @@ export default function Avaluador() {
         />
       </div>
     </Main>
+  );
+}
+
+function Trigger() {
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      El precio de avalúo indicado en esta página se basa en las características
+      originales del bien evaluado, teniendo en cuenta Marca, Modelo, material y
+      transmisión. Sin tener en cuenta posibles modificaciones o accesorios de
+      topes de gama que se hayan agregado posteriormente. Es importante destacar
+      que el valor del bien puede variar en función de estos factores, por lo
+      que recomendamos considerar esta información al momento de realizar su
+      evaluación. Para obtener más información, no dude en ponerse en contacto
+      con nuestro equipo de evaluación.
+    </Tooltip>
+  );
+
+  return (
+    <OverlayTrigger
+      placement="left"
+      delay={{ show: 250, hide: 400 }}
+      overlay={renderTooltip}
+    >
+      <Button variant="light" style={{ borderRadius: "100%", padding: "0" }}>
+        <div
+          style={{
+            height: "1.5rem",
+            width: "1.5rem",
+            placeContent: "center",
+          }}
+          className="grid"
+        >
+          <FiAlertCircle size={16} style={{color: "rgba(15, 168, 153, 1)"}} />
+        </div>
+      </Button>
+    </OverlayTrigger>
   );
 }

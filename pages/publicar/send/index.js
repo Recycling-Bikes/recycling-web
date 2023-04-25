@@ -46,8 +46,13 @@ export default function Partdos() {
 
   const [button, setButton] = useState(false);
 
-  const { setPublication, setForm, UpdateImages, clearAll, postPublication } =
-    FPState();
+  const {
+    setPublication,
+    setForm,
+    UpdateImages,
+    clearAll,
+    postPublication,
+  } = FPState();
 
   useEffect(() => {
     if (!form.brands || !form.models) {

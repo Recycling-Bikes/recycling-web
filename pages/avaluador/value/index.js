@@ -16,8 +16,13 @@ import ModalCondition from "./modalcondition";
 
 export default function Value() {
   const [hydration, setHydration] = useState(true);
-  const { nameCondition, off, price, imageUrl, ...cardSelected } =
-    avaluadorSelect((state) => state.cardSelected);
+  const {
+    nameCondition,
+    off,
+    price,
+    imageUrl,
+    ...cardSelected
+  } = avaluadorSelect((state) => state.cardSelected);
 
   useEffect(() => {
     console.log(cardSelected);
