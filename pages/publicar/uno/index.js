@@ -29,17 +29,22 @@ export default function PartUno() {
     shallow
   );
 
-  const [setPublication, setForm, setModels, clearAll, clearTransmision] =
-    FPState(
-      (state) => [
-        state.setPublication,
-        state.setForm,
-        state.setModels,
-        state.clearAll,
-        state.clearTransmision,
-      ],
-      shallow
-    );
+  const [
+    setPublication,
+    setForm,
+    setModels,
+    clearAll,
+    clearTransmision,
+  ] = FPState(
+    (state) => [
+      state.setPublication,
+      state.setForm,
+      state.setModels,
+      state.clearAll,
+      state.clearTransmision,
+    ],
+    shallow
+  );
 
   const {
     handleSubmit,

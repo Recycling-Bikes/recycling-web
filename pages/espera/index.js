@@ -8,48 +8,46 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import Form from "react-bootstrap/Form";
 
 export default function Espera({
-    questions,
-    title,
-    description,
-    onSubmit,
-    nameForm,
-    back,
-    backButtonVision, // <--- Hace visible on invisible el botón de Atrás
-    checkbox, // <--- Agrega la propiedad "checkbox"
-    progress,
+  questions,
+  title,
+  description,
+  onSubmit,
+  nameForm,
+  back,
+  backButtonVision, // <--- Hace visible on invisible el botón de Atrás
+  checkbox, // <--- Agrega la propiedad "checkbox"
+  progress,
 }) {
+  return (
+    <>
+      <EsperaComponent>
+        <h1 style={{ color: "#06433D", fontStyle: "medium" }}>
+          ¿Aún no encuentras la bici de tus sueños? ¡Te ayudamos a rodar!
+        </h1>
+        <p className="mb-5 text-secondary">
+          Cuéntanos más sobre lo que estás buscando, moveremos cielo y tierra
+          por conseguirlo para ti :){" "}
+        </p>
+        <form>
+          <Row className="d-flex flex-row">
+            <InputGroup className="mb-3">
+              <Button
+                variant="primary"
+                className=" "
+                type="submit"
+                onClick={() => {
+                  router.push("/publicar/uno");
+                }}
+              >
+                Comenzar
+                <MdKeyboardArrowRight />
+              </Button>
+            </InputGroup>
+          </Row>
+        </form>
+      </EsperaComponent>
 
-    return (
-        <>
-            <EsperaComponent>
-                <h1 style={{ color: "#06433D", fontStyle: "medium" }}>
-                    ¿Aún no encuentras la bici de tus sueños? ¡Te ayudamos a
-                    rodar!
-                </h1>
-                <p className="mb-5 text-secondary">
-                    Cuéntanos más sobre lo que estás buscando, moveremos cielo y
-                    tierra por conseguirlo para ti :){" "}
-                </p>
-                <form>
-                    <Row className="d-flex flex-row">
-                        <InputGroup className="mb-3">
-                            <Button
-                                variant="primary"
-                                className=" "
-                                type="submit"
-                                onClick={() => {
-                                    router.push("/publicar/uno");
-                                }}
-                            >
-                                Comenzar
-                                <MdKeyboardArrowRight />
-                            </Button>
-                        </InputGroup>
-                    </Row>
-                </form>
-            </EsperaComponent>
-
-            {/* <EsperaComponent>
+      {/* <EsperaComponent>
                 <form onSubmit={handleSubmit(onSubmit)} className="pt-2">
                     <div className="mt-5 d-none d-xl-block" />
                     {progress ? (
@@ -75,7 +73,7 @@ export default function Espera({
                 ))} 
                      */}
 
-                    {/* Button Back con condicionales de visibilidad
+      {/* Button Back con condicionales de visibilidad
                     {backButtonVision ? (
                         <Button
                             variant="light"
@@ -94,10 +92,10 @@ export default function Espera({
                     {
                          Button Back End*/}
 
-                    {/* <button ref={submit} type="submit" className="d-none" />
+      {/* <button ref={submit} type="submit" className="d-none" />
                 </form> 
             </EsperaComponent>
         */}
-        </>
-    );
+    </>
+  );
 }

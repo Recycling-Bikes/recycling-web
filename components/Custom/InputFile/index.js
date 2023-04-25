@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { HiPlus } from "react-icons/hi";
 import { useState } from "react";
 
-
 import style from "./else.module.scss";
 import { Col, Image, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
@@ -17,8 +16,18 @@ export default function InputFile({ onChange, label, ...props }) {
       if (image !== "error") {
         if (image.type.includes("video")) {
           return (
-            <Col key={index} lg={4} xs={6} className="mb-3 d-flex justify-content-center">
-              <video width={150} height={150} src={URL.createObjectURL(image)} alt="video" />
+            <Col
+              key={index}
+              lg={4}
+              xs={6}
+              className="mb-3 d-flex justify-content-center"
+            >
+              <video
+                width={150}
+                height={150}
+                src={URL.createObjectURL(image)}
+                alt="video"
+              />
             </Col>
           );
         }

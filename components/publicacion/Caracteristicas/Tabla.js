@@ -1,5 +1,5 @@
 import { Table, Col, Row } from "react-bootstrap";
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 import { parkingState } from "context/Parking/ParkingState";
 
@@ -7,8 +7,8 @@ export default function Tabla() {
   const bici = parkingState((state) => state.bici);
 
   useEffect(() => {
-    console.log(bici)
-  })
+    console.log(bici);
+  });
 
   const {
     brand,
@@ -16,10 +16,8 @@ export default function Tabla() {
     size,
 
     propiedades,
-
   } = bici;
-    console.log("🚀 ~ file: Tabla.js:21 ~ Tabla ~ propiedades:", propiedades)
-  
+  console.log("🚀 ~ file: Tabla.js:21 ~ Tabla ~ propiedades:", propiedades);
 
   const data = (name, datum) => {
     return (
@@ -53,16 +51,28 @@ export default function Tabla() {
               <tr></tr>
             </thead>
             <tbody>
-              {propiedades?.brands?.name ? data("Marca", propiedades.brands.name) : null}
+              {propiedades?.brands?.name
+                ? data("Marca", propiedades.brands.name)
+                : null}
               {propiedades?.model ? data("Modelo", propiedades.model) : null}
-              {propiedades?.transmission?.name ? data("Transmisión", propiedades?.transmission?.name) : null}
+              {propiedades?.transmission?.name
+                ? data("Transmisión", propiedades?.transmission?.name)
+                : null}
               {size.name ? data("Talla", size.name) : null}
 
-              {propiedades?.materials?.name ? data("Material", propiedades?.materials?.name) : null}
-              {propiedades?.suspension?.name ? data("Suspensión", propiedades?.suspension?.name) : null}
-              {propiedades?.frenos?.name ? data("Frenos", propiedades?.frenos?.name) : null}
-              {propiedades?.rines?.name ? data("Rines", propiedades?.rines?.name) : null}
-{/* 
+              {propiedades?.materials?.name
+                ? data("Material", propiedades?.materials?.name)
+                : null}
+              {propiedades?.suspension?.name
+                ? data("Suspensión", propiedades?.suspension?.name)
+                : null}
+              {propiedades?.frenos?.name
+                ? data("Frenos", propiedades?.frenos?.name)
+                : null}
+              {propiedades?.rines?.name
+                ? data("Rines", propiedades?.rines?.name)
+                : null}
+              {/* 
 
 
               {material ? data("Material", material) : null}
@@ -72,14 +82,12 @@ export default function Tabla() {
               {suspension ? data("Suspensión", suspension) : null}
 
               {saddle ? data("Sillín", saddle) : null} */}
-
-
             </tbody>
           </Table>
         </Col>
       </Row>
-    
-{/*       {bici.others ? (
+
+      {/*       {bici.others ? (
         <Row className="mt-5">
           <Col md="2">
             <h5>Build</h5>

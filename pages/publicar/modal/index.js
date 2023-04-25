@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userState } from "context/User/UserState";
 import { useRouter } from "next/router";
@@ -13,10 +13,8 @@ const schema = yup.object({
   email: yup.string().required("El correo es requerido"),
 });
 
-
 export default function PopLogin(props) {
-
-  const signIn = userState(state => state.signIn)
+  const signIn = userState((state) => state.signIn);
   const router = useRouter();
 
   const {
@@ -48,15 +46,19 @@ export default function PopLogin(props) {
 
     error
       ? (reset(error?.message), console.log(error.message))
-      : props.setModalShow(false)
+      : props.setModalShow(false);
   };
 
   return (
-    <Modal centered show={props.ModalShow} onHide={()=> props.setModalShow(false)}>
-        <Modal.Body>
+    <Modal
+      centered
+      show={props.ModalShow}
+      onHide={() => props.setModalShow(false)}
+    >
+      <Modal.Body>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <center>
-          <h3 className="mb-4">Accede a Recycling para vender tu bici</h3>
+            <h3 className="mb-4">Accede a Recycling para vender tu bici</h3>
           </center>
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Correo Electrónico</Form.Label>
@@ -104,16 +106,13 @@ export default function PopLogin(props) {
             Olvidé mi contraseña
           </Link>
         </Form>
-        <div className='mt-3 mb-3 d-flex justify-content-center'>
-
-        ¿Aún no tienes cuenta?
-        <Link href="/form/register" className='ms-2'>
-        
-          Regístrate
-        </Link>
+        <div className="mt-3 mb-3 d-flex justify-content-center">
+          ¿Aún no tienes cuenta?
+          <Link href="/form/register" className="ms-2">
+            Regístrate
+          </Link>
         </div>
-
-        </Modal.Body>
+      </Modal.Body>
     </Modal>
-  )
+  );
 }

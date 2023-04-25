@@ -1,5 +1,5 @@
 import { supabase } from "supabase/client";
-import {create} from "zustand";
+import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
@@ -86,14 +86,13 @@ const getBicis = async () => {
   return error ? error : await bicis;
 };
 
-
-
 const getBici = async (id) => {
-  console.log("🚀 ~ file: ParkingState.js:92 ~ getBici ~ id:", id)
+  console.log("🚀 ~ file: ParkingState.js:92 ~ getBici ~ id:", id);
   const { data: bicis, error } = id
     ? await supabase
         .from("bicis")
-        .select(`
+        .select(
+          `
         id,price,title,
           models (name), filesUrl, propiedades (transmission (name),
           category (name) ,
