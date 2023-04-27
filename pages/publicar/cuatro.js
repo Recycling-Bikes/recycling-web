@@ -199,7 +199,8 @@ export default function Avaluador() {
                     <Col className="d-flex flex-column">
                       <p className="my-0">Te la compramos ya por</p>
                       <h5>
-                        ${values.directa.min} - ${values?.directa?.max} <Trigger/>
+                        ${values.directa.min} - ${values?.directa?.max}{" "}
+                        <Trigger />
                       </h5>
                     </Col>
                   </Row>
@@ -210,7 +211,8 @@ export default function Avaluador() {
                     <Col className="d-flex flex-column">
                       <p className="my-0">En nuestro Marketplace por</p>
                       <h5>
-                        ${values?.min} - ${values.max}<Trigger/>
+                        ${values?.min} - ${values.max}
+                        <Trigger />
                       </h5>
                     </Col>
                   </Row>
@@ -313,14 +315,11 @@ export default function Avaluador() {
 function Trigger() {
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-      El precio de avalúo indicado en esta página se basa en las características
-      originales del bien evaluado, teniendo en cuenta Marca, Modelo, material y
-      transmisión. Sin tener en cuenta posibles modificaciones o accesorios de
-      topes de gama que se hayan agregado posteriormente. Es importante destacar
-      que el valor del bien puede variar en función de estos factores, por lo
-      que recomendamos considerar esta información al momento de realizar su
-      evaluación. Para obtener más información, no dude en ponerse en contacto
-      con nuestro equipo de evaluación.
+      El precio de avalúo indicado en ésta página se basa en las características
+      originales del bien evaluado, teniendo en cuenta marca, modelo, material y
+      transmisión. No se tiene en cuenta modificaciones o accesorios que se
+      hayan agregado posteriormente. Para obtener más información, no dude en
+      ponerse en contacto con nuestro equipo.
     </Tooltip>
   );
 
@@ -339,7 +338,7 @@ function Trigger() {
           }}
           className="grid"
         >
-          <FiAlertCircle size={16} style={{color: "rgba(15, 168, 153, 1)"}} />
+          <FiAlertCircle size={16} style={{ color: "rgba(15, 168, 153, 1)" }} />
         </div>
       </Button>
     </OverlayTrigger>
