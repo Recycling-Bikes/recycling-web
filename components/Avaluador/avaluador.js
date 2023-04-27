@@ -19,10 +19,8 @@ function EdadFn(anio, edad) {
       return edad["d"];
     case anio >= year - 5:
       return edad["f"];
-    case anio >= year - 9:
-      return edad["f"] - edad["resto"] * (year - anio - 5);
     default:
-      return "No se puede calcular";
+      return edad["f"] - edad["resto"] * (year - anio - 5);
   }
 }
 
