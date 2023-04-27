@@ -8,27 +8,35 @@ export default function InputFile2({
   maxNumber = 30,
   ...props
 }) {
-
   const [images, setImages] = React.useState(InitialValues);
 
-  
   const HandleChange = async (imageList, addUpdateIndex) => {
-
-    setImages(imageList); 
+    setImages(imageList);
 
     const data = imageList.map((datum) => {
-      const {file, data_url} = datum;
-      return file
+      const { file, data_url } = datum;
+      return file;
     });
-    let event = {}
-    if(data.length > 0){
+    let event = {};
+    if (data.length > 0) {
       event = {
-      target: { value: [...data], name: props.name, id: props.id, files: [...data] },
-    };}else{
+        target: {
+          value: [...data],
+          name: props.name,
+          id: props.id,
+          files: [...data],
+        },
+      };
+    } else {
       event = {
-        target: { value: undefined, name: props.name, id: props.id, files: undefined },
-
-    }}
+        target: {
+          value: undefined,
+          name: props.name,
+          id: props.id,
+          files: undefined,
+        },
+      };
+    }
 
     props.onChange(event);
   };
@@ -56,7 +64,6 @@ export default function InputFile2({
       }) => (
         <div className="">
           <div className="d-flex align-items-end justify-content-between">
-
             <div className="d-flex align-items-center mb-3">
               Fotos del producto{" "}
               <div className="mx-1" style={{ color: "red" }}>

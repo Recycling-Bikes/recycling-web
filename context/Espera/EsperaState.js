@@ -5,35 +5,35 @@ import { persist, devtools } from "zustand/middleware";
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
 
 export const esperaState = create(
-    devtools(
-        persist(
-            (set, get) => ({
-                quest: {},
+  devtools(
+    persist(
+      (set, get) => ({
+        quest: {},
 
-                setQuest: (data) => {
-                    set({ quest: { ...data } });
-                },
+        setQuest: (data) => {
+          set({ quest: { ...data } });
+        },
 
-                clearQuest: () => {
-                    set(
-                        (state) => ({
-                            ...state,
-                            quest: {},
-                        }),
-                        true
-                    );
-                },
-
-                clearAll: () => {
-                    get().clearQuest();
-                },
+        clearQuest: () => {
+          set(
+            (state) => ({
+              ...state,
+              quest: {},
             }),
-            { name: "EsperaData" }
-        ),
-        {
-            anonymousActionType: "EsperaData",
-            enabled: true,
-            name: "EsperaData",
-        }
-    )
+            true
+          );
+        },
+
+        clearAll: () => {
+          get().clearQuest();
+        },
+      }),
+      { name: "EsperaData" }
+    ),
+    {
+      anonymousActionType: "EsperaData",
+      enabled: true,
+      name: "EsperaData",
+    }
+  )
 );

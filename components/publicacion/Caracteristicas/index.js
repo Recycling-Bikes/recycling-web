@@ -3,20 +3,20 @@ import { Container, Accordion } from "react-bootstrap";
 import Tabla from "./Tabla";
 
 export default function Carractristicas(props) {
-    return (
-        <Container className=" my-5">
-            <Accordion defaultActiveKey="0" flush className="separador">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>
-                        <h4>Características del producto</h4>
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        <Container>
-                            <Tabla />
-                        </Container>
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
+  return (
+    <Container className=" my-5">
+      <Accordion defaultActiveKey="0" flush className="separador">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            <h4>Características del producto</h4>
+          </Accordion.Header>
+          <Accordion.Body>
+            <Container>
+              <Tabla />
+            </Container>
+          </Accordion.Body>
+        </Accordion.Item>
+        {/* <Accordion.Item eventKey="1">
                     <Accordion.Header>
                         <h4>Otra categoría</h4>
                     </Accordion.Header>
@@ -31,8 +31,8 @@ export default function Carractristicas(props) {
                         non proident, sunt in culpa qui officia deserunt mollit
                         anim id est laborum.
                     </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-        </Container>
-    );
+                </Accordion.Item> */}
+      </Accordion>
+    </Container>
+  );
 }

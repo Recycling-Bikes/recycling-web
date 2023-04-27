@@ -133,11 +133,6 @@ export function valorarBicicleta(
   };
 }
 
-
-
-
-
-
 /* 
 const precio = 500; // Precio base de la bicicleta en dólares
 const anio = 2018; // Año de la bicicleta

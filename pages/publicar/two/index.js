@@ -103,6 +103,9 @@ export default function Partdos() {
   }, [forceUpdate, publication]);
 
   const onSubmit = (items) => {
+
+    items["subcategory"] = null;
+
     if (publication?.model !== "1") {
       let model = form?.models?.find((model) => {
         return model?.id == items?.model;
@@ -110,7 +113,7 @@ export default function Partdos() {
 
       items["other"] = model?.name ? model?.name : "error model";
 
-      items["subcategory"] = null;
+      
     }
 
     setPublication(items);
@@ -140,7 +143,7 @@ export default function Partdos() {
               <Progres2 />
 
               <div className="my-5">
-                {publication.model === "1" ? (
+                {publication.model == "1" ? (
                   <Form.Group className="mb-3" controlId="model">
                     <Form.Label>
                       Name Model <span className="text-danger">*</span>
@@ -158,7 +161,7 @@ export default function Partdos() {
                   ""
                 )}
 
-                {publication.model === "1" ? (
+                {/* {publication.model === "1" && (
                   <Form.Group className="mb-3" controlId="subcategory">
                     <Form.Label>
                       Subcategoria <span className="text-danger">*</span>
@@ -174,9 +177,8 @@ export default function Partdos() {
                       {errors.subcategory?.message}
                     </Form.Control.Feedback>
                   </Form.Group>
-                ) : (
-                  ""
-                )}
+                )
+                } */}
 
                 {/* Talla */}
                 <Form.Group className="mb-3" controlId="size">

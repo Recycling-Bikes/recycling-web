@@ -4,7 +4,6 @@ import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { shallow } from "zustand/shallow";
 
 export default function ButtonsYears({ years }) {
-
   const [selectedYears, setSelectedYears] = useState([]);
 
   const setYears = avaluadorState((state) => state.setYears);

@@ -4,9 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
+import { CDN } from "utils/constantes";
 
 export default function GetBicis(props) {
-  const CDN = "https://yrdmpvdxobghopvoevsg.supabase.co/storage/v1/object/public/imagesbicis/"/* parkingState((state) => state.CDN2); */
+  
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
   const filters = filtersState((state) => state.filters);
@@ -102,15 +103,24 @@ function filteredData(data, filters) {
   return data.filter((datum) => {
     let passesFilter = true;
 
-    if (filters.country?.length > 0 && !filters.country.includes(datum.country)) {
+    if (
+      filters.country?.length > 0 &&
+      !filters.country.includes(datum.country)
+    ) {
       passesFilter = false;
     }
 
-    if (filters.category?.length > 0 && !filters.category.includes(datum.propiedades.category)) {
+    if (
+      filters.category?.length > 0 &&
+      !filters.category.includes(datum.propiedades.category)
+    ) {
       passesFilter = false;
     }
 
-    if (filters.subcategory?.length > 0 && !filters.subcategory.includes(datum.propiedades.subcategory)) {
+    if (
+      filters.subcategory?.length > 0 &&
+      !filters.subcategory.includes(datum.propiedades.subcategory)
+    ) {
       passesFilter = false;
     }
 
@@ -118,23 +128,38 @@ function filteredData(data, filters) {
       passesFilter = false;
     }
 
-    if (filters.brands?.length > 0 && !filters.brands.includes(datum.propiedades.brand)) {
+    if (
+      filters.brands?.length > 0 &&
+      !filters.brands.includes(datum.propiedades.brand)
+    ) {
       passesFilter = false;
     }
 
-    if (filters.materials?.length > 0 && !filters.materials.includes(datum.propiedades.material)) {
+    if (
+      filters.materials?.length > 0 &&
+      !filters.materials.includes(datum.propiedades.material)
+    ) {
       passesFilter = false;
     }
 
-    if (filters.suspension?.length > 0 && !filters.suspension.includes(datum.propiedades.suspension)) {
+    if (
+      filters.suspension?.length > 0 &&
+      !filters.suspension.includes(datum.propiedades.suspension)
+    ) {
       passesFilter = false;
     }
 
-    if (filters.frenos?.length > 0 && !filters.frenos.includes(datum.propiedades.freno)) {
+    if (
+      filters.frenos?.length > 0 &&
+      !filters.frenos.includes(datum.propiedades.freno)
+    ) {
       passesFilter = false;
     }
 
-    if (filters?.rines?.length > 0 && !filters.rines.includes(datum.propiedades.rine)) {
+    if (
+      filters?.rines?.length > 0 &&
+      !filters.rines.includes(datum.propiedades.rine)
+    ) {
       passesFilter = false;
     }
 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Main from "components/main";
-import Article from "../Home/Article";
+import Article from "../../components/Articulos/Article";
 import Descriptons from "components/publicacion/vender";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import Carractristicas from "components/publicacion/Caracteristicas";
@@ -10,6 +10,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import Custom404 from "pages/404";
 import { parkingState } from "context/Parking/ParkingState";
+import Buttons from "components/publicacion/vender/buttons";
+import Promesas from "components/publicacion/vender/promesas";
 
 const Vender = () => {
   const { id } = useRouter().query;
@@ -57,10 +59,14 @@ const Vender = () => {
               <Vista />
 
               <div className=" d-lg-none   ">
-                <Descriptons />
+                <Buttons />
               </div>
 
               <Carractristicas />
+
+              <div className=" d-lg-none   ">
+                <Promesas />
+              </div>
             </Col>
             <Col
               sm="100"
@@ -68,7 +74,7 @@ const Vender = () => {
               lg="5"
               xl="5"
               xxl="4"
-              className="d-none d-lg-block"
+              className="d-none d-lg-block mt-5"
             >
               <Descriptons />
             </Col>

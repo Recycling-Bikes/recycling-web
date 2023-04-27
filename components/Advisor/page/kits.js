@@ -13,21 +13,21 @@ export function Kits() {
 
   const onSubmit = (event) => {
     switch (event[nameForm]) {
-        case "3":
-            setFilter(() => ({ rines: [1]}));
-            break;
-        case "4":
-            setFilter(() => ({ rines:[2,1] }));
-            break;
-        case "5":
-            setFilter(() => ({ rines: [3,4]}));
-            break;
-        case "6":
-            setFilter(() => ({ rines: [4] }));
-            break;
-        case "7":
-            setFilter(() => ({rines: [6,5] }));
-            break;
+      case "3":
+        setFilter(() => ({ rines: [1] }));
+        break;
+      case "4":
+        setFilter(() => ({ rines: [2, 1] }));
+        break;
+      case "5":
+        setFilter(() => ({ rines: [3, 4] }));
+        break;
+      case "6":
+        setFilter(() => ({ rines: [4] }));
+        break;
+      case "7":
+        setFilter(() => ({ rines: [6, 5] }));
+        break;
     }
 
     router.push(router.pathname + "/price");

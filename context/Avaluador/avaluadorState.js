@@ -3,69 +3,60 @@ import { supabase } from "supabase/client";
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
+export const avaluadorState = create((set, get) => ({
+  brand: "",
 
+  quest: { years: [] },
 
-export const avaluadorState = create(
-  
-    (set, get) => ({
-      brand: "",
+  setYears: (data) => {
+    set({ quest: { ...data } });
+  },
 
-      quest: { years: [] },
+  clearQuest: () => {
+    set(
+      (state) => ({
+        ...state,
+        quest: {},
+      }),
+      true
+    );
+  },
 
-      setYears: (data) => {
-        set({ quest: { ...data } });
-      },
+  setBrand: (title) => {
+    set((state) => ({
+      brand: title,
+    }));
+  },
 
-      clearQuest: () => {
-        set(
-          (state) => ({
-            ...state,
-            quest: {},
-          }),
-          true
-        );
-      },
+  clearAll: () => {
+    get().clearQuest();
+  },
 
-      setBrand: (title) => {
-        set((state) => ({
-          brand: title,
-        }));
-      },
+  parking: [],
 
-      clearAll: () => {
-        get().clearQuest();
-      },
+  setParking: async () => {
+    const data = await getBicis();
 
-      parking: [],
+    set({
+      parking: [...data],
+    });
+    return data;
+  },
 
-      setParking: async () => {
-        const data = await getBicis();
+  conditions: [],
 
-        set({
-          parking: 
-            [...data],
-          
-        });
-        return data;
-      },
+  setConditions: async () => {
+    const data = await getData("conditions");
 
-      conditions: [],
-
-      setConditions: async () => {
-        const data = await getData("conditions");
-
-        set(() => ({
-          ...data,
-        }));
-      },
-    }
-  )
-);
-
+    set(() => ({
+      ...data,
+    }));
+  },
+}));
 
 const getBicis = async () => {
   const { data: bicis, error } = await supabase.from("bmodels").select(`
     id,price,name,year, brands (name), category, imageUrl`);
-  error? console.log(error) :null
+  error ? console.log(error) : null;
   return error ? error : await bicis;
 };
