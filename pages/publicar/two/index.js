@@ -59,6 +59,13 @@ export default function Partdos() {
     if (category === 3 || category === 6) {
       category = 1;
     }
+
+    console.log("category", category);
+
+    if (category === 8) {
+      category = 2;
+    }
+    console.log("category", category);
     const updateFormState = async (
       property,
       parameter,
@@ -103,7 +110,6 @@ export default function Partdos() {
   }, [forceUpdate, publication]);
 
   const onSubmit = (items) => {
-
     items["subcategory"] = null;
 
     if (publication?.model !== "1") {
@@ -112,8 +118,6 @@ export default function Partdos() {
       });
 
       items["other"] = model?.name ? model?.name : "error model";
-
-      
     }
 
     setPublication(items);
@@ -251,7 +255,7 @@ export default function Partdos() {
                 )}
 
                 {/* freno */}
-                {publication?.category === "2" ? (
+                {publication?.category == "2" || publication?.category == "8"  ? (
                   <Form.Group className="mb-3" controlId="freno">
                     <Form.Label>freno</Form.Label>
                     <Form.Select
