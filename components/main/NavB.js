@@ -64,9 +64,11 @@ export default function NavB({}) {
 
             <Nav.Link href="/espera">Lista de espera</Nav.Link>
 
+            */}
+
             <Nav.Link href="#features" disabled>
               Otros servicios
-            </Nav.Link> */}
+          </Nav.Link> 
           </Nav>
 
           <Nav>
