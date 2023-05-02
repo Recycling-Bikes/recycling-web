@@ -5,7 +5,6 @@ import { persist, devtools } from "zustand/middleware";
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
 
 export const esperaState = create(
-  devtools(
     persist(
       (set, get) => ({
         quest: {},
@@ -29,11 +28,5 @@ export const esperaState = create(
         },
       }),
       { name: "EsperaData" }
-    ),
-    {
-      anonymousActionType: "EsperaData",
-      enabled: true,
-      name: "EsperaData",
-    }
-  )
+    )
 );

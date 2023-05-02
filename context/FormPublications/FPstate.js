@@ -6,7 +6,7 @@ import { persist, devtools } from "zustand/middleware";
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
 
 export const FPState = create(
-  devtools(
+
     persist(
       (set, get) => ({
         name: "",
@@ -105,13 +105,8 @@ export const FPState = create(
         },
       }),
       { name: "FormPublicationData" }
-    ),
-    {
-      anonymousActionType: "FormPublicationData",
-      enabled: true,
-      name: "FormPublicationData",
-    }
-  )
+    )
+  
 );
 
 const getModels = async (category, brand) => {

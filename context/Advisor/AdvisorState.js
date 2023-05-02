@@ -5,7 +5,7 @@ import { persist, devtools } from "zustand/middleware";
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
 
 export const advisorState = create(
-  devtools(
+  
     persist(
       (set, get) => ({
         quest: {},
@@ -30,10 +30,4 @@ export const advisorState = create(
       }),
       { name: "AdvisorData" }
     ),
-    {
-      anonymousActionType: "AdvisorData",
-      enabled: true,
-      name: "AdvisorData",
-    }
-  )
 );

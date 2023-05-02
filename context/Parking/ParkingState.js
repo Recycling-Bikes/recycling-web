@@ -3,7 +3,6 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
-  devtools(
     persist(
       (set, get) => ({
         bici: {},
@@ -60,14 +59,7 @@ export const parkingState = create(
         CDN2: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
       }),
       { name: "ParkingData" }
-    ),
-
-    {
-      anonymousActionType: "ParkingData",
-      enabled: true,
-      name: "ParkingData",
-    }
-  )
+    )
 );
 
 const getBicis = async () => {

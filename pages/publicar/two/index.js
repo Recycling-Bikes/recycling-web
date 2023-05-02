@@ -18,10 +18,10 @@ const schema = yup.object().shape({
   material: yup.string().required("El año es requerido"),
   size: yup.string().required("El modelo es requerido"),
   transmission: yup.string().required("La marca es requerida"),
-  other: yup.string().min(3, "Debe tener mínimo tres caracteres"),
+  other: yup.string().min(1, "Debe tener uno caracteres"),
 });
 
-export default function Partdos() {
+export default function ParteDos() {
   const [hydrated, setHydrated] = useState(true);
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function Partdos() {
         updateFormState("sizes"),
         updateFormState("materials"),
         updateFormState("transmissions", "*", category, "category"),
-        updateFormState("rines", "*", publication.category ?? null, "category"),
+        updateFormState("rines", "*"),
         updateFormState("frenos"),
         updateFormState("suspension"),
       ]);
@@ -107,6 +107,7 @@ export default function Partdos() {
     console.log("publication?.category", publication?.category);
 
     updateForm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceUpdate, publication]);
 
   const onSubmit = (items) => {
@@ -244,7 +245,21 @@ export default function Partdos() {
                       {...register("rin")}
                     >
                       <option value="">Selecciona un rin</option>
-                      {selectList(form?.rines)}
+                      {selectList(
+                        form?.rines?.filter((item) => {
+                          if (publication?.category == "1") {
+                            return 6 <= item.id && item.id <= 8;
+                          }
+                          if (publication?.category == "3") {
+                            return 6 <= item.id;
+                          }
+
+                          if (publication?.category == "6") {
+                            return item.id <= 6;
+                          }
+                          return false;
+                        })
+                      )}
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       {errors?.rin?.message}
@@ -255,7 +270,8 @@ export default function Partdos() {
                 )}
 
                 {/* freno */}
-                {publication?.category == "2" || publication?.category == "8"  ? (
+                {publication?.category == "2" ||
+                publication?.category == "8" ? (
                   <Form.Group className="mb-3" controlId="freno">
                     <Form.Label>freno</Form.Label>
                     <Form.Select

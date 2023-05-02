@@ -3,7 +3,7 @@ import { persist, devtools } from "zustand/middleware";
 import { create } from "zustand";
 
 export const userState = create(
-  devtools(
+
     persist(
       (set, get) => ({
         user: {},
@@ -54,13 +54,7 @@ export const userState = create(
         },
       }),
       { name: "UserData" }
-    ),
-    {
-      anonymousActionType: "UserData",
-      enabled: true,
-      name: "UserData",
-    }
-  )
+    )
 );
 
 const getInfoUser = async () => {

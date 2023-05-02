@@ -71,6 +71,7 @@ export default function Avaluador() {
       console.log(form[property]);
     };
     updateFormState("conditions");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [values, setValues] = useState({
@@ -116,6 +117,7 @@ export default function Avaluador() {
       typePrice
     );
     setValues(values);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     form.brands,
     form.conditions,
@@ -270,7 +272,7 @@ export default function Avaluador() {
 
           <div className="mt-2 py-3 d-grid gap-2 d-md-none ">
             <Button
-              onClick={() => router.push("./enviar")}
+              onClick={() => router.push("https://wa.me/50769240795?text=%C2%A1Hola!")}
               className=""
               variant="primary"
               type="submit"
@@ -287,7 +289,7 @@ export default function Avaluador() {
               }}
               type="submit"
             >
-              <BsHandbag size={16} /> Publícala en Marketplace
+              <BsHandbag size={16} /> Publícala en el Marketplace
             </Button>
 
             <Button

@@ -60,8 +60,8 @@ export default function Promesas() {
                 <BsBagCheck size={29} className="mb-3" style={styleIcons} />
                 <h5 className="fw-semibold">2. Publica tu bici</h5>
                 <Card.Text className="text-secondary">
-                  Postea tu bicicleta para que nuestra comunidad de más de 3.000
-                  ciclistas la puedan comprar.
+                  Postea tu bicicleta para que nuestra comunidad de más de 50
+                  mil usuarios la puedan comprar.
                 </Card.Text>
               </Card.Body>
             </center>
@@ -85,8 +85,8 @@ export default function Promesas() {
                 />
                 <h5 className="fw-semibold">3. Recibe el pago</h5>
                 <Card.Text className="text-secondary">
-                  Apenas compren tu bici recibirás un pago instantáneo a través
-                  de X.
+                  Una vez compren tu bici, recibirás el pago correspondiente en
+                  tu cuenta bancaria.
                 </Card.Text>
               </Card.Body>
             </center>

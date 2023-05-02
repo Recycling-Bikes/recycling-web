@@ -46,9 +46,9 @@ export default function NavB({}) {
           />
 
           {/* Cart */}
-          <Nav.Link href="#deets" className="ms-2">
+          <Link href="#deets" className="nav-link ms-2">
             <FiShoppingCart size={24} />
-          </Nav.Link>
+          </Link>
         </div>
 
         {/* NavBar Toggle */}
@@ -57,25 +57,26 @@ export default function NavB({}) {
           <Nav className="ms-auto flex-fill"></Nav>
 
           <Nav className="me-auto flex-fill">
-            <Nav.Link href="/compra">Comprar</Nav.Link>
-            <Nav.Link href="/vender">Vender y avaluó</Nav.Link>
+            <Link href="/compra" className="nav-link">Comprar</Link>
+            <Link href="/vender" className="nav-link">Vender y avaluó</Link>
 
-{/*             <Nav.Link href="/avaluador">Avaluador</Nav.Link>
+            {/*             <Nav.Link href="/avaluador">Avaluador</Nav.Link>
+             */}
 
-            <Nav.Link href="/espera">Lista de espera</Nav.Link>
+            <Nav.Link href="#"/* "/espera" */  disabled>Lista de espera</Nav.Link>
 
             <Nav.Link href="#features" disabled>
               Otros servicios
-            </Nav.Link> */}
+            </Nav.Link>
           </Nav>
 
           <Nav>
-            <Nav.Link href="#deets" className="d-none d-lg-block">
+            <Link href="#deets" className="nav-link d-none d-lg-block">
               <BiSearchAlt size={23} />{" "}
-            </Nav.Link>
-            <Nav.Link href="#deets" className="d-none d-lg-block">
+            </Link>
+            <Link href="#deets" className="nav-link  d-none d-lg-block">
               <FiShoppingCart size={22} />{" "}
-            </Nav.Link>
+            </Link>
             <User />
           </Nav>
         </Navbar.Collapse>
