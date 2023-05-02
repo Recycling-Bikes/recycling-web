@@ -20,10 +20,10 @@ export default function User() {
   }
 
   try {
-    if (Object.keys(user).length !== 0) {
+    if (Object.keys(user?? {}).length !== 0) {
       const first_name =
-        user.user_metadata.first_name[0].toUpperCase() +
-        user.user_metadata.first_name.slice(1).toLowerCase();
+        user?.user_metadata?.first_name[0].toUpperCase() +
+        user?.user_metadata?.first_name.slice(1).toLowerCase();
       const delta = (
         <div className="d-inline">
           <BsPersonCircle className="me-1" />

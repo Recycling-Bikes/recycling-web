@@ -1,23 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Link from "next/link";
 import React from "react";
 import { BsInstagram } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Nav, Row, Col } from "react-bootstrap";
+
 
 const Footer = (props) => {
   return (
     <Container style={{}}>
       <div className="text-center text-lg-start text-muted footer-customs">
         <section className="d-flex justify-content-center justify-content-lg-between p-1">
-          <MDBContainer className="text-center text-md-start mt-5" fluid="true">
+          <div className="container-fluid  text-center text-md-start mt-5" fluid="true">
             {/*Container*/}
-            <MDBRow className="text-center text-md-start mt-3">
+            <Row className="text-center text-md-start mt-3">
               {/*Logo*/}
-              <MDBCol md="3" lg="2" xl="3">
+              <Col md="3" lg="2" xl="3">
                 <Link href="/">
                   <img
                     src="/recyclingLogo.png"
@@ -25,13 +23,13 @@ const Footer = (props) => {
                     className="img-fluid pb-5"
                   />
                 </Link>
-              </MDBCol>
+              </Col>
 
               {/*Main*/}
-              <MDBCol fluid="true">
-                <MDBRow className="mt-3">
+              <Col fluid="true">
+                <Row className="mt-3">
                   {/*Seccion 1*/}
-                  <MDBCol
+                  <Col
                     md="3"
                     lg="2"
                     xl="2"
@@ -45,23 +43,23 @@ const Footer = (props) => {
                     </p>
                     <p>
                       <Link href="/vender" className="text-reset">
-                        Vender
+                        Vender y Avaluó
                       </Link>
                     </p>
-                    <p>
+                    {/*                     <p>
                       <Link href="/avaluador" className="text-reset">
                         Avaluador
                       </Link>
-                    </p>
+                    </p> */}
                     <p>
-                      <Link href="/espera" className="text-reset">
+                      <Nav.Link href="/espera" className="text-reset" disabled>
                         Lista de espera
-                      </Link>
+                      </Nav.Link>
                     </p>
-                  </MDBCol>
+                  </Col>
 
                   {/*Seccion 2*/}
-                  <MDBCol
+                  <Col
                     md="4"
                     lg="3"
                     xl="2"
@@ -71,19 +69,19 @@ const Footer = (props) => {
                       Otros Servicios
                     </h6>
                     <p>
-                      <Link href="#!" className="text-reset">
+                      <Link href="#" className="text-reset">
                         Bike Fitting
                       </Link>
                     </p>
                     <p>
-                      <Link href="#!" className="text-reset">
+                      <Link href="#" className="text-reset">
                         Mantenimiento
                       </Link>
                     </p>
-                  </MDBCol>
+                  </Col>
 
                   {/*Seccion 3 - Contact*/}
-                  <MDBCol
+                  <Col
                     md="5"
                     lg="4"
                     xl="3"
@@ -142,10 +140,10 @@ const Footer = (props) => {
                                             />{" "}
                                             + 01 234 567 88
                                         </p> */}
-                  </MDBCol>
+                  </Col>
 
                   {/*Seccion 4 - Síguenos*/}
-                  <MDBCol md="3" lg="3" xl="2" className="me-auto pb-3">
+                  <Col md="3" lg="3" xl="2" className="me-auto pb-3">
                     <h6 className="text-uppercase fw-bold mb-3 text-reset">
                       Síguenos
                     </h6>
@@ -163,13 +161,13 @@ const Footer = (props) => {
                     >
                       <FaFacebook size={25} />
                     </Link>
-                  </MDBCol>
-                </MDBRow>
-              </MDBCol>
+                  </Col>
+                </Row>
+              </Col>
               {/*End Content*/}
-            </MDBRow>
+            </Row>
             {/*End Container*/}
-          </MDBContainer>
+          </div>
         </section>
 
         {/*Bottom Footer*/}
@@ -181,17 +179,17 @@ const Footer = (props) => {
               </div>
             </Col>{" "}
             <Col xl="auto">
-              <Link href="#!" className="text-reset ms-3">
+              <Link href="#" className="text-reset ms-3">
                 Política de privacidad{" "}
               </Link>
 
-              <Link href="#!" className="text-reset ms-3">
+              <Link href="#" className="text-reset ms-3">
                 Cookies{" "}
               </Link>
-              <Link href="#!" className="text-reset ms-3">
+              <Link href="#" className="text-reset ms-3">
                 Aviso Legal{" "}
               </Link>
-              <Link href="#!" className="text-reset ms-3">
+              <Link href="#" className="text-reset ms-3">
                 Condiciones de Uso{" "}
               </Link>
             </Col>
