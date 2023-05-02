@@ -24,7 +24,7 @@ function Presentation() {
               Vende tu bici de manera fácil y segura con nosotros
             </h1>
             <p className="pb-4 fw-semibold">
-              Publica en un mercado de más de 3.000 ciclistas
+              Publica en un mercado de más de 50 mil usuarios.
             </p>
             <Button
               className=""

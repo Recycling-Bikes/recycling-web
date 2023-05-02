@@ -29,22 +29,17 @@ export default function PartUno() {
     shallow
   );
 
-  const [
-    setPublication,
-    setForm,
-    setModels,
-    clearAll,
-    clearTransmision,
-  ] = FPState(
-    (state) => [
-      state.setPublication,
-      state.setForm,
-      state.setModels,
-      state.clearAll,
-      state.clearTransmision,
-    ],
-    shallow
-  );
+  const [setPublication, setForm, setModels, clearAll, clearTransmision] =
+    FPState(
+      (state) => [
+        state.setPublication,
+        state.setForm,
+        state.setModels,
+        state.clearAll,
+        state.clearTransmision,
+      ],
+      shallow
+    );
 
   const {
     handleSubmit,
@@ -80,6 +75,7 @@ export default function PartUno() {
       setViewModels(true);
     }
     clearTransmision();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch("brand"), watch("category")]);
 
   useEffect(() => {
@@ -89,7 +85,6 @@ export default function PartUno() {
   const onSubmit = (items) => {
     /* console.log(items)
      */
-
     setPublication(items);
     router.push("./two");
   };
@@ -136,7 +131,8 @@ export default function PartUno() {
                 </Form.Group>
 
                 {/* Categoria */}
-                <Form.Group className="mb-3" controlId="category">
+
+                <Form.Group className="mb-3 mx-auto" controlId="category">
                   <Form.Label>
                     Categoría <span className="text-danger">*</span>
                   </Form.Label>
@@ -151,6 +147,43 @@ export default function PartUno() {
                   <Form.Control.Feedback type="invalid">
                     {errors.category?.message}
                   </Form.Control.Feedback>
+                </Form.Group>
+
+                {/* Bici E-Bike */}
+
+                <Form.Group className="mb-3" controlId="isE-Bike">
+                  {/* style one row */}
+
+                  <Row className="mx-2">
+                    <Col
+                      style={{
+                        width: "15% !important",
+                      }}
+                      className="d-flex"
+                    >
+                      <Form.Check
+                        className="mt-3"
+                        type="checkbox"
+                        label="E-Bike"
+                        {...register("IsE-Bike")}
+                      />
+                    </Col>
+
+                    <Col
+                      style={{
+                        width: "15% !important",
+                      }}
+                      className="d-flex"
+                    >
+                      {/* is kids */}
+                      <Form.Check
+                        className="mt-3"
+                        type="checkbox"
+                        label="Niños"
+                        {...register("isKids")}
+                      />
+                    </Col>
+                  </Row>
                 </Form.Group>
 
                 {/* Modelo */}
@@ -187,7 +220,11 @@ export default function PartUno() {
                     /* value={values.year} */
                   >
                     <option value="">Selecciona un año</option>
-                    {selectList(form?.years)}
+                    {selectList(
+                      form?.years?.sort((a, b) => {
+                        return b?.name - a?.name;
+                      })
+                    )}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.year?.message}

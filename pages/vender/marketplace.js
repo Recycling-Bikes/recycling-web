@@ -39,8 +39,8 @@ function Martket() {
                 <BsPatchCheckFill width={40} style={styleIcons} />
               </Col>
               <Col className="d-flex flex-column text-secondary" lg={5}>
-                Revisamos y certificamos cada bicicleta y nos aseguramos de que
-                todo está en regla.
+                Revisamos el estado de cada una de las bicicletas que se venden
+                a través de nuestra plataforma.
               </Col>
             </Row>
 
