@@ -3,9 +3,9 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
-  persist(
-    (set, get) => ({
-      bici: {},
+    persist(
+      (set, get) => ({
+        bici: {},
 
       setBici: async (id) => {
         if (id != get().bici.id && id != undefined) {
@@ -60,6 +60,7 @@ export const parkingState = create(
     }),
     { name: "ParkingData" }
   )
+
 );
 
 const getBicis = async () => {
