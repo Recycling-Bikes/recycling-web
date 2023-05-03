@@ -1,19 +1,29 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 import { Button } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
 
 export default function Buttons() {
   const bici = parkingState((state) => state.bici);
+
+  const dataSize=useCallback((id, sizeNormal, sizeRuta )=>{
+    if (id != 2) {
+      return sizeNormal ? sizeNormal : ""
+    }
+    return sizeRuta ? sizeNormal : "" 
+  },[])
+
+  const size = dataSize(bici?.category?.id, bici?.size?.relacion, bici?.size?.ruta)
+
   return (
     <>
       <h2>{bici.title}</h2>
-      <p className="text-secondary">SKU: {bici.id}</p>
+      <p className="text-secondary">SKU: {bici?.id}</p>
 
       <p className="mb-0 text-secondary ">
         Altura recomendada del ciclista:{" "}
-        <strong className="text-black">1,77m - 1,85m</strong>
+        <strong className="text-black">{size}</strong>
       </p>
       <Link href="#">Guía de tallas</Link>
       <h2 className="my-4">${bici.price.toLocaleString("en")}</h2>

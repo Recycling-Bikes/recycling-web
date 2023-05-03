@@ -61,6 +61,7 @@ const Vender = () => {
               <div className=" d-lg-none   ">
                 <Buttons />
               </div>
+              
 
               <Carractristicas />
 

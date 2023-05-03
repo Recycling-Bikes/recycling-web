@@ -5,6 +5,7 @@ Avaluador
 Hardtail
 imagesbicis
 MSRP
+relacion
 removibles
 rine
 rines
