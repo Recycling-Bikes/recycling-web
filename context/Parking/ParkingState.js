@@ -3,63 +3,63 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
-  persist(
-    (set, get) => ({
-      bici: {},
+    persist(
+      (set, get) => ({
+        bici: {},
 
-      setBici: async (id) => {
-        if (id != get().bici.id && id != undefined) {
-          console.log("server");
-          const data = await getBici(id);
-          set({ bici: { ...data } });
+        setBici: async (id) => {
+          if (id != get().bici.id && id != undefined) {
+            console.log("server");
+            const data = await getBici(id);
+            set({ bici: { ...data } });
+            return data;
+          } else {
+            console.log("cache");
+            return { ...get().bici };
+          }
+        },
+
+        clearBici: () => {
+          set(
+            (state) => ({
+              ...state,
+              bici: {},
+            }),
+            true
+          );
+        },
+
+        parking: {},
+
+        setParking: async () => {
+          const data = await getBicis();
+          set({
+            parking: {
+              ...data,
+            },
+          });
           return data;
-        } else {
-          console.log("cache");
-          return { ...get().bici };
-        }
-      },
+        },
 
-      clearBici: () => {
-        set(
-          (state) => ({
-            ...state,
-            bici: {},
-          }),
-          true
-        );
-      },
+        clearParking: () => {
+          set(
+            (state) => ({
+              ...state,
+              parking: {},
+            }),
+            true
+          );
+        },
 
-      parking: {},
+        clearAll: () => {
+          get().clearParking();
+          get().clearBici();
+        },
 
-      setParking: async () => {
-        const data = await getBicis();
-        set({
-          parking: {
-            ...data,
-          },
-        });
-        return data;
-      },
-
-      clearParking: () => {
-        set(
-          (state) => ({
-            ...state,
-            parking: {},
-          }),
-          true
-        );
-      },
-
-      clearAll: () => {
-        get().clearParking();
-        get().clearBici();
-      },
-
-      CDN2: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
-    }),
-    { name: "ParkingData" }
-  )
+        CDN2: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
+      }),
+      { name: "ParkingData" }
+    )
 );
 
 const getBicis = async () => {
@@ -87,16 +87,14 @@ const getBici = async (id) => {
           `
         id,price,title,
           models (name), filesUrl, propiedades (transmission (name),
-          category (name, id) ,
+          category (name) ,
           subcategory (name) ,
           brands (name), 
           materials (name),
           model,
           suspension (name) ,
           frenos (name),
-          rines (name)), 
-          size (name, relacion, ruta), 
-          country (name), year  (name)`
+          rines (name)), size (name), country (name), year  (name)`
         )
         .eq("id", id)
     : { error: { message: "id = undefined" }, bicis: [] };
