@@ -29,8 +29,8 @@ export default function Filtro() {
         {data.map((option, index) => {
           // Verificar si la opción pertenece a la categoría seleccionada
           if (
-            filters.category.length === 0 ||
-            option?.category?.some((c) => filters.category.includes(c)) ||
+            filters?.category?.length === 0 ||
+            option?.category?.some((c) => filters?.category?.includes(c)) ||
             option.all
           ) {
             return (
