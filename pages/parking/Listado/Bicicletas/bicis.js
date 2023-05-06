@@ -1,13 +1,12 @@
-import { Card, Badge, Spinner, Col } from "react-bootstrap";
-import Link from "next/link";
+import { Spinner } from "react-bootstrap";
+
 import { useQuery } from "@tanstack/react-query";
 import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
-import { CDN } from "utils/constantes";
+import { ComponenteBike } from "components/bicletas";
 
 export default function GetBicis(props) {
-  
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
   const filters = filtersState((state) => state.filters);
@@ -18,7 +17,7 @@ export default function GetBicis(props) {
   });
 
   if (isLoading) {
-    return (
+    return ( 
       <div
         style={{
           display: "flex",
@@ -40,6 +39,20 @@ export default function GetBicis(props) {
       </div>
     );
   }
+
+  function Descuento(original, off) {
+    const descuento = original - off;
+    console.log((descuento / original) * 100);
+
+    const porcentaje = ((descuento / original) * 100).toFixed(0);
+
+    if (porcentaje == 100) {
+      return 99;
+    }
+
+    return porcentaje;
+  }
+
   // Resto del código para renderizar los resultados filtrados
 
   return (
@@ -57,41 +70,16 @@ export default function GetBicis(props) {
 
       {Array.isArray(data)
         ? filteredData(data, filters).map((bici) => (
-            <Card className="p-0" key={bici.id}>
-              <Link href={`/parking/${bici.id}`} passHref>
-                <div className="m-3">
-                  <Badge bg="primary" style={{ color: "white" }}>
-                    Popular
-                  </Badge>
-                  <Card.Img
-                    variant="top"
-                    src={CDN + bici.filesUrl[0]}
-                    style={{
-                      maxHeight: "200px",
-                    }}
-                  />
-                </div>
-                <Card.Body>
-                  <Card.Text
-                    style={{
-                      color: "rgba(108, 117, 125, 1)",
-                    }}
-                  >
-                    {bici.models.name}
-                  </Card.Text>
-                  <Card.Title style={{ color: "black" }}>
-                    {bici.title}
-                  </Card.Title>
-                  <Card.Text
-                    style={{
-                      color: "rgba(108, 117, 125, 1)",
-                    }}
-                  >
-                    ${bici.price.toLocaleString("en")}
-                  </Card.Text>
-                </Card.Body>
-              </Link>
-            </Card>
+            <ComponenteBike
+              key={bici.id}
+              id={bici.id}
+              name={bici.models.name}
+              title={bici.title}
+              price={bici.price}
+              off={bici.off}
+              image={bici.filesUrl[0]}
+              etiqueta={bici.etiquetas?.name}
+            />
           ))
         : ""}
       <Relleno />
@@ -102,6 +90,8 @@ export default function GetBicis(props) {
 function filteredData(data, filters) {
   return data.filter((datum) => {
     let passesFilter = true;
+
+    const price = datum.off ?? datum.price;
 
     if (
       filters.country?.length > 0 &&
@@ -167,11 +157,11 @@ function filteredData(data, filters) {
       passesFilter = false;
     }
 
-    if (filters?.minPrice !== null && datum.price < filters.minPrice) {
+    if (filters?.minPrice !== null && price < filters.minPrice) {
       passesFilter = false;
     }
 
-    if (filters?.maxPrice !== null && datum.price > filters.maxPrice) {
+    if (filters?.maxPrice !== null && price > filters.maxPrice) {
       passesFilter = false;
     }
 

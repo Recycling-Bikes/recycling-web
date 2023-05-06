@@ -72,7 +72,9 @@ const getBicis = async () => {
   material ,
   suspension ,
   freno,
-  rine), size, country, year`);
+  rine), size, country, year,
+  off,
+  etiquetas (name)`);
   console.log(error);
   console.log(bicis);
   return error ? error : await bicis;
@@ -96,7 +98,9 @@ const getBici = async (id) => {
           frenos (name),
           rines (name)), 
           size (name, relacion, ruta), 
-          country (name), year  (name)`
+          country (name), year  (name),
+          off,
+          etiquetas (name)`
         )
         .eq("id", id)
     : { error: { message: "id = undefined" }, bicis: [] };

@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "supabase/client";
 import { CDN } from "utils/constantes";
 import { useRouter } from "next/router";
+import { ComponenteBike } from "components/bicletas";
 
 const getBicis = async () => {
   const { data: bicis, error } = await supabase
@@ -17,7 +18,8 @@ const getBicis = async () => {
     .select(
       `
   id,price,title, etiquetas (name),
-  models (name), filesUrl`
+  models (name), filesUrl,
+  off`
     )
     .eq("main", true);
 
@@ -27,13 +29,11 @@ const getBicis = async () => {
 };
 
 function Article({ Title }) {
-
   const router = useRouter();
   const { isLoading, data, isError } = useQuery({
     queryKey: ["productos"],
     queryFn: () => getBicis(),
   });
-
 
   const [change, setChange] = useState(null);
 
@@ -125,7 +125,7 @@ function Article({ Title }) {
           {isLoading && (
             <SwiperSlide>
               {" "}
-              <Card style={{ width: "18rem", height: "370px" }} >
+              <Card style={{ width: "18rem", height: "370px" }}>
                 <div className="m-3">
                   <Placeholder bg="primary" size="xs" xs={4} />
                 </div>
@@ -144,7 +144,32 @@ function Article({ Title }) {
           {data?.map((bici) => (
             <SwiperSlide key={bici.id}>
               {" "}
-              <Card style={{ width: "18rem", height: "370px" }} onClick={()=>{router.push(`/parking/${bici.id}`)}}>
+              <ComponenteBike
+                key={bici.id}
+                id={bici.id}
+                name={bici.models.name}
+                title={bici.title}
+                price={bici.price}
+                off={bici.off}
+                image={bici.filesUrl[0]}
+                etiqueta={bici.etiquetas?.name}
+                style={{ width: "18rem", height: "370px" }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Container>
+    </Container>
+  );
+}
+
+export default Article;
+/* <Card
+                style={{ width: "18rem", height: "370px" }}
+                onClick={() => {
+                  router.push(`/parking/${bici.id}`);
+                }}
+              >
                 <div className="m-3">
                   <Badge
                     className="mb-1"
@@ -173,13 +198,4 @@ function Article({ Title }) {
                     ${bici?.price.toLocaleString("en")}
                   </Card.Text>
                 </Card.Body>
-              </Card>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Container>
-    </Container>
-  );
-}
-
-export default Article;
+              </Card> */
