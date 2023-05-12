@@ -114,7 +114,8 @@ export default function Avaluador() {
       material.id ?? "1",
       marca?.status ?? "c",
       condition?.status ?? "c",
-      typePrice
+      typePrice,
+      publication.ebike ?? false
     );
     setValues(values);
   // eslint-disable-next-line react-hooks/exhaustive-deps

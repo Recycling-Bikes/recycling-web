@@ -60,12 +60,10 @@ export default function ParteDos() {
       category = 1;
     }
 
-    console.log("category", category);
-
     if (category === 8) {
       category = 2;
     }
-    console.log("category", category);
+
     const updateFormState = async (
       property,
       parameter,
@@ -107,19 +105,49 @@ export default function ParteDos() {
     console.log("publication?.category", publication?.category);
 
     updateForm();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceUpdate, publication]);
 
   const onSubmit = (items) => {
     items["subcategory"] = null;
+
+    const subcategories = [];
 
     if (publication?.model !== "1") {
       let model = form?.models?.find((model) => {
         return model?.id == items?.model;
       });
 
+      console.log(model);
+
       items["other"] = model?.name ? model?.name : "error model";
+
+      if (!!model?.subcategory1) {
+        subcategories.push(model?.subcategory1);
+      }
+
+      if (!!model?.subcategory2) {
+        subcategories.push(model?.subcategory2);
+      }
+
+      if (!!model?.subcategory3) {
+        subcategories.push(model?.subcategory3);
+      }
     }
+
+    if (publication?.ebike === true) {
+      subcategories.push(10);
+    }
+
+    if (publication?.kids === true) {
+      subcategories.push(15);
+    }
+
+    console.log(subcategories);
+
+    items["subcategories"] = subcategories;
+
+    console.log(items["subcategories"]);
 
     setPublication(items);
     router.push("./tres");

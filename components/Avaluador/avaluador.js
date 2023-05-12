@@ -73,7 +73,8 @@ export function valorarBicicleta(
   material,
   marca,
   condition,
-  typePrice
+  typePrice,
+  ebike
 ) {
   let materialStatus;
   if (material != 1 && material != 2) {
@@ -95,6 +96,12 @@ export function valorarBicicleta(
     precio = transmision?.precio2 ?? 800;
   }
 
+  let multiplicadorEbike = 1;
+
+  if (ebike) {
+    multiplicadorEbike = multiplicadores.ebike;
+  }
+
   const multiplicadorMarca = multiplicadores.marca[marca];
   const multiplicadorCondition = multiplicadores.condition[condition];
 
@@ -104,7 +111,8 @@ export function valorarBicicleta(
     materialStatus *
     multiplicadorMarca *
     multiplicadorEdad *
-    multiplicadorCondition;
+    multiplicadorCondition *
+    multiplicadorEbike;
 
   const precioMin = 0.93;
 

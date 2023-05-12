@@ -1,20 +1,37 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
 import React, { useCallback } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
 
 export default function Buttons() {
   const bici = parkingState((state) => state.bici);
 
-  const dataSize=useCallback((id, sizeNormal, sizeRuta )=>{
+  const dataSize = useCallback((id, sizeNormal, sizeRuta) => {
     if (id != 2) {
-      return sizeNormal ? sizeNormal : ""
+      return sizeNormal ? sizeNormal : "";
     }
-    return sizeRuta ? sizeNormal : "" 
-  },[])
+    return sizeRuta ? sizeNormal : "";
+  }, []);
 
-  const size = dataSize(bici?.category?.id, bici?.size?.relacion, bici?.size?.ruta)
+  const size = dataSize(
+    bici?.category?.id,
+    bici?.size?.relacion,
+    bici?.size?.ruta
+  );
+
+  const price = bici.off ?? bici?.price;
+
+  function Descuento(original, off) {
+    const descuento = original - off;
+    const porcentaje = ((descuento / original) * 100).toFixed(0);
+
+    if (porcentaje == 100) {
+      return 99;
+    }
+
+    return porcentaje;
+  }
 
   return (
     <>
@@ -26,7 +43,34 @@ export default function Buttons() {
         <strong className="text-black">{size}</strong>
       </p>
       <Link href="#">Guía de tallas</Link>
-      <h2 className="my-4">${bici.price.toLocaleString("en")}</h2>
+      <h2 className="my-4">
+        <Row>
+          {bici?.off ? (
+            <>
+              {" "}
+              <span className="text-decoration-line-through text-secondary">
+                ${bici.price.toLocaleString("en")}
+              </span>{" "}
+            </>
+          ) : (
+            ""
+          )}
+        </Row>
+        ${price.toLocaleString("en")}{" "}
+        {bici?.off ? (
+          <>
+            <span
+              style={{
+                color: "#0fa899",
+              }}
+            >
+              {Descuento(bici.price, bici.off)}% off
+            </span>
+          </>
+        ) : (
+          ""
+        )}
+      </h2>
       <Link
         target="_blank"
         className="d-flex"

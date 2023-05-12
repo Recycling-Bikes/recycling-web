@@ -152,7 +152,6 @@ export default function PartUno() {
                 {/* Bici E-Bike */}
 
                 <Form.Group className="mb-3" controlId="isE-Bike">
-                  {/* style one row */}
 
                   <Row className="mx-2">
                     <Col
@@ -165,7 +164,7 @@ export default function PartUno() {
                         className="mt-3"
                         type="checkbox"
                         label="E-Bike"
-                        {...register("IsE-Bike")}
+                        {...register("ebike")}
                       />
                     </Col>
 
@@ -180,7 +179,7 @@ export default function PartUno() {
                         className="mt-3"
                         type="checkbox"
                         label="Niños"
-                        {...register("isKids")}
+                        {...register("kids")}
                       />
                     </Col>
                   </Row>

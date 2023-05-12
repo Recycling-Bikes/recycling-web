@@ -76,13 +76,13 @@ export function ComponenteBike({
                 >
                   {price?.toLocaleString("en")}
                 </span>
-                <spam
+                <span
                   style={{
                     color: "#0fa899",
                   }}
                 >
                   {Descuento(price, off)}% off
-                </spam>
+                </span>
               </span>
             ) : (
               ""
