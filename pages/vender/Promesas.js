@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Container, Card, Button } from "react-bootstrap";
 import { SlDiamond } from "react-icons/sl";
 import {
@@ -8,8 +8,21 @@ import {
 } from "react-icons/bs";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { useRouter } from "next/router";
+import PopLogin from "./modal";
+import { userState } from "context/User/UserState";
+
 
 export default function Promesas() {
+  const [ModalShow, setModalShow] = useState(false);
+  const router = useRouter();
+  const confirmUser = userState((state) => state.confirmUser);
+
+  const userStatus = async () => {
+    const { user } = await confirmUser();
+
+    user ? router.push("/publicar/uno") : setModalShow(true);
+  };
   return (
     <Container
       style={{ backgroundColor: "rgba(248, 249, 250, 1)" }}
@@ -86,8 +99,7 @@ export default function Promesas() {
             className="d-inline"
             style={{ width: "auto" }}
             onClick={() => {
-              localStorage.removeItem("items");
-              router.push("/publicar/uno");
+              userStatus();
             }}
           >
             Encuentra una bici para ti
@@ -96,6 +108,11 @@ export default function Promesas() {
         <br />
         <div></div>
       </div>
+      <PopLogin
+        ModalShow={ModalShow}
+        setModalShow={setModalShow}
+        router={"/publicar/uno"}
+      />
     </Container>
   );
 }

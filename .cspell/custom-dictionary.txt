@@ -2,6 +2,7 @@
 anio
 avaluador
 Avaluador
+ebike
 Hardtail
 imagesbicis
 MSRP

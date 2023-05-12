@@ -2,9 +2,21 @@ import { Container, Row, Col, Button, Image, Card } from "react-bootstrap";
 import Link from "next/link";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useRouter } from "next/router";
+import PopLogin from "./modal";
+import { userState } from "context/User/UserState";
+import { useState } from "react";
 
 function Presentation() {
+  const [ModalShow, setModalShow] = useState(false);
   const router = useRouter();
+  const confirmUser = userState((state) => state.confirmUser);
+
+  const userStatus = async () => {
+    const { user } = await confirmUser();
+
+    user ? router.push("/publicar/uno") : setModalShow(true);
+  };
+
   return (
     <>
       <Container className="mt-3">
@@ -26,11 +38,7 @@ function Presentation() {
             <p className="pb-4 fw-semibold">
               Publica en un mercado de más de 50 mil usuarios.
             </p>
-            <Button
-              className=""
-              variant="primary"
-              onClick={() => router.push("/publicar/uno")}
-            >
+            <Button className="" variant="primary" onClick={userStatus}>
               Vender bici ahora
             </Button>
           </Col>
@@ -45,6 +53,11 @@ function Presentation() {
               />
             </div>
           </Col>
+          <PopLogin
+            ModalShow={ModalShow}
+            setModalShow={setModalShow}
+            router={"/publicar/uno"}
+          />
         </Row>
       </Container>
 

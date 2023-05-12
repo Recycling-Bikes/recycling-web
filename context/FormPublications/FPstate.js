@@ -110,11 +110,11 @@ export const FPState = create(
 );
 
 const getModels = async (category, brand) => {
+  
   // converter brand to id
-
   let { data, error } = await supabase
     .from("models")
-    .select("id,name")
+    .select("id,name, subcategory1, subcategory2, subcategory3")
     .eq("brand", parseInt(brand))
     .eq("category", parseInt(category))
     .order("name", { ascending: true });

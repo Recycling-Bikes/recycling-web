@@ -11,6 +11,8 @@ export const multiplicadores = {
     d: 0.9,
   },
 
+  ebike: 1.4,
+
   marca: {
     a: 1.45,
     b: 1.2,
