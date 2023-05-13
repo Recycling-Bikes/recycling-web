@@ -14,6 +14,8 @@ function Presentation() {
   const userStatus = async () => {
     const { user } = await confirmUser();
 
+    console.log("🚀 ~ file: Presentation.js:16 ~ userStatus ~ user:", user)
+    
     user ? router.push("/publicar/uno") : setModalShow(true);
   };
 
