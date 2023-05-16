@@ -19,11 +19,11 @@ export default function Tabla() {
   } = bici;
   console.log("🚀 ~ file: Tabla.js:21 ~ Tabla ~ propiedades:", propiedades);
 
-  const data = (name, datum) => {
+  const data = (name = "", datum = "") => {
     return (
       <tr>
-        <td colSpan={2}>{name}</td>
-        <td colSpan={2}>{datum}</td>
+        <td colSpan={2}>{name ?? ""}</td>
+        <td colSpan={2}>{datum ?? ""}</td>
       </tr>
     );
   };
@@ -52,13 +52,13 @@ export default function Tabla() {
             </thead>
             <tbody>
               {propiedades?.brands?.name
-                ? data("Marca", propiedades.brands.name)
+                ? data("Marca", propiedades?.brands?.name)
                 : null}
-              {propiedades?.model ? data("Modelo", propiedades.model) : null}
+              {propiedades?.model ? data("Modelo", propiedades?.model) : null}
               {propiedades?.transmission?.name
                 ? data("Transmisión", propiedades?.transmission?.name)
                 : null}
-              {size.name ? data("Talla", size.name) : null}
+              {size?.name ? data("Talla", size?.name) : null}
 
               {propiedades?.materials?.name
                 ? data("Material", propiedades?.materials?.name)

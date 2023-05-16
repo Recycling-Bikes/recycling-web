@@ -1,18 +1,18 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
 
 export default function Buttons() {
   const bici = parkingState((state) => state.bici);
 
-  const dataSize = useCallback((id, sizeNormal, sizeRuta) => {
+  const dataSize = useCallback((id = 1, sizeNormal = "", sizeRuta = "")=> {
     if (id != 2) {
-      return sizeNormal ? sizeNormal : "";
+      return sizeNormal ?? "";
     }
     return sizeRuta ? sizeNormal : "";
-  }, []);
+  },[])
 
   const size = dataSize(
     bici?.category?.id,
@@ -20,7 +20,9 @@ export default function Buttons() {
     bici?.size?.ruta
   );
 
-  const price = bici.off ?? bici?.price;
+
+
+  const [price , setPrice] =useState(bici.off ?? bici?.price)
 
   function Descuento(original, off) {
     const descuento = original - off;
@@ -32,6 +34,10 @@ export default function Buttons() {
 
     return porcentaje;
   }
+
+ 
+
+
 
   return (
     <>
@@ -49,14 +55,14 @@ export default function Buttons() {
             <>
               {" "}
               <span className="text-decoration-line-through text-secondary">
-                ${bici.price.toLocaleString("en")}
+                ${bici?.price?.toLocaleString("en")}
               </span>{" "}
             </>
           ) : (
             ""
           )}
         </Row>
-        ${price.toLocaleString("en")}{" "}
+        ${price?.toLocaleString("en")}{" "}
         {bici?.off ? (
           <>
             <span
