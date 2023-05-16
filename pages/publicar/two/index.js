@@ -56,11 +56,11 @@ export default function ParteDos() {
   useEffect(() => {
     let count = 0;
     let category = parseInt(publication?.category);
-    if (category === 3 || category === 6) {
+    if (category == 3 || category == 6 || category == 4) {
       category = 1;
     }
 
-    if (category === 8) {
+    if (category == 8) {
       category = 2;
     }
 
