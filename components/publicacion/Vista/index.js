@@ -6,16 +6,15 @@ import PropTypes from "prop-types";
 
 import Image from "next/image";
 import { parkingState } from "context/Parking/ParkingState";
+import { CDN } from "utils/constantes";
 
 export default function Vista() {
-  const [bici, CDN2] = parkingState((state) => [state.bici, state.CDN2]);
+  const [bici] = parkingState((state) => [state.bici]);
 
-  const CDN =
-    "https://yrdmpvdxobghopvoevsg.supabase.co/storage/v1/object/public/imagesbicis/";
 
   const [primaryVista, setPrimaryVista] = useState(
-    bici?.filesUrl[0]
-      ? bici?.filesUrl[0]
+    bici && bici.filesUrl && bici.filesUrl[0]
+      ? bici.filesUrl[0]
       : "https://via.placeholder.com/500x500"
   );
 
@@ -30,7 +29,7 @@ export default function Vista() {
       </Row>
       <Row>
         <Col md="2" className="d-none d-lg-block">
-          {bici.filesUrl.map((link) => (
+          {bici?.filesUrl?.map((link) => (
             <Image
               src={CDN + link}
               alt=""
@@ -57,7 +56,7 @@ export default function Vista() {
 
         <Col className="d-lg-none">
           <Carousel style={{ height: "70vw" }}>
-            {bici.filesUrl.map((link) => (
+            {bici?.filesUrl?.map((link) => (
               <Carousel.Item key={link} style={{ maxHeight: "70vw" }}>
                 <img
                   style={{ maxHeight: "70vw" }}

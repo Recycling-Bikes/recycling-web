@@ -15,6 +15,11 @@ import Promesas from "components/publicacion/vender/promesas";
 
 const Vender = () => {
   const { id } = useRouter().query;
+  
+  useEffect(() => {
+    console.log("rendering principal");
+  });
+
 
   const bici = parkingState((state) => state.bici);
 
