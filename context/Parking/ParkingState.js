@@ -63,11 +63,10 @@ export const parkingState = create(
 );
 
 const getBicis = async () => {
-  const { data: bicis, error } = await supabase.from("bicis").select(`
+  const { data, error } = await supabase.from("bicis").select(`
   id,price,title,
   models (name), filesUrl, propiedades (transmission,
   category ,
-  subcategory ,
   brand, 
   material ,
   suspension ,
@@ -75,9 +74,56 @@ const getBicis = async () => {
   rine), size, country, year,
   off,
   etiquetas (name)`);
-  console.log(error);
-  console.log(bicis);
-  return error ? error : await bicis;
+
+  // Si hay un error en la consulta, devolverlo inmediatamente
+  if (error) {
+    return { error };
+  }
+
+  const ids = data.map((item) => item.id);
+
+  const { data: subData, error: subError } = await supabase
+    .from("bici_subcategory")
+    .select("bici_id, subcategory_id")
+    .in("bici_id", ids);
+
+  // Si hay un error en la consulta, devolverlo inmediatamente
+  if (subError) {
+    return { error: subError };
+  }
+
+  const subcategoriesMap = subData.reduce((acc, cur) => {
+    if (!acc[cur.bici_id]) {
+      acc[cur.bici_id] = [];
+    }
+    acc[cur.bici_id].push(cur.subcategory_id);
+    return acc;
+  }, {});
+
+  const result = data.map((item) => ({
+    id: item.id,
+    price: item.price,
+    title: item.title,
+    models: item.models,
+    filesUrl: item.filesUrl,
+    size: item.size,
+    country: item.country,
+    year: item.year,
+    off: item.off,
+    etiquetas: item.etiquetas,
+    propiedades: {
+      transmission: item.propiedades.transmission,
+      category: item.propiedades.category,
+      brand: item.propiedades.brand,
+      material: item.propiedades.material,
+      suspension: item.propiedades.suspension,
+      freno: item.propiedades.freno,
+      rine: item.propiedades.rine,
+      subcategories: subcategoriesMap[item.id] || [],
+    },
+  }));
+
+  return result;
 };
 
 const getBici = async (id) => {

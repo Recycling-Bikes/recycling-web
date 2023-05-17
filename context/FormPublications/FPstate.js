@@ -188,8 +188,9 @@ const postBici = async ({
   subcategory,
   filesUrl,
   user_id,
+  subcategories
 }) => {
-  const propsres = await supabase
+  const proposers = await supabase
     .from("propiedades")
     .insert([
       {
@@ -206,7 +207,7 @@ const postBici = async ({
     ])
     .select("*");
 
-  const res = await supabase.from("bicis").insert([
+  const datums = await supabase.from("bicis").insert([
     {
       condition: conditions,
       year,
@@ -218,9 +219,18 @@ const postBici = async ({
       filesUrl,
       user_id,
       country: 1,
-      propiedades: propsres?.data[0]?.id ?? 8,
+      propiedades: proposers?.data[0]?.id ?? 8,
     },
-  ]);
+  ]).select("id");
+
+  const subCat = subcategories.map((sub) => {
+    return {
+      bici_id: datums?.id ?? 8,
+      subcategory_id: sub,
+    };
+  });
+
+  const res = await supabase.from("bici_subcategory").insert(subCat);
 
   return res;
 };
