@@ -17,7 +17,7 @@ export default function GetBicis(props) {
   });
 
   if (isLoading) {
-    return ( 
+    return (
       <div
         style={{
           display: "flex",
@@ -40,33 +40,13 @@ export default function GetBicis(props) {
     );
   }
 
-  function Descuento(original, off) {
-    const descuento = original - off;
-    console.log((descuento / original) * 100);
-
-    const porcentaje = ((descuento / original) * 100).toFixed(0);
-
-    if (porcentaje == 100) {
-      return 99;
-    }
-
-    return porcentaje;
-  }
-
-  // Resto del código para renderizar los resultados filtrados
-
   return (
     <div
       className="d-grid gap-3 my-4"
       style={{
-        gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr)",
+        gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
       }}
     >
-      {/*
-          - Antes era "data"
-          - Se cambió para checkear que la estructura de "data" es un array, antes de usar el método "map"
-          - Resuelve un error
-          */}
 
       {Array.isArray(data)
         ? filteredData(data, filters).map((bici) => (
@@ -79,6 +59,7 @@ export default function GetBicis(props) {
               off={bici.off}
               image={bici.filesUrl[0]}
               etiqueta={bici.etiquetas?.name}
+
             />
           ))
         : ""}
@@ -109,7 +90,9 @@ function filteredData(data, filters) {
 
     if (
       filters.subcategory?.length > 0 &&
-      !filters.subcategory.includes(datum.propiedades.subcategory)
+      !filters.subcategory.some((sub) =>
+        datum.propiedades.subcategories.includes(sub)
+      )
     ) {
       passesFilter = false;
     }

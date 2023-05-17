@@ -3,15 +3,14 @@ import { Badge, Card } from "react-bootstrap";
 import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 
-
 ComponenteBike.propTypes = {
-    id: propTypes.any.isRequired,
-    name: propTypes.string.isRequired,
-    title: propTypes.string.isRequired,
-    price: propTypes.number.isRequired,
-    off: propTypes.number,
-    image: propTypes.string.isRequired,
-    etiqueta: propTypes.string,
+  id: propTypes.any.isRequired,
+  name: propTypes.string.isRequired,
+  title: propTypes.string.isRequired,
+  price: propTypes.number.isRequired,
+  off: propTypes.number,
+  image: propTypes.string.isRequired,
+  etiqueta: propTypes.string,
 };
 
 export function ComponenteBike({
@@ -44,7 +43,7 @@ export function ComponenteBike({
           </Badge>
           <Card.Img
             variant="top"
-            src={CDN + image}
+            src={CDN + image + "?width=${500}&height={180}&quality=${60}&webp=true&format=webp&fit=cover&optimize=medium&"}
             style={{
               maxHeight: "180px",
               borderRadius: "5px",

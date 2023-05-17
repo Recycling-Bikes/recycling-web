@@ -42,7 +42,7 @@ export const filtersState = create(
             frenos: [],
             rines: [],
             years: [],
-            minPrice: 0,
+            minPrice: null,
             maxPrice: Infinity,
           },
         }));

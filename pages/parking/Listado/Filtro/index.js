@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Form, Row, Col } from "react-bootstrap";
+import { Accordion, Form, Row, Col, Button } from "react-bootstrap";
 
 import brands from "components/parking/filtros/brands";
 import category from "components/parking/filtros/category";
@@ -13,8 +13,10 @@ import suspension from "components/parking/filtros/suspension";
 import years from "components/parking/filtros/years";
 
 import { filtersState } from "context/Filters/filtersState";
+import { useRouter } from "next/router";
 
 export default function Filtro() {
+  const router = useRouter();
   const [hydration, setHydration] = useState(false);
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function Filtro() {
   }, []);
   const setFilters = filtersState((state) => state.setFilters);
   const filters = filtersState((state) => state.filters);
+  const ClearFilters = filtersState((state) => state.ClearFilters);
 
   const Iters = (data, category) => {
     return (
@@ -67,6 +70,16 @@ export default function Filtro() {
 
   return hydration ? (
     <div className="separador">
+      <div className="sticky-bottom d-grid gap-2">
+        <Button
+          onClick={() => {
+            ClearFilters();
+            router.reload();
+          }}
+        >
+          Limpiar
+        </Button>
+      </div>
       <Accordion defaultActiveKey={["1", "10"]} flush alwaysOpen>
         {/* Start - País */}
         <Accordion.Item eventKey="0">
@@ -175,6 +188,7 @@ export default function Filtro() {
                   type="number"
                   placeholder="$ 0.00"
                   className="px-2"
+                  defaultValue={filters ? filters.minPrice : ""}
                   onChange={(e) => {
                     let minPrice;
                     if (e.target.value === "") {
@@ -199,6 +213,7 @@ export default function Filtro() {
                 <Form.Control
                   type="number"
                   placeholder="$ 0.00"
+                  defaultValue={filters ? filters.maxPrice : ""}
                   onChange={(e) =>
                     setFilters((prevFilters) => {
                       let maxPrice;
