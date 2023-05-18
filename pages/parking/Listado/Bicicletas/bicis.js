@@ -47,7 +47,6 @@ export default function GetBicis(props) {
         gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
       }}
     >
-
       {Array.isArray(data)
         ? filteredData(data, filters).map((bici) => (
             <ComponenteBike
@@ -59,7 +58,7 @@ export default function GetBicis(props) {
               off={bici.off}
               image={bici.filesUrl[0]}
               etiqueta={bici.etiquetas?.name}
-
+              verified={bici.verified}
             />
           ))
         : ""}

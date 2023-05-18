@@ -19,6 +19,7 @@ const getBicis = async () => {
       `
   id,price,title, etiquetas (name),
   models (name), filesUrl,
+  verified,
   off`
     )
     .eq("main", true);
@@ -153,6 +154,7 @@ function Article({ Title }) {
                 off={bici.off}
                 image={bici.filesUrl[0]}
                 etiqueta={bici.etiquetas?.name}
+                verified={bici.verified}
                 style={{ width: "18rem", height: "370px" }}
               />
             </SwiperSlide>
