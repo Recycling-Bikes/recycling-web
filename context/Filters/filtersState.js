@@ -1,23 +1,25 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+const initialFilters = {
+  country: [],
+  category: [],
+  subcategory: [],
+  size: [],
+  brands: [],
+  materials: [],
+  suspension: [],
+  frenos: [],
+  rines: [],
+  years: [],
+  minPrice: 0,
+  maxPrice: Infinity,
+};
+
 export const filtersState = create(
   persist(
     (set, get) => ({
-      filters: {
-        country: [],
-        category: [],
-        subcategory: [],
-        size: [],
-        brands: [],
-        materials: [],
-        suspension: [],
-        frenos: [],
-        rines: [],
-        years: [],
-        minPrice: 0,
-        maxPrice: Infinity,
-      },
+      filters: initialFilters,
 
       setFilters: (fn) => {
         const data = fn(get().filters);
@@ -31,20 +33,7 @@ export const filtersState = create(
 
       ClearFilters: () => {
         set(() => ({
-          filters: {
-            country: [],
-            category: [],
-            subcategory: [],
-            size: [],
-            brands: [],
-            materials: [],
-            suspension: [],
-            frenos: [],
-            rines: [],
-            years: [],
-            minPrice: null,
-            maxPrice: Infinity,
-          },
+          filters: initialFilters,
         }));
       },
     }),

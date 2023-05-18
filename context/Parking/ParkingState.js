@@ -69,21 +69,23 @@ const getBicis = async () => {
   category ,
   brand, 
   material ,
-  suspension ,
+  suspension,
   freno,
   rine), size, country, year,
   off,
-  etiquetas (name)`);
+  etiquetas (name),
+  verified`);
 
   // Si hay un error en la consulta, devolverlo inmediatamente
   if (error) {
+    console.log(error);
     return { error };
   }
 
   const ids = data.map((item) => item.id);
 
   const { data: subData, error: subError } = await supabase
-    .from("bici_subcategory")
+    .from("bicis_subcategory")
     .select("bici_id, subcategory_id")
     .in("bici_id", ids);
 
@@ -109,6 +111,7 @@ const getBicis = async () => {
     size: item.size,
     country: item.country,
     year: item.year,
+    verified: item.verified,
     off: item.off,
     etiquetas: item.etiquetas,
     propiedades: {

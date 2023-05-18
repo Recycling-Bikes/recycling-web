@@ -192,7 +192,9 @@ export default function Filtro() {
                   onChange={(e) => {
                     let minPrice;
                     if (e.target.value === "") {
-                      minPrice = 0;
+                      minPrice = null;
+                    } else if (e.target.value === "0") {
+                      e.target.value = "";
                     } else {
                       minPrice = parseInt(e.target.value);
                     }
@@ -219,6 +221,8 @@ export default function Filtro() {
                       let maxPrice;
                       if (e.target.value === "") {
                         maxPrice = Infinity;
+                      } else if (e.target.value === "0") {
+                        e.target.value = "";
                       } else {
                         maxPrice = parseInt(e.target.value);
                       }
