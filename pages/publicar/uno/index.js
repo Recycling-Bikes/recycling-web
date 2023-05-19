@@ -142,7 +142,7 @@ export default function PartUno() {
                     /* value={values.category} */
                   >
                     <option value="">Selecciona una categoría</option>
-                    {selectList(form?.category.filter((item) => item.id !== 7 && item.id !== 6))}
+                    {selectList(form?.category?.filter((item) => item.id !== 7 && item.id !== 6))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.category?.message}
