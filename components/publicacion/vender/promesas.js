@@ -11,13 +11,13 @@ export default function Promesas() {
           <span className="fw-bold">Envío y ensamblaje</span>
         </Accordion.Header>
         <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          <p>
+            Entregamos nuestros productos tanto en la ciudad de Panamá como en
+            todas las provincias de Panamá. Nos esforzamos por alcanzar cada
+            rincón de nuestro país para asegurar que nuestros clientes tengan
+            acceso a nuestros productos.
+          </p>
+          <p>También puedes recoger tu producto en nuestro showroom.</p>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="0">
