@@ -13,6 +13,7 @@ const subcategory = [
   { id: 12, label: "Carga para niños", category: [3] },
   { id: 13, label: "Canastas y Alforjas", category: [3] },
   { id: 14, label: "Fixie", category: [3] },
+  { id: 15, label: "NIÑOS", all: true },
 ];
 
 export default subcategory;
