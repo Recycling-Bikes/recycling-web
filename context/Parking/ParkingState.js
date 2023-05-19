@@ -63,7 +63,10 @@ export const parkingState = create(
 );
 
 const getBicis = async () => {
-  const { data, error } = await supabase.from("bicis").select(`
+  const { data, error } = await supabase
+    .from("bicis")
+    .select(
+      `
   id,price,title,
   models (name), filesUrl, propiedades (transmission,
   category ,
@@ -74,7 +77,16 @@ const getBicis = async () => {
   rine), size, country, year,
   off,
   etiquetas (name),
-  verified`);
+  verified,
+  subcategories:bicis_subcategory(
+    id:subcategory_id
+    )
+  status
+  `
+    )
+    .in("status", [2, 3])
+    .order("id", { ascending: false })
+    .order("status", { ascending: true });
 
   // Si hay un error en la consulta, devolverlo inmediatamente
   if (error) {
@@ -82,25 +94,9 @@ const getBicis = async () => {
     return { error };
   }
 
-  const ids = data.map((item) => item.id);
-
-  const { data: subData, error: subError } = await supabase
-    .from("bicis_subcategory")
-    .select("bici_id, subcategory_id")
-    .in("bici_id", ids);
-
-  // Si hay un error en la consulta, devolverlo inmediatamente
-  if (subError) {
-    return { error: subError };
+  function subcategories(item) {
+    return item.map((subcategory) => subcategory.id);
   }
-
-  const subcategoriesMap = subData.reduce((acc, cur) => {
-    if (!acc[cur.bici_id]) {
-      acc[cur.bici_id] = [];
-    }
-    acc[cur.bici_id].push(cur.subcategory_id);
-    return acc;
-  }, {});
 
   const result = data.map((item) => ({
     id: item.id,
@@ -122,7 +118,8 @@ const getBicis = async () => {
       suspension: item.propiedades.suspension,
       freno: item.propiedades.freno,
       rine: item.propiedades.rine,
-      subcategories: subcategoriesMap[item.id] || [],
+      subcategories:
+        item.subcategories.length > 0 ? subcategories(item.subcategories) : [],
     },
   }));
 
