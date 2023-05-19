@@ -26,19 +26,21 @@ export default function Promesas() {
         </Accordion.Header>
 
         <Accordion.Body>
-          <Link href="#">
+          {/*           <Link href="#">
             <BsShieldCheck className="me-2" />
             Recycling Certified - 12 meses
-          </Link>
+          </Link> */}
           <p className="mt-2">
-            Esta bicicleta ha sido inspeccionada y certificada por nuestros
+            {/* Esta bicicleta ha sido inspeccionada y certificada por nuestros
             expertos mecánicos.
             <br />
             <br />
             Nuestro servicio de guante blanco incluye una puesta a punto de
             transmisión, frenos y dirección. Los consumibles desgastados como
             cadena, pastillas de freno, cubiertas o cableado son reemplazados
-            por otros nuevos si han llegado al final de su vida útil
+            por otros nuevos si han llegado al final de su vida útil */}
+            Esta bicicleta será revisada antes de su entrega, para validar que
+            el cuadro no tenga fisuras ni hayan piezas rotas.
           </p>
           <hr className="text-secondary" />
         </Accordion.Body>
