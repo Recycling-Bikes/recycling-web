@@ -15,7 +15,6 @@ import {
 import Link from "next/link";
 import { MdOutlinePedalBike } from "react-icons/md";
 import { BsCardChecklist, BsThreeDots } from "react-icons/bs";
-import Mountain from "../../public/Mountain.png";
 import Image from "next/image";
 import { BsHandbag, BsPencilSquare, BsTag } from "react-icons/bs";
 import { HiArrowsRightLeft } from "react-icons/hi2";
@@ -30,6 +29,7 @@ import { FiAlertCircle } from "react-icons/fi";
 export default function Avaluador() {
   const [ModalShow, setModalShow] = useState(false);
   const router = useRouter();
+  const [ImageBici, setImageBici] = useState("/biciImage/1/1.png");
 
   const [publication, form] = FPState(
     (state) => [state.publication, state.form],
@@ -68,10 +68,9 @@ export default function Avaluador() {
       ) {
         setForm(property);
       }
-      console.log(form[property]);
     };
     updateFormState("conditions");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [values, setValues] = useState({
@@ -118,7 +117,7 @@ export default function Avaluador() {
       publication.ebike ?? false
     );
     setValues(values);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     form.brands,
     form.conditions,
@@ -131,6 +130,15 @@ export default function Avaluador() {
     publication.transmission,
     publication.year,
   ]);
+
+  useEffect(() => {
+    const typePrice = publication?.freno ?? publication.suspension ?? 1;
+
+    const image = `/biciImage/${publication.category}/${typePrice}.png`;
+    console.log(image);
+
+    setImageBici(image);
+  }, [publication.category, publication.freno, publication.suspension]);
 
   return (
     <Main>
@@ -187,9 +195,9 @@ export default function Avaluador() {
         </Container>
         <Container className="justify-content-center">
           <Row className="justify-content-center">
-            <Col sm={100} md={6} lg={5} className="justify-content-center">
-              <Container>
-                <Image src={Mountain} alt="" className="img-fluid" />
+            <Col sm={100} md={6} lg={5} className="flex justify-content-center">
+              <Container className="flex justify-content-center">
+                <Image width={400} height={400} src={ImageBici} alt="Image to bici" className="img-fluid" />
               </Container>
             </Col>
             <Col md="auto" className="d-flex d-md-block justify-content-center">
@@ -273,7 +281,9 @@ export default function Avaluador() {
 
           <div className="mt-2 py-3 d-grid gap-2 d-md-none ">
             <Button
-              onClick={() => router.push("https://wa.me/50769240795?text=%C2%A1Hola!")}
+              onClick={() =>
+                router.push("https://wa.me/50769240795?text=%C2%A1Hola!")
+              }
               className=""
               variant="primary"
               type="submit"

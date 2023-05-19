@@ -178,7 +178,7 @@ export default function Partdos() {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                   <Form.Check
                     type="checkbox"
-                    label={<Link href="#" > Acepto los términos y condiciones</Link>}
+                    label={<Link href="/politica/terminos" target="_blank" > Acepto los términos y condiciones</Link>}
                     {...register("terms")}
                     isInValue={!errors?.terms}
                   />
