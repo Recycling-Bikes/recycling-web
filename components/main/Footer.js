@@ -179,17 +179,17 @@ const Footer = (props) => {
               </div>
             </Col>{" "}
             <Col xl="auto">
-              <Link href="#" className="text-reset ms-3">
+              <Link href="/politica/privacidad" className="text-reset ms-3">
                 Política de privacidad{" "}
               </Link>
 
-              <Link href="#" className="text-reset ms-3">
+              <Link href="/politica/privacidad" className="text-reset ms-3">
                 Cookies{" "}
               </Link>
-              <Link href="#" className="text-reset ms-3">
+              <Link href="/politica/privacidad" className="text-reset ms-3">
                 Aviso Legal{" "}
               </Link>
-              <Link href="#" className="text-reset ms-3">
+              <Link href="/politica/privacidad" className="text-reset ms-3">
                 Condiciones de Uso{" "}
               </Link>
             </Col>
