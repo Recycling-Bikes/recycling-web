@@ -29,23 +29,51 @@ export const parkingState = create(
         );
       },
 
-      parking: {},
+      parking: [],
+
+      pageNumber: 0,
+
+      setPageNumber: (callback) => {
+        const pageNumber = callback(get().pageNumber);
+
+        set((state) => ({
+          pageNumber: pageNumber,
+        }));
+      },
 
       setParking: async () => {
-        const data = await getBicis();
-        set({
-          parking: {
-            ...data,
-          },
-        });
+        const data = await getBicis(get().pageNumber, 20);
+
+        set((state) => ({
+          parking: [...state.parking, ...data],
+        }));
+
         return data;
+      },
+
+      didMemoryParking: async () => {
+        const id = await getBiciDidMemory();
+
+        if (id !== (get().parking[0]?.id ?? id)) {
+          console.log("clear");
+          console.log(id);
+          console.log(get().parking[0]);
+          set((state) => ({
+            parking: [],
+            pageNumber: 0,
+          }));
+          return true;
+        }
+        return false;
       },
 
       clearParking: () => {
         set(
           (state) => ({
             ...state,
-            parking: {},
+
+            parking: [],
+            pageNumber: 0,
           }),
           true
         );
@@ -55,38 +83,37 @@ export const parkingState = create(
         get().clearParking();
         get().clearBici();
       },
-
-      CDN2: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesbicis/`,
     }),
-    { name: "ParkingData" }
+    { name: "ParkingData3" }
   )
 );
 
-const getBicis = async () => {
+const getBicis = async (pageNumber, pageSize) => {
   const { data, error } = await supabase
     .from("bicis")
     .select(
       `
-  id,price,title,
-  models (name), filesUrl, propiedades (transmission,
-  category ,
-  brand, 
-  material ,
-  suspension,
-  freno,
-  rine), size, country, year,
-  off,
-  etiquetas (name),
-  verified,
-  subcategories:bicis_subcategory(
-    id:subcategory_id
-    )
-  status
+    id,price,title,
+    models (name), filesUrl, propiedades (transmission,
+    category ,
+    brand, 
+    material ,
+    suspension,
+    freno,
+    rine), size, country, year,
+    off,
+    etiquetas (name),
+    verified,
+    subcategories:bicis_subcategory(
+      id:subcategory_id
+      )
+    status
   `
     )
     .in("status", [2, 3])
     .order("id", { ascending: false })
-    .order("status", { ascending: true });
+    .order("status", { ascending: true })
+    .range(pageSize * (pageNumber - 1), pageSize * pageNumber - 1);
 
   // Si hay un error en la consulta, devolverlo inmediatamente
   if (error) {
@@ -109,6 +136,7 @@ const getBicis = async () => {
     year: item.year,
     verified: item.verified,
     off: item.off,
+    sold: item.status == 3 ? true : false,
     etiquetas: item.etiquetas,
     propiedades: {
       transmission: item.propiedades.transmission,
@@ -124,6 +152,24 @@ const getBicis = async () => {
   }));
 
   return result;
+};
+
+const getBiciDidMemory = async () => {
+  const { data, error } = await supabase
+    .from("bicis")
+    .select("id")
+    .in("status", [2, 3])
+    .order("id", { ascending: false })
+    .order("status", { ascending: true })
+    .limit(1);
+
+  // Si hay un error en la consulta, devolverlo inmediatamente
+  if (error) {
+    console.log(error);
+    return { error };
+  }
+
+  return data[0].id;
 };
 
 const getBici = async (id) => {
@@ -142,7 +188,9 @@ const getBici = async (id) => {
           model,
           suspension (name) ,
           frenos (name),
-          rines (name)), 
+          rines (name)),
+          status,
+          verified,
           size (name, relacion, ruta), 
           country (name), year  (name),
           off,

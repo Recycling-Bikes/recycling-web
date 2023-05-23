@@ -7,12 +7,12 @@ import { BsChatSquareDots } from "react-icons/bs";
 export default function Buttons() {
   const bici = parkingState((state) => state.bici);
 
-  const dataSize = useCallback((id = 1, sizeNormal = "", sizeRuta = "")=> {
+  const dataSize = useCallback((id = 1, sizeNormal = "", sizeRuta = "") => {
     if (id != 2) {
       return sizeNormal ?? "";
     }
-    return sizeRuta ? sizeNormal : "";
-  },[])
+    return sizeRuta ?? "";
+  }, []);
 
   const size = dataSize(
     bici?.category?.id,
@@ -20,9 +20,7 @@ export default function Buttons() {
     bici?.size?.ruta
   );
 
-
-
-  const [price , setPrice] =useState(bici.off ?? bici?.price)
+  const [price, setPrice] = useState(bici.off ?? bici?.price);
 
   function Descuento(original, off) {
     const descuento = original - off;
@@ -35,13 +33,9 @@ export default function Buttons() {
     return porcentaje;
   }
 
- 
-
-
-
   return (
     <>
-      <h2>{bici.title}</h2>
+      <h2>{bici?.title}</h2>
       <p className="text-secondary">SKU: {bici?.id}</p>
 
       <p className="mb-0 text-secondary ">

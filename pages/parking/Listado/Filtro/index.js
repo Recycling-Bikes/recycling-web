@@ -17,11 +17,7 @@ import { useRouter } from "next/router";
 
 export default function Filtro() {
   const router = useRouter();
-  const [hydration, setHydration] = useState(false);
 
-  useEffect(() => {
-    setHydration(true);
-  }, []);
   const setFilters = filtersState((state) => state.setFilters);
   const filters = filtersState((state) => state.filters);
   const ClearFilters = filtersState((state) => state.ClearFilters);
@@ -68,10 +64,11 @@ export default function Filtro() {
     );
   };
 
-  return hydration ? (
+  return (
     <div className="separador">
       <div className="sticky-bottom d-grid gap-2">
         <Button
+          className="d-none d-xl-block"
           onClick={() => {
             ClearFilters();
             router.reload();
@@ -86,6 +83,7 @@ export default function Filtro() {
           <Accordion.Header className="py-0">
             <h5 className="fw-bolder fs-6">País</h5>
           </Accordion.Header>
+
           <Accordion.Body>{Iters(country, "country")}</Accordion.Body>
         </Accordion.Item>
         {/* End - País */}
@@ -180,6 +178,7 @@ export default function Filtro() {
           <Accordion.Header>
             <h5 className="fw-bolder fs-6">Precio</h5>
           </Accordion.Header>
+
           <Accordion.Body>
             <Row className="mb-3 d-flex align-items-end">
               <Form.Group as={Col} controlId="formGridEmail">
@@ -238,5 +237,5 @@ export default function Filtro() {
         {/* End - Precio */}
       </Accordion>
     </div>
-  ) : null;
+  );
 }

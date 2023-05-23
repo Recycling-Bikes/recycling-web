@@ -5,28 +5,102 @@ import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
 import { ComponenteBike } from "components/bicletas";
+import { use, useCallback, useEffect, useState } from "react";
+import { useHydrate } from "hooks/hydrate/hydrate";
 
 export default function GetBicis(props) {
   const setParking = parkingState((state) => state.setParking);
   const parking = parkingState((state) => state.parking);
+  const didMemoryParking = parkingState((state) => state.didMemoryParking);
   const filters = filtersState((state) => state.filters);
+  const [lastScrollTop, setLastScrollTop] = useState(0);
 
-  const { isLoading, isError, error, data } = useQuery({
-    queryKey: ["productos"],
-    queryFn: setParking,
-  });
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (isLoading) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "90hv",
-          textAlign: "center",
-        }}
-      >
+  // useState hydrates the state with the initial value
+  const hydrate = useHydrate();
+
+  useEffect(() => {
+    if (hydrate) {
+      didMemoryParking();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrate]);
+
+  const [pageNumber, setPageNumber] = parkingState((state) => [
+    state.pageNumber,
+    state.setPageNumber,
+  ]);
+
+  const fetchParking = useCallback(async () => {
+    if (!isLoading) {
+      setIsLoading(true);
+      setPageNumber((old) => old + 1);
+
+      try {
+        await setParking();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  }, [isLoading, setPageNumber, setParking]);
+
+  useEffect(() => {
+    (async () => {
+      if (hydrate && parking.length === 0 && !isLoading) {
+        await fetchParking();
+      }
+    })();
+  }, [fetchParking, hydrate, isLoading, parking.length]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      const scrolledPercentage =
+        (document.documentElement.scrollTop + window.innerHeight) /
+        document.documentElement.scrollHeight;
+
+      if (scrolledPercentage < 0.8 || isLoading) return;
+
+      if (scrollTop > lastScrollTop) {
+        fetchParking();
+      }
+
+      setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [parking, lastScrollTop, pageNumber, hydrate, isLoading, fetchParking]);
+
+  return (
+    <div
+      className="d-grid gap-3 my-4"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
+      }}
+    >
+      {hydrate &&
+        filteredData(parking ?? [], filters).map((bici) => (
+          <ComponenteBike
+            key={bici.id}
+            id={bici.id}
+            name={bici.models.name}
+            title={bici.title}
+            price={bici.price}
+            status={bici.status}
+            sold={bici.sold}
+            off={bici.off}
+            image={bici.filesUrl[0]}
+            etiqueta={bici.etiquetas?.name}
+            verified={bici.verified}
+          />
+        ))}
+      {isLoading && (
         <Spinner
           animation="border"
           variant="secondary"
@@ -36,39 +110,14 @@ export default function GetBicis(props) {
             fontSize: "90px",
           }}
         />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className="d-grid gap-3 my-4"
-      style={{
-        gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
-      }}
-    >
-      {Array.isArray(data)
-        ? filteredData(data, filters).map((bici) => (
-            <ComponenteBike
-              key={bici.id}
-              id={bici.id}
-              name={bici.models.name}
-              title={bici.title}
-              price={bici.price}
-              off={bici.off}
-              image={bici.filesUrl[0]}
-              etiqueta={bici.etiquetas?.name}
-              verified={bici.verified}
-            />
-          ))
-        : ""}
+      )}
       <Relleno />
     </div>
   );
 }
 
 function filteredData(data, filters) {
-  return data.filter((datum) => {
+  return data?.filter((datum) => {
     let passesFilter = true;
 
     const price = datum.off ?? datum.price;

@@ -12,6 +12,7 @@ import { shallow } from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FPState } from "context/FormPublications/FPstate";
+import { useHydrate } from "hooks/hydrate/hydrate";
 
 const schema = yup.object().shape({
   year: yup.string().required("El año es requerido"),
@@ -22,7 +23,7 @@ const schema = yup.object().shape({
 
 export default function PartUno() {
   const router = useRouter();
-  const [hydrated, setHydrated] = useState(true);
+  const hydrate = useHydrate();
 
   const [publication, form] = FPState(
     (state) => [state.publication, state.form],
@@ -78,10 +79,6 @@ export default function PartUno() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch("brand"), watch("category")]);
 
-  useEffect(() => {
-    setHydrated(false);
-  }, []);
-
   const onSubmit = (items) => {
     /* console.log(items)
      */
@@ -99,7 +96,7 @@ export default function PartUno() {
     });
   };
 
-  return hydrated ? (
+  return hydrate ? (
     ""
   ) : (
     <Main>
@@ -142,7 +139,11 @@ export default function PartUno() {
                     /* value={values.category} */
                   >
                     <option value="">Selecciona una categoría</option>
-                    {selectList(form?.category?.filter((item) => item.id !== 7 && item.id !== 6))}
+                    {selectList(
+                      form?.category?.filter(
+                        (item) => item.id !== 7 && item.id !== 6
+                      )
+                    )}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.category?.message}
@@ -152,7 +153,6 @@ export default function PartUno() {
                 {/* Bici E-Bike */}
 
                 <Form.Group className="mb-3" controlId="isE-Bike">
-
                   <Row className="mx-2">
                     <Col
                       style={{
