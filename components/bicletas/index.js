@@ -24,6 +24,7 @@ export function ComponenteBike({
   image,
   etiqueta = null,
   verified = false,
+  sold = false,
   ...props
 }) {
   function Descuento(original, off) {
@@ -35,6 +36,10 @@ export function ComponenteBike({
     }
 
     return porcentaje;
+  }
+
+  if (sold) {
+    console.log(sold);
   }
 
   return (
@@ -58,15 +63,15 @@ export function ComponenteBike({
             }}
           />
           {/*  sello de verificado */}
-          {verified && (
+          {verified && !sold && (
             <div
               className="px-2"
               style={{
                 position: "absolute",
-                bottom: -4, 
-                left: 10, 
-                backgroundColor: "#0fa899", 
-                color: "white", 
+                bottom: -4,
+                left: 10,
+                backgroundColor: "#0fa899",
+                color: "white",
                 padding: "5px",
                 borderRadius: "5px",
                 display: "flex",
@@ -76,6 +81,25 @@ export function ComponenteBike({
             >
               <BsShieldFillCheck />
               <span className="ms-2">Verificado</span>
+            </div>
+          )}
+          {sold && (
+            <div
+              className="px-2"
+              style={{
+                position: "absolute",
+                bottom: -4,
+                left: 10,
+                backgroundColor: "red",
+                color: "white",
+                padding: "5px",
+                borderRadius: "5px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span className="ms-2">Vendido</span>
             </div>
           )}
         </div>

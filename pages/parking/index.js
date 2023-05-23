@@ -15,7 +15,7 @@ export default function Todasbicis() {
             <Filtro />
           </Col>
           <Col className="separador">
-            <Bicicletas></Bicicletas>
+            <Bicicletas/>
           </Col>
         </Row>
       </Container>

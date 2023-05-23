@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Main from "components/main";
 import { Row, Form, Col, Container, Button } from "react-bootstrap";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { FPState } from "context/FormPublications/FPstate";
 import { shallow } from "zustand/shallow";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useHydrate } from "hooks/hydrate/hydrate";
 
 const condicionalesStyle = {
   color: "#212928",
@@ -23,11 +24,7 @@ const schema = yup.object().shape({
 });
 
 export default function Parttres() {
-  const [hydrated, setHydrated] = useState(true);
-
-  useEffect(() => {
-    setHydrated(false);
-  }, []);
+  const hydrate = useHydrate();
 
   const router = useRouter();
 
@@ -72,7 +69,7 @@ export default function Parttres() {
     router.push("./cuatro");
   };
 
-  return hydrated ? (
+  return hydrate ? (
     ""
   ) : (
     <Main>

@@ -13,6 +13,7 @@ import { shallow } from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FPState } from "context/FormPublications/FPstate";
+import { useHydrate } from "hooks/hydrate/hydrate";
 
 const schema = yup.object().shape({
   material: yup.string().required("El año es requerido"),
@@ -22,11 +23,7 @@ const schema = yup.object().shape({
 });
 
 export default function ParteDos() {
-  const [hydrated, setHydrated] = useState(true);
-
-  useEffect(() => {
-    setHydrated(false);
-  }, []);
+  const hydrate = useHydrate();
 
   const router = useRouter();
 
@@ -165,7 +162,7 @@ export default function ParteDos() {
       : null;
   };
 
-  return hydrated ? (
+  return hydrate ? (
     ""
   ) : (
     <Main>
@@ -193,26 +190,6 @@ export default function ParteDos() {
                 ) : (
                   ""
                 )}
-
-                {/* {publication.model === "1" && (
-                  <Form.Group className="mb-3" controlId="subcategory">
-                    <Form.Label>
-                      Subcategoria <span className="text-danger">*</span>
-                    </Form.Label>
-                    <Form.Select
-                      isInvalid={!!errors.subcategory}
-                      {...register("subcategory")}
-                    >
-                      <option value="">Selecciona una talla</option>
-                      {selectList(form?.subcategory)}
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">
-                      {errors.subcategory?.message}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                )
-                } */}
-
                 {/* Talla */}
                 <Form.Group className="mb-3" controlId="size">
                   <Form.Label>
