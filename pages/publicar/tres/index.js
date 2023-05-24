@@ -24,7 +24,11 @@ const schema = yup.object().shape({
 });
 
 export default function Parttres() {
-  const hydrate = useHydrate();
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
 
   const router = useRouter();
 

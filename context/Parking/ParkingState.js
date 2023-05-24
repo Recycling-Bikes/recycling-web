@@ -52,12 +52,11 @@ export const parkingState = create(
       },
 
       didMemoryParking: async () => {
+        if (get().parking.length === 0) return false;
         const id = await getBiciDidMemory();
 
         if (id !== (get().parking[0]?.id ?? id)) {
           console.log("clear");
-          console.log(id);
-          console.log(get().parking[0]);
           set((state) => ({
             parking: [],
             pageNumber: 0,

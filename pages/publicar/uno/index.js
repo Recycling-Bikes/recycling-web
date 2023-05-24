@@ -23,7 +23,12 @@ const schema = yup.object().shape({
 
 export default function PartUno() {
   const router = useRouter();
-  const hydrate = useHydrate();
+
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
 
   const [publication, form] = FPState(
     (state) => [state.publication, state.form],
@@ -96,9 +101,7 @@ export default function PartUno() {
     });
   };
 
-  return hydrate ? (
-    ""
-  ) : (
+  return (
     <Main>
       {/* <DevTool control={control} /> */}
       <Container>
@@ -120,7 +123,7 @@ export default function PartUno() {
                   >
                     <option value="">Selecciona una Marca</option>
 
-                    {selectList(form?.brands)}
+                    {hydrate && selectList(form?.brands)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.brand?.message}
@@ -139,11 +142,12 @@ export default function PartUno() {
                     /* value={values.category} */
                   >
                     <option value="">Selecciona una categoría</option>
-                    {selectList(
-                      form?.category?.filter(
-                        (item) => item.id !== 7 && item.id !== 6
-                      )
-                    )}
+                    {hydrate &&
+                      selectList(
+                        form?.category?.filter(
+                          (item) => item.id !== 7 && item.id !== 6
+                        )
+                      )}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.category?.message}
@@ -197,7 +201,7 @@ export default function PartUno() {
                     {...register("model")}
                   >
                     <option value="">Selecciona un modelo</option>
-                    {selectList(form.models)}
+                    {hydrate && selectList(form.models)}
                     <option value="1">Otro</option>
                   </Form.Select>
                   <span className="text-secondary">
@@ -219,11 +223,12 @@ export default function PartUno() {
                     /* value={values.year} */
                   >
                     <option value="">Selecciona un año</option>
-                    {selectList(
-                      form?.years?.sort((a, b) => {
-                        return b?.name - a?.name;
-                      })
-                    )}
+                    {hydrate &&
+                      selectList(
+                        form?.years?.sort((a, b) => {
+                          return b?.name - a?.name;
+                        })
+                      )}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors.year?.message}
