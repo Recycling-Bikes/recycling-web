@@ -23,11 +23,7 @@ const schema = yup.object().shape({
 });
 
 export default function ParteDos() {
-  const [hydrate, setHydrate] = useState(false);
-
-  useEffect(() => {
-    setHydrate(true);
-  }, []);
+  const hydrate = useHydrate();
 
   const router = useRouter();
 
@@ -155,15 +151,16 @@ export default function ParteDos() {
   };
 
   const selectList = (list) => {
-    return Array.isArray(list)
-      ? list?.map((item) => {
-          return (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          );
-        })
-      : null;
+    return (
+      Array.isArray(list) &&
+      list?.map((item) => {
+        return (
+          <option key={item.id} value={item.id}>
+            {item.name}
+          </option>
+        );
+      })
+    );
   };
 
   return (
@@ -175,7 +172,7 @@ export default function ParteDos() {
               <Progres2 />
 
               <div className="my-5">
-                {publication.model == "1" ? (
+                {publication.model == "1" && (
                   <Form.Group className="mb-3" controlId="model">
                     <Form.Label>
                       Name Model <span className="text-danger">*</span>
@@ -183,24 +180,27 @@ export default function ParteDos() {
                     <Form.Control
                       isInvalid={!!errors?.other}
                       /* value={values.model} */
-                      {...register("other")}
-                    ></Form.Control>
+                      {...(hydrate && register("other"))}
+                    />
                     <Form.Control.Feedback type="invalid">
                       {errors.other?.message}
                     </Form.Control.Feedback>
                   </Form.Group>
-                ) : (
-                  ""
                 )}
                 {/* Talla */}
                 <Form.Group className="mb-3" controlId="size">
                   <Form.Label>
                     Talla <span className="text-danger">*</span>
                   </Form.Label>
-                  <Form.Select isInvalid={!!errors.size} {...register("size")}>
+
+                  <Form.Select
+                    isInvalid={!!errors.size}
+                    {...(hydrate && register("size"))}
+                  >
                     <option value="">Selecciona una talla</option>
                     {hydrate && selectList(form?.sizes)}
                   </Form.Select>
+
                   <Form.Control.Feedback type="invalid">
                     {errors?.size?.message}
                   </Form.Control.Feedback>
@@ -211,14 +211,16 @@ export default function ParteDos() {
                   <Form.Label>
                     Material <span className="text-danger">*</span>
                   </Form.Label>
+
                   <Form.Select
                     isInvalid={!!errors.material}
-                    {...register("material")}
+                    {...(hydrate && register("material"))}
                   >
                     <option value="">Selecciona un material</option>
 
                     {hydrate && selectList(form?.materials)}
                   </Form.Select>
+
                   <Form.Control.Feedback type="invalid">
                     {errors?.material?.message}
                   </Form.Control.Feedback>
@@ -229,27 +231,30 @@ export default function ParteDos() {
                   <Form.Label>
                     Transmisión <span className="text-danger">*</span>
                   </Form.Label>
+
                   <Form.Select
                     isInvalid={errors?.transmission}
-                    {...register("transmission")}
+                    {...(hydrate && register("transmission"))}
                   >
                     <option value="">Selecciona una transmisión</option>
                     {hydrate && selectList(form?.transmissions)}
                   </Form.Select>
+
                   <Form.Control.Feedback type="invalid">
                     {errors?.transmission?.message}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 {/* Rin */}
-                {publication?.category === "1" ||
-                publication?.category === "3" ||
-                publication?.category === "6" ? (
+                {(publication?.category === "1" ||
+                  publication?.category === "3" ||
+                  publication?.category === "6") && (
                   <Form.Group className="mb-3" controlId="rin">
                     <Form.Label>Rin</Form.Label>
+
                     <Form.Select
                       isInvalid={errors?.transmission}
-                      {...register("rin")}
+                      {...(hydrate && register("rin"))}
                     >
                       <option value="">Selecciona un rin</option>
                       {hydrate &&
@@ -269,53 +274,52 @@ export default function ParteDos() {
                           })
                         )}
                     </Form.Select>
+
                     <Form.Control.Feedback type="invalid">
                       {errors?.rin?.message}
                     </Form.Control.Feedback>
                   </Form.Group>
-                ) : (
-                  ""
                 )}
 
                 {/* freno */}
                 {publication?.category == "2" ||
-                publication?.category == "8" ? (
-                  <Form.Group className="mb-3" controlId="freno">
-                    <Form.Label>freno</Form.Label>
-                    <Form.Select
-                      isInvalid={errors?.freno}
-                      {...register("freno")}
-                    >
-                      <option value="">Selecciona un freno</option>
-                      {hydrate && selectList(form?.frenos)}
-                    </Form.Select>
-                    <Form.Control.Feedback type="invalid">
-                      {errors?.freno?.message}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                ) : (
-                  ""
-                )}
+                  (publication?.category == "8" && (
+                    <Form.Group className="mb-3" controlId="freno">
+                      <Form.Label>freno</Form.Label>
+
+                      <Form.Select
+                        isInvalid={errors?.freno}
+                        {...(hydrate && register("freno"))}
+                      >
+                        <option value="">Selecciona un freno</option>
+                        {hydrate && selectList(form?.frenos)}
+                      </Form.Select>
+
+                      <Form.Control.Feedback type="invalid">
+                        {errors?.freno?.message}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  ))}
 
                 {/* suspension */}
-                {publication?.category === "1" ||
-                publication?.category === "3" ||
-                publication?.category === "6" ? (
+                {(publication?.category === "1" ||
+                  publication?.category === "3" ||
+                  publication?.category === "6") && (
                   <Form.Group className="mb-3" controlId="suspension">
                     <Form.Label>Suspension</Form.Label>
+
                     <Form.Select
                       isInvalid={errors?.suspension}
-                      {...register("suspension")}
+                      {...(hydrate && register("suspension"))}
                     >
                       <option value="">Selecciona una Suspension</option>
                       {hydrate && selectList(form?.suspension)}
                     </Form.Select>
+
                     <Form.Control.Feedback type="invalid">
                       {errors?.suspension?.message}
                     </Form.Control.Feedback>
                   </Form.Group>
-                ) : (
-                  ""
                 )}
 
                 {/* Botones */}

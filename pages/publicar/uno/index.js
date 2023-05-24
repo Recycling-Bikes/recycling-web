@@ -24,11 +24,7 @@ const schema = yup.object().shape({
 export default function PartUno() {
   const router = useRouter();
 
-  const [hydrate, setHydrate] = useState(false);
-
-  useEffect(() => {
-    setHydrate(true);
-  }, []);
+  const hydrate = useHydrate();
 
   const [publication, form] = FPState(
     (state) => [state.publication, state.form],
@@ -119,7 +115,7 @@ export default function PartUno() {
                   <Form.Select
                     isInvalid={!!errors?.brand}
                     /* value={values.brand} */
-                    {...register("brand")}
+                    {...(hydrate && register("brand"))}
                   >
                     <option value="">Selecciona una Marca</option>
 
@@ -137,7 +133,7 @@ export default function PartUno() {
                     Categoría <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Select
-                    {...register("category")}
+                    {...(hydrate && register("category"))}
                     isInvalid={errors?.category}
                     /* value={values.category} */
                   >
@@ -168,7 +164,7 @@ export default function PartUno() {
                         className="mt-3"
                         type="checkbox"
                         label="E-Bike"
-                        {...register("ebike")}
+                        {...(hydrate && register("ebike"))}
                       />
                     </Col>
 
@@ -183,7 +179,7 @@ export default function PartUno() {
                         className="mt-3"
                         type="checkbox"
                         label="Niños"
-                        {...register("kids")}
+                        {...(hydrate && register("kids"))}
                       />
                     </Col>
                   </Row>
@@ -198,7 +194,7 @@ export default function PartUno() {
                     disabled={viewModels}
                     isInvalid={!!errors?.model}
                     /* value={values.model} */
-                    {...register("model")}
+                    {...(hydrate && register("model"))}
                   >
                     <option value="">Selecciona un modelo</option>
                     {hydrate && selectList(form.models)}
@@ -218,7 +214,7 @@ export default function PartUno() {
                     Año <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Select
-                    {...register("year")}
+                    {...(hydrate && register("year"))}
                     isInvalid={errors?.year}
                     /* value={values.year} */
                   >
