@@ -166,9 +166,7 @@ export default function ParteDos() {
       : null;
   };
 
-  return hydrate ? (
-    ""
-  ) : (
+  return (
     <Main>
       <Container>
         <Row className="justify-content-md-center">
@@ -201,7 +199,7 @@ export default function ParteDos() {
                   </Form.Label>
                   <Form.Select isInvalid={!!errors.size} {...register("size")}>
                     <option value="">Selecciona una talla</option>
-                    {selectList(form?.sizes)}
+                    {hydrate && selectList(form?.sizes)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors?.size?.message}
@@ -219,7 +217,7 @@ export default function ParteDos() {
                   >
                     <option value="">Selecciona un material</option>
 
-                    {selectList(form?.materials)}
+                    {hydrate && selectList(form?.materials)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors?.material?.message}
@@ -236,7 +234,7 @@ export default function ParteDos() {
                     {...register("transmission")}
                   >
                     <option value="">Selecciona una transmisión</option>
-                    {selectList(form?.transmissions)}
+                    {hydrate && selectList(form?.transmissions)}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
                     {errors?.transmission?.message}
@@ -254,21 +252,22 @@ export default function ParteDos() {
                       {...register("rin")}
                     >
                       <option value="">Selecciona un rin</option>
-                      {selectList(
-                        form?.rines?.filter((item) => {
-                          if (publication?.category == "1") {
-                            return 6 <= item.id && item.id <= 8;
-                          }
-                          if (publication?.category == "3") {
-                            return 6 <= item.id;
-                          }
+                      {hydrate &&
+                        selectList(
+                          form?.rines?.filter((item) => {
+                            if (publication?.category == "1") {
+                              return 6 <= item.id && item.id <= 8;
+                            }
+                            if (publication?.category == "3") {
+                              return 6 <= item.id;
+                            }
 
-                          if (publication?.category == "6") {
-                            return item.id <= 6;
-                          }
-                          return false;
-                        })
-                      )}
+                            if (publication?.category == "6") {
+                              return item.id <= 6;
+                            }
+                            return false;
+                          })
+                        )}
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       {errors?.rin?.message}
@@ -288,7 +287,7 @@ export default function ParteDos() {
                       {...register("freno")}
                     >
                       <option value="">Selecciona un freno</option>
-                      {selectList(form?.frenos)}
+                      {hydrate && selectList(form?.frenos)}
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       {errors?.freno?.message}
@@ -309,7 +308,7 @@ export default function ParteDos() {
                       {...register("suspension")}
                     >
                       <option value="">Selecciona una Suspension</option>
-                      {selectList(form?.suspension)}
+                      {hydrate && selectList(form?.suspension)}
                     </Form.Select>
                     <Form.Control.Feedback type="invalid">
                       {errors?.suspension?.message}

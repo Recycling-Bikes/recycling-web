@@ -49,6 +49,7 @@ export default function GetBicis(props) {
         setIsLoading(false);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function GetBicis(props) {
         await fetchParking();
       }
     })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hydrate]);
 
   useEffect(() => {
