@@ -73,9 +73,7 @@ export default function Parttres() {
     router.push("./cuatro");
   };
 
-  return hydrate ? (
-    ""
-  ) : (
+  return (
     <Main>
       <Container>
         <Row className="justify-content-md-center">
@@ -84,33 +82,36 @@ export default function Parttres() {
               <Progres3 />
               <div className="mt-5">
                 <Container>
-                  {form?.conditions?.map((datum) => {
-                    return (
-                      <Form.Group key={datum.id} required>
-                        <div className="d-flex justify-content-sm-between flex-column flex-sm-row my-4 ">
-                          <Col className="mx=sm-4 my-2 my-sm-0">
-                            <Form.Check
-                              type="radio"
-                              style={condicionalesStyle}
-                              id={`radio-${datum.id}`}
-                            >
-                              <Form.Check.Input
-                                required
+                  {hydrate &&
+                    form?.conditions?.map((datum) => {
+                      return (
+                        <Form.Group key={datum.id} required>
+                          <div className="d-flex justify-content-sm-between flex-column flex-sm-row my-4 ">
+                            <Col className="mx=sm-4 my-2 my-sm-0">
+                              <Form.Check
                                 type="radio"
-                                value={datum.id}
-                                {...register("conditions")}
-                              />
-                              <Form.Check.Label>{datum.name}</Form.Check.Label>
-                            </Form.Check>
-                          </Col>
+                                style={condicionalesStyle}
+                                id={`radio-${datum.id}`}
+                              >
+                                <Form.Check.Input
+                                  required
+                                  type="radio"
+                                  value={datum.id}
+                                  {...register("conditions")}
+                                />
+                                <Form.Check.Label>
+                                  {datum.name}
+                                </Form.Check.Label>
+                              </Form.Check>
+                            </Col>
 
-                          <Col sm="5" className="text-secondary">
-                            {datum.description}
-                          </Col>
-                        </div>
-                      </Form.Group>
-                    );
-                  })}
+                            <Col sm="5" className="text-secondary">
+                              {datum.description}
+                            </Col>
+                          </div>
+                        </Form.Group>
+                      );
+                    })}
                 </Container>
               </div>
 

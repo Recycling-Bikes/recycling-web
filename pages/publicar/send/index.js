@@ -38,7 +38,6 @@ const schema = yup.object().shape({
 });
 
 export default function Partdos() {
-
   const [Commission, setCommission] = useState(false);
 
   const [savePublication, setSavePublication] = useState(false);
@@ -59,10 +58,7 @@ export default function Partdos() {
     if (!form.brands || !form.models) {
       setForm();
     }
-    console.log(
-      "🚀 ~ file: index.js:77 ~ onSubmit ~ publication:",
-      publication
-    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -140,8 +136,11 @@ export default function Partdos() {
                 </Row>
 
                 <div className="d-flex flex-row-reverse">
-                  <Button variant="outline-primary" onClick={()=>setCommission(true)} >
-                   Ver comisiones
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => setCommission(true)}
+                  >
+                    Ver comisiones
                   </Button>
                 </div>
 
@@ -176,7 +175,12 @@ export default function Partdos() {
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                   <Form.Check
                     type="checkbox"
-                    label={<Link href="/politica/terminos" target="_blank" > Acepto los términos y condiciones</Link>}
+                    label={
+                      <Link href="/politica/terminos" target="_blank">
+                        {" "}
+                        Acepto los términos y condiciones
+                      </Link>
+                    }
                     {...register("terms")}
                     isInValue={!errors?.terms}
                   />
@@ -197,11 +201,13 @@ export default function Partdos() {
               </div>
             </Form>
           </Col>
-        </Row> 
+        </Row>
         <PopCommission ModalShow={Commission} setModalShow={setCommission} />
 
-        <PopPublicationSave ModalShow={savePublication} setModalShow={setSavePublication} />
-
+        <PopPublicationSave
+          ModalShow={savePublication}
+          setModalShow={setSavePublication}
+        />
       </Container>
       <div className="d-none d-lg-block" style={{ height: "20rem" }}></div>
     </Main>
