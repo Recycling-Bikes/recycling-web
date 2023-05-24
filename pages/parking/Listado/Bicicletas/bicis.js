@@ -18,7 +18,11 @@ export default function GetBicis(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   // useState hydrates the state with the initial value
-  const hydrate = useHydrate();
+  const [hydrate, setHydrate] = useState(false);
+
+  useEffect(() => {
+    setHydrate(true);
+  }, []);
 
   useEffect(() => {
     if (hydrate) {
@@ -45,7 +49,7 @@ export default function GetBicis(props) {
         setIsLoading(false);
       }
     }
-  }, [isLoading, setPageNumber, setParking]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -53,7 +57,7 @@ export default function GetBicis(props) {
         await fetchParking();
       }
     })();
-  }, [fetchParking, hydrate, isLoading, parking.length]);
+  }, [hydrate]);
 
   useEffect(() => {
     const handleScroll = () => {

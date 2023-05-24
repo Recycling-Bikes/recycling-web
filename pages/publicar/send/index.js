@@ -43,8 +43,6 @@ export default function Partdos() {
 
   const [savePublication, setSavePublication] = useState(false);
 
-  const router = useRouter();
-
   const user = userState((state) => state.user);
 
   const [publication, form, name] = FPState(
