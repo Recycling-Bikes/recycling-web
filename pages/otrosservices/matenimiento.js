@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import PopLogin from "./modal";
 import { userState } from "context/User/UserState";
 import { useState } from "react";
+import { BsWhatsapp } from "react-icons/bs";
 
 function Mantenimiento() {
   const router = useRouter();
@@ -32,10 +33,19 @@ function Mantenimiento() {
               </span>
             </p>
             <div className="d-flex gap-2 ">
-              <Button className="" variant="outline-primary" onClick={() => {}}>
+              <Button
+                className=" d-flex align-items-center"
+                variant="outline-primary"
+                onClick={() => {}}
+              >
+                <BsWhatsapp
+                  className="me-2"
+                  onClick={() => {
+                    router.push("https://wa.me/50769240795?text=%C2%A1Hola!");
+                  }}
+                />
                 Agenda tu cita
               </Button>
-
             </div>
           </Col>
 

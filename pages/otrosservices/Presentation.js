@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import PopLogin from "./modal";
 import { userState } from "context/User/UserState";
 import { useState } from "react";
+import { BsWhatsapp } from "react-icons/bs";
 
 function Presentation() {
   const router = useRouter();
@@ -34,17 +35,22 @@ function Presentation() {
               con nuestro servicio de mantenimiento.
             </p>
             <div className="d-flex gap-2 ">
-              <Button className="" variant="primary" onClick={() => {}}>
+              <Button
+                className=" d-flex justify-content-center align-items-center"
+                variant="primary"
+                onClick={() => {}}
+              >
+                <BsWhatsapp className="me-2" />
                 Agenda tu cita
               </Button>
-              <Button
+              {/*              <Button
                 className="text-primary"
                 variant="light"
                 onClick={() => {}}
               >
                 
                 Conoce más
-              </Button>
+              </Button> */}
             </div>
           </Col>
 

@@ -30,7 +30,9 @@ export default function Promesas() {
           >
             <center>
               <Card.Body className="justify-content-center align-items-center">
-                <BsTag size={29} className="mb-3" style={styleIcons} />
+                <p size={29} className="mb-3 fs-1" style={styleIcons}>
+                  💭
+                </p>
 
                 <Card.Text className="text-secondary">
                   Entrevista, antecedentes y expectativas
@@ -50,7 +52,9 @@ export default function Promesas() {
           >
             <center>
               <Card.Body>
-                <BsBagCheck size={29} className="mb-3" style={styleIcons} />
+                <p size={29} className="mb-3 fs-1" style={styleIcons}>
+                  🔧
+                </p>
 
                 <Card.Text className="text-secondary">
                   Acomodación de calas
@@ -70,11 +74,9 @@ export default function Promesas() {
           >
             <center>
               <Card.Body>
-                <BsCurrencyDollar
-                  size={29}
-                  className="mb-3"
-                  style={styleIcons}
-                />
+                <p size={29} className="mb-3 fs-1" style={styleIcons}>
+                  📐
+                </p>
 
                 <Card.Text className="text-secondary">
                   Toma de ángulos y medidas
@@ -83,7 +85,7 @@ export default function Promesas() {
             </center>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 4 */}
           <div
             style={{
               width: "17rem",
@@ -94,11 +96,9 @@ export default function Promesas() {
           >
             <center>
               <Card.Body>
-                <BsCurrencyDollar
-                  size={29}
-                  className="mb-3"
-                  style={styleIcons}
-                />
+                <p size={29} className="mb-3 fs-1" style={styleIcons}>
+                  🚴
+                </p>
 
                 <Card.Text className="text-secondary">
                   Análisis de pedaleo y conclusiones
