@@ -164,126 +164,127 @@ export default function ParteDos() {
   };
 
   return (
-    <Main>
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col md="8" xl="6">
-            <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
-              <Progres2 />
+    hydrate && (
+      <Main>
+        <Container>
+          <Row className="justify-content-md-center">
+            <Col md="8" xl="6">
+              <Form className=" py-5" onSubmit={handleSubmit(onSubmit)}>
+                <Progres2 />
 
-              <div className="my-5">
-                {publication.model == "1" && (
-                  <Form.Group className="mb-3" controlId="model">
+                <div className="my-5">
+                  {publication.model == "1" && (
+                    <Form.Group className="mb-3" controlId="model">
+                      <Form.Label>
+                        Name Model <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        isInvalid={!!errors?.other}
+                        /* value={values.model} */
+                        {...(hydrate && register("other"))}
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        {errors.other?.message}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  )}
+                  {/* Talla */}
+                  <Form.Group className="mb-3" controlId="size">
                     <Form.Label>
-                      Name Model <span className="text-danger">*</span>
+                      Talla <span className="text-danger">*</span>
                     </Form.Label>
-                    <Form.Control
-                      isInvalid={!!errors?.other}
-                      /* value={values.model} */
-                      {...(hydrate && register("other"))}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.other?.message}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                )}
-                {/* Talla */}
-                <Form.Group className="mb-3" controlId="size">
-                  <Form.Label>
-                    Talla <span className="text-danger">*</span>
-                  </Form.Label>
-
-                  <Form.Select
-                    isInvalid={!!errors.size}
-                    {...(hydrate && register("size"))}
-                  >
-                    <option value="">Selecciona una talla</option>
-                    {hydrate && selectList(form?.sizes)}
-                  </Form.Select>
-
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.size?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Material */}
-                <Form.Group className="mb-3" controlId="materials">
-                  <Form.Label>
-                    Material <span className="text-danger">*</span>
-                  </Form.Label>
-
-                  <Form.Select
-                    isInvalid={!!errors.material}
-                    {...(hydrate && register("material"))}
-                  >
-                    <option value="">Selecciona un material</option>
-
-                    {hydrate && selectList(form?.materials)}
-                  </Form.Select>
-
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.material?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Transmisión */}
-                <Form.Group className="mb-3" controlId="transmission">
-                  <Form.Label>
-                    Transmisión <span className="text-danger">*</span>
-                  </Form.Label>
-
-                  <Form.Select
-                    isInvalid={errors?.transmission}
-                    {...(hydrate && register("transmission"))}
-                  >
-                    <option value="">Selecciona una transmisión</option>
-                    {hydrate && selectList(form?.transmissions)}
-                  </Form.Select>
-
-                  <Form.Control.Feedback type="invalid">
-                    {errors?.transmission?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Rin */}
-                {(publication?.category === "1" ||
-                  publication?.category === "3" ||
-                  publication?.category === "6") && (
-                  <Form.Group className="mb-3" controlId="rin">
-                    <Form.Label>Rin</Form.Label>
 
                     <Form.Select
-                      isInvalid={errors?.transmission}
-                      {...(hydrate && register("rin"))}
+                      isInvalid={!!errors.size}
+                      {...(hydrate && register("size"))}
                     >
-                      <option value="">Selecciona un rin</option>
-                      {hydrate &&
-                        selectList(
-                          form?.rines?.filter((item) => {
-                            if (publication?.category == "1") {
-                              return 6 <= item.id && item.id <= 8;
-                            }
-                            if (publication?.category == "3") {
-                              return 6 <= item.id;
-                            }
-
-                            if (publication?.category == "6") {
-                              return item.id <= 6;
-                            }
-                            return false;
-                          })
-                        )}
+                      <option value="">Selecciona una talla</option>
+                      {hydrate && selectList(form?.sizes)}
                     </Form.Select>
 
                     <Form.Control.Feedback type="invalid">
-                      {errors?.rin?.message}
+                      {errors?.size?.message}
                     </Form.Control.Feedback>
                   </Form.Group>
-                )}
 
-                {/* freno */}
-                {publication?.category == "2" ||
-                  (publication?.category == "8" && (
+                  {/* Material */}
+                  <Form.Group className="mb-3" controlId="materials">
+                    <Form.Label>
+                      Material <span className="text-danger">*</span>
+                    </Form.Label>
+
+                    <Form.Select
+                      isInvalid={!!errors.material}
+                      {...(hydrate && register("material"))}
+                    >
+                      <option value="">Selecciona un material</option>
+
+                      {hydrate && selectList(form?.materials)}
+                    </Form.Select>
+
+                    <Form.Control.Feedback type="invalid">
+                      {errors?.material?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+
+                  {/* Transmisión */}
+                  <Form.Group className="mb-3" controlId="transmission">
+                    <Form.Label>
+                      Transmisión <span className="text-danger">*</span>
+                    </Form.Label>
+
+                    <Form.Select
+                      isInvalid={errors?.transmission}
+                      {...(hydrate && register("transmission"))}
+                    >
+                      <option value="">Selecciona una transmisión</option>
+                      {hydrate && selectList(form?.transmissions)}
+                    </Form.Select>
+
+                    <Form.Control.Feedback type="invalid">
+                      {errors?.transmission?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+
+                  {/* Rin */}
+                  {(publication?.category === "1" ||
+                    publication?.category === "3" ||
+                    publication?.category === "6") && (
+                    <Form.Group className="mb-3" controlId="rin">
+                      <Form.Label>Rin</Form.Label>
+
+                      <Form.Select
+                        isInvalid={errors?.transmission}
+                        {...(hydrate && register("rin"))}
+                      >
+                        <option value="">Selecciona un rin</option>
+                        {hydrate &&
+                          selectList(
+                            form?.rines?.filter((item) => {
+                              if (publication?.category == "1") {
+                                return 6 <= item.id && item.id <= 8;
+                              }
+                              if (publication?.category == "3") {
+                                return 6 <= item.id;
+                              }
+
+                              if (publication?.category == "6") {
+                                return item.id <= 6;
+                              }
+                              return false;
+                            })
+                          )}
+                      </Form.Select>
+
+                      <Form.Control.Feedback type="invalid">
+                        {errors?.rin?.message}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  )}
+
+                  {/* freno */}
+                  {(publication?.category == "2" ||
+                    publication?.category == "8") && (
                     <Form.Group className="mb-3" controlId="freno">
                       <Form.Label>freno</Form.Label>
 
@@ -299,53 +300,54 @@ export default function ParteDos() {
                         {errors?.freno?.message}
                       </Form.Control.Feedback>
                     </Form.Group>
-                  ))}
+                  )}
 
-                {/* suspension */}
-                {(publication?.category === "1" ||
-                  publication?.category === "3" ||
-                  publication?.category === "6") && (
-                  <Form.Group className="mb-3" controlId="suspension">
-                    <Form.Label>Suspension</Form.Label>
+                  {/* suspension */}
+                  {(publication?.category === "1" ||
+                    publication?.category === "3" ||
+                    publication?.category === "6") && (
+                    <Form.Group className="mb-3" controlId="suspension">
+                      <Form.Label>Suspension</Form.Label>
 
-                    <Form.Select
-                      isInvalid={errors?.suspension}
-                      {...(hydrate && register("suspension"))}
-                    >
-                      <option value="">Selecciona una Suspension</option>
-                      {hydrate && selectList(form?.suspension)}
-                    </Form.Select>
+                      <Form.Select
+                        isInvalid={errors?.suspension}
+                        {...(hydrate && register("suspension"))}
+                      >
+                        <option value="">Selecciona una Suspension</option>
+                        {hydrate && selectList(form?.suspension)}
+                      </Form.Select>
 
-                    <Form.Control.Feedback type="invalid">
-                      {errors?.suspension?.message}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-                )}
+                      <Form.Control.Feedback type="invalid">
+                        {errors?.suspension?.message}
+                      </Form.Control.Feedback>
+                    </Form.Group>
+                  )}
 
-                {/* Botones */}
-                <div className="d-flex justify-content-end pt-3 align-items-center">
-                  <Link href="./uno" className="mx-3">
-                    <BsChevronLeft
-                      size={18}
-                      className="me-2 align-items-center"
-                    />
-                    Atrás
-                  </Link>
+                  {/* Botones */}
+                  <div className="d-flex justify-content-end pt-3 align-items-center">
+                    <Link href="./uno" className="mx-3">
+                      <BsChevronLeft
+                        size={18}
+                        className="me-2 align-items-center"
+                      />
+                      Atrás
+                    </Link>
 
-                  <Button variant="primary" type="submit">
-                    Valor de tu bici
-                    <BsChevronRight
-                      size={18}
-                      className="ms-2 align-items-center"
-                    />
-                  </Button>
+                    <Button variant="primary" type="submit">
+                      Valor de tu bici
+                      <BsChevronRight
+                        size={18}
+                        className="ms-2 align-items-center"
+                      />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-      <div className="d-none d-lg-block" style={{ height: "20rem" }} />
-    </Main>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+        <div className="d-none d-lg-block" style={{ height: "20rem" }} />
+      </Main>
+    )
   );
 }
