@@ -57,17 +57,23 @@ export default function NavB({}) {
           <Nav className="ms-auto flex-fill"></Nav>
 
           <Nav className="me-auto flex-fill">
-            <Link href="/compra" className="nav-link">Comprar</Link>
-            <Link href="/vender" className="nav-link">Vender y avaluó</Link>
+            <Link href="/compra" className="nav-link">
+              Comprar
+            </Link>
+            <Link href="/vender" className="nav-link">
+              Vender y avaluó
+            </Link>
 
             {/*             <Nav.Link href="/avaluador">Avaluador</Nav.Link>
              */}
 
-            <Nav.Link href="#"/* "/espera" */  disabled>Lista de espera</Nav.Link>
-
-            <Nav.Link href="#features" disabled>
-              Otros servicios
+            <Nav.Link href="#" /* "/espera" */ disabled>
+              Lista de espera
             </Nav.Link>
+
+            <Link href="/otrosservices" className="nav-link">
+              Otros servicios
+            </Link>
           </Nav>
 
           <Nav>

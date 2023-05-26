@@ -90,7 +90,9 @@ export default function Promesas() {
             variant="outline-primary"
             className="d-inline"
             style={{ width: "auto" }}
-            onClick={() => {}}
+            onClick={() => {
+              router.push("https://wa.me/50769240795?text=%C2%A1Hola!");
+            }}
           >
             Encuentra una bici para ti
           </Button>

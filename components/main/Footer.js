@@ -69,12 +69,12 @@ const Footer = (props) => {
                       Otros Servicios
                     </h6>
                     <p>
-                      <Link href="#" className="text-reset">
+                      <Link href="/otrosservices" className="text-reset">
                         Bike Fitting
                       </Link>
                     </p>
                     <p>
-                      <Link href="#" className="text-reset">
+                      <Link href="/otrosservices" className="text-reset">
                         Mantenimiento
                       </Link>
                     </p>
