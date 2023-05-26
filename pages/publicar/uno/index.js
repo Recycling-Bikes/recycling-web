@@ -98,168 +98,174 @@ export default function PartUno() {
   };
 
   return (
-    <Main>
-      {/* <DevTool control={control} /> */}
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col md="8" xl="6">
-            <Form className="py-5" noValidate onSubmit={handleSubmit(onSubmit)}>
-              <Progress />
+    hydrate && (
+      <Main>
+        {/* <DevTool control={control} /> */}
+        <Container>
+          <Row className="justify-content-md-center">
+            <Col md="8" xl="6">
+              <Form
+                className="py-5"
+                noValidate
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <Progress />
 
-              <div className="my-5">
-                {/* Marca */}
-                <Form.Group className="mb-3" controlId="brands">
-                  <Form.Label>
-                    Marca <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    isInvalid={!!errors?.brand}
-                    /* value={values.brand} */
-                    {...(hydrate && register("brand"))}
-                  >
-                    <option value="">Selecciona una Marca</option>
-
-                    {hydrate && selectList(form?.brands)}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.brand?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Categoria */}
-
-                <Form.Group className="mb-3 mx-auto" controlId="category">
-                  <Form.Label>
-                    Categoría <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    {...(hydrate && register("category"))}
-                    isInvalid={errors?.category}
-                    /* value={values.category} */
-                  >
-                    <option value="">Selecciona una categoría</option>
-                    {hydrate &&
-                      selectList(
-                        form?.category?.filter(
-                          (item) => item.id !== 7 && item.id !== 6
-                        )
-                      )}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.category?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Bici E-Bike */}
-
-                <Form.Group className="mb-3" controlId="isE-Bike">
-                  <Row className="mx-2">
-                    <Col
-                      style={{
-                        width: "15% !important",
-                      }}
-                      className="d-flex"
+                <div className="my-5">
+                  {/* Marca */}
+                  <Form.Group className="mb-3" controlId="brands">
+                    <Form.Label>
+                      Marca <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Select
+                      isInvalid={!!errors?.brand}
+                      /* value={values.brand} */
+                      {...(hydrate && register("brand"))}
                     >
-                      <Form.Check
-                        className="mt-3"
-                        type="checkbox"
-                        label="E-Bike"
-                        {...(hydrate && register("ebike"))}
-                      />
-                    </Col>
+                      <option value="">Selecciona una Marca</option>
 
-                    <Col
-                      style={{
-                        width: "15% !important",
-                      }}
-                      className="d-flex"
+                      {hydrate && selectList(form?.brands)}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.brand?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+
+                  {/* Categoria */}
+
+                  <Form.Group className="mb-3 mx-auto" controlId="category">
+                    <Form.Label>
+                      Categoría <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Select
+                      {...(hydrate && register("category"))}
+                      isInvalid={errors?.category}
+                      /* value={values.category} */
                     >
-                      {/* is kids */}
-                      <Form.Check
-                        className="mt-3"
-                        type="checkbox"
-                        label="Niños"
-                        {...(hydrate && register("kids"))}
-                      />
-                    </Col>
-                  </Row>
-                </Form.Group>
+                      <option value="">Selecciona una categoría</option>
+                      {hydrate &&
+                        selectList(
+                          form?.category?.filter(
+                            (item) => item.id !== 7 && item.id !== 6
+                          )
+                        )}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.category?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
 
-                {/* Modelo */}
-                <Form.Group className="mb-3" controlId="model">
-                  <Form.Label>
-                    Modelo <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    disabled={viewModels}
-                    isInvalid={!!errors?.model}
-                    /* value={values.model} */
-                    {...(hydrate && register("model"))}
+                  {/* Bici E-Bike */}
+
+                  <Form.Group className="mb-3" controlId="isE-Bike">
+                    <Row className="mx-2">
+                      <Col
+                        style={{
+                          width: "15% !important",
+                        }}
+                        className="d-flex"
+                      >
+                        <Form.Check
+                          className="mt-3"
+                          type="checkbox"
+                          label="E-Bike"
+                          {...(hydrate && register("ebike"))}
+                        />
+                      </Col>
+
+                      <Col
+                        style={{
+                          width: "15% !important",
+                        }}
+                        className="d-flex"
+                      >
+                        {/* is kids */}
+                        <Form.Check
+                          className="mt-3"
+                          type="checkbox"
+                          label="Niños"
+                          {...(hydrate && register("kids"))}
+                        />
+                      </Col>
+                    </Row>
+                  </Form.Group>
+
+                  {/* Modelo */}
+                  <Form.Group className="mb-3" controlId="model">
+                    <Form.Label>
+                      Modelo <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Select
+                      disabled={viewModels}
+                      isInvalid={!!errors?.model}
+                      /* value={values.model} */
+                      {...(hydrate && register("model"))}
+                    >
+                      <option value="">Selecciona un modelo</option>
+                      {hydrate && selectList(form.models)}
+                      <option value="1">Otro</option>
+                    </Form.Select>
+                    <span className="text-secondary">
+                      Tienes que seleccionar una categoría y marca primero
+                    </span>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.model?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+
+                  {/* Año */}
+                  <Form.Group className="mb-3" controlId="year">
+                    <Form.Label>
+                      Año <span className="text-danger">*</span>
+                    </Form.Label>
+                    <Form.Select
+                      {...(hydrate && register("year"))}
+                      isInvalid={errors?.year}
+                      /* value={values.year} */
+                    >
+                      <option value="">Selecciona un año</option>
+                      {hydrate &&
+                        selectList(
+                          form?.years?.sort((a, b) => {
+                            return b?.name - a?.name;
+                          })
+                        )}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      {errors.year?.message}
+                    </Form.Control.Feedback>
+                    <p className="mt-2 text-secondary">
+                      Sabemos que no todos conocen el año de su bici. Puedes
+                      agregar un estimado.
+                    </p>
+                  </Form.Group>
+                </div>
+
+                <div className="d-flex justify-content-between pt-3">
+                  {" "}
+                  <Button
+                    variant="outline-secondary"
+                    onClick={() => {
+                      clearAll();
+                      router.push("/vender");
+                    }}
                   >
-                    <option value="">Selecciona un modelo</option>
-                    {hydrate && selectList(form.models)}
-                    <option value="1">Otro</option>
-                  </Form.Select>
-                  <span className="text-secondary">
-                    Tienes que seleccionar una categoría y marca primero
-                  </span>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.model?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/* Año */}
-                <Form.Group className="mb-3" controlId="year">
-                  <Form.Label>
-                    Año <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    {...(hydrate && register("year"))}
-                    isInvalid={errors?.year}
-                    /* value={values.year} */
-                  >
-                    <option value="">Selecciona un año</option>
-                    {hydrate &&
-                      selectList(
-                        form?.years?.sort((a, b) => {
-                          return b?.name - a?.name;
-                        })
-                      )}
-                  </Form.Select>
-                  <Form.Control.Feedback type="invalid">
-                    {errors.year?.message}
-                  </Form.Control.Feedback>
-                  <p className="mt-2 text-secondary">
-                    Sabemos que no todos conocen el año de su bici. Puedes
-                    agregar un estimado.
-                  </p>
-                </Form.Group>
-              </div>
-
-              <div className="d-flex justify-content-between pt-3">
-                {" "}
-                <Button
-                  variant="outline-secondary"
-                  onClick={() => {
-                    clearAll();
-                    router.push("/vender");
-                  }}
-                >
-                  Limpiar
-                </Button>
-                <Button variant="primary" type="submit">
-                  Detalles de tu bici
-                  <BsChevronRight
-                    size={18}
-                    className="ms-2 align-items-center"
-                  />
-                </Button>
-              </div>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-      <div className="d-none d-lg-block" style={{ height: "20rem" }} />
-    </Main>
+                    Limpiar
+                  </Button>
+                  <Button variant="primary" type="submit">
+                    Detalles de tu bici
+                    <BsChevronRight
+                      size={18}
+                      className="ms-2 align-items-center"
+                    />
+                  </Button>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+        <div className="d-none d-lg-block" style={{ height: "20rem" }} />
+      </Main>
+    )
   );
 }
