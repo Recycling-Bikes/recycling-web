@@ -8,7 +8,7 @@ import { Container, Nav, Row, Col } from "react-bootstrap";
 
 const Footer = (props) => {
   return (
-    <Container style={{}}>
+    <Container>
       <div className="text-center text-lg-start text-muted footer-customs">
         <section className="d-flex justify-content-center justify-content-lg-between p-1">
           <div className="container-fluid  text-center text-md-start mt-5" fluid="true">

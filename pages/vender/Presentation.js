@@ -62,9 +62,6 @@ function Presentation() {
           />
         </Row>
       </Container>
-
-      {/* Es Rapido y Sencillo */}
-      <Container></Container>
     </>
   );
 }

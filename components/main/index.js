@@ -5,24 +5,24 @@ import { SSRProvider } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 
 const Main = (props) => {
-  return (
-    <>
-      <Head>
-        <link rel="shortcut icon" href="/mesa.png" />
-        <title>Recycling</title>
-      </Head>
+	return (
+		<>
+			<Head>
+				<link rel="shortcut icon" href="/mesa.png" />
+				<title>Recycling</title>
+			</Head>
 
-      <SSRProvider>
-        <NavB />
+			<SSRProvider>
+				<NavB />
 
-        {props.children}
+				{props.children}
 
-        <Container fluid className="footer-customs border-top">
-          <Footer />
-        </Container>
-      </SSRProvider>
-    </>
-  );
+				<Container fluid className="footer-customs border-top">
+					<Footer />
+				</Container>
+			</SSRProvider>
+		</>
+	);
 };
 
 export default Main;
