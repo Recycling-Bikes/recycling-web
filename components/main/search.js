@@ -32,6 +32,7 @@ export default function Search() {
 				search: e.search,
 			}));
 		}
+		router.push("/parking");
 	};
 
 	const onSearch = () => {
