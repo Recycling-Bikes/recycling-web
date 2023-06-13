@@ -76,11 +76,12 @@ export default function Partdos() {
 		try {
 			const filesUrl = await UpdateImages(items.files, user.id);
 
-			newItems = {
+			const newItems = {
 				...items,
 				filesUrl,
 				user_id: user.id,
 			};
+      
 			console.log("🚀 ~ file: index.js:77 ~ onSubmit ~ items:", newItems);
 
 			await setPublication(newItems);
@@ -93,6 +94,7 @@ export default function Partdos() {
 			setSavePublication(true);
 		} catch (err) {
 			setError("general", err);
+			console.log(err);
 		}
 
 		setButton(false);
