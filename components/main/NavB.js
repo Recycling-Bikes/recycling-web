@@ -8,6 +8,7 @@ import {
 	Container,
 	Navbar,
 	Nav,
+	NavDropdown,
 } from "react-bootstrap";
 
 import { FiShoppingCart } from "react-icons/fi";
@@ -42,7 +43,7 @@ export default function NavB() {
 				{/* End Logo */}
 
 				{/* NavBar */}
-				<Search />
+				<Search className="d-lg-none" />
 
 				{/* NavBar Toggle */}
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -70,9 +71,22 @@ export default function NavB() {
 					</Nav>
 
 					<Nav>
-						<Link href="#deets" className="nav-link d-none d-lg-block">
-							<BiSearchAlt size={23} />{" "}
-						</Link>
+						<NavDropdown
+							title={<BiSearchAlt size={23} />}
+							id="basic-nav-dropdown"
+							align={{ lg: "end" }}
+							
+						>
+							<Search
+								style={{
+									minWidth: "300px",
+
+									
+								}}
+								className="flip"
+							/>
+						</NavDropdown>
+
 						{/*             <Link href="#deets" className="nav-link  d-none d-lg-block">
               <FiShoppingCart size={22} />{" "}
             </Link> */}

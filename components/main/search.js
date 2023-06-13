@@ -13,7 +13,7 @@ const scheme = yup.object().shape({
 	search: yup.string().trim(),
 });
 
-export default function Search() {
+export default function Search({ className, ...props }) {
 	const { register, handleSubmit } = useForm({
 		resolver: yupResolver(scheme),
 	});
@@ -42,7 +42,8 @@ export default function Search() {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="d-lg-none d-flex col align-items-baseline mx-2"
+			className={`d-flex col align-items-baseline mx-2 ${className}`}
+			{...props}
 		>
 			<InputGroup className="d-flex flex-grow-1">
 				<Form.Control
