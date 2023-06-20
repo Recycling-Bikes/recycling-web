@@ -13,6 +13,7 @@ export default function Espera() {
 					<p className=" text-secondary">
 						Recibimos la información de tu bici soñada!
 					</p>
+
 					<p className="mb-5 text-secondary">
 						Te avisaremos por correo electrónico apenas la tengamos en nuestras
 						manos. También podrás ver tu lista de espera en el dashboard

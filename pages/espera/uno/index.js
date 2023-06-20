@@ -101,7 +101,21 @@ export default function ParteDos() {
 	}, [forceUpdate, publication]);
 
 	const onSubmit = (items) => {
-		console.log(items);
+
+    items["subcategory"] = null;
+
+		const subcategories = [];
+
+		if (items?.ebike === true) {
+			subcategories.push(10);
+		}
+
+		if (items?.kids === true) {
+			subcategories.push(15);
+		}
+
+		items["subcategories"] = subcategories;
+
 		setPublication(items);
 		router.push("./dos");
 	};
@@ -187,7 +201,7 @@ export default function ParteDos() {
 											{errors?.material?.message}
 										</Form.Control.Feedback>
 									</Form.Group>
-									<Row className="mx-2">
+{/* 									<Row className="mx-2">
 										<Col
 											style={{
 												width: "15% !important",
@@ -211,7 +225,7 @@ export default function ParteDos() {
 											className="d-flex"
 										>
 											<Form.Group className="mb-3" controlId="kids">
-												{/* is kids */}
+											
 												<Form.Check
 													className="mt-3"
 													type="checkbox"
@@ -220,7 +234,7 @@ export default function ParteDos() {
 												/>
 											</Form.Group>
 										</Col>
-									</Row>
+									</Row> */}
 
 									{/* Botones */}
 									<div className="d-flex justify-content-end pt-3 align-items-center">
