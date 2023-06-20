@@ -14,6 +14,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FPState } from "context/FormPublications/FPstate";
 import { useHydrate } from "hooks/hydrate/hydrate";
 import EsperaComponent from "../component";
+import { supabase } from "supabase/client";
+import { userState } from "context/User/UserState";
 
 const schema = yup.object().shape({
 	material: yup.string().required("El año es requerido"),
@@ -25,6 +27,8 @@ export default function ParteDos() {
 	const hydrate = useHydrate();
 
 	const router = useRouter();
+
+	const user = userState((state) => state.user);
 
 	const [publication, form] = FPState(
 		(state) => [state.publication, state.form],
@@ -101,27 +105,25 @@ export default function ParteDos() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [forceUpdate, publication]);
 
-	const onSubmit = (items) => {
-		items["subcategory"] = null;
+	const onSubmit = async (items) => {
+		console.log("items", items);
 
-		const subcategories = [];
+		const datums = await supabase.from("waitinglist").insert([
+			{
+				size: items.size ? items.size : null,
+				material: items.material ? items.material : null,
+				transmission: items.transmission ? items.transmission : null,
+				rin: items.rin ? items.rin : null,
+				freno: items.freno ? items.freno : null,
+				suspension: items.suspension ? items.suspension : null,
+				category: publication?.category ? publication?.category : null,
+				user_id: user.id ? user.id : null,
+			},
+		]);
 
-		if (publication?.ebike === true) {
-			subcategories.push(10);
-		}
+		console.log("datums", datums);
 
-		if (publication?.kids === true) {
-			subcategories.push(15);
-		}
-
-		console.log(subcategories);
-
-		items["subcategories"] = subcategories;
-
-		console.log(items["subcategories"]);
-
-		setPublication(items);
-		router.push("./send");
+		/* router.push("./send"); */
 	};
 
 	const selectList = (list) => {
@@ -267,7 +269,6 @@ export default function ParteDos() {
 						</Col>
 					</Row>
 				</EsperaComponent>
-				
 			</>
 		)
 	);
