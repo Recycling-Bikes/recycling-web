@@ -23,7 +23,7 @@ export default function Filtro() {
 	const filters = filtersState((state) => state.filters);
 	const ClearFilters = filtersState((state) => state.ClearFilters);
 
-  const hydrate = useHydrate();
+	const hydrate = useHydrate();
 
 	const Iters = (data, category) => {
 		return (
@@ -67,7 +67,7 @@ export default function Filtro() {
 		);
 	};
 
-	return  (
+	return (
 		<div className="separador">
 			<div className="sticky-bottom d-grid gap-2">
 				<Button
@@ -87,7 +87,9 @@ export default function Filtro() {
 						<h5 className="fw-bolder fs-6">País</h5>
 					</Accordion.Header>
 
-					<Accordion.Body>{hydrate && Iters(country, "country")}</Accordion.Body>
+					<Accordion.Body>
+						{hydrate && Iters(country, "country")}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - País */}
 
@@ -96,7 +98,9 @@ export default function Filtro() {
 					<Accordion.Header className="py-0">
 						<h5 className="fw-bolder fs-6">Categoría</h5>
 					</Accordion.Header>
-					<Accordion.Body>{hydrate && Iters(category, "category")}</Accordion.Body>
+					<Accordion.Body>
+						{hydrate && Iters(category, "category")}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - Categoría */}
 
@@ -105,7 +109,9 @@ export default function Filtro() {
 					<Accordion.Header>
 						<h5 className="fw-bolder fs-6">Subcategorías</h5>
 					</Accordion.Header>
-					<Accordion.Body>{ hydrate && Iters(subcategory, "subcategory")}</Accordion.Body>
+					<Accordion.Body>
+						{hydrate && Iters(subcategory, "subcategory")}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - Subcategoría */}
 
@@ -136,7 +142,9 @@ export default function Filtro() {
 					<Accordion.Header>
 						<h5 className="fw-bolder fs-6">Material del marco</h5>
 					</Accordion.Header>
-					<Accordion.Body>{hydrate && Iters(materials, "materials")}</Accordion.Body>
+					<Accordion.Body>
+						{hydrate && Iters(materials, "materials")}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - Material del marco */}
 
@@ -145,7 +153,9 @@ export default function Filtro() {
 					<Accordion.Header>
 						<h5 className="fw-bolder fs-6">Suspensión</h5>
 					</Accordion.Header>
-					<Accordion.Body>{hydrate && Iters(suspension, "suspension")}</Accordion.Body>
+					<Accordion.Body>
+						{hydrate && Iters(suspension, "suspension")}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - Suspension */}
 
@@ -182,7 +192,7 @@ export default function Filtro() {
 						<h5 className="fw-bolder fs-6">Precio</h5>
 					</Accordion.Header>
 
-					{hydrate && <Accordion.Body>
+					<Accordion.Body>
 						<Row className="mb-3 d-flex align-items-end">
 							<Form.Group as={Col} controlId="formGridEmail">
 								<Form.Label>Mínimo</Form.Label>
@@ -190,7 +200,7 @@ export default function Filtro() {
 									type="number"
 									placeholder="$ 0.00"
 									className="px-2"
-									defaultValue={filters ? filters.minPrice : ""}
+									defaultValue={filters?.minPrice ?? ""}
 									onChange={(e) => {
 										let minPrice;
 										if (e.target.value === "") {
@@ -202,7 +212,7 @@ export default function Filtro() {
 										}
 
 										setFilters((prevFilters) => {
-											return { minPrice: minPrice };
+											return { ...prevFilters, minPrice: minPrice };
 										});
 									}}
 								/>
@@ -217,7 +227,7 @@ export default function Filtro() {
 								<Form.Control
 									type="number"
 									placeholder="$ 0.00"
-									defaultValue={filters ? filters.maxPrice : ""}
+									defaultValue={filters?.maxPrice ?? ""}
 									onChange={(e) =>
 										setFilters((prevFilters) => {
 											let maxPrice;
@@ -229,13 +239,13 @@ export default function Filtro() {
 												maxPrice = parseInt(e.target.value);
 											}
 
-											return { maxPrice };
+											return { ...prevFilters, maxPrice };
 										})
 									}
 								/>
 							</Form.Group>
 						</Row>
-					</Accordion.Body>}
+					</Accordion.Body>
 				</Accordion.Item>
 				{/* End - Precio */}
 			</Accordion>
