@@ -123,7 +123,7 @@ export default function ParteDos() {
 
 		console.log("datums", datums);
 
-		/* router.push("./send"); */
+		router.push("./send");
 	};
 
 	const selectList = (list) => {
@@ -192,7 +192,8 @@ export default function ParteDos() {
 															if (publication?.category == "6") {
 																return item.id <= 6;
 															}
-															return false;
+
+															return true;
 														}),
 													)}
 											</Form.Select>
@@ -257,7 +258,7 @@ export default function ParteDos() {
 										</Link>
 
 										<Button variant="primary" type="submit">
-											Valor de tu bici
+											Enviar
 											<BsChevronRight
 												size={18}
 												className="ms-2 align-items-center"
