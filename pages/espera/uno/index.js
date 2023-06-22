@@ -245,9 +245,8 @@ export default function ParteDos() {
 											/>
 											Atrás
 										</Link>
-
 										<Button variant="primary" type="submit">
-											Valor de tu bici
+											Siguiente
 											<BsChevronRight
 												size={18}
 												className="ms-2 align-items-center"
