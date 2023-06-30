@@ -13,6 +13,7 @@ import { parkingState } from "context/Parking/ParkingState";
 import Buttons from "components/publicacion/vender/buttons";
 import Promesas from "components/publicacion/vender/promesas";
 import Head from "next/head";
+import { CDN } from "utils/constantes";
 
 const Vender = () => {
 	const router = useRouter();
@@ -62,19 +63,19 @@ const Vender = () => {
 				<meta property="og:title" content={`${data?.title}`} />
 				<meta property="og:description" content={`${data?.description}`} />
 				<meta property="og:url" content={`https://www.recyclingbikes.co${router.asPath}`} />
-				<meta property="og:image" content={`${data?.filesUrl[0]}`} />
-				<meta property="product:brand" content={`${data?.propiedades.brands.name}`} />
-				<meta property="product:availability" content={`${data.status}`} />
+				<meta property="og:image" content={`${CDN}${data?.filesUrl[0]}`} />
+				<meta property="product:brand" content={`${data?.propiedades?.brands?.name}`} />
+				<meta property="product:availability" content={`${data?.status?.name}`} />
 				<meta
 					property="product:condition"
-					content={`${data.conditions.name}`}
+					content={`${data?.conditions}`}
 				/>
 				<meta
 					property="product:price:amount"
 					content={`${data?.price?.toLocaleString("en")}`}
 				/>
 				<meta property="product:price:currency" content="USA" />
-				<meta property="product:retailer_item_id" content={`${data.id}`} />
+				<meta property="product:retailer_item_id" content={`${data?.id}`} />
 				<meta property="product:item_group_id" content="fb_bicis" />
 			</Head>
 			<Main>
