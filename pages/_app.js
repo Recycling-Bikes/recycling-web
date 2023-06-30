@@ -3,14 +3,29 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import ButtonWhatsapp from "components/main/ButtonWhatsapp";
 
 function MyApp({ Component, pageProps }) {
-  const queryClient = new QueryClient();
+	const queryClient = new QueryClient();
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-      <ButtonWhatsapp />
-    </QueryClientProvider>
-  );
+	const router = useRouter();
+
+	useEffect(() => {
+		import("react-facebook-pixel")
+			.then((x) => x.default)
+			.then((ReactPixel) => {
+				ReactPixel.init("545058853440226");
+				ReactPixel.pageView();
+
+				router.events.on("routeChangeComplete", () => {
+					ReactPixel.pageView();
+				});
+			});
+	}, [router.events]);
+
+	return (
+		<QueryClientProvider client={queryClient}>
+			<Component {...pageProps} />
+			<ButtonWhatsapp />
+		</QueryClientProvider>
+	);
 }
 
 export default MyApp;
