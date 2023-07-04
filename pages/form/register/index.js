@@ -1,20 +1,19 @@
 import { userState } from "context/User/UserState";
-import React, { useState } from "react";
+import React from "react";
 
 import Login from "components/formlogin/Login";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
-import { isValidNumber, parsePhoneNumberFromString } from "libphonenumber-js";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 const schema = yup.object({
 	email: yup.string().required("El correo es requerido"),
@@ -26,9 +25,9 @@ const schema = yup.object({
 		.string()
 		.required("Es obligatorio confirmar la contraseña")
 		.oneOf([yup.ref("password")], "Las contraseñas deben ser iguales."),
-	first_name: yup.string().required("El nombre es requerido"),
+	first_name: yup.string().required("Por favor, introduce tu nombre."),
 	last_name: yup.string().required("El Apellido es requerido"),
-	phone: yup.string().required("El teléfono es requerido"),
+	phone: yup.string().min(6,"La numero debe tener 6 o mas caracteres").required("El teléfono es requerido"),
 });
 
 export default function Register() {
@@ -41,6 +40,7 @@ export default function Register() {
 		handleSubmit,
 		register,
 		setError,
+		watch,
 
 		formState: { isValid, errors },
 	} = useForm({
@@ -69,9 +69,9 @@ export default function Register() {
 			setError("account", { message: error });
 		};
 
-		const { data: user, error } = await registerUser(event);
+		const { data: user, error } = await registerUser(event); 
 
-		error ? reset(error.message) : router.push("/");
+		error ? reset(error.message) : router.push("/"); 
 	};
 
 	return (
@@ -98,8 +98,8 @@ export default function Register() {
 								{errors.first_name?.message}
 							</Form.Control.Feedback>
 							<Form.Control.Feedback type="invalid">
-								{errors?.first_name?.name &&
-									errors.first_name.name === "required" && (
+								{errors?.first_name &&
+									errors.first_name?.message === "required" && (
 										<span>Por favor, introduce tu nombre.</span>
 									)}
 							</Form.Control.Feedback>
@@ -151,14 +151,20 @@ export default function Register() {
 							<span className="text-danger"> *</span>
 						</Form.Label>
 						<PhoneInput
-							country={"pa"} // Define el pais por defecto
+							defaultCountry="PA"
 							{...register("phone")}
-							inputProps={{
-								required: true,
-								autoFocus: true,
-								placeholder: "+507 6234-5678", // Placeholder para Panama
+							onChange={(e) => {
+								register("phone").onChange({
+									target: {
+										value: e,
+										name: "phone",
+									},
+								});
 							}}
-							enableSearchField
+							international
+							countries={["PA", "CR", "CO", "US"]}
+							name="phone"
+							placeholder="+507 6234-5678"
 						/>
 
 						{errors?.phone && (
