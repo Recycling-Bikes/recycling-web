@@ -35,7 +35,6 @@
     },
     "devDependencies": {
         "@hookform/devtools": "^4.3.0",
-        "@pandacss/dev": "^0.5.1",
         "@types/node": "18.14.6",
         "eslint": "^8.26.0",
         "eslint-config-next": "^12.0.4",
