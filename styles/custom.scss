@@ -1,3 +1,5 @@
+@layer reset, base, tokens, recipes, utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Karla&display=swap");
 
 @import "../node_modules/bootstrap/scss/functions";
@@ -118,9 +120,9 @@ a {
 }
 
 .with-available {
-  width: stretch;
   width: -webkit-fill-available;
   width: -moz-available;
+  width: stretch;
 }
 
 @media only screen and (max-device-width: 780px) {
@@ -159,3 +161,40 @@ a {
     background-color: rgba(255, 255, 255, 0.371);
   }
 }
+
+
+
+/* Después */
+.PhoneInput {
+	@extend .d-flex;
+	@extend .align-items-center;
+}
+
+.PhoneInputInput {
+	min-width: 0;
+  @extend .form-control;
+}
+
+.PhoneInputCountrySelect {
+	top: 0;
+	left: 0;
+	z-index: 1;
+	border: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.PhoneInputCountry{
+  @extend .input-group-text;
+  margin-right: 0 !important;
+}
+
+.PhoneInputCountryIconImg{
+  border-radius: 10%;
+}
+
+.PhoneInputCountryIcon--border{
+  box-shadow: none !important;
+}
+
+
