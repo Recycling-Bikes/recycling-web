@@ -150,6 +150,7 @@ export default function Register() {
 							Teléfono móvil
 							<span className="text-danger"> *</span>
 						</Form.Label>
+            
 						<PhoneInput
 							defaultCountry="PA"
 							{...register("phone")}
@@ -162,7 +163,7 @@ export default function Register() {
 								});
 							}}
 							international
-							countries={["PA", "CR", "CO", "US"]}
+
 							name="phone"
 							placeholder="+507 6234-5678"
 						/>
