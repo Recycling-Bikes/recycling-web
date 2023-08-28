@@ -247,7 +247,7 @@ export default function PartUno() {
 										variant="outline-secondary"
 										onClick={() => {
 											clearAll();
-											router.push("/vender");
+											router.push("/publicar/uno");
 										}}
 									>
 										Limpiar
