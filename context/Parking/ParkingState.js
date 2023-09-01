@@ -3,7 +3,6 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
-  persist(
     (set, get) => ({
       bici: {},
 
@@ -84,7 +83,6 @@ export const parkingState = create(
       },
     }),
     { name: "ParkingData3" }
-  )
 );
 
 const getBicis = async (pageNumber, pageSize) => {
