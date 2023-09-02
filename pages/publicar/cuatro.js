@@ -269,12 +269,12 @@ export default function Avaluador() {
               Atrás
             </Link>
 
-            <div>
-              <Link href={"./enviar"}>
+            <div className="d-flex">
+              {/* <Link href={"./enviar"}>
                 <Button className="mx-2" variant="primary" type="submit">
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
-              </Link>
+              </Link> */}
 
               <Button
                 onClick={userStatus}
