@@ -3,6 +3,7 @@ import { Badge, Card } from "react-bootstrap";
 import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
+import Image from 'react-bootstrap/Image';
 
 ComponenteBike.propTypes = {
   id: propTypes.any.isRequired,
@@ -59,10 +60,10 @@ export function ComponenteBike({
 
             style={{
               maxHeight: "180px",
+              minHeight: "180px",
               borderRadius: "5px",
               objectFit: "cover",
               width: "100%",
-              height: "100%",
             }}
           />
           {/*  sello de verificado */}
