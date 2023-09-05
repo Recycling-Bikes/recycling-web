@@ -18,7 +18,7 @@ const initialFilters = {
 };
 
 export const filtersState = create(
-	persist(
+
 		(set, get) => ({
 			filters: initialFilters,
 			
@@ -42,5 +42,4 @@ export const filtersState = create(
 		{
 			name: "filters",
 		},
-	),
 );

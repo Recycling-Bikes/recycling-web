@@ -2,6 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Main from "components/main";
+
+// importacion de componentes de react-bootstrap
 import {
   Row,
   Form,
@@ -12,19 +14,28 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+
+// modulos de nextjs
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+// iconos de react-icons
 import { MdOutlinePedalBike } from "react-icons/md";
 import { BsCardChecklist, BsThreeDots } from "react-icons/bs";
-import Image from "next/image";
 import { BsHandbag, BsPencilSquare, BsTag } from "react-icons/bs";
 import { HiArrowsRightLeft } from "react-icons/hi2";
-import { useRouter } from "next/router";
+import { FiAlertCircle } from "react-icons/fi";
 import PopLogin from "./modal";
+
+// context global
 import { userState } from "context/User/UserState";
 import { FPState } from "context/FormPublications/FPstate";
 import { shallow } from "zustand/shallow";
+
+// componentes
 import { valorarBicicleta } from "components/Avaluador/avaluador";
-import { FiAlertCircle } from "react-icons/fi";
+
 
 export default function Avaluador() {
   const [ModalShow, setModalShow] = useState(false);
@@ -111,8 +122,8 @@ export default function Avaluador() {
       transmission,
       year.name,
       material.id ?? "1",
-      marca?.status ?? "c",
-      condition?.status ?? "c",
+      marca.status ?? "c",
+      condition.status ?? "c",
       typePrice,
       publication.ebike ?? false
     );
@@ -258,12 +269,12 @@ export default function Avaluador() {
               Atrás
             </Link>
 
-            <div>
-              <Link href={"./enviar"}>
+            <div className="d-flex">
+              {/* <Link href={"./enviar"}>
                 <Button className="mx-2" variant="primary" type="submit">
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
-              </Link>
+              </Link> */}
 
               <Button
                 onClick={userStatus}

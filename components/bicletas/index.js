@@ -3,6 +3,7 @@ import { Badge, Card } from "react-bootstrap";
 import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
+import Image from 'react-bootstrap/Image';
 
 ComponenteBike.propTypes = {
   id: propTypes.any.isRequired,
@@ -42,6 +43,8 @@ export function ComponenteBike({
     console.log(sold);
   }
 
+
+
   return (
     <Card className="p-0" {...props}>
       <Link href={`/parking/${id}`} passHref>
@@ -50,16 +53,17 @@ export function ComponenteBike({
           <Badge className="mb-1" bg={etiqueta ? "primary" : ""}>
             {etiqueta}{" "}
           </Badge>
+          
           <Card.Img
             variant="top"
-            src={
-              CDN +
-              image +
-              "?width=${500}&height={180}&quality=${60}&webp=true&format=webp&fit=cover&optimize=medium"
-            }
+            src={`${CDN}${image}?width=500&height=180&quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
+
             style={{
               maxHeight: "180px",
+              minHeight: "180px",
               borderRadius: "5px",
+              objectFit: "cover",
+              width: "100%",
             }}
           />
           {/*  sello de verificado */}
