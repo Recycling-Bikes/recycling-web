@@ -270,11 +270,11 @@ export default function Avaluador() {
             </Link>
 
             <div className="d-flex">
-              {/* <Link href={"./enviar"}>
+              <Link href={"https://wa.me/50769240795?text=%C2%A1Hola!"}>
                 <Button className="mx-2" variant="primary" type="submit">
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
-              </Link> */}
+              </Link> 
 
               <Button
                 onClick={userStatus}
