@@ -125,7 +125,6 @@ function Article({ Title }) {
         >
           {isLoading && (
             <SwiperSlide>
-              {" "}
               <Card style={{ width: "18rem", height: "370px" }}>
                 <div className="m-3">
                   <Placeholder bg="primary" size="xs" xs={4} />
@@ -144,7 +143,6 @@ function Article({ Title }) {
           {isError && <div>Error</div>}
           {data?.map((bici) => (
             <SwiperSlide key={bici.id}>
-              {" "}
               <ComponenteBike
                 key={bici.id}
                 id={bici.id}
