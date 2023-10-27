@@ -4,7 +4,7 @@ import Pro from './filter/Pro.js'
 const index = () => {
   return (
     <main>
-    <Pro />
+      <Pro />
     </main>
   )
 }

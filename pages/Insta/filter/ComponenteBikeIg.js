@@ -159,7 +159,7 @@ export function ComponenteBikeIg({
           )}
           {/* Ig Button */}
           <main className=" text-center">
-            <button onClick={mostrarTexto}>Mostrar Texto</button>
+            <button onClick={mostrarTexto}>Publicar en Ig</button>
             {publisher && <div>{viewPublisher}</div>}
           </main>
 
