@@ -62,7 +62,6 @@ export function ComponenteBikeIg({
   
   return (
     <Card className="p-0" {...props}>
-      {/* <Link href={`/parking/${id}`} passHref> */}
       <div className="m-3 position-relative">
         <Badge className="mb-1" bg={etiqueta ? "primary" : ""}>
           {etiqueta}
