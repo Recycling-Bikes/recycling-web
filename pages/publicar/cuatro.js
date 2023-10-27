@@ -150,6 +150,7 @@ export default function Avaluador() {
 
     setImageBici(image);
   }, [publication.category, publication.freno, publication.suspension]);
+  
 
   return (
     <Main>
@@ -270,7 +271,7 @@ export default function Avaluador() {
             </Link>
 
             <div className="d-flex">
-              <Link href={"https://wa.me/50769240795?text=%C2%A1Hola!"}>
+              <Link href={"https://wa.me/50769240795?text=%C2%A1Hola!"} target="_blank">
                 <Button className="mx-2" variant="primary" type="submit">
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
@@ -293,11 +294,13 @@ export default function Avaluador() {
           <div className="mt-2 py-3 d-grid gap-2 d-md-none ">
             <Button
               onClick={() =>
-                router.push("https://wa.me/50769240795?text=%C2%A1Hola!")
+                router.push("https://wa.me/50769240795?text=%C2%A1Hola!", "_blank")
+                
               }
               className=""
               variant="primary"
               type="submit"
+              target="_blank"
             >
               <HiArrowsRightLeft size={16} /> Véndela ya
             </Button>

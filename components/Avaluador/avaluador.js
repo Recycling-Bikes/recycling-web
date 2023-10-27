@@ -5,7 +5,7 @@ function redondear(numero) {
 }
 
 function EdadFn(anio, edad) {
-  let year = new Date().getFullYear();
+  const year = new Date().getFullYear();
   switch (true) {
     case anio == year:
       return edad["s"];
@@ -105,7 +105,7 @@ export function valorarBicicleta(
   const multiplicadorMarca = multiplicadores.marca[marca];
   const multiplicadorCondition = multiplicadores.condition[condition];
 
-  let multiplicadorEdad = priceEdad(precio, anio);
+  const multiplicadorEdad = priceEdad(precio, anio);
 
   const multiplicadorTotal =
     materialStatus *
