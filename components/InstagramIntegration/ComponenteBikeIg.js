@@ -59,7 +59,7 @@ export function ComponenteBikeIg({
       );
     }
   };
-  
+
   return (
     <Card className="p-0" {...props}>
       {/* <Link href={`/parking/${id}`} passHref> */}
@@ -128,7 +128,7 @@ export function ComponenteBikeIg({
         >
           {name}
         </Card.Text>
-        <Card.Title style={{ color: "black" }}>{title }</Card.Title>
+        <Card.Title style={{ color: "black" }}>{title}</Card.Title>
         <Card.Text
           style={{
             color: "rgba(108, 117, 125, 1)",
@@ -158,16 +158,17 @@ export function ComponenteBikeIg({
             ""
           )}
           {/* Ig Button */}
-          <main className=" text-center">
+          <div className="text-center">
             <button onClick={mostrarTexto}>Publicar en Ig</button>
             {publisher && <div>{viewPublisher}</div>}
-          </main>
-
-          <main>
+          </div>
+          <div>
             <Link href={`/parking/${id}`} passHref>
-              ver bichicleta UwU
+              ver bici
             </Link>
-          </main>
+          </div>
+
+
           
         </Card.Text>
       </Card.Body>

@@ -84,7 +84,8 @@ export default function InstaFilter() {
       fetchParking();
       setFetchCount((fetchCount) => fetchCount + 1);
     }
-  }, [filteredData, fetchParking]);
+    // se agrego fetchCount para el funcionamiento del filtro
+  }, [filteredData, fetchParking, fetchCount]);
 
   return (
     <div

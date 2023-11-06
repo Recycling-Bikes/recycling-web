@@ -1,12 +1,8 @@
 import React from 'react'
-import InstaFilter from './filter/InstaFilter'
+import InstagramIntegration from '../../components/InstagramIntegration/InstaFilter'
 
 const index = () => {
-  return (
-    <div>
-        <InstaFilter />
-    </div>
-  )
+  return <InstagramIntegration  />;
 }
 
 export default index
