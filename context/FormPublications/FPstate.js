@@ -6,7 +6,7 @@ import { persist, devtools } from "zustand/middleware";
 /* Recordatorio Colocar el estado del usuario para que se puede leer directamente */
 
 export const FPState = create(
-	persist(
+	// persist(
 		(set, get) => ({
 			name: "",
 			setName: (name) => {
@@ -98,8 +98,8 @@ export const FPState = create(
 				get().clearPublication();
 			},
 		}),
-		{ name: "FormPublicationData" },
-	),
+	// 	{ name: "FormPublicationData" },
+	// ),
 );
 
 const getModels = async (category, brand) => {
@@ -114,14 +114,19 @@ const getModels = async (category, brand) => {
 	return error ? error : data;
 };
 
+
+// datos de la pagina publicar/uno en teoria 
 const getDatum = async (name, parameters = "*") => {
 	const { data, error } = await supabase
 		.from(name)
 		.select(parameters)
-		.order("id", { ascending: true });
+		// .order("id", { ascending: true })
+		.order("name", { ascending: true});
 
 	return error ? error : data;
 };
+
+// datos de la pagina publicar/two en teoria
 
 const getDatumEqual = async (name, parameters, equal, column) => {
 	const { data, error } = await supabase
@@ -129,6 +134,7 @@ const getDatumEqual = async (name, parameters, equal, column) => {
 		.select(parameters)
 		.eq(column, parseInt(equal))
 		.order("id", { ascending: true });
+		
 
 	return error ? error : data;
 };
