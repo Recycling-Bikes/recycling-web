@@ -82,7 +82,7 @@ export default function Filtro() {
 			</div>
 			<Accordion defaultActiveKey={["1", "10"]} flush alwaysOpen>
 				{/* Start - País */}
-				<Accordion.Item eventKey="0">
+				{/* <Accordion.Item eventKey="0">
 					<Accordion.Header className="py-0">
 						<h5 className="fw-bolder fs-6">País</h5>
 					</Accordion.Header>
@@ -90,8 +90,19 @@ export default function Filtro() {
 					<Accordion.Body>
 						{hydrate && Iters(country, "country")}
 					</Accordion.Body>
-				</Accordion.Item>
+				</Accordion.Item> */}
 				{/* End - País */}
+ 
+				{/* Start - Subcategoría */}
+				{/* <Accordion.Item eventKey="2">
+					<Accordion.Header>
+						<h5 className="fw-bolder fs-6">Subcategorías</h5>
+					</Accordion.Header>
+					<Accordion.Body>
+						{hydrate && Iters(subcategory, "subcategory")}
+					</Accordion.Body>
+				</Accordion.Item> */}
+				{/* End - Subcategoría */}
 
 				{/* Start - Categoría */}
 				<Accordion.Item eventKey="1">
@@ -104,16 +115,6 @@ export default function Filtro() {
 				</Accordion.Item>
 				{/* End - Categoría */}
 
-				{/* Start - Subcategoría */}
-				<Accordion.Item eventKey="2">
-					<Accordion.Header>
-						<h5 className="fw-bolder fs-6">Subcategorías</h5>
-					</Accordion.Header>
-					<Accordion.Body>
-						{hydrate && Iters(subcategory, "subcategory")}
-					</Accordion.Body>
-				</Accordion.Item>
-				{/* End - Subcategoría */}
 
 				{/* Start - Talla */}
 				<Accordion.Item eventKey="3">
