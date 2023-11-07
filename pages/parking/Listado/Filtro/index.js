@@ -92,7 +92,7 @@ export default function Filtro() {
 					</Accordion.Body>
 				</Accordion.Item> */}
 				{/* End - País */}
-
+ 
 				{/* Start - Subcategoría */}
 				{/* <Accordion.Item eventKey="2">
 					<Accordion.Header>
