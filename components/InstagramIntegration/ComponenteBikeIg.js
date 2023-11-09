@@ -158,15 +158,15 @@ export function ComponenteBikeIg({
             ""
           )}
           {/* Ig Button */}
-          <div className="text-center">
-            <button onClick={mostrarTexto}>Publicar en Ig</button>
-            {publisher && <div>{viewPublisher}</div>}
-          </div>
-          <div>
+          <span className="text-start d-block ">
+            <button className=" btn btn-primary my-2 d-block " onClick={mostrarTexto}>Publicar en Ig</button>
+            {publisher && <span className=" my-2 d-block" >{viewPublisher}</span>}
+          </span>
+          <span className=" h5 text-start ">
             <Link href={`/parking/${id}`} passHref>
               ver bici
             </Link>
-          </div>
+          </span>
 
 
           
