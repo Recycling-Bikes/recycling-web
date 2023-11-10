@@ -1,8 +1,20 @@
-import React from 'react'
-import InstagramIntegration from '../../components/InstagramIntegration/InstaFilter'
+import React from "react";
+import InstaFilter from "../../components/InstagramIntegration/InstaFilter";
 
-const index = () => {
-  return <InstagramIntegration  />;
-}
+const Index = () => {
+  return (
+    <>
+      <div className=" container-fluid bg-primary my-5 ">
+        <p className=" text-center h1 text-light ">
+          Instagram Filter Preview
+        </p>
+      </div>
 
-export default index
+      <div className=" container ">
+        <InstaFilter />
+      </div>
+    </>
+  );
+};
+
+export default Index;
