@@ -43,7 +43,7 @@ export default function Vista() {
 							width={50}
 							height={50}
 							className="m-2 cover"
-							onClick={() => setPrimaryVista(link)} />
+							onClick={() => setPrimaryVista(link)} loading="lazy" />
 					))}
 				</Col>
 				<Col className="d-none d-lg-block" style={{ height: "620px" }}>
@@ -65,7 +65,7 @@ export default function Vista() {
 						style={{
 							maxHeight: "600px",
 						}}
-						className="img-fluid p-0" />
+						className="img-fluid p-0" loading="lazy"  />
 						
 				</Col>
 
@@ -78,6 +78,7 @@ export default function Vista() {
 									src={CDN + link}
 									className="d-block w-100 img-fluid"
 									alt="First slide"
+									loading="lazy" 
 								/>
 							</Carousel.Item>
 						))}
