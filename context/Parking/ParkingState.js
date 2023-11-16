@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
 export const parkingState = create(
+
     (set, get) => ({
       bici: {},
 

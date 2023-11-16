@@ -63,7 +63,7 @@ const Vender = () => {
 				<meta property="og:title" content={`${data?.title}`} />
 				<meta property="og:description" content={`${data?.description}`} />
 				<meta property="og:url" content={`https://www.recyclingbikes.co${router.asPath}`} />
-				<meta property="og:image" content={`${CDN}${data?.filesUrl[0]}`} />
+				{/* <meta property="og:image" content={`${CDN}${data?.filesUrl[0]}`} /> */}
 				<meta property="product:brand" content={`${data?.propiedades?.brands?.name}`} />
 				<meta property="product:availability" content={`${data?.status?.name}`} />
 				<meta

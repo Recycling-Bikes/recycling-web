@@ -28,28 +28,45 @@ export default function Vista() {
 			<Row>
 				<Col md="2" className="d-none d-lg-block">
 					{bici?.filesUrl?.map((link) => (
-						<Image
-							src={CDN + link}
-							alt=""
+						// <Image
+						// 	src={CDN + link}
+						// 	alt="imagen bicicleta"
+						// 	key={link}
+						// 	width={50}
+						// 	height={50}
+						// 	className="m-2 cover"
+						// 	onClick={() => setPrimaryVista(link)}
+						// />
+						<img src={CDN + link}
+							alt="imagen bicicleta"
 							key={link}
 							width={50}
 							height={50}
 							className="m-2 cover"
-							onClick={() => setPrimaryVista(link)}
-						/>
+							onClick={() => setPrimaryVista(link)} />
 					))}
 				</Col>
 				<Col className="d-none d-lg-block" style={{ height: "620px" }}>
-					<Image
+					{/* <Image
 						src={CDN + primaryVista}
 						height={500}
 						width={500}
-						alt=""
+						alt="imagen bicicleta"
 						style={{
 							maxHeight: "600px",
 						}}
 						className="img-fluid p-0"
-					/>
+					/> */}
+					<img 
+						src={CDN + primaryVista}
+						height={500}
+						width={500}
+						alt="imagen bicicleta"
+						style={{
+							maxHeight: "600px",
+						}}
+						className="img-fluid p-0" />
+						
 				</Col>
 
 				<Col className="d-lg-none">
