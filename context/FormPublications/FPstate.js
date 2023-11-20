@@ -98,7 +98,7 @@ export const FPState = create(
 				get().clearPublication();
 			},
 		}),
-	// 	{ name: "FormPublicationData" },
+		{ name: "FormPublicationData" },
 	// ),
 );
 
