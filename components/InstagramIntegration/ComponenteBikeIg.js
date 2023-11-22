@@ -4,6 +4,7 @@ import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
 import { useState } from "react";
+import axios from "axios";
 
 ComponenteBikeIg.propTypes = {
   id: propTypes.any.isRequired,
@@ -59,6 +60,48 @@ export function ComponenteBikeIg({
       );
     }
   };
+
+  // publicar en instagram
+  async function uploadImage(image_url, access_token, ig_user_id, caption = '') {
+    const post_url = `https://graph.facebook.com/v18.0/${ig_user_id}/media`;
+    const payload = {
+        image_url: image_url,
+        caption: caption,
+        access_token: access_token,
+
+    };
+ 
+    const response = await axios.post(post_url, payload);
+    return response.data;
+ }
+ 
+ async function publishImage(result, access_token, ig_user_id) {
+    if ('id' in result) {
+        const creation_id = result.id;
+        const second_url = `https://graph.facebook.com/v18.0/${ig_user_id}/media_publish`;
+        const second_payload = {
+            creation_id: creation_id,
+            access_token: access_token
+        };
+ 
+        const response = await axios.post(second_url, second_payload);
+        console.log('Imagen publicada en Instagram');
+    } else {
+        console.log('No se pudo publicar la imagen');
+    }
+ }
+
+  const ig_user_id = "17841422081058640";
+  const access_token = "EAAEq8IZCM2oMBO9fVDboDtsD0iOxYZAzBpQz9sx5aQOASoBFE9y6T06SCYFCJuKOEJkrGzwZBKu5hFhPETy5QSB6WDPSEKG2tb8JEiEJMjVcIphAvgsRbLGt8eTsCg24V0ZBRMUkWmZB3ARbAIhvZBqlvYtNyjVH9csDiRHxWss2Bi5hNp2ENgZCRAf";
+  const image_url = `${CDN}${image}`;
+  const caption = `${title} ${name} ${price} #bici #bicicleta #bike #bicycle #ciclismo #ciclista #cycling #mtb #bicicletas #bikes #ciclistas #bikelife #ciclismodecarretera #ciclismomtb #ciclis `;
+
+
+  async function publicar() {
+    const result = await uploadImage(image_url, access_token, ig_user_id, caption);
+    await publishImage(result, access_token, ig_user_id);
+  }
+ 
 
   return (
     <Card className="p-0" {...props}>
@@ -159,7 +202,7 @@ export function ComponenteBikeIg({
           )}
           {/* Ig Button */}
           <span className="text-start d-block ">
-            <button className=" btn btn-primary my-2 d-block " onClick={mostrarTexto}>Publicar en Ig</button>
+            <button className=" btn btn-primary my-2 d-block " onClick={publicar}>Publicar en Ig</button>
             {publisher && <span className=" my-2 d-block" >{viewPublisher}</span>}
           </span>
           <span className=" h5 text-start ">
