@@ -34,7 +34,7 @@
 
 Snippet
 
-- "@next/swc-win32-x64-msvc": "^13.1.6"
+- "@next/swc-linux-x64-gnu": "13.1.6",
 -
 
 Elimina la dependencia @next/swc-linux-x64-gnu del archivo package.json y ejecuta el comando npm install nuevamente. Si esta dependencia es necesaria, intenta instalarla en un entorno de desarrollo separado que tenga la plataforma compatible.

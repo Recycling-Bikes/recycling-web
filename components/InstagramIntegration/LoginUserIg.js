@@ -2,14 +2,17 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import imgBici from "../../public/mesa.png";
+import toast, { Toaster } from "react-hot-toast";
 
 import { supabase } from "supabase/client";
 import Head from "next/head";
+import Link from "next/link";
 
 const LoginUserIg = ({ onLogin }) => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,9 +27,11 @@ const LoginUserIg = ({ onLogin }) => {
 
       if (error) {
         console.error("Error al obtener datos del usuario:", error.message);
+        setError(true);
       } else if (data) {
         // console.log("Usuario autenticado:", data);
-        console.log("Usuario Aceptado");
+        setLoading(true);
+        toast.success('Login exitoso')
         onLogin();
       } else {
         console.error("Credenciales incorrectas");
@@ -36,12 +41,15 @@ const LoginUserIg = ({ onLogin }) => {
     }
   };
 
+
+
   return (
     <>
-       <Head>
+      <Head>
         <link rel="shortcut icon" href="/mesa.png" />
         <title>Login</title>
       </Head>
+
 
       <Container
         className="m-3 p-4 py-5"
@@ -92,7 +100,14 @@ const LoginUserIg = ({ onLogin }) => {
           <Button variant="primary" type="submit">
             Login
           </Button>
+          <Link href="/" passHref><Button variant="link">Volver a la pagina principal</Button></Link>
         </Form>
+        {error && (
+          <p className="mt-3 text-danger text-center">
+            Credenciales incorrectas
+          </p>
+        )}
+        {loading && <Toaster position="top-center" reverseOrder={false} />}
       </Container>
     </>
   );

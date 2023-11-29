@@ -108,7 +108,6 @@ export function ComponenteBikeIg({
       );
     } else {
       toast.error("No se pudo publicar la imagen");
-      console.log("No se pudo publicar la imagen");
     }
   }
 
