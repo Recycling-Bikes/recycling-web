@@ -107,6 +107,7 @@ export default function InstaFilter() {
           image={bici.filesUrl[0]}
           etiqueta={bici.etiquetas?.name}
           verified={bici.verified}
+          description={bici.propiedades}
           
           />
       ))}

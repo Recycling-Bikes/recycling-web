@@ -36,7 +36,14 @@ export function ComponenteBikeIg({
   const [publisher, setPublisher] = useState(false);
   const viewPublisher = "Se ha publicado correctamente";
   const [seEjecuto, setSeEjecuto] = useState(false);
-  const [content, setContent] = useState("#bici #bicicleta #bike #bicycle #ciclismo #ciclista #cycling #mtb #bicicletas #bikes #ciclistas #bikelife #ciclismodecarretera #ciclismomtb #ciclis");
+  const [content, setContent] = useState(
+    "#bici #bicicleta #bike #bicycle #ciclismo #ciclista #cycling #mtb #bicicletas #bikes #ciclistas #bikelife #ciclismodecarretera #ciclismomtb #ciclis",
+  );
+
+  const handleContent = (e) => {
+    e.preventDefault()
+    setContent(e.target.value);
+  }
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -45,19 +52,6 @@ export function ComponenteBikeIg({
   };
 
   const [publishing, setPublishing] = useState(false);
-
-  const handlePublish = async () => {
-    setPublishing(true);
-    try {
-      await publicar();
-      handleClose(); // cerrar el modal despues de publicar
-    } catch (error) {
-      toast.error("Error al publicar", error);
-    } finally {
-      setPublishing(false);
-    }
-  };
-
   function Descuento(original, off) {
     const descuento = original - off;
     const porcentaje = ((descuento / original) * 100).toFixed(0);
@@ -89,7 +83,7 @@ export function ComponenteBikeIg({
   const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
   const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
   const image_url = `${CDN}${image}`;
-  const caption = `${title} ${name} ${price} ${content} `;
+  const caption = `${title} ${name} ${price} ${content}`;
 
   // funcionalidad para publicar en Instagram
   async function publicar() {
@@ -101,6 +95,20 @@ export function ComponenteBikeIg({
     );
     await publishPostInstagram(result, access_token, ig_user_id);
   }
+
+  const handlePublish = async () => {
+    setPublishing(true);
+    try {
+      await publicar();
+      handleClose(); // cerrar el modal despues de publicar
+    } catch (error) {
+      toast.error("Error al publicar", error);
+      console.log(error)
+    } finally {
+      setPublishing(false);
+    }
+  };
+
 
   return (
     <>
@@ -237,17 +245,15 @@ export function ComponenteBikeIg({
             alt={title}
             style={{ maxWidth: "100%", height: "auto" }}
           />
-          <p>{name}</p>
           <p>{`Precio: $${off ?? price}`}</p>
           {off && <p>{`Descuento: ${Descuento(price, off)}%`}</p>}
-
           <Form>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Contenido de la publicacion</Form.Label>
-              <Form.Control as="textarea" rows={3} value={content} />
+              <Form.Control as="textarea" rows={3} value={content} onChange={handleContent} />
             </Form.Group>
           </Form>
         </Modal.Body>

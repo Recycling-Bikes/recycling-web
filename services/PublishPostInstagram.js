@@ -2,7 +2,7 @@ import axios from "axios";
 import {toast} from "react-hot-toast";
 
 
-  async function uploadImage(image_url, access_token, ig_user_id, caption) {
+  export async function uploadImage(image_url, access_token, ig_user_id, caption) {
     const post_url =  `https://graph.facebook.com/v18.0/${ig_user_id}/media`;
     const payload = {
       image_url: image_url,
