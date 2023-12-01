@@ -1,14 +1,13 @@
 import { Autoplay, Pagination } from "swiper";
 
 // Import Swiper styles
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Container, Card, Badge, Button, Placeholder } from "react-bootstrap";
+import { Container, Card, Button, Placeholder } from "react-bootstrap";
 import React, { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs/";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "supabase/client";
-import { CDN } from "utils/constantes";
 import { useRouter } from "next/router";
 import { ComponenteBike } from "components/bicletas";
 
@@ -23,9 +22,6 @@ const getBicis = async () => {
   off`
     )
     .eq("main", true);
-
-  console.log(bicis);
-
   return error ? error : bicis;
 };
 
@@ -166,38 +162,3 @@ function Article({ Title }) {
 }
 
 export default Article;
-/* <Card
-                style={{ width: "18rem", height: "370px" }}
-                onClick={() => {
-                  router.push(`/parking/${bici.id}`);
-                }}
-              >
-                <div className="m-3">
-                  <Badge
-                    className="mb-1"
-                    bg={bici?.etiquetas?.name ? "primary" : ""}
-                  >
-                    {bici?.etiquetas?.name}{" "}
-                  </Badge>
-                  <Card.Img
-                    variant="top"
-                    src={CDN + bici?.filesUrl[0]}
-                    style={{
-                      maxHeight: "200px",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </div>
-                <Card.Body>
-                  <Card.Title style={{ color: "black" }}>
-                    {bici?.title}
-                  </Card.Title>
-                  <Card.Text
-                    style={{
-                      color: "rgba(108, 117, 125, 1)",
-                    }}
-                  >
-                    ${bici?.price.toLocaleString("en")}
-                  </Card.Text>
-                </Card.Body>
-              </Card> */

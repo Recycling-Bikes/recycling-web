@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Card, Button, Row, Col, Form } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import { BsBell } from "react-icons/bs";
 import GetBicis from "./bicis";
 import FiltersMobile from "../FiltersMobile";
-import { parkingState } from "context/Parking/ParkingState";
 
 export default function Bicicletas() {
-  const parking = parkingState((state) => state.parking);
-
   return (
     <div>
       <Card className="my-3 lg w-100" style={{ width: "auto" }}>
@@ -36,29 +32,6 @@ export default function Bicicletas() {
       <div className="justify-content-center">
         <FiltersMobile className="d-block d-xl-none" />
       </div>
-      {/* End FiltersMobile */}
-
-      {/* <Row className="d-none d-xl-flex align-items-center justify-content-between">
-        {hydrate && <Col sm="3">{parking.length} Resultados y más</Col>}
-
-                <Col sm="6">
-          <Form.Group
-            as={Row}
-            controlId="formGridState"
-            className=" d-flex justify-content-end"
-          >
-            <Form.Label column xl="auto">
-              Ordenar por
-            </Form.Label>
-            <Col xl="8" xxl="9" className="">
-              <Form.Select defaultValue="Choose...">
-                <option>Choose...</option>
-                <option>...</option>
-              </Form.Select>
-            </Col>
-          </Form.Group>
-        </Col>
-      </Row> */}
       <GetBicis />
     </div>
   );

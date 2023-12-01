@@ -42,7 +42,7 @@ const Index = () => {
               style={{ background: "#0fa899", padding: "10px" }}
             >
               <p className="text-center h3 text-light mb-3 mb-md-0">
-                Publicar en Instagram
+                Dashboard Social | Publicar en Instagram
               </p>
               <button
                 className="btn btn-outline-light rounded-pill border border-2 border-white "

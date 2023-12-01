@@ -24,6 +24,7 @@ import InputFile2 from "components/Custom/InputFile/inputFile2";
 import { userState } from "context/User/UserState";
 import PopCommission from "../modal/Commission";
 import PopPublicationSave from "../modal/savePubication";
+import { redirect } from "next/dist/server/api-utils";
 
 const schema = yup.object().shape({
 	description: yup.string(),
@@ -92,6 +93,9 @@ export default function Partdos() {
 
 			/* router.push("/parking"); */
 			setSavePublication(true);
+
+			// redireccionar a al dasboard social
+			redirect("/insta");
 		} catch (err) {
 			setError("general", err);
 			console.log(err);

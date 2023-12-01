@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Main from "components/main";
+import { uploadImage, publishPostInstagram } from "services/PublishPostInstagram";
 
 // importacion de componentes de react-bootstrap
 import {
@@ -150,6 +151,12 @@ export default function Avaluador() {
 
     setImageBici(image);
   }, [publication.category, publication.freno, publication.suspension]);
+
+  // usar las funciones de publicar en instageam tomando los datos de la publicacion
+  const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
+  const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
+
+  
   
 
   return (
