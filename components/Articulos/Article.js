@@ -1,14 +1,13 @@
 import { Autoplay, Pagination } from "swiper";
 
 // Import Swiper styles
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Container, Card, Badge, Button, Placeholder } from "react-bootstrap";
+import { Container, Card, Button, Placeholder } from "react-bootstrap";
 import React, { useState } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs/";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "supabase/client";
-import { CDN } from "utils/constantes";
 import { useRouter } from "next/router";
 import { ComponenteBike } from "components/bicletas";
 

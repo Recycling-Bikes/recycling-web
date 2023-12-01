@@ -1,5 +1,5 @@
 import AdvisorComponent, { Selects } from "components/Advisor/component";
-import React, { useRef, useEffect } from "react";
+import React, { useRef} from "react";
 import { useForm } from "react-hook-form";
 import { advisorState } from "context/Advisor/AdvisorState";
 import { Button, ProgressBar } from "react-bootstrap";
