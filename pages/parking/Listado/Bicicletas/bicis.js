@@ -1,6 +1,4 @@
 import { Spinner } from "react-bootstrap";
-
-import { useQuery } from "@tanstack/react-query";
 import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
@@ -148,7 +146,7 @@ function filteredBicis(data, filters) {
     if (
       filters.subcategory?.length > 0 &&
       !filters.subcategory.some((sub) =>
-        datum.propiedades.subcategories.includes(sub)
+        datum.propiedades.subcategories.includes(sub),
       )
     ) {
       passesFilter = false;

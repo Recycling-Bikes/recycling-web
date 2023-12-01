@@ -5,10 +5,6 @@ export function useHydrate(props) {
 
   useEffect(() => {
     setLoading(true);
-    return () => {
-      console.log("Componente desmontado");
-      // Realizar cualquier otra acción de limpieza necesaria aquí
-    };
   }, []);
 
   return loading;

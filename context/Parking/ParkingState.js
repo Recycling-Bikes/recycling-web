@@ -1,9 +1,9 @@
 import { supabase } from "supabase/client";
 import { create } from "zustand";
-import { persist, devtools } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 export const parkingState = create(
-
+  persist(
     (set, get) => ({
       bici: {},
 
@@ -25,7 +25,7 @@ export const parkingState = create(
             ...state,
             bici: {},
           }),
-          true
+          true,
         );
       },
 
@@ -74,8 +74,17 @@ export const parkingState = create(
             parking: [],
             pageNumber: 0,
           }),
-          true
+          true,
         );
+      },
+
+      handleRealTimeUpdate: (payload) => {
+        console.log("Real-time update recieved!", payload);
+
+        if (payload.table === "bicis") {
+          get().setBici(payload.event.data.id);
+          get().setParking();
+        }
       },
 
       clearAll: () => {
@@ -83,8 +92,19 @@ export const parkingState = create(
         get().clearBici();
       },
     }),
-    { name: "ParkingData3" }
+    { name: "ParkingData3" },
+  ),
 );
+
+// set up the real-time channel
+const channel = supabase
+  .channel("custom-all-channel")
+  .on(
+    "postgres_changes",
+    { event: "*", schema: "public", table: "bicis" },
+    parkingState.handleRealTimeUpdate,
+  )
+  .subscribe();
 
 const getBicis = async (pageNumber, pageSize) => {
   const { data, error } = await supabase
@@ -106,7 +126,7 @@ const getBicis = async (pageNumber, pageSize) => {
       id:subcategory_id
       )
     status
-  `
+  `,
     )
     .in("status", [2, 3])
     .order("id", { ascending: false })
@@ -192,7 +212,7 @@ const getBici = async (id) => {
           size (name, relacion, ruta), 
           country (name), year  (name),
           off,
-          etiquetas (name)`
+          etiquetas (name)`,
         )
         .eq("id", id)
     : { error: { message: "id = undefined" }, bicis: [] };
