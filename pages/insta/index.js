@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InstaFilter from "../../components/InstagramIntegration/InstaFilter";
 import LoginUserIg from "../../components/InstagramIntegration/LoginUserIg";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const Index = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,8 +24,13 @@ const Index = () => {
     localStorage.removeItem("isLoggedIn");
   };
 
+
+  const navigation = useRouter();
+
+
   return (
     <>
+
       <Head>
         <link rel="shortcut icon" href="/mesa.png" />
         <title>Instagram</title>
@@ -44,19 +50,37 @@ const Index = () => {
               <p className="text-center h3 text-light mb-3 mb-md-0">
                 Dashboard Social | Publicar en Instagram
               </p>
-              <button
-                className="btn btn-outline-light rounded-pill border border-2 border-white "
-                style={{
-                  height: "36px",
-                  minWidth: "120px",
-                  display: "flex",
-                  justifyContent: "center",
-                  justifyItems: "center",
-                }}
-                onClick={handleLogout}
-              >
-                Cerrar sesión
-              </button>
+
+              <div className="d-flex">
+                <button
+                  className="btn btn-outline-light rounded-pill border border-2 border-white mx-2"
+                  style={{
+                    height: "36px",
+                    minWidth: "120px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  
+                  onClick={ () => navigation.push("/vender") }
+                >
+                  Publicar en ig
+                </button>
+
+                <button
+                  className="btn btn-outline-light rounded-pill border border-2 border-white mr-2 mx-2"
+                  style={{
+                    height: "36px",
+                    minWidth: "120px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                  onClick={handleLogout}
+                >
+                  Cerrar Sesion
+                </button>
+              </div>
             </div>
             <div className=" container">
               <InstaFilter />
