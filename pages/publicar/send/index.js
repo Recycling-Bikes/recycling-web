@@ -91,11 +91,8 @@ export default function Partdos() {
 
 			await clearAll();
 
-			/* router.push("/parking"); */
 			setSavePublication(true);
 
-			// redireccionar a al dasboard social
-			redirect("/insta");
 		} catch (err) {
 			setError("general", err);
 			console.log(err);
