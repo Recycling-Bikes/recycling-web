@@ -3,7 +3,7 @@ import { Badge, Card, Button, Modal, Form } from "react-bootstrap";
 import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   uploadImage,
   publishPostInstagram,
@@ -36,14 +36,72 @@ export function ComponenteBikeIg({
   const [publisher, setPublisher] = useState(false);
   const viewPublisher = "Se ha publicado correctamente";
   const [seEjecuto, setSeEjecuto] = useState(false);
-  const [content, setContent] = useState(
+  const [tags, setTags] = useState(
     "#bici #bicicleta #bike #bicycle #ciclismo #ciclista #cycling #mtb #bicicletas #bikes #ciclistas #bikelife #ciclismodecarretera #ciclismomtb #ciclis",
   );
+  const [pass, setPass] = useState(`Forma de pago: 
+  * De contado.
+  * Abonos: Reserva con el 30%, 4 meses de plazo para terminarla de pagar.
+  Envios a todo el pais:
+  * Gratis en ciudad de Panamá.
+  * $20.90 a cualquier otra provincia
+  `);
 
-  const handleContent = (e) => {
-    e.preventDefault()
-    setContent(e.target.value);
+  const [legal, setLegal] = useState(`Cabe recordar que Recycling Inc es una empresa intermediaria para la venta de productos de ciclismo. Una vez que se completa la venta, solo entregamos el dinero al propietario anterior después de recibir el producto satisfactoriamente  en nuestro showroom, por lo que garantizamos la seguridad para su comprador.
+  Si deseas realizar la compra de este producto puedes contactarnos al +507 69240795.
+  ♻🚲♻🚲♻🚲♻🚲♻🚲♻
+  
+  
+  
+  
+  `)
+  const [selectTitle, setSelectTitle] = useState('');
+
+
+
+  
+  const [selectOne, setSelectOne] = useState('');
+
+  const handleSelectOption = (event) => {
+    const options = event.target.value;
+    setSelectOne(options);
+    handleTitle();
   }
+  const handleContentPass = (e) => {
+    e.preventDefault()
+    setPass(e.target.value);
+  }
+
+  const handleContentTags = (e) => {
+    e.preventDefault()
+    setTags(e.target.value);
+  }
+  const handleLegal = (e) => {
+    e.preventDefault()
+    setLegal(e.target.value);
+  }
+
+  const handleTitle = () => {
+    const options = selectOne;
+
+    // titulos 
+    const titleOpcions = {
+      opcion1: `🟣🟣🟣🟣 DESCUENTO 🟣🟣🟣🟣`,
+      opcion2: `🟣🟣🟣🟣 BICI USADA 🟣🟣🟣🟣`,
+    }
+
+    // validad que opcion es
+    if (options == 1) {
+      setSelectTitle(titleOpcions.opcion1)
+    } else if(options == 2) {
+      setSelectTitle(titleOpcions.opcion2)
+    } 
+    
+
+  }
+  useEffect(() => {
+    handleTitle();
+  }, [selectOne])
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -52,6 +110,7 @@ export function ComponenteBikeIg({
   };
 
   const [publishing, setPublishing] = useState(false);
+  
   function Descuento(original, off) {
     const descuento = original - off;
     const porcentaje = ((descuento / original) * 100).toFixed(0);
@@ -83,7 +142,18 @@ export function ComponenteBikeIg({
   const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
   const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
   const image_url = `${CDN}${image}`;
-  const caption = `${title} ${name} ${price} ${content}`;
+  const caption = `${selectTitle}
+
+   ${title}
+
+
+   ${price} 
+
+   ${pass} 
+
+   ${legal} 
+
+   ${tags}  `;
 
   // funcionalidad para publicar en Instagram
   async function publicar() {
@@ -248,13 +318,54 @@ export function ComponenteBikeIg({
           <p>{`Precio: $${off ?? price}`}</p>
           {off && <p>{`Descuento: ${Descuento(price, off)}%`}</p>}
           <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Contenido de la publicacion</Form.Label>
-              <Form.Control as="textarea" rows={3} value={content} onChange={handleContent} />
-            </Form.Group>
+          <Form.Select aria-label="Default select example" value={selectOne} onChange={handleSelectOption} >
+            <option>Que tipo de publicacion es ?</option>
+            <option value="1" >Descuento</option>
+            <option value="2" >Bici usada</option>
+          </Form.Select>
+          {
+            selectOne == 1 ? (
+              <Form.Group className="mb-3" controlId="formBasicEmail"> <br/>
+
+                <Form.Control type="text" placeholder={selectTitle} value={selectTitle} onChange={ handleTitle}   />
+
+                <Form.Label>precio antes</Form.Label>
+                <Form.Control type="text" placeholder={price} disabled aria-label="Disabled input example" />
+
+                <Form.Label>precio ahora</Form.Label>
+                <Form.Control type="text" placeholder={off} />
+
+                <Form.Label>formas de pago</Form.Label>
+                <Form.Control as="textarea" rows={3} value={pass} onChange={handleContentPass} />
+
+                <Form.Label>Legalidades y avisos</Form.Label>
+                <Form.Control as="textarea" rows={3} value={legal} onChange={handleLegal} />
+
+                <Form.Label>etiquetas</Form.Label>
+                <Form.Control as="textarea" rows={3} value={tags} onChange={handleContentTags} />
+
+              </Form.Group>
+            ) : selectOne == 2 && (
+              <Form.Group className="mb-3" controlId="formBasicEmail"> <br/>
+                <Form.Control type="text" placeholder={off} value={selectTitle} onChange={handleTitle}   />
+
+                <Form.Label>precio</Form.Label>
+                <Form.Control type="text" placeholder={price} disabled aria-label="Disabled input example" />
+
+
+                <Form.Label>formas de pago</Form.Label>
+                <Form.Control as="textarea" rows={3} value={pass} onChange={handleContentPass} />
+
+                <Form.Label>Legalidades y avisos</Form.Label>
+                <Form.Control as="textarea" rows={3} value={legal} onChange={handleLegal} />
+
+                <Form.Label>etiquetas</Form.Label>
+                <Form.Control as="textarea" rows={3} value={tags} onChange={handleContentTags} />
+              </Form.Group>
+            )
+          }
+          
+
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -273,3 +384,5 @@ export function ComponenteBikeIg({
     </>
   );
 }
+
+/** template post */

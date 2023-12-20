@@ -19,7 +19,9 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import Search from "./search";
 
+
 export default function NavB() {
+	
 	return (
 		<Navbar
 			collapseOnSelect

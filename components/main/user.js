@@ -3,11 +3,14 @@ import { userState } from "context/User/UserState";
 import Link from "next/link";
 import { BsPersonCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import useUserRole from "hooks/roleAdmin/roleAdmin";
 
 export default function User() {
 	const signOut = userState((state) => state.signOut);
 
 	const user = userState((state) => state.user);
+
+	const role = useUserRole();
 
 	const [state, setState] = useState(false);
 
@@ -36,7 +39,17 @@ export default function User() {
 					<NavDropdown title={delta}>
 						<NavDropdown.Item href="/perfil" disabled>
 							Perfil
+							
 						</NavDropdown.Item>
+
+						{
+						role === 'super-admin' ? (
+							<NavDropdown.Item href="/insta" >
+							Admin
+						</NavDropdown.Item>
+						) : null
+					}
+
 
 						{/* <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
             <NavDropdown.Divider /> */}

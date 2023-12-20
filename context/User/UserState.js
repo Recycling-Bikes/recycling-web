@@ -40,6 +40,13 @@ export const userState = create(
 				set((state) => ({ user: user.user }));
 				return user;
 			},
+			// obtener el rol del usuario
+			getRole: async () => {
+				const { data: user, error } = await supabase.auth.getUser();
+				const role = user?.user.app_metadata?.role;
+				return role;
+				
+			},			
 
 			signOut: () => {
 				signOutUser();
