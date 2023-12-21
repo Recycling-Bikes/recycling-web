@@ -18,11 +18,15 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import Search from "./search";
+import useUserRole from "hooks/roleAdmin/roleAdmin";
 
 
 export default function NavB() {
+
+	const role  = useUserRole();
 	
 	return (
+		<>
 		<Navbar
 			collapseOnSelect
 			expand="lg"
@@ -96,8 +100,17 @@ export default function NavB() {
 					</Nav>
 				</Navbar.Collapse>
 
+				
+
 				{/* End NavBar Toggle */}
 			</Container>
 		</Navbar>
+		{
+			role === "super-admin" && (
+				<div className="me-auto text-center p-2 fixed-bottom  bg-warning ">estas navengado como administrador</div>
+			) 
+		}
+		
+		</>
 	);
 }
