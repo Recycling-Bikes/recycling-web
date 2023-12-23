@@ -11,20 +11,19 @@ import {
 	NavDropdown,
 } from "react-bootstrap";
 
-import { FiShoppingCart } from "react-icons/fi";
 import { BiSearch, BiSearchAlt } from "react-icons/bi";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { use, useRef, useState, useEffect } from "react";
 import Search from "./search";
 import useUserRole from "hooks/roleAdmin/roleAdmin";
 
 
 export default function NavB() {
 
-	const role  = useUserRole();
+
 	
+
+
 	return (
 		<>
 		<Navbar
@@ -105,11 +104,6 @@ export default function NavB() {
 				{/* End NavBar Toggle */}
 			</Container>
 		</Navbar>
-		{
-			role === "super-admin" && (
-				<div className="me-auto text-center p-2 fixed-bottom  bg-warning ">estas navengado como administrador</div>
-			) 
-		}
 		
 		</>
 	);

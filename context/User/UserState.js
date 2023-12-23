@@ -42,8 +42,8 @@ export const userState = create(
 			},
 			// obtener el rol del usuario
 			getRole: async () => {
-				const { data: user, error } = await supabase.auth.getUser();
-				const role = user?.user.app_metadata?.role;
+				const {data:user, error} = await supabase.auth.getUser();
+				const role = user?.user.app_metadata.role;
 				return role;
 				
 			},			
