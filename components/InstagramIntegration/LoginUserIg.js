@@ -22,32 +22,33 @@ const LoginUserIg = ({ onLogin }) => {
   // funcionalidad para logearse y validad si el rol es de super-admin entonces procede a logearse
 
 
-    // const checkRoleAdmin = async () => {
-    //   if(role === 'super-admin'){
-    //     await onLogin(user)
-    //     } else {
-    //       setError(error);
-    //       toast.error('no tienes permisos para acceder a esta pagina');
-    //       setLoading(false);
-    //     }
-    // }
-    // if(user){
-    //   checkRoleAdmin()
-    // }
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const { user, error } = await signIn({ email, password });
-    if (error) {
-      setError(error?.message);
-      toast.error(error?.message);
-      setLoading(false);
-    } else {
-      setUser(user);
+    const handleLogin = async () => {
+      if(role === 'super-admin'){
+        console.log('soy super-admin', role)
+        await onLogin(user)
+        } else {
+          setError(error);
+          toast.error('no tienes permisos para acceder a esta pagina');
+          setLoading(false);
+        }
     }
+    if(user){
+      checkRoleAdmin()
+    }
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   const { user, error } = await signIn({ email, password });
+  //   if (error) {
+  //     setError(error?.message);
+  //     toast.error(error?.message);
+  //     setLoading(false);
+  //   } else {
+  //     setUser(user);
+  //   }
     
-  }
+  // }
 
 
 

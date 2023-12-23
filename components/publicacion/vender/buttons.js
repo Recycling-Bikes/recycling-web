@@ -1,6 +1,6 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { use, useCallback, useEffect, useState } from "react";
 import { Button, Row, Modal, Form } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
 import useUserRole from "hooks/roleAdmin/roleAdmin";
@@ -10,10 +10,34 @@ import {
   publishPostInstagram,
 } from "services/PublishPostInstagram";
 import { CDN } from "utils/constantes";
+import useCustomHook from "hooks/instaPublish/TemplateInstaPublish";
 
 export default function Buttons() {
 
+  
+
   const bici = parkingState((state) => state.bici);
+
+  const {
+    tags,
+    setTags,
+    pass,
+    setPass,
+    legal,
+    setLegal,
+    selectTitle,
+    setSelectTitle,
+    publishing,
+    setPublishing,
+    selectOne,
+    setSelectOne,
+    handleSelectOption,
+    handleContentPass,
+    handleContentTags,
+    handleLegal,
+    handleTitle
+    
+  } = useCustomHook();
 
   const role = useUserRole();
 
@@ -48,71 +72,6 @@ export default function Buttons() {
 
     return porcentaje;
   }
-
-  const [tags, setTags] = useState(
-    "#bici #bicicleta #bike #bicycle #ciclismo #ciclista #cycling #mtb #bicicletas #bikes #ciclistas #bikelife #ciclismodecarretera #ciclismomtb #ciclis",
-  );
-  const [pass, setPass] = useState(`Forma de pago: 
-  * De contado.
-  * Abonos: Reserva con el 30%, 4 meses de plazo para terminarla de pagar.
-  Envios a todo el pais:
-  * Gratis en ciudad de Panamá.
-  * $20.90 a cualquier otra provincia
-  `);
-
-  const [legal, setLegal] = useState(`Cabe recordar que Recycling Inc es una empresa intermediaria para la venta de productos de ciclismo. Una vez que se completa la venta, solo entregamos el dinero al propietario anterior después de recibir el producto satisfactoriamente  en nuestro showroom, por lo que garantizamos la seguridad para su comprador.
-  Si deseas realizar la compra de este producto puedes contactarnos al +507 69240795.
-  ♻🚲♻🚲♻🚲♻🚲♻🚲♻
-  
-  
-  
-  
-  `)
-  const [selectTitle, setSelectTitle] = useState('');
-  const [publishing, setPublishing] = useState(false);
-  const [selectOne, setSelectOne] = useState('');
-
-  const handleSelectOption = (event) => {
-    const options = event.target.value;
-    setSelectOne(options);
-    handleTitle();
-  }
-  const handleContentPass = (e) => {
-    e.preventDefault()
-    setPass(e.target.value);
-  }
-
-  const handleContentTags = (e) => {
-    e.preventDefault()
-    setTags(e.target.value);
-  }
-  const handleLegal = (e) => {
-    e.preventDefault()
-    setLegal(e.target.value);
-  }
-  
-
-  const handleTitle = () => {
-    const options = selectOne;
-
-    // titulos 
-    const titleOpcions = {
-      opcion1: `🟣🟣🟣🟣 DESCUENTO 🟣🟣🟣🟣`,
-      opcion2: `🟣🟣🟣🟣 BICI USADA 🟣🟣🟣🟣`,
-    }
-
-    // validad que opcion es
-    if (options == 1) {
-      setSelectTitle(titleOpcions.opcion1)
-    } else if(options == 2) {
-      setSelectTitle(titleOpcions.opcion2)
-    } 
-    
-
-  }
-  useEffect(() => {
-    handleTitle();
-  }, [selectOne])
 
 
   const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
@@ -268,7 +227,7 @@ export default function Buttons() {
               </Form.Group>
             ) : selectOne == 2 && (
               <Form.Group className="mb-3" controlId="formBasicEmail"> <br/>
-                <Form.Control type="text" placeholder={off} value={selectTitle} onChange={handleTitle}   />
+                <Form.Control type="text" value={selectTitle} onChange={handleTitle}   />
 
                 <Form.Label>precio</Form.Label>
                 <Form.Control type="text" placeholder={price} disabled aria-label="Disabled input example" />
