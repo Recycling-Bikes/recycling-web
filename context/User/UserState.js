@@ -74,7 +74,6 @@ const signInUser = async ({ email, password }) => {
 		email,
 		password,
 	});
-	console.log(user);
 	return user;
 };
 
