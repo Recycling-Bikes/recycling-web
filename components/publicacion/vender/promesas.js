@@ -1,16 +1,110 @@
 import { parkingState } from "context/Parking/ParkingState";
-import Link from "next/link";
 import React, { useState } from "react";
-import { Container, Button, Accordion } from "react-bootstrap";
+import {Button, Accordion, Modal, Form } from "react-bootstrap";
 import { BsShieldCheck } from "react-icons/bs";
+import useCustomHook from "hooks/instaPublish/TemplateInstaPublish";
+import {
+  uploadCarouselItems,
+  createCarouselContainer,
+  publishCarousel,
+} from "services/PublishPostInstagram";
+import toast, { Toaster } from "react-hot-toast";
+import { CDN } from "utils/constantes";
+import ModalShow from "../../main/modalShow";
+import { get } from "http";
 
 export default function Promesas() {
   const bici = parkingState((state) => state.bici);
+  const {getUser, isAdmin} = userState((state) => state);
   const [showMore, setShowMore] = useState(false);
   const handleToggle = () => {
     setShowMore(!showMore);
   };
+
+  const {
+    tags,
+    pass,
+    legal,
+    selectTitle,
+    publishing,
+    setPublishing,
+    selectOne,
+    handleSelectOption,
+    handleContentPass,
+    handleContentTags,
+    handleLegal,
+    handleTitle
+    
+  } = useCustomHook();
+
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const [price, setPrice] = useState(bici.off ?? bici?.price);
+
+  const administrador = getUser();
+
+  const [role, setRole] = useState(false);
+
+
+  if (isAdmin) {
+    setRole(true)
+  }
+
+  // array para las imagenes
+  const images = bici?.filesUrl?.map((image) => {
+    return `${CDN}${image}`;
+  })
+
+
+  const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
+  const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
+  const image_urls = images;
+  const caption = `${selectTitle}
+
+   ${bici?.title}
+
+
+   $ ${price} 
+
+   ${pass} 
+
+   ${legal} 
+
+   ${tags}`;
+
+  // funcionalidad para publicar en Instagram
+  async function publicar() {
+    const media_ids = await Promise.all(
+      image_urls.map(async(image_url) => {
+        return await uploadCarouselItems(image_url, access_token, ig_user_id, caption)
+      })
+    );
+
+    const carousel_id = await createCarouselContainer(media_ids, access_token, ig_user_id, caption);
+    await publishCarousel(carousel_id, access_token, ig_user_id);
+  }
+
+  const handlePublish = async () => {
+    setPublishing(true);
+    try {
+      await publicar();
+      handleClose(); // cerrar el modal despues de publicar
+    } catch (error) {
+      toast.error("Error al publicar", error);
+      console.log(error)
+    } finally {
+      setPublishing(false);
+    }
+  };
+
+
   return (
+    <>
     <Accordion className="mt-3 separador" defaultActiveKey="0" flush>
       <Accordion.Item eventKey="1" className="separador">
         <Accordion.Header>
@@ -96,5 +190,38 @@ export default function Promesas() {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
+
+    <p>Merketing</p>
+
+    {/* {
+      role === 'super-admin' ? (
+        <Button className="mb-2" variant="outline-primary btn-outline" onClick={handleShow}>
+        Republicar en META {bici?.title}
+        </Button> 
+        ) : null
+      } */}
+
+      <ModalShow
+        image={`${CDN}${bici?.filesUrl[0]}`} 
+        title={bici?.title}
+        selectOne={selectOne}
+        selectTitle={selectTitle}
+        priceDescount={`${bici.price, bici.off} % off`}
+        price={bici?.price}
+        pass={pass}
+        legal={legal}
+        tags={tags}
+        handleTitle={handleTitle}
+        handleContentPass={handleContentPass}
+        handleContentTags={handleContentTags}
+        handleLegal={handleLegal}
+        handlePublish={handlePublish}
+        handleClose={handleClose}
+        publishing={publishing}
+        show={show}
+        handleSelectOption={handleSelectOption}
+      />
+      <Toaster position="bottom-left" reverseOrder={false} />
+    </>
   );
 }

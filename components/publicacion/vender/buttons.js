@@ -1,52 +1,11 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
-import React, { use, useCallback, useEffect, useState } from "react";
+import React, {useCallback, useState } from "react";
 import { Button, Row, Modal, Form } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
-import useUserRole from "hooks/roleAdmin/roleAdmin";
-import toast, { Toaster } from "react-hot-toast";
-import {
-  uploadImage,
-  publishPostInstagram,
-} from "services/PublishPostInstagram";
-import { CDN } from "utils/constantes";
-import useCustomHook from "hooks/instaPublish/TemplateInstaPublish";
-
 export default function Buttons() {
 
-  
-
   const bici = parkingState((state) => state.bici);
-
-  const {
-    tags,
-    setTags,
-    pass,
-    setPass,
-    legal,
-    setLegal,
-    selectTitle,
-    setSelectTitle,
-    publishing,
-    setPublishing,
-    selectOne,
-    setSelectOne,
-    handleSelectOption,
-    handleContentPass,
-    handleContentTags,
-    handleLegal,
-    handleTitle
-    
-  } = useCustomHook();
-
-  const role = useUserRole();
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
-
   const dataSize = useCallback((id = 1, sizeNormal = "", sizeRuta = "") => {
     if (id != 2) {
       return sizeNormal ?? "";
@@ -73,48 +32,7 @@ export default function Buttons() {
     return porcentaje;
   }
 
-
-  const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
-  const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
-  const image_url = `${CDN}${bici?.filesUrl?.[0]}`;
-  const caption = `${selectTitle}
-
-   ${bici?.title}
-
-
-   ${price} 
-
-   ${pass} 
-
-   ${legal} 
-
-   ${tags}  `;
-
-  // funcionalidad para publicar en Instagram
-  async function publicar() {
-    const result = await uploadImage(
-      image_url,
-      access_token,
-      ig_user_id,
-      caption,
-    );
-    await publishPostInstagram(result, access_token, ig_user_id);
-  }
-
-  const handlePublish = async () => {
-    setPublishing(true);
-    try {
-      await publicar();
-      handleClose(); // cerrar el modal despues de publicar
-    } catch (error) {
-      toast.error("Error al publicar", error);
-      console.log(error)
-    } finally {
-      setPublishing(false);
-    }
-  };
-
-
+ 
 
   return (
     <>
@@ -160,16 +78,8 @@ export default function Buttons() {
         href={`https://wa.me/50769240795?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20si%20la%20bicicleta%20con%20identificador%20${bici.id}%20est%C3%A1%20disponible%20para%20su%20compra.%20%C2%BFPodr%C3%ADa%20confirmar%20si%20est%C3%A1%20disponible%20y%20proporcionarme%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20caracter%C3%ADsticas%20y%20precio%3F%20Gracias.%0Ahttps%3A%2F%2Frecyclingbikes.co%2Fparking%2F${bici.id}`}
       >
         <Button className="mb-2 py-2 w-100">Comprar</Button>
-
-        
       </Link>
-      {
-        role === 'super-admin' ? (
-        <Button className="mb-2" variant="outline-primary btn-outline" onClick={handleShow}>
-        Republicar en META {bici?.title}
-        </Button> 
-        ) : null
-      }
+      
       <div className="mt-3 d-flex justify-content-center">
         <h6 className="fw-bold">
           <BsChatSquareDots className="me-2" />
@@ -180,89 +90,6 @@ export default function Buttons() {
           </Link>
         </h6>
       </div>
-
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>{bici?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <img
-            src={`${CDN}${bici?.filesUrl?.[0]}`}
-            alt={bici?.title}
-            style={{ maxWidth: "100%", height: "auto" }}
-          />
-          <Form> <br/>
-          <Form.Select aria-label="Default select example" value={selectOne} onChange={handleSelectOption} >
-            <option>Que tipo de publicacion es ?</option>
-            <option value="1" >Descuento</option>
-            <option value="2" >Bici usada</option>
-          </Form.Select>
-          {
-            selectOne == 1 ? (
-              <Form.Group className="mb-3" controlId="formBasicEmail"> <br/>
-
-                <Form.Control type="text" placeholder={selectTitle} value={selectTitle} onChange={ handleTitle}   />
-
-                <Form.Label>precio antes</Form.Label>
-                <Form.Control type="text" placeholder={bici?.price} disabled aria-label="Disabled input example" />
-
-                <Form.Label>precio ahora</Form.Label>
-                <Form.Control type="text" placeholder={`${bici.price, bici.off} % off`} />
-
-                <Form.Label>formas de pago</Form.Label>
-                <Form.Control as="textarea" rows={3} value={pass} onChange={handleContentPass} />
-
-                <Form.Label>Legalidades y avisos</Form.Label>
-                <Form.Control as="textarea" rows={3} value={legal} onChange={handleLegal} />
-
-                <Form.Label>etiquetas</Form.Label>
-                <Form.Control as="textarea" rows={3} value={tags} onChange={handleContentTags} />
-
-              </Form.Group>
-            ) : selectOne == 2 && (
-              <Form.Group className="mb-3" controlId="formBasicEmail"> <br/>
-                <Form.Control type="text" value={selectTitle} onChange={handleTitle}   />
-
-                <Form.Label>precio</Form.Label>
-                <Form.Control type="text" placeholder={price} disabled aria-label="Disabled input example" />
-
-
-                <Form.Label>formas de pago</Form.Label>
-                <Form.Control as="textarea" rows={3} value={pass} onChange={handleContentPass} />
-
-                <Form.Label>Legalidades y avisos</Form.Label>
-                <Form.Control as="textarea" rows={3} value={legal} onChange={handleLegal} />
-
-                <Form.Label>etiquetas</Form.Label>
-                <Form.Control as="textarea" rows={3} value={tags} onChange={handleContentTags} />
-              </Form.Group>
-            )
-          }
-          
-
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="primary"
-            onClick={handlePublish}
-            disabled={publishing}
-          >
-            {publishing ? "Publicando..." : "Publicar en Instagram"}
-          </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Toaster position="bottom-left" reverseOrder={false} />
     </>
   );
 }

@@ -2,20 +2,14 @@ import User from "./user";
 import Image from "next/image";
 
 import {
-	Button,
-	Form,
-	InputGroup,
 	Container,
 	Navbar,
 	Nav,
 	NavDropdown,
 } from "react-bootstrap";
-
-import { BiSearch, BiSearchAlt } from "react-icons/bi";
+import {BiSearchAlt } from "react-icons/bi";
 import Link from "next/link";
-import { use, useRef, useState, useEffect } from "react";
 import Search from "./search";
-import useUserRole from "hooks/roleAdmin/roleAdmin";
 
 
 export default function NavB() {

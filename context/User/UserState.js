@@ -6,6 +6,7 @@ export const userState = create(
 	persist(
 		(set, get) => ({
 			user: {},
+			isAdmin: false,
 
 			signIn: async (data) => {
 				const user = await signInUser(data);
@@ -15,8 +16,10 @@ export const userState = create(
 
 			getUser: async () => {
 				const user = await getInfoUser();
+				set((state) => ({ user}));
 				return user;
 			},
+
 			updateSession: (user) => {
 				set((state) => ({ user }));
 			},
@@ -40,15 +43,8 @@ export const userState = create(
 				set((state) => ({ user: user.user }));
 				return user;
 			},
-			// obtener el rol del usuario
-			getRole: async () => {
-				const {data:user, error} = await supabase.auth.getUser();
-				const role = user?.user.app_metadata.role;
-				return role;
-				
-			},			
-
 			signOut: () => {
+				// limpar todo el localstorage
 				signOutUser();
 				set(
 					(state) => ({
@@ -58,10 +54,14 @@ export const userState = create(
 					true,
 				);
 			},
+
 		}),
 		{ name: "UserData" },
 	),
 );
+
+
+
 
 const getInfoUser = async () => {
 	const { data: user, error } = await supabase.auth.getUser();
