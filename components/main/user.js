@@ -3,7 +3,6 @@ import { userState } from "context/User/UserState";
 import Link from "next/link";
 import { BsPersonCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { supabase } from "supabase/client";
 
 
 export default function User() {
@@ -12,12 +11,11 @@ export default function User() {
 	const user = userState((state) => state.user);
 
 	const [state, setState] = useState(false);
-
 	useEffect(() => {
 		setState(true);
 	}, []);
 
-	if (!state) {
+if (!state) {
 		return <Spinner animation="grow" />;
 	}
 
@@ -42,11 +40,6 @@ export default function User() {
 							
 						</NavDropdown.Item>
 
-				
-
-
-						{/* <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
-            <NavDropdown.Divider /> */}
 						<NavDropdown.Item href="/" onClick={() => signOut()}>
 							Cerrar sesión
 						</NavDropdown.Item>

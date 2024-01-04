@@ -12,11 +12,9 @@ import Link from "next/link";
 import Search from "./search";
 
 
+
+
 export default function NavB() {
-
-
-	
-
 
 	return (
 		<>
@@ -92,8 +90,6 @@ export default function NavB() {
 						<User />
 					</Nav>
 				</Navbar.Collapse>
-
-				
 
 				{/* End NavBar Toggle */}
 			</Container>

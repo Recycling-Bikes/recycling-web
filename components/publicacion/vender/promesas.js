@@ -11,12 +11,15 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { CDN } from "utils/constantes";
 import ModalShow from "../../main/modalShow";
-import { get } from "http";
+import { useAdminVerification } from "hooks/adminUser/useAdminVerification";
+import { userState } from "context/User/UserState";
+
 
 export default function Promesas() {
   const bici = parkingState((state) => state.bici);
-  const {getUser, isAdmin} = userState((state) => state);
   const [showMore, setShowMore] = useState(false);
+  const user = userState((state) => state.user);
+	const isAdmin = useAdminVerification(user?.id);
   const handleToggle = () => {
     setShowMore(!showMore);
   };
@@ -45,15 +48,6 @@ export default function Promesas() {
   };
 
   const [price, setPrice] = useState(bici.off ?? bici?.price);
-
-  const administrador = getUser();
-
-  const [role, setRole] = useState(false);
-
-
-  if (isAdmin) {
-    setRole(true)
-  }
 
   // array para las imagenes
   const images = bici?.filesUrl?.map((image) => {
@@ -101,6 +95,7 @@ export default function Promesas() {
       setPublishing(false);
     }
   };
+
 
 
   return (
@@ -191,15 +186,19 @@ export default function Promesas() {
       </Accordion.Item>
     </Accordion>
 
-    <p>Merketing</p>
+    
 
-    {/* {
-      role === 'super-admin' ? (
+    {
+    isAdmin && (
+      <div>
+        <p>Merketing</p>
         <Button className="mb-2" variant="outline-primary btn-outline" onClick={handleShow}>
         Republicar en META {bici?.title}
-        </Button> 
-        ) : null
-      } */}
+        </Button>
+      </div>
+       
+        )
+      }
 
       <ModalShow
         image={`${CDN}${bici?.filesUrl[0]}`} 
