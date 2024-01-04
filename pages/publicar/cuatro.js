@@ -2,7 +2,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Main from "components/main";
-import { uploadImage, publishPostInstagram } from "services/PublishPostInstagram";
 
 // importacion de componentes de react-bootstrap
 import {
@@ -156,9 +155,6 @@ export default function Avaluador() {
   const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
   const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
 
-  
-  
-
   return (
     <Main>
       <div className="py-3 my-md-0">
@@ -216,7 +212,13 @@ export default function Avaluador() {
           <Row className="justify-content-center">
             <Col sm={100} md={6} lg={5} className="flex justify-content-center">
               <Container className="flex justify-content-center">
-                <Image width={400} height={400} src={ImageBici} alt="Image to bici" className="img-fluid" />
+                <Image
+                  width={400}
+                  height={400}
+                  src={ImageBici}
+                  alt="Image to bici"
+                  className="img-fluid"
+                />
               </Container>
             </Col>
             <Col md="auto" className="d-flex d-md-block justify-content-center">
@@ -278,13 +280,17 @@ export default function Avaluador() {
             </Link>
 
             <div className="d-flex">
-              <Link href={"https://wa.me/50769240795?text=%C2%A1Hola!"} target="_blank">
+              <Link
+                href={"https://wa.me/50769240795?text=%C2%A1Hola!"}
+                target="_blank"
+              >
                 <Button className="mx-2" variant="primary" type="submit">
                   <HiArrowsRightLeft size={16} /> Véndela ya
                 </Button>
-              </Link> 
+              </Link>
 
               <Button
+                className="mx-2"
                 onClick={userStatus}
                 variant="primary"
                 style={{
@@ -301,8 +307,10 @@ export default function Avaluador() {
           <div className="mt-2 py-3 d-grid gap-2 d-md-none ">
             <Button
               onClick={() =>
-                router.push("https://wa.me/50769240795?text=%C2%A1Hola!", "_blank")
-                
+                router.push(
+                  "https://wa.me/50769240795?text=%C2%A1Hola!",
+                  "_blank"
+                )
               }
               className=""
               variant="primary"
