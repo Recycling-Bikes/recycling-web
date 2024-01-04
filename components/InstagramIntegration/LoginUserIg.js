@@ -5,7 +5,6 @@ import imgBici from "../../public/mesa.png";
 import toast, { Toaster } from "react-hot-toast";
 import Head from "next/head";
 import Link from "next/link";
-import useUserRole from "hooks/roleAdmin/roleAdmin";
 import { userState } from "context/User/UserState";
 
 
@@ -15,26 +14,25 @@ const LoginUserIg = ({ onLogin }) => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const signIn = userState((state) => state.signIn);
-  const role = useUserRole()
   const [user, setUser] = useState(null);
   
 
-  // funcionalidad para logearse y validad si el rol es de super-admin entonces procede a logearse
+  // funcionalidad para logearse y valida d si el rol es de super-admin entonces procede a logearse
 
 
-    const handleLogin = async () => {
-      if(role === 'super-admin'){
-        console.log('soy super-admin', role)
-        await onLogin(user)
-        } else {
-          setError(error);
-          toast.error('no tienes permisos para acceder a esta pagina');
-          setLoading(false);
-        }
-    }
-    if(user){
-      checkRoleAdmin()
-    }
+    // const handleLogin = async () => {
+    //   if(role === 'super-admin'){
+    //     console.log('soy super-admin', role)
+    //     await onLogin(user)
+    //     } else {
+    //       setError(error);
+    //       toast.error('no tienes permisos para acceder a esta pagina');
+    //       setLoading(false);
+    //     }
+    // }
+    // if(user){
+    //   checkRoleAdmin()
+    // }
 
   // const handleLogin = async (e) => {
   //   e.preventDefault();
