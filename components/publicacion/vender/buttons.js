@@ -1,12 +1,11 @@
 import { parkingState } from "context/Parking/ParkingState";
 import Link from "next/link";
-import React, { useCallback, useEffect, useState } from "react";
-import { Button, Row } from "react-bootstrap";
+import React, {useCallback, useState } from "react";
+import { Button, Row, Modal, Form } from "react-bootstrap";
 import { BsChatSquareDots } from "react-icons/bs";
-
 export default function Buttons() {
-  const bici = parkingState((state) => state.bici);
 
+  const bici = parkingState((state) => state.bici);
   const dataSize = useCallback((id = 1, sizeNormal = "", sizeRuta = "") => {
     if (id != 2) {
       return sizeNormal ?? "";
@@ -32,6 +31,8 @@ export default function Buttons() {
 
     return porcentaje;
   }
+
+ 
 
   return (
     <>
@@ -78,9 +79,7 @@ export default function Buttons() {
       >
         <Button className="mb-2 py-2 w-100">Comprar</Button>
       </Link>
-      {/* <Button className="mb-2" variant="outline-primary btn-outline">
-        Trade - in
-      </Button> */}
+      
       <div className="mt-3 d-flex justify-content-center">
         <h6 className="fw-bold">
           <BsChatSquareDots className="me-2" />

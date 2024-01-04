@@ -2,25 +2,22 @@ import User from "./user";
 import Image from "next/image";
 
 import {
-	Button,
-	Form,
-	InputGroup,
 	Container,
 	Navbar,
 	Nav,
 	NavDropdown,
 } from "react-bootstrap";
-
-import { FiShoppingCart } from "react-icons/fi";
-import { BiSearch, BiSearchAlt } from "react-icons/bi";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import {BiSearchAlt } from "react-icons/bi";
 import Link from "next/link";
-import { useRef, useState } from "react";
 import Search from "./search";
 
+
+
+
 export default function NavB() {
+
 	return (
+		<>
 		<Navbar
 			collapseOnSelect
 			expand="lg"
@@ -97,5 +94,7 @@ export default function NavB() {
 				{/* End NavBar Toggle */}
 			</Container>
 		</Navbar>
+		
+		</>
 	);
 }

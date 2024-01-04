@@ -3,6 +3,8 @@ import { Badge, Card } from "react-bootstrap";
 import { CDN } from "utils/constantes";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
+import useCustomHook from "hooks/instaPublish/TemplateInstaPublish";
+import { useState } from "react";
 
 ComponenteBike.propTypes = {
   id: propTypes.any.isRequired,
@@ -41,6 +43,73 @@ export function ComponenteBike({
   if (sold) {
     console.log(sold);
   }
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const {
+    tags,
+    setTags,
+    pass,
+    setPass,
+    legal,
+    setLegal,
+    selectTitle,
+    setSelectTitle,
+    publishing,
+    setPublishing,
+    selectOne,
+    setSelectOne,
+    handleSelectOption,
+    handleContentPass,
+    handleContentTags,
+    handleLegal,
+    handleTitle,
+  } = useCustomHook();
+
+
+  const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
+  const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
+  const image_url = `${CDN}${image}`;
+  const caption = `${selectTitle}
+
+   ${title}
+
+
+   ${price} 
+
+   ${pass} 
+
+   ${legal} 
+
+   ${tags}  `;
+
+  // funcionalidad para publicar en Instagram
+  async function publicar() {
+    const result = await uploadImage(
+      image_url,
+      access_token,
+      ig_user_id,
+      caption,
+    );
+    await publishPostInstagram(result, access_token, ig_user_id);
+  }
+
+  const handlePublish = async () => {
+    setPublishing(true);
+    try {
+      await publicar();
+      handleClose(); // cerrar el modal despues de publicar
+    } catch (error) {
+      toast.error("Error al publicar", error);
+      console.log(error)
+    } finally {
+      setPublishing(false);
+    }
+  };
 
   return (
     <Card className="p-0" {...props}>
@@ -139,6 +208,8 @@ export function ComponenteBike({
               ""
             )}
           </Card.Text>
+          
+
         </Card.Body>
       </Link>
     </Card>

@@ -4,20 +4,21 @@ import Link from "next/link";
 import { BsPersonCircle } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
+
 export default function User() {
 	const signOut = userState((state) => state.signOut);
 
 	const user = userState((state) => state.user);
 
 	const [state, setState] = useState(false);
-
 	useEffect(() => {
 		setState(true);
 	}, []);
 
-	if (!state) {
+if (!state) {
 		return <Spinner animation="grow" />;
 	}
+
 
 	try {
 		if (Object.keys(user ?? {}).length !== 0) {
@@ -36,10 +37,9 @@ export default function User() {
 					<NavDropdown title={delta}>
 						<NavDropdown.Item href="/perfil" disabled>
 							Perfil
+							
 						</NavDropdown.Item>
 
-						{/* <NavDropdown.Item href="/">Something else here</NavDropdown.Item>
-            <NavDropdown.Divider /> */}
 						<NavDropdown.Item href="/" onClick={() => signOut()}>
 							Cerrar sesión
 						</NavDropdown.Item>
