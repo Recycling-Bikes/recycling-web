@@ -13,17 +13,13 @@ import { parkingState } from "context/Parking/ParkingState";
 import Buttons from "components/publicacion/vender/buttons";
 import Promesas from "components/publicacion/vender/promesas";
 import Head from "next/head";
-import { CDN } from "utils/constantes";
 
 const Vender = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  useEffect(() => {
-    console.log("rendering principal");
-  });
-
   const bici = parkingState((state) => state.bici);
+
 
   const setBici = parkingState((state) => state.setBici);
 

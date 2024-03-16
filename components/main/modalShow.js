@@ -2,6 +2,7 @@ import {Button, Modal, Form } from "react-bootstrap";
 
 export default function ModalShow({image, title, selectOne, selectTitle, priceDescount, price, pass, legal, tags, handleTitle, handleContentPass, handleContentTags, handleLegal, handlePublish, handleClose, publishing, show, handleSelectOption}) {
 
+
   return (
     <Modal
     show={show}
@@ -9,6 +10,24 @@ export default function ModalShow({image, title, selectOne, selectTitle, priceDe
     backdrop="static"
     keyboard={false}
   >
+
+{/* Categoría: MTB
+
+Marca: Cannondale
+
+Modelo: Trail 2
+
+Talla: M
+
+Rin 29
+
+Material: Aluminio
+
+Transmision: Sram NX. 12 pasos.
+
+Suspensión: Rockshox de aire. Bloqueo remoto */}
+
+
     <Modal.Header closeButton>
       <Modal.Title>{title}</Modal.Title>
     </Modal.Header>
@@ -35,6 +54,9 @@ export default function ModalShow({image, title, selectOne, selectTitle, priceDe
 
             <Form.Label>precio ahora</Form.Label>
             <Form.Control type="text" placeholder={priceDescount} />
+
+            {/* <Form.Label>Caracteristicas del producto</Form.Label>
+            <Form.Control type="textarea" placeholder={priceDescount} /> */}
 
             <Form.Label>formas de pago</Form.Label>
             <Form.Control as="textarea" rows={3} value={pass} onChange={handleContentPass} />

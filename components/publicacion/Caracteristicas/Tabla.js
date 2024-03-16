@@ -17,7 +17,6 @@ export default function Tabla() {
 
     propiedades,
   } = bici;
-  console.log("🚀 ~ file: Tabla.js:21 ~ Tabla ~ propiedades:", propiedades);
 
   const data = (name = "", datum = "") => {
     return (
