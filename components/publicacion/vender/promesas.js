@@ -25,6 +25,16 @@ export default function Promesas() {
   };
 
   const {
+    brand,
+    models,
+    size,
+
+    propiedades,
+  } = bici;
+
+  
+
+  const {
     tags,
     pass,
     legal,
@@ -39,6 +49,9 @@ export default function Promesas() {
     handleTitle
     
   } = useCustomHook();
+
+  const nameRin = propiedades?.rines?.name;
+  
 
 
   const [show, setShow] = useState(false);
@@ -60,10 +73,26 @@ export default function Promesas() {
   const image_urls = images;
   const caption = `${selectTitle}
 
-   ${bici?.title}
+   ${bici?.title ?? ""}
+
+    Categoria: ${propiedades?.category?.name ?? ""}
+
+    Marca: ${propiedades?.brands?.name ?? ""}
+
+    Modelo: ${propiedades?.model ?? ""}
+
+    Talla: ${size?.name ?? ""}
+
+    ${nameRin ? `Rin: ${nameRin}` : ""}
+
+    Material: ${propiedades?.materials?.name ?? ""}
+
+    Transmision: ${propiedades?.transmission?.name ?? ""}
+
+    Suspensión: ${propiedades?.suspension?.name ?? ""}
 
 
-   $ ${price} 
+   Precio: $ ${price} 
 
    ${pass} 
 
@@ -71,7 +100,6 @@ export default function Promesas() {
 
    ${tags}`;
 
-  // funcionalidad para publicar en Instagram
   async function publicar() {
     const media_ids = await Promise.all(
       image_urls.map(async(image_url) => {
@@ -186,6 +214,7 @@ export default function Promesas() {
       </Accordion.Item>
     </Accordion>
 
+
     
 
     {
@@ -203,6 +232,7 @@ export default function Promesas() {
       <ModalShow
         image={`${CDN}${bici?.filesUrl[0]}`} 
         title={bici?.title}
+        properties={propiedades}
         selectOne={selectOne}
         selectTitle={selectTitle}
         priceDescount={`${bici.price, bici.off} % off`}
