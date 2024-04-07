@@ -4,7 +4,7 @@ import ButtonWhatsapp from "components/main/ButtonWhatsapp";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
-import { Script } from "vm";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
 	const queryClient = new QueryClient();
@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
 		<>
 		<Script strategy='lazyOnload' src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
 
-		<Script strategy='lazyOnload'>
+		<Script strategy='lazyOnload' id="js">
 			{`
 				window.dataLayer = window.dataLayer || [];
 				function gtag(){dataLayer.push(arguments);}
