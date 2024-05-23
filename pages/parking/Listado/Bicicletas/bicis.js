@@ -96,7 +96,7 @@ export default function GetBicis(props) {
         <ComponenteBike
           key={bici.id}
           id={bici.id}
-          name={bici.models.name}
+          name={bici.models?.name}
           title={bici.title}
           price={bici.price}
           status={bici.status}
