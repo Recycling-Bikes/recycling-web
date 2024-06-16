@@ -85,6 +85,9 @@ export default function GetBicis(props) {
     }
   }, [filteredData, fetchParking]);
 
+  console.table("filteredData", filteredData);
+
+
   return (
     <div
       className="d-grid gap-3 my-4"
@@ -93,6 +96,7 @@ export default function GetBicis(props) {
       }}
     >
       {filteredData.map((bici) => (
+
         <ComponenteBike
           key={bici.id}
           id={bici.id}
@@ -128,6 +132,11 @@ function filteredBicis(data, filters) {
     let passesFilter = true;
 
     const price = datum.off ?? datum.price;
+
+    // verificar si la bicicleta tiene la etiqueta "Vendida"
+    if(datum.etiquetas?.name.includes("Vendida")) {
+      passesFilter = false;
+    }
 
     if (
       filters.country?.length > 0 &&
