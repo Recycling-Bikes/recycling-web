@@ -3,7 +3,6 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import ButtonWhatsapp from "components/main/ButtonWhatsapp";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
@@ -40,7 +39,6 @@ function MyApp({ Component, pageProps }) {
 		</Script>
 		<QueryClientProvider client={queryClient}>
 			<Component {...pageProps} />
-			<Analytics />
 			<ButtonWhatsapp />
 		</QueryClientProvider>
 		</>
