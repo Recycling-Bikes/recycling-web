@@ -13,6 +13,7 @@ export default function GetBicis(props) {
   const parking = parkingState((state) => state.parking);
   const didMemoryParking = parkingState((state) => state.didMemoryParking);
   const filters = filtersState((state) => state.filters);
+
   const [lastScrollTop, setLastScrollTop] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -51,39 +52,41 @@ export default function GetBicis(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
 
-      const scrolledPercentage =
-        (document.documentElement.scrollTop + window.innerHeight) /
-        document.documentElement.scrollHeight;
 
-      if (scrolledPercentage < 0.8 || isLoading) return;
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollTop =
+      window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > lastScrollTop) {
-        fetchParking();
-      }
+    const scrolledPercentage =
+      (document.documentElement.scrollTop + window.innerHeight) /
+      document.documentElement.scrollHeight;
 
-      setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
-    };
+    if (scrolledPercentage < 0.8 || isLoading) return;
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [parking, lastScrollTop, pageNumber, hydrate, isLoading, fetchParking]);
-
-  useEffect(() => {
-    const filtered = filteredBicis(parking ?? [], filters);
-    setFilteredData(filtered);
-  }, [parking, filters]);
-
-  useEffect(() => {
-    if (filteredData.length === 0 && fetchCount < 3) {
+    if (scrollTop > lastScrollTop) {
       fetchParking();
-      setFetchCount((fetchCount) => fetchCount + 1);
     }
-  }, [filteredData, fetchParking]);
+
+    setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [parking, lastScrollTop, pageNumber, hydrate, isLoading, fetchParking]);
+
+useEffect(() => {
+  const filtered = filteredBicis(parking ?? [], filters);
+  setFilteredData(filtered);
+}, [parking, filters]);
+
+useEffect(() => {
+  if (filteredData.length === 0 && fetchCount < 3) {
+    fetchParking();
+    setFetchCount((fetchCount) => fetchCount + 1);
+  }
+}, [filteredData, fetchParking]);
 
   console.table("filteredData", filteredData);
 
@@ -96,8 +99,8 @@ export default function GetBicis(props) {
       }}
     >
       {filteredData.map((bici) => (
-
-        <ComponenteBike
+      
+          <ComponenteBike
           key={bici.id}
           id={bici.id}
           name={bici.models?.name}
@@ -110,7 +113,7 @@ export default function GetBicis(props) {
           etiqueta={bici.etiquetas?.name}
           verified={bici.verified}
         />
-      ))}
+        ))}
       {isLoading && (
         <Spinner
           animation="border"
@@ -123,22 +126,25 @@ export default function GetBicis(props) {
         />
       )}
       <Relleno />
+
+
+      {/* <Pagination>
+     <Pagination.First  />
+     <Pagination.Prev />
+     
+       <Pagination.Item
+         
+
+         
+       >
+         1
+       </Pagination.Item>
+     <Pagination.Next  />
+     <Pagination.Last />
+   </Pagination> */}
+
     </div>
-  //    <Pagination>
-  //    <Pagination.First onClick={() => handlePageChange(1)} disabled={pageNumber === 1} />
-  //    <Pagination.Prev onClick={() => handlePageChange(pageNumber - 1)} disabled={pageNumber === 1} />
-  //    {[...Array(totalPages).keys()].map((page) => (
-  //      <Pagination.Item
-  //        key={page + 1}
-  //        active={pageNumber === page + 1}
-  //        onClick={() => handlePageChange(page + 1)}
-  //      >
-  //        {page + 1}
-  //      </Pagination.Item>
-  //    ))}
-  //    <Pagination.Next onClick={() => handlePageChange(pageNumber + 1)} disabled={pageNumber === totalPages} />
-  //    <Pagination.Last onClick={() => handlePageChange(totalPages)} disabled={pageNumber === totalPages} />
-  //  </Pagination>
+     
   );
 }
 
@@ -148,10 +154,16 @@ function filteredBicis(data, filters) {
 
     const price = datum.off ?? datum.price;
 
-    // verificar si la bicicleta tiene la etiqueta "Vendida"
-    if(datum.etiquetas?.name.includes("Vendida")) {
+  // verificar si la bicicleta tiene la etiqueta "Vendida"
+   if(datum.etiquetas?.name.includes("Vendida")) {
+     passesFilter = false;
+   }
+
+    if (datum?.status?.name.includes("Vendida")) {
       passesFilter = false;
     }
+
+  
 
     if (
       filters.country?.length > 0 &&
