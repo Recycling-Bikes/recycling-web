@@ -220,7 +220,7 @@ export default function Promesas() {
     {
     isAdmin && (
       <div>
-        <p>Merketing</p>
+        <p>Marketing</p>
         <Button className="mb-2" variant="outline-primary btn-outline" onClick={handleShow}>
         Republicar en META {bici?.title}
         </Button>

@@ -121,16 +121,16 @@ const getBicis = async (pageNumber, pageSize) => {
     rine), size, country, year,
     off,
     etiquetas (name),
+    status (name),
     verified,
     subcategories:bicis_subcategory(
       id:subcategory_id
       )
-    status
   `,
     )
-    .in("status", [2, 3])
+    // .in("status", [2, 3])
     .order("id", { ascending: false })
-    .order("status", { ascending: true })
+    // .order("status", { ascending: true })
     .range(pageSize * (pageNumber - 1), pageSize * pageNumber - 1);
 
   // Si hay un error en la consulta, devolverlo inmediatamente
@@ -154,7 +154,8 @@ const getBicis = async (pageNumber, pageSize) => {
     year: item.year,
     verified: item.verified,
     off: item.off,
-    sold: item.status == 3 ? true : false,
+    // sold: item.status == 3 ? true : false,
+    status: item.status,
     etiquetas: item.etiquetas,
     propiedades: {
       transmission: item.propiedades.transmission,
@@ -207,7 +208,7 @@ const getBici = async (id) => {
           suspension (name) ,
           frenos (name),
           rines (name)),
-          status,
+          
           verified,
           size (name, relacion, ruta), 
           country (name), year  (name),
@@ -218,6 +219,7 @@ const getBici = async (id) => {
     : { error: { message: "id = undefined" }, bicis: [] };
 
   console.log(error);
+
 
   return error ? error : bicis[0];
 };
