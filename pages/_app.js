@@ -8,20 +8,6 @@ import Script from "next/script";
 function MyApp({ Component, pageProps }) {
 	const queryClient = new QueryClient();
 
-	const router = useRouter();
-
-	useEffect(() => {
-		import("react-facebook-pixel")
-			.then((x) => x.default)
-			.then((ReactPixel) => {
-				ReactPixel.init("545058853440226");
-				ReactPixel.pageView();
-
-				router.events.on("routeChangeComplete", () => {
-					ReactPixel.pageView();
-				});
-			});
-	}, [router.events]);
 
 	return (
 		<>

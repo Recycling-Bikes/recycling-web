@@ -22,10 +22,16 @@ const getBicis = async () => {
   off`
     )
     .eq("main", true);
-  return error ? error : bicis;
+
+  if (error) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+
+  return bicis ?? [];
 };
 
-function Article({ Title }) {
+ function Article({ Title }) {
   const router = useRouter();
   const { isLoading, data, isError } = useQuery({
     queryKey: ["productos"],
@@ -119,7 +125,7 @@ function Article({ Title }) {
           }}
           slidesPerView="auto"
         >
-          {isLoading && (
+          {(isLoading || isError || !data) && (
             <SwiperSlide>
               {" "}
               <Card style={{ width: "18rem", height: "370px" }}>
@@ -137,8 +143,8 @@ function Article({ Title }) {
               </Card>
             </SwiperSlide>
           )}
-          {isError && <div>Error</div>}
-          {data?.map((bici) => (
+          {/* {isError && <div>Error</div>} */}
+          {!isLoading && !isError && data && data?.map((bici) => (
             <SwiperSlide key={bici.id}>
               {" "}
               <ComponenteBike
