@@ -25,7 +25,7 @@ export const useBicisPaginations = () => {
 				.post({
 					filter: filters,
 					currentPage: pageParam,
-					pageSize: 22,
+					pageSize: 24,
 				})
 				.json();
 			return data;
