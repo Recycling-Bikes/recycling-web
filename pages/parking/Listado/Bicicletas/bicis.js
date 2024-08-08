@@ -1,27 +1,19 @@
 import { ComponenteBike } from "components/bicletas";
-import { use, useCallback, useEffect, useState } from "react";
-import { Spinner, Pagination, Button, Stack } from "react-bootstrap";
+import {useEffect, useState } from "react";
+import { Spinner, Pagination, Button} from "react-bootstrap";
 import Relleno from "utils/relleno";
 
 import { useBicisPaginations } from "hooks/get-bicis-paginations";
 import { useRouter } from "next/router";
 
 export default function GetBicis(props) {
-  const { data, isError, isLoading } = useBicisPaginations();
+  const { data, isLoading } = useBicisPaginations();
   // estado para la pagina actual
   const [currentPage, setCurrentPage] = useState(1);
-  // estado para la cantidad de items por página
-  const [itemsPerPage, setItemsPerPage] = useState(10);
   const router = useRouter();
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   // Obtener items por página
   const items = data?.pages?.[0]?.data ?? [];
-
-  console.log(items);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -36,7 +28,7 @@ export default function GetBicis(props) {
           gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
         }}
       >
-        {(data?.pages?.[0]?.data ?? []).map((bici) => (
+        {items.map((bici) => (
           <ComponenteBike
             key={bici.id}
             id={bici.id}
@@ -85,6 +77,7 @@ export default function GetBicis(props) {
           variant="primary"
 					size="lg"
           onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
         >
           Pagina anterior
         </Button>
