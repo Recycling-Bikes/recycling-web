@@ -121,6 +121,7 @@ export function ComponenteBike({
           </Badge>
           <Card.Img
             variant="top"
+            loading="lazy"
             src={`${CDN}${image}?width=500&height=180&quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
             style={{
               maxHeight: "180px",
