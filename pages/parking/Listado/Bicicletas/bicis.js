@@ -7,7 +7,7 @@ import { useBicisPaginations } from "hooks/get-bicis-paginations";
 import { useRouter } from "next/router";
 
 export default function GetBicis(props) {
-  const { data, isLoading } = useBicisPaginations();
+  const { data, isLoading, fetchNextPage  } = useBicisPaginations();
   // estado para la pagina actual
   const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
@@ -19,6 +19,11 @@ export default function GetBicis(props) {
     setCurrentPage(page);
     router.push(`?page=${page}`);
   };
+
+  useEffect(() => {
+    fetchNextPage();
+  }, [router.query.page]);
+
 
   return (
     <>
