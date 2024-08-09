@@ -1,30 +1,20 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { filtersState } from "context/Filters/filtersState";
 import { useRouter } from "next/router";
 import wretch from "wretch";
 
-export const useBicisPaginations = () => {
+export const useBicisPaginations = ({ page = 1, initialPage }) => {
 	const filters = filtersState((state) => state.filters);
 
-	const router = useRouter();
-	return useInfiniteQuery({
-		queryKey: ["bicis", filters, router.query.page],
+	return useQuery({
+		queryKey: ["bicis", filters, page],
+		initialData: initialPage,
 
-		initialPageParam: Number.isNaN(Number(router.query.page))
-			? 1
-			: Number(router.query.page),
-		getNextPageParam: (lastPage) => {
-			return lastPage?.next;
-		},
-
-		getPreviousPageParam: (firstPage) => {
-			return firstPage?.previous;
-		},
-		queryFn: async ({ pageParam, signal }) => {
+		queryFn: async ({ signal }) => {
 			const data = await wretch(`${window.location.origin}/api/allbicis`)
 				.post({
 					filter: filters,
-					currentPage: pageParam,
+					currentPage: page,
 					pageSize: 24,
 				})
 				.json();
