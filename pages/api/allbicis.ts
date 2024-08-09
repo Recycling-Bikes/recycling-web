@@ -44,8 +44,6 @@ export default async function handler(
 		};
 	};
 
-	console.log(currentPage, pageSize);
-
 	const filters = {
 		search: filter?.search ?? "",
 		country: filter?.country ?? [],
