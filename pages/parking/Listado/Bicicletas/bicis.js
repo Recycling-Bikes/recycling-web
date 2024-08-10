@@ -85,9 +85,9 @@ export default function GetBicis(props) {
           />
         )}
         <Relleno />
-      </div>
-      <div className="d-flex justify-content-center gap-3">
-        <Pagination>
+
+        <div className="d-flex justify-content-center gap-3">
+        <Pagination size="lg">
           <Pagination.First onClick={
             () => {
               router.push(`?page=1`);
@@ -154,6 +154,8 @@ export default function GetBicis(props) {
           Pagina Siguiente
         </Button> */}
       </div>
+      </div>
+    
     </>
   );
 }
