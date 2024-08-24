@@ -1,24 +1,12 @@
 import { parkingState } from "context/Parking/ParkingState";
 import React, { useState } from "react";
-import {Button, Accordion, Modal, Form } from "react-bootstrap";
+import {Button, Accordion} from "react-bootstrap";
 import { BsShieldCheck } from "react-icons/bs";
-import {
-  uploadCarouselItems,
-  createCarouselContainer,
-  publishCarousel,
-} from "services/PublishPostInstagram";
-import toast, { Toaster } from "react-hot-toast";
-import { CDN } from "utils/constantes";
-import ModalShow from "../../main/modalShow";
-import { useAdminVerification } from "hooks/adminUser/useAdminVerification";
-import { userState } from "context/User/UserState";
 
 
 export default function Promesas() {
   const bici = parkingState((state) => state.bici);
   const [showMore, setShowMore] = useState(false);
-  const user = userState((state) => state.user);
-	const isAdmin = useAdminVerification(user?.id);
   const handleToggle = () => {
     setShowMore(!showMore);
   };
