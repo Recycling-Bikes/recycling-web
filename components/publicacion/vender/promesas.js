@@ -2,7 +2,6 @@ import { parkingState } from "context/Parking/ParkingState";
 import React, { useState } from "react";
 import {Button, Accordion, Modal, Form } from "react-bootstrap";
 import { BsShieldCheck } from "react-icons/bs";
-import useCustomHook from "hooks/instaPublish/TemplateInstaPublish";
 import {
   uploadCarouselItems,
   createCarouselContainer,
@@ -31,101 +30,7 @@ export default function Promesas() {
 
     propiedades,
   } = bici;
-
   
-
-  const {
-    tags,
-    pass,
-    legal,
-    selectTitle,
-    publishing,
-    setPublishing,
-    selectOne,
-    handleSelectOption,
-    handleContentPass,
-    handleContentTags,
-    handleLegal,
-    handleTitle
-    
-  } = useCustomHook();
-
-  const nameRin = propiedades?.rines?.name;
-  
-
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => {
-    setShow(true);
-  };
-
-  const [price, setPrice] = useState(bici.off ?? bici?.price);
-
-  // array para las imagenes
-  const images = bici?.filesUrl?.map((image) => {
-    return `${CDN}${image}`;
-  })
-
-
-  const ig_user_id = process.env.NEXT_PUBLIC_INSTAGRAM_IG_USER_ID;
-  const access_token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
-  const image_urls = images;
-  const caption = `${selectTitle}
-
-   ${bici?.title ?? ""}
-
-    Categoria: ${propiedades?.category?.name ?? ""}
-
-    Marca: ${propiedades?.brands?.name ?? ""}
-
-    Modelo: ${propiedades?.model ?? ""}
-
-    Talla: ${size?.name ?? ""}
-
-    ${nameRin ? `Rin: ${nameRin}` : ""}
-
-    Material: ${propiedades?.materials?.name ?? ""}
-
-    Transmision: ${propiedades?.transmission?.name ?? ""}
-
-    Suspensión: ${propiedades?.suspension?.name ?? ""}
-
-
-   Precio: $ ${price} 
-
-   ${pass} 
-
-   ${legal} 
-
-   ${tags}`;
-
-  async function publicar() {
-    const media_ids = await Promise.all(
-      image_urls.map(async(image_url) => {
-        return await uploadCarouselItems(image_url, access_token, ig_user_id, caption)
-      })
-    );
-
-    const carousel_id = await createCarouselContainer(media_ids, access_token, ig_user_id, caption);
-    await publishCarousel(carousel_id, access_token, ig_user_id);
-  }
-
-  const handlePublish = async () => {
-    setPublishing(true);
-    try {
-      await publicar();
-      handleClose(); // cerrar el modal despues de publicar
-    } catch (error) {
-      toast.error("Error al publicar", error);
-      console.log(error)
-    } finally {
-      setPublishing(false);
-    }
-  };
-
-
-
   return (
     <>
     <Accordion className="mt-3 separador" defaultActiveKey="0" flush>
@@ -213,44 +118,6 @@ export default function Promesas() {
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
-
-
-    
-
-    {
-    isAdmin && (
-      <div>
-        <p>Marketing</p>
-        <Button className="mb-2" variant="outline-primary btn-outline" onClick={handleShow}>
-        Republicar en META {bici?.title}
-        </Button>
-      </div>
-       
-        )
-      }
-
-      <ModalShow
-        image={`${CDN}${bici?.filesUrl[0]}`} 
-        title={bici?.title}
-        properties={propiedades}
-        selectOne={selectOne}
-        selectTitle={selectTitle}
-        priceDescount={`${bici.price, bici.off} % off`}
-        price={bici?.price}
-        pass={pass}
-        legal={legal}
-        tags={tags}
-        handleTitle={handleTitle}
-        handleContentPass={handleContentPass}
-        handleContentTags={handleContentTags}
-        handleLegal={handleLegal}
-        handlePublish={handlePublish}
-        handleClose={handleClose}
-        publishing={publishing}
-        show={show}
-        handleSelectOption={handleSelectOption}
-      />
-      <Toaster position="bottom-left" reverseOrder={false} />
     </>
   );
 }
