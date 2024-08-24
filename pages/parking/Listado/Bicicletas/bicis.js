@@ -1,161 +1,231 @@
-import { ComponenteBike } from "components/bicletas";
-import { use, useEffect, useState } from "react";
-import { Button, Pagination, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
+import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
-
-import { useBicisPaginations } from "hooks/get-bicis-paginations";
-import { useRouter } from "next/router";
+import { filtersState } from "context/Filters/filtersState";
+import { ComponenteBike } from "components/bicletas";
+import { use, useCallback, useEffect, useState } from "react";
+import { useHydrate } from "hooks/hydrate/hydrate";
 
 export default function GetBicis(props) {
-  const [currentPage, setCurrentPage] = useState(props.page);
-  const { data, isLoading } = useBicisPaginations({
-    page: currentPage,
-    initialPage: props.initialPage,
-  });
-  // estado para la pagina actual
-  const router = useRouter();
-  // Obtener items por página
-  const nextPage = () => {
-    if (data?.next) {
-      router.push(`?page=${data.next}`);
-      setCurrentPage(data.next);
+  const hydrate = useHydrate();
+
+  const setParking = parkingState((state) => state.setParking);
+  const parking = parkingState((state) => state.parking);
+  const didMemoryParking = parkingState((state) => state.didMemoryParking);
+  const filters = filtersState((state) => state.filters);
+
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  // useState hydrates the state with the initial value
+
+  const [filteredData, setFilteredData] = useState([]);
+
+  const [fetchCount, setFetchCount] = useState(0);
+
+  useEffect(() => {
+    if (hydrate) {
+      didMemoryParking();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrate]);
+
+  const [pageNumber, setPageNumber] = parkingState((state) => [
+    state.pageNumber,
+    state.setPageNumber,
+  ]);
+
+  const fetchParking = useCallback(async () => {
+    if (!isLoading) {
+      setIsLoading(true);
+      setPageNumber((old) => old + 1);
+
+      try {
+        await setParking();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollTop =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    const scrolledPercentage =
+      (document.documentElement.scrollTop + window.innerHeight) /
+      document.documentElement.scrollHeight;
+
+    if (scrolledPercentage < 0.8 || isLoading) return;
+
+    if (scrollTop > lastScrollTop) {
+      fetchParking();
+    }
+
+    setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
   };
 
-  const showPaginationCount = 10;
-  const currentPageGroup = Math.ceil(currentPage / showPaginationCount);
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [parking, lastScrollTop, pageNumber, hydrate, isLoading, fetchParking]);
 
-  const paginationItems = Array.from({ length: showPaginationCount }).map((_, index) => {
-    const pageNumber = (currentPageGroup - 1) * showPaginationCount + index + 1;
-    return (
-      <Pagination.Item
-        key={pageNumber}
-        active={currentPage === pageNumber}
-        onClick={() => {
-          router.push(`?page=${pageNumber}`);
-          setCurrentPage(pageNumber);
-        }}
-      >
-        {
-          pageNumber > 27 ? "..." : pageNumber
-        }
-      </Pagination.Item>
-    );
-  });
+useEffect(() => {
+  const filtered = filteredBicis(parking ?? [], filters);
+  setFilteredData(filtered);
+}, [parking, filters]);
 
-  const prevPage = () => {
-    if (data?.prev) {
-      router.push(`?page=${data.prev}`);
-      setCurrentPage(data.prev);
-    }
-  };
+useEffect(() => {
+  if (filteredData.length === 0 && fetchCount < 3) {
+    fetchParking();
+    setFetchCount((fetchCount) => fetchCount + 1);
+  }
+}, [filteredData, fetchParking]);
+
+  console.table("filteredData", filteredData);
+
 
   return (
-    <>
-      <div
-        className="d-grid gap-3 my-4"
-        style={{
-          gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
-        }}
-      >
-        {data?.data?.map((bici) => (
-          <ComponenteBike
-            key={bici.id}
-            id={bici.id}
-            name={bici.models?.name}
-            title={bici.title}
-            price={bici.price}
-            status={bici.status}
-            sold={bici.sold}
-            off={bici.off}
-            image={bici.filesUrl[0]}
-            etiqueta={bici.etiquetas?.name}
-            verified={bici.verified}
-          />
-        ))}
-        {isLoading && (
-          <Spinner
-            animation="border"
-            variant="secondary"
-            style={{
-              width: "200px",
-              height: "200px",
-              fontSize: "90px",
-            }}
-          />
-        )}
-        <Relleno />
-
-        <div className="d-flex justify-content-center gap-3">
-        <Pagination size="lg">
-          <Pagination.First onClick={
-            () => {
-              router.push(`?page=1`);
-              setCurrentPage(1);
-            }
-          } />
-          <Pagination.Prev
-            onClick={() => prevPage()}
-            disabled={
-              data?.prev === null ||
-              data?.prev === undefined ||
-              data?.prev <= 1 ||
-              currentPage <= 1
-            }
-            
-          />
+    <div
+      className="d-grid gap-3 my-4"
+      style={{
+        gridTemplateColumns: "repeat(auto-fit,minmax(14.8rem, 1fr))",
+      }}
+    >
+      {filteredData.map((bici) => (
       
-          {
-            paginationItems  
-          }
-          
-          <Pagination.Next
-            onClick={() => nextPage()}
-            disabled={
-              data?.next === null ||
-              data?.next === undefined ||
-              data?.next >= data?.paginationCount ||
-              currentPage >= (data?.paginationCount ?? 100)
-            }
-          />
-          <Pagination.Last onClick={
-            () => {
-              router.push(`?page=${data?.paginationCount}`);
-              setCurrentPage(data?.paginationCount);
-            }
-          } />
-        </Pagination>
-
-        {/* <Button
-          variant="primary"
-          size="lg"
-          onClick={() => prevPage()}
-          disabled={
-            data?.prev === null ||
-            data?.prev === undefined ||
-            data?.prev <= 1 ||
-            currentPage <= 1
-          }
-        >
-          Pagina anterior
-        </Button>
-        <Button
-          variant="primary"
-          size="lg"
-          className="bg-blue"
-          disabled={
-            data?.next === null ||
-            data?.next === undefined ||
-            data?.next >= data?.paginationCount ||
-            currentPage >= (data?.paginationCount ?? 100)
-          }
-          onClick={() => nextPage()}
-        >
-          Pagina Siguiente
-        </Button> */}
-      </div>
-      </div>
-    
-    </>
+          <ComponenteBike
+          key={bici.id}
+          id={bici.id}
+          name={bici.models?.name}
+          title={bici.title}
+          price={bici.price}
+          status={bici.status}
+          sold={bici.sold}
+          off={bici.off}
+          image={bici.filesUrl[0]}
+          etiqueta={bici.etiquetas?.name}
+          verified={bici.verified}
+        />
+        ))}
+      {isLoading && (
+        <Spinner
+          animation="border"
+          variant="secondary"
+          style={{
+            width: "200px",
+            height: "200px",
+            fontSize: "90px",
+          }}
+        />
+      )}
+      <Relleno />
+    </div>
+     
   );
+}
+
+function filteredBicis(data, filters) {
+  return data?.filter((datum) => {
+    let passesFilter = true;
+
+    const price = datum.off ?? datum.price;
+
+  // verificar si la bicicleta tiene la etiqueta "Vendida"
+   if(datum.etiquetas?.name.includes("Vendida")) {
+     passesFilter = false;
+   }
+
+    if (datum?.status?.name.includes("Vendida")) {
+      passesFilter = false;
+    }
+
+  
+
+    if (
+      filters.country?.length > 0 &&
+      !filters.country.includes(datum.country)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.category?.length > 0 &&
+      !filters.category.includes(datum.propiedades.category)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.subcategory?.length > 0 &&
+      !filters.subcategory.some((sub) =>
+        datum.propiedades.subcategories.includes(sub),
+      )
+    ) {
+      passesFilter = false;
+    }
+
+    if (filters.size?.length > 0 && !filters.size.includes(datum.size)) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.brands?.length > 0 &&
+      !filters.brands.includes(datum.propiedades.brand)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.materials?.length > 0 &&
+      !filters.materials.includes(datum.propiedades.material)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.suspension?.length > 0 &&
+      !filters.suspension.includes(datum.propiedades.suspension)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters.frenos?.length > 0 &&
+      !filters.frenos.includes(datum.propiedades.freno)
+    ) {
+      passesFilter = false;
+    }
+
+    if (
+      filters?.rines?.length > 0 &&
+      !filters.rines.includes(datum.propiedades.rine)
+    ) {
+      passesFilter = false;
+    }
+
+    if (filters?.years?.length > 0 && !filters.years.includes(datum.year)) {
+      passesFilter = false;
+    }
+
+    if (filters?.minPrice !== null && price < filters.minPrice) {
+      passesFilter = false;
+    }
+
+    if (filters?.maxPrice !== null && price > filters.maxPrice) {
+      passesFilter = false;
+    }
+
+    if (!datum.title?.toLowerCase().includes(filters?.search?.toLowerCase())) {
+      passesFilter = false;
+    }
+
+    return passesFilter;
+  });
 }
