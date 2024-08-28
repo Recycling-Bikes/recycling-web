@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge, Card } from "react-bootstrap";
 import { CDN } from "utils/constantes";
+import Image from "next/image";
 import propTypes from "prop-types";
 import { BsShieldFillCheck } from "react-icons/bs";
 
@@ -38,8 +39,6 @@ export function ComponenteBike({
     return porcentaje;
   }
 
-
-
   return (
     <Card className="p-0" {...props}>
       <Link href={`/parking/${id}`} passHref>
@@ -48,10 +47,10 @@ export function ComponenteBike({
           <Badge className="mb-1" bg={etiqueta ? "primary" : ""}>
             {etiqueta}{" "}
           </Badge>
-          <Card.Img
+          {/* <Card.Img
             variant="top"
             loading="lazy"
-            src={`${CDN}${image}?width=500&height=180&quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
+            src={urlImage}
             style={{
               maxHeight: "180px",
               minHeight: "180px",
@@ -59,6 +58,20 @@ export function ComponenteBike({
               objectFit: "cover",
               width: "100%",
             }}
+          /> */}
+          <Image
+            src={`${CDN}${image}?width=500&height=180&quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
+            width={500}
+            height={180}
+            alt="imagen de la bici"
+            style={{
+              maxHeight: "180px",
+              minHeight: "180px",
+              borderRadius: "5px",
+              objectFit: "cover",
+              width: "100%",
+            }}
+            priority
           />
           {/*  sello de verificado */}
           {verified && !sold && (
@@ -138,8 +151,6 @@ export function ComponenteBike({
               ""
             )}
           </Card.Text>
-          
-
         </Card.Body>
       </Link>
     </Card>
