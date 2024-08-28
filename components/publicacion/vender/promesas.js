@@ -42,10 +42,6 @@ export default function Promesas() {
         </Accordion.Header>
 
         <Accordion.Body>
-          {/*           <Link href="#">
-            <BsShieldCheck className="me-2" />
-            Recycling Certified - 12 meses
-          </Link> */}
           <p className="mt-2">
             {bici.verified ? (
               <>
