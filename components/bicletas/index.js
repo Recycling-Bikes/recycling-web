@@ -7,7 +7,7 @@ import { BsShieldFillCheck } from "react-icons/bs";
 
 ComponenteBike.propTypes = {
   id: propTypes.any.isRequired,
-  name: propTypes.string.isRequired,
+  name: propTypes.string,
   title: propTypes.string.isRequired,
   price: propTypes.number.isRequired,
   off: propTypes.number,
@@ -47,26 +47,12 @@ export function ComponenteBike({
           <Badge className="mb-1" bg={etiqueta ? "primary" : ""}>
             {etiqueta}{" "}
           </Badge>
-          {/* <Card.Img
-            variant="top"
-            loading="lazy"
-            src={urlImage}
-            style={{
-              maxHeight: "180px",
-              minHeight: "180px",
-              borderRadius: "5px",
-              objectFit: "cover",
-              width: "100%",
-            }}
-          /> */}
           <Image
-            src={`${CDN}${image}?width=500&height=180&quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
-            width={500}
+            src={`${CDN}${image}?quality=60&webp=true&format=webp&fit=cover&optimize=medium`}
+            width={180}
             height={180}
             alt="imagen de la bici"
             style={{
-              maxHeight: "180px",
-              minHeight: "180px",
               borderRadius: "5px",
               objectFit: "cover",
               width: "100%",
