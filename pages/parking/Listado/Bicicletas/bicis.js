@@ -5,6 +5,7 @@ import { filtersState } from "context/Filters/filtersState";
 import { ComponenteBike } from "components/bicletas";
 import { use, useCallback, useEffect, useState } from "react";
 import { useHydrate } from "hooks/hydrate/hydrate";
+import { filteredBicis } from "utils/filterUtils";
 
 export default function GetBicis(props) {
   const hydrate = useHydrate();
@@ -13,16 +14,14 @@ export default function GetBicis(props) {
   const parking = parkingState((state) => state.parking);
   const didMemoryParking = parkingState((state) => state.didMemoryParking);
   const filters = filtersState((state) => state.filters);
-
   const [lastScrollTop, setLastScrollTop] = useState(0);
-
   const [isLoading, setIsLoading] = useState(false);
-
-  // useState hydrates the state with the initial value
-
   const [filteredData, setFilteredData] = useState([]);
-
   const [fetchCount, setFetchCount] = useState(0);
+  const [pageNumber, setPageNumber] = parkingState((state) => [
+    state.pageNumber,
+    state.setPageNumber,
+  ]);
 
   useEffect(() => {
     if (hydrate) {
@@ -30,11 +29,6 @@ export default function GetBicis(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hydrate]);
-
-  const [pageNumber, setPageNumber] = parkingState((state) => [
-    state.pageNumber,
-    state.setPageNumber,
-  ]);
 
   const fetchParking = useCallback(async () => {
     if (!isLoading) {
@@ -52,44 +46,43 @@ export default function GetBicis(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = window.innerHeight;
 
+      const scrolledPercentage = (scrollTop + clientHeight) / scrollHeight;
 
-useEffect(() => {
-  const handleScroll = () => {
-    const scrollTop =
-      window.pageYOffset || document.documentElement.scrollTop;
+      if (
+        scrolledPercentage >= 0.8 &&
+        !isLoading &&
+        scrollTop > lastScrollTop
+      ) {
+        fetchParking();
+      }
 
-    const scrolledPercentage =
-      (document.documentElement.scrollTop + window.innerHeight) /
-      document.documentElement.scrollHeight;
+      setLastScrollTop(scrollTop);
+    };
 
-    if (scrolledPercentage < 0.8 || isLoading) return;
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollTop, isLoading, fetchParking]);
 
-    if (scrollTop > lastScrollTop) {
-      fetchParking();
+  useEffect(() => {
+    if (parking) {
+      const filtered = filteredBicis(parking, filters);
+      setFilteredData(filtered);
     }
+  }, [parking, filters]);
 
-    setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [parking, lastScrollTop, pageNumber, hydrate, isLoading, fetchParking]);
-
-useEffect(() => {
-  const filtered = filteredBicis(parking ?? [], filters);
-  setFilteredData(filtered);
-}, [parking, filters]);
-
-useEffect(() => {
-  if (filteredData.length === 0 && fetchCount < 3) {
-    fetchParking();
-    setFetchCount((fetchCount) => fetchCount + 1);
-  }
-}, [filteredData, fetchParking]);
-
-  console.table("filteredData", filteredData);
-
+  useEffect(() => {
+    if (filteredData.length === 0 && fetchCount < 3) {
+      fetchParking();
+      setFetchCount((fetchCount) => fetchCount + 1);
+    }
+  }, [filteredData, fetchParking]);
 
   return (
     <div
@@ -99,8 +92,7 @@ useEffect(() => {
       }}
     >
       {filteredData.map((bici) => (
-      
-          <ComponenteBike
+        <ComponenteBike
           key={bici.id}
           id={bici.id}
           name={bici.models?.name}
@@ -113,7 +105,7 @@ useEffect(() => {
           etiqueta={bici.etiquetas?.name}
           verified={bici.verified}
         />
-        ))}
+      ))}
       {isLoading && (
         <Spinner
           animation="border"
@@ -127,105 +119,5 @@ useEffect(() => {
       )}
       <Relleno />
     </div>
-     
   );
-}
-
-function filteredBicis(data, filters) {
-  return data?.filter((datum) => {
-    let passesFilter = true;
-
-    const price = datum.off ?? datum.price;
-
-  // verificar si la bicicleta tiene la etiqueta "Vendida"
-   if(datum.etiquetas?.name.includes("Vendida")) {
-     passesFilter = false;
-   }
-
-    if (datum?.status?.name.includes("Vendida")) {
-      passesFilter = false;
-    }
-
-  
-
-    if (
-      filters.country?.length > 0 &&
-      !filters.country.includes(datum.country)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.category?.length > 0 &&
-      !filters.category.includes(datum.propiedades.category)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.subcategory?.length > 0 &&
-      !filters.subcategory.some((sub) =>
-        datum.propiedades.subcategories.includes(sub),
-      )
-    ) {
-      passesFilter = false;
-    }
-
-    if (filters.size?.length > 0 && !filters.size.includes(datum.size)) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.brands?.length > 0 &&
-      !filters.brands.includes(datum.propiedades.brand)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.materials?.length > 0 &&
-      !filters.materials.includes(datum.propiedades.material)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.suspension?.length > 0 &&
-      !filters.suspension.includes(datum.propiedades.suspension)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters.frenos?.length > 0 &&
-      !filters.frenos.includes(datum.propiedades.freno)
-    ) {
-      passesFilter = false;
-    }
-
-    if (
-      filters?.rines?.length > 0 &&
-      !filters.rines.includes(datum.propiedades.rine)
-    ) {
-      passesFilter = false;
-    }
-
-    if (filters?.years?.length > 0 && !filters.years.includes(datum.year)) {
-      passesFilter = false;
-    }
-
-    if (filters?.minPrice !== null && price < filters.minPrice) {
-      passesFilter = false;
-    }
-
-    if (filters?.maxPrice !== null && price > filters.maxPrice) {
-      passesFilter = false;
-    }
-
-    if (!datum.title?.toLowerCase().includes(filters?.search?.toLowerCase())) {
-      passesFilter = false;
-    }
-
-    return passesFilter;
-  });
 }
