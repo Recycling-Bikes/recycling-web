@@ -3,7 +3,7 @@ import { parkingState } from "context/Parking/ParkingState";
 import Relleno from "utils/relleno";
 import { filtersState } from "context/Filters/filtersState";
 import { ComponenteBike } from "components/bicletas";
-import { use, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useHydrate } from "hooks/hydrate/hydrate";
 import { filteredBicis } from "utils/filterUtils";
 
